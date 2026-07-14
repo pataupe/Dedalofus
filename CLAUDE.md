@@ -29,8 +29,10 @@ Dedalofus/
 ```
 
 - `server/index.js` : point d'entrée Express, route `GET /api/ping` de test, CORS activé
-- `server/.env` : `PORT=3001`
-- Sous-dossiers `server/routes/`, `server/controllers/`, `server/models/`, `server/config/` : **pas encore créés**, prévus à la Tâche 4 (API Express), pas nécessaire avant
+- `server/.env` : `PORT=3001` + `DB_HOST`, `DB_USER`, `DB_PASSWORD`, `DB_NAME=dedalofus` (connexion MySQL locale)
+- `server/scripts/` : scripts d'import Node (`import-cubes.js`, `import-breloques.js`, `import-sorts.js`), dépendent de `mysql2` et `csv-parse` (ajoutés à `server/package.json`)
+- `schema.sql` (racine du repo) : script de création de la base `dedalofus` et de ses 10 tables, à exécuter une seule fois
+- Sous-dossiers `server/routes/`, `server/controllers/`, `server/models/` : **pas encore créés**, prévus à la Tâche 4 (API Express), pas nécessaire avant
 - `client/src/App.jsx` : fetch de test vers `/api/ping`
 
 ## Périmètre du MVP
@@ -88,7 +90,11 @@ calculerDegats(statsPersonnage, sortsEquipes) → { sortId, degatsMin, degatsMax
 
 (Une version à une seule fonction `calculerDegats(cubesEquipes, sortsEquipes)` avait été proposée puis corrigée — l'étape intermédiaire d'agrégation des stats est centrale et doit rester séparée.)
 
-## Modèle de données MySQL (schéma validé)
+## Modèle de données MySQL (schéma validé et implémenté)
+
+**Nom de la base : `dedalofus`** (et non `dedale_book`, renommée en cours de Tâche 2).
+
+⚠️ **`Cube` est un mot réservé en MySQL 8.0** (lié à `GROUP BY ... WITH CUBE`). Toute requête SQL qui référence cette table doit l'entourer de backticks : `` `Cube` ``. C'est déjà fait dans `schema.sql` et `import-cubes.js` — à reproduire dans tout futur code SQL touchant cette table (API Express, etc.).
 
 ```
 Utilisateur
@@ -145,8 +151,8 @@ Index utiles à prévoir au minimum : `element`, `rang`/`evolution` sur `Cube` (
 ## Plan de développement (tâches séquentielles)
 
 1. **Mise en place du projet** ✅ FAIT (Jour 1) — voir "État d'avancement" ci-dessous
-2. **Tables MySQL + import cubes/breloques/sorts** ← PROCHAINE ÉTAPE
-3. Module de calcul (2 fonctions pures) + tests unitaires (Jest/Vitest)
+2. **Tables MySQL + import cubes/breloques/sorts** ✅ FAIT (Jour 3) — voir "État d'avancement" ci-dessous
+3. **Module de calcul (2 fonctions pures) + tests unitaires (Jest/Vitest)** ← PROCHAINE ÉTAPE
 4. API Express pour exposer les équipements (`GET /api/cubes`, `/api/charms`, `/api/spells`, recherche, filtres, pagination)
 5. Pages React liste + détail équipement (peut démarrer en parallèle de la tâche 6)
 6. Authentification (register/login, bcrypt, JWT, middleware de protection)
@@ -171,11 +177,25 @@ Règles d'enchaînement :
 - Git/GitHub lié, premier commit fait : "Setup initial: backend Express + frontend React connectés (test /api/ping)"
 - Reporté volontairement : sous-dossiers `routes/`/`controllers/`/`models/`/`config/` (Tâche 4), script `concurrently` (optionnel)
 
-### 🔜 Prochaine étape — Tâche 2
-Créer la base MySQL, écrire `schema.sql` versionné dans le repo, écrire les scripts d'import Node (`scripts/import-cubes.js` etc.) pour les 420 cubes puis les breloques/sorts. Fini quand les 3 tables référentiel sont peuplées et qu'une requête `SELECT * FROM Cube WHERE element = 'Feu'` renvoie des résultats cohérents.
+### ✅ Jour 3 — Tâche 2 terminée
+- MySQL 8.0 installé en local (MySQL Installer, config "Development Computer", "Full", port 3306)
+- Base `dedalofus` créée via `schema.sql` (10 tables : Utilisateur, Personnage, Cube, StatCube, Breloque, Sort, Equipement, EquipementCube, EquipementBreloque, EquipementSort)
+- Bug corrigé : `Cube` est un mot réservé MySQL → backticks ajoutés dans `schema.sql` et `import-cubes.js` (voir section "Modèle de données" ci-dessus)
+- `scripts/` déplacé à la racine → `server/scripts/` (partage le `package.json`/`node_modules` du serveur, cohérent avec le mono-repo)
+- Dépendances `mysql2` et `csv-parse` ajoutées à `server/package.json`
+- Noms de fichiers CSV corrigés dans les scripts d'import (`DEDALE - BRELOQUES.csv`, `DEDALE - SORTS.csv` — espaces, pas underscores)
+- Les 3 imports exécutés avec succès : **420 cubes** (+ 1755 lignes StatCube), **116 breloques**, **115 sorts**
+- Vérifié : `SELECT * FROM `Cube` WHERE element = 'Feu'` renvoie 75 résultats → critère "fini" de la Tâche 2 rempli
+- Commit : "Ajout des tables MySQL et scripts d'import (cubes, breloques, sorts)"
+
+### 🔜 Prochaine étape — Tâche 3
+Créer `server/logic/calcul.js` avec les 2 fonctions pures `calculerStatsPersonnage` et `calculerDegats`, plus tests unitaires (Jest ou Vitest — à trancher, Vitest cohérent avec Vite déjà utilisé côté client). Formaliser noir sur blanc le taux de conversion stat → % de dégâts (encore en suspens).
+
+**Point à trancher avant de coder** : les cubes contiennent, en plus des caractéristiques (Intelligence, Agilité, Force, Chance, Vitalité), des dommages élémentaires directs déjà présents (`DO_AIR`, `DO_FEU`, `DO_TERRE`, `DO_EAU`) et des bonus globaux (`PUISSANCE`, `DOMMAGES`, `DO_CRIT`, `%_COUP_CRITIQUE`, résistances, PA/PM/PO...). À décider : le calcul de dégâts d'un sort doit-il agréger uniquement la conversion caractéristique→élément, ou aussi ces dommages/bonus directs quand ils s'appliquent ?
 
 ## Points encore en suspens
 
 - **Hébergeur** : pas encore choisi (doit supporter Node + Express + MySQL)
 - **Taux de conversion stat → % de dégâts** : à formaliser précisément à la Tâche 3
+- **Périmètre exact du calcul** (caractéristiques seules vs. + dommages directs/bonus globaux des cubes) : à trancher au démarrage de la Tâche 3
 - **Sourcing des images** des équipements : prévu après le MVP
