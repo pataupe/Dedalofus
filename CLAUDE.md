@@ -32,7 +32,8 @@ Dedalofus/
 - `server/.env` : `PORT=3001` + `DB_HOST`, `DB_USER`, `DB_PASSWORD`, `DB_NAME=dedalofus` (connexion MySQL locale)
 - `server/scripts/` : scripts d'import Node (`import-cubes.js`, `import-breloques.js`, `import-sorts.js`), dépendent de `mysql2` et `csv-parse` (ajoutés à `server/package.json`)
 - `schema.sql` (racine du repo) : script de création de la base `dedalofus` et de ses 10 tables, à exécuter une seule fois
-- Sous-dossiers `server/routes/`, `server/controllers/`, `server/models/` : **pas encore créés**, prévus à la Tâche 4 (API Express), pas nécessaire avant
+- `server/config/db.js` : pool de connexions MySQL (`mysql2/promise`)
+- `server/controllers/` + `server/routes/` : API REST en lecture seule (`/api/cubes`, `/api/breloques`, `/api/sorts`) — voir "État d'avancement" (Tâche 4)
 - `client/src/App.jsx` : fetch de test vers `/api/ping`
 
 ## Périmètre du MVP
@@ -195,7 +196,7 @@ Index utiles à prévoir au minimum : `element`, `rang`/`evolution` sur `Cube` (
 1. **Mise en place du projet** ✅ FAIT (Jour 1) — voir "État d'avancement" ci-dessous
 2. **Tables MySQL + import cubes/breloques/sorts** ✅ FAIT (Jour 3) — voir "État d'avancement" ci-dessous
 3. **Module de calcul (2 fonctions pures) + tests unitaires (Jest/Vitest)** ← PROCHAINE ÉTAPE
-4. API Express pour exposer les équipements (`GET /api/cubes`, `/api/charms`, `/api/spells`, recherche, filtres, pagination)
+4. API Express pour exposer les équipements (`GET /api/cubes`, `/api/breloques`, `/api/sorts`, recherche, filtres, pagination) — routes 100% en français, cohérent avec le reste du code
 5. Pages React liste + détail équipement (peut démarrer en parallèle de la tâche 6)
 6. Authentification (register/login, bcrypt, JWT, middleware de protection)
 7. Création de personnage + emplacements d'équipement
@@ -245,11 +246,27 @@ Règles d'enchaînement :
 ### ✅ Jour 3 (suite 2) — Stats dérivées + bonus de panoplie ajoutés
 - Toutes les formules de stats dérivées (Vitalité, PA, PM, Invocation, Tacle, Fuite, Retrait/Esquive PA/PM, Dommages élémentaires affichés) intégrées dans `calculerStatsPersonnage` — détail complet dans la section "Stats dérivées et bonus de panoplie" ci-dessus
 - Bonus de panoplie implémentés (config `PANOPLIES` dans `calcul.js`, facilement éditable), avec gestion du comptage des cubes Chaos (comptent comme 1 cube de chaque famille)
-- 28 tests unitaires au total, tous verts
-- Pas encore commité (à faire)
+- Esquive PA/PM confirmée boostable directement par certains cubes (stat `ESQUIVE_PA`/`ESQUIVE_PM`), en plus du palier Sagesse — contrairement au Retrait PA/PM qui n'a pas d'équivalent cube
+- 29 tests unitaires au total, tous verts
+- Commit : "Ajout des stats derivees et bonus de panoplie au calcul (Tache 3)", pushé sur GitHub
 
-### 🔜 Prochaine étape — Tâche 4
-API Express en lecture seule pour exposer les équipements (`GET /api/cubes`, `/api/charms`, `/api/spells`, recherche/filtres).
+### ✅ Jour 3 (suite 3) — Tâche 4 terminée
+- Nommage des routes tranché : **100% français** (`/api/cubes`, `/api/breloques`, `/api/sorts`), pas d'anglais, cohérent avec le reste du code
+- `server/config/db.js` : pool de connexions MySQL (`mysql2/promise`), réutilisé par tous les contrôleurs
+- `server/controllers/` : `cubesController.js`, `breloquesController.js`, `sortsController.js` — logique des routes
+- `server/routes/` : `cubes.js`, `breloques.js`, `sorts.js` — déclaration des routes Express
+- Routes implémentées :
+  - `GET /api/cubes` — filtres `nom` (recherche partielle), `element`, `rang`, pagination `limit`/`offset` (max 500)
+  - `GET /api/cubes/:id` — détail d'un cube avec ses stats jointes (format identique à `cubes_v2.json` : `{ ...cube, stats: [{ key, value, label }] }`), 404 si introuvable
+  - `GET /api/breloques` — filtres `nom`, `rang`, pagination
+  - `GET /api/sorts` — filtres `nom`, `element`, `rang` (mappé sur `rang_evolution`), pagination
+- `server/index.js` monte les 3 routers + middleware d'erreur global (Express 5 route automatiquement les rejets de promesses des handlers async, pas besoin de try/catch dans les contrôleurs)
+- Testé en conditions réelles avec `curl` : filtres, détail, 404, recherche — tout fonctionne
+- Bug de session résolu : une ancienne instance du serveur (lancée plus tôt) squattait le port 3001 et masquait les nouvelles routes → tuée avant de retester
+
+### 🔜 Prochaine étape — Tâche 5 / Tâche 6 (en parallèle)
+- Tâche 5 : pages React liste + détail équipement (consultable sans compte)
+- Tâche 6 : authentification (register/login, bcrypt, JWT, middleware de protection)
 
 ## Points encore en suspens
 
