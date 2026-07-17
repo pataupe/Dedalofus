@@ -1,8 +1,11 @@
 import { Link } from 'react-router-dom';
 import logo from '../assets/logo.webp';
+import { useAuth } from '../context/AuthContext';
 import './HomePage.css';
 
 function HomePage() {
+  const { session } = useAuth();
+
   return (
     <div className="page-accueil">
       <img src={logo} alt="Dédalofus" className="page-accueil__logo" />
@@ -13,7 +16,10 @@ function HomePage() {
         <Link to="/cubes" className="page-accueil__bouton">
           Voir les équipements
         </Link>
-        <Link to="/connexion" className="page-accueil__bouton page-accueil__bouton--secondaire">
+        <Link
+          to={session ? '/personnage' : '/inscription'}
+          className="page-accueil__bouton page-accueil__bouton--secondaire"
+        >
           Créer mon équipement
         </Link>
       </div>

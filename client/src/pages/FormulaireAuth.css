@@ -1,0 +1,65 @@
+.page-auth {
+  max-width: 360px;
+  margin: 60px auto;
+  padding: 0 24px;
+}
+
+.page-auth h1 {
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+.formulaire-auth {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.formulaire-auth label {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 14px;
+  color: var(--texte-attenue);
+}
+
+.formulaire-auth input {
+  padding: 10px 14px;
+  border-radius: 6px;
+  border: 1px solid var(--bordure);
+  background: var(--bg-carte);
+  color: var(--texte);
+  font-size: 15px;
+}
+
+.formulaire-auth button {
+  padding: 12px;
+  border-radius: 6px;
+  border: none;
+  background: var(--couleur-lumiere);
+  color: #1a1a1a;
+  font-weight: 600;
+  font-size: 15px;
+}
+
+.formulaire-auth button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.formulaire-auth__erreur {
+  color: var(--couleur-feu);
+  margin: 0;
+  font-size: 14px;
+}
+
+.page-auth__lien {
+  text-align: center;
+  margin-top: 16px;
+  font-size: 14px;
+  color: var(--texte-attenue);
+}
+
+.page-auth__lien a {
+  color: var(--couleur-lumiere);
+}

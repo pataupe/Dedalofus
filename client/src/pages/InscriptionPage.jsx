@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import { connecter } from '../api/auth';
+import { inscrire } from '../api/auth';
 import { useAuth } from '../context/AuthContext';
 import './FormulaireAuth.css';
 
-function ConnexionPage() {
+function InscriptionPage() {
   const [email, setEmail] = useState('');
   const [motDePasse, setMotDePasse] = useState('');
   const [erreur, setErreur] = useState(null);
@@ -12,7 +12,7 @@ function ConnexionPage() {
   const { session, connecterSession } = useAuth();
   const navigate = useNavigate();
 
-  // Déjà connecté : pas de sens à réafficher le formulaire de connexion.
+  // Déjà connecté : pas de sens à réafficher le formulaire d'inscription.
   useEffect(() => {
     if (session) navigate('/personnage', { replace: true });
   }, [session, navigate]);
@@ -22,7 +22,7 @@ function ConnexionPage() {
     setErreur(null);
     setEnvoiEnCours(true);
     try {
-      const { token, utilisateur } = await connecter(email, motDePasse);
+      const { token, utilisateur } = await inscrire(email, motDePasse);
       connecterSession(token, utilisateur);
       navigate('/');
     } catch (err) {
@@ -34,31 +34,32 @@ function ConnexionPage() {
 
   return (
     <div className="page-auth">
-      <h1>Connexion</h1>
+      <h1>Créer un compte</h1>
       <form onSubmit={soumettre} className="formulaire-auth">
         <label>
           Email
           <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
         </label>
         <label>
-          Mot de passe
+          Mot de passe (6 caractères minimum)
           <input
             type="password"
             value={motDePasse}
             onChange={(e) => setMotDePasse(e.target.value)}
+            minLength={6}
             required
           />
         </label>
         {erreur && <p className="formulaire-auth__erreur">{erreur}</p>}
         <button type="submit" disabled={envoiEnCours}>
-          {envoiEnCours ? 'Connexion...' : 'Se connecter'}
+          {envoiEnCours ? 'Création...' : 'Créer mon compte'}
         </button>
       </form>
       <p className="page-auth__lien">
-        Pas encore de compte ? <Link to="/inscription">S'inscrire</Link>
+        Déjà un compte ? <Link to="/connexion">Se connecter</Link>
       </p>
     </div>
   );
 }
 
-export default ConnexionPage;
+export default InscriptionPage;

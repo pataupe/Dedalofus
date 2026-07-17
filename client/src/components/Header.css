@@ -24,6 +24,7 @@
 
 .entete__nav {
   display: flex;
+  align-items: center;
   gap: 20px;
 }
 
@@ -34,4 +35,18 @@
 
 .entete__nav a:hover {
   color: var(--texte);
+}
+
+.entete__email {
+  color: var(--texte);
+  font-size: 14px;
+}
+
+.entete__deconnexion {
+  background: transparent;
+  border: 1px solid var(--bordure);
+  border-radius: 6px;
+  padding: 6px 12px;
+  color: var(--texte);
+  font-size: 14px;
 }
