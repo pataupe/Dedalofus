@@ -275,3 +275,4 @@ Règles d'enchaînement :
 - **Paliers 5-9 (Lumière) et 7-9 (Air) des panoplies** : valeurs actuellement fictives en attendant les vraies (voir section "Stats dérivées et bonus de panoplie")
 - **Dommages critique et dommages poussée** : formules connues mais pas encore intégrées à `calculerDegats` (pas de modélisation du jet critique ni du nombre de cases de poussée pour l'instant) — pas urgent
 - **Sourcing des images** des équipements : prévu après le MVP
+- **Catégories de filtres pour les breloques** (Dégâts, Mobilité, Soin/Protection, Entrave, Bonus PA/PO, Bonus divers, Breloques boss) : catégories **pas encore décidées définitivement**, et de nouvelles breloques seront ajoutées plus tard. Reporté à plus tard dans le développement plutôt que de classer les 116 breloques actuelles maintenant (risque de tout refaire).

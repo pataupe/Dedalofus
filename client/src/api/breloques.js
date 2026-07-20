@@ -1,9 +1,9 @@
 const BASE_URL = 'http://localhost:3001/api';
 
-export async function listerBreloques({ nom = '', rang = '', limite = 24, offset = 0 } = {}) {
+export async function listerBreloques({ nom = '', rangs = [], limite = 24, offset = 0 } = {}) {
   const params = new URLSearchParams();
   if (nom) params.set('nom', nom);
-  if (rang) params.set('rang', rang);
+  if (rangs.length) params.set('rangs', rangs.join(','));
   params.set('limit', limite);
   params.set('offset', offset);
 

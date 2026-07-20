@@ -6,13 +6,14 @@ import './BreloqueListPage.css';
 
 const PAR_PAGE = 24;
 
-function basculer(valeurActuelle, valeurCliquee) {
-  return valeurActuelle === valeurCliquee ? '' : valeurCliquee;
+// Plusieurs filtres actifs en même temps (ajoute/retire de la liste).
+function basculerMulti(liste, valeur) {
+  return liste.includes(valeur) ? liste.filter((v) => v !== valeur) : [...liste, valeur];
 }
 
 function BreloqueListPage() {
   const [recherche, setRecherche] = useState('');
-  const [rangActif, setRangActif] = useState('');
+  const [rangsActifs, setRangsActifs] = useState([]);
   const [page, setPage] = useState(0);
   const [breloques, setBreloques] = useState([]);
   const [chargement, setChargement] = useState(true);
@@ -20,17 +21,17 @@ function BreloqueListPage() {
 
   useEffect(() => {
     setPage(0);
-  }, [recherche, rangActif]);
+  }, [recherche, rangsActifs]);
 
   useEffect(() => {
     setChargement(true);
     setErreur(null);
 
-    listerBreloques({ nom: recherche, rang: rangActif, limite: PAR_PAGE, offset: page * PAR_PAGE })
+    listerBreloques({ nom: recherche, rangs: rangsActifs, limite: PAR_PAGE, offset: page * PAR_PAGE })
       .then(setBreloques)
       .catch(() => setErreur('Impossible de charger les breloques. Le serveur est-il lancé ?'))
       .finally(() => setChargement(false));
-  }, [recherche, rangActif, page]);
+  }, [recherche, rangsActifs, page]);
 
   return (
     <div className="page-breloques">
@@ -48,8 +49,8 @@ function BreloqueListPage() {
           {RANGS_MAITRISE.map((rang) => (
             <button
               key={rang}
-              className={rangActif === rang ? 'actif' : ''}
-              onClick={() => setRangActif((actuel) => basculer(actuel, rang))}
+              className={rangsActifs.includes(rang) ? 'actif' : ''}
+              onClick={() => setRangsActifs((actuels) => basculerMulti(actuels, rang))}
             >
               {rang}
             </button>

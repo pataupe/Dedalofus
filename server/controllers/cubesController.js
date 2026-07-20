@@ -11,7 +11,7 @@ function parserPagination(query) {
 
 // GET /api/cubes?nom=&element=&rang=&stats=&limit=&offset=
 // `stats` accepte plusieurs clés séparées par des virgules (ex: "AGILITE,DO_AIR") :
-// renvoie les cubes ayant AU MOINS UNE de ces stats (OR).
+// renvoie les cubes ayant TOUTES ces stats à la fois (ET, pas OU).
 async function listerCubes(req, res) {
   const { nom, element, rang, stats } = req.query;
   const { limite, offset } = parserPagination(req.query);
@@ -35,11 +35,11 @@ async function listerCubes(req, res) {
     params.push(rang);
   }
   const listeStats = stats ? stats.split(',').filter(Boolean) : [];
-  if (listeStats.length) {
-    conditions.push(
-      `id IN (SELECT cube_id FROM StatCube WHERE cle_stat IN (${listeStats.map(() => '?').join(',')}))`
-    );
-    params.push(...listeStats);
+  // Une condition IN(...) séparée par stat cochée, jointe en AND avec les autres
+  // conditions ci-dessous : le cube doit avoir CHACUNE des stats, pas juste une seule.
+  for (const cle of listeStats) {
+    conditions.push('id IN (SELECT cube_id FROM StatCube WHERE cle_stat = ?)');
+    params.push(cle);
   }
 
   const whereClause = conditions.length ? `WHERE ${conditions.join(' AND ')}` : '';

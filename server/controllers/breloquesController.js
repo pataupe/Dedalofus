@@ -9,9 +9,16 @@ function parserPagination(query) {
   return { limite, offset };
 }
 
-// GET /api/breloques?nom=&rang=&limit=&offset=
+function parserListe(valeur) {
+  return valeur ? valeur.split(',').filter(Boolean) : [];
+}
+
+// GET /api/breloques?nom=&rangs=&limit=&offset=
+// `rangs` accepte plusieurs valeurs séparées par des virgules (plusieurs filtres
+// actifs en même temps, combinés en OR entre eux).
 async function listerBreloques(req, res) {
-  const { nom, rang } = req.query;
+  const { nom } = req.query;
+  const rangs = parserListe(req.query.rangs);
   const { limite, offset } = parserPagination(req.query);
 
   const conditions = [];
@@ -21,9 +28,9 @@ async function listerBreloques(req, res) {
     conditions.push('nom LIKE ?');
     params.push(`%${nom}%`);
   }
-  if (rang) {
-    conditions.push('rang = ?');
-    params.push(rang);
+  if (rangs.length) {
+    conditions.push(`(${rangs.map(() => 'rang = ?').join(' OR ')})`);
+    params.push(...rangs);
   }
 
   const whereClause = conditions.length ? `WHERE ${conditions.join(' AND ')}` : '';
