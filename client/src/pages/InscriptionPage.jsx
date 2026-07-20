@@ -6,6 +6,7 @@ import './FormulaireAuth.css';
 
 function InscriptionPage() {
   const [email, setEmail] = useState('');
+  const [pseudo, setPseudo] = useState('');
   const [motDePasse, setMotDePasse] = useState('');
   const [erreur, setErreur] = useState(null);
   const [envoiEnCours, setEnvoiEnCours] = useState(false);
@@ -22,7 +23,7 @@ function InscriptionPage() {
     setErreur(null);
     setEnvoiEnCours(true);
     try {
-      const { token, utilisateur } = await inscrire(email, motDePasse);
+      const { token, utilisateur } = await inscrire(email, pseudo, motDePasse);
       connecterSession(token, utilisateur);
       navigate('/');
     } catch (err) {
@@ -39,6 +40,17 @@ function InscriptionPage() {
         <label>
           Email
           <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
+        </label>
+        <label>
+          Pseudo (3 à 32 caractères)
+          <input
+            type="text"
+            value={pseudo}
+            onChange={(e) => setPseudo(e.target.value)}
+            minLength={3}
+            maxLength={32}
+            required
+          />
         </label>
         <label>
           Mot de passe (6 caractères minimum)

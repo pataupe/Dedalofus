@@ -37,9 +37,10 @@
   color: var(--texte);
 }
 
-.entete__email {
+.entete__pseudo {
   color: var(--texte);
   font-size: 14px;
+  font-weight: 600;
 }
 
 .entete__deconnexion {

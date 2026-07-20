@@ -24,7 +24,7 @@ function Header() {
         <Link to="/sorts">Sorts</Link>
         {session ? (
           <>
-            <span className="entete__email">{session.utilisateur.email}</span>
+            <span className="entete__pseudo">{session.utilisateur.pseudo}</span>
             <button className="entete__deconnexion" onClick={seDeconnecter}>
               Déconnexion
             </button>
