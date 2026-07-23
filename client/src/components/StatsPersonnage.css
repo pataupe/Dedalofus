@@ -33,11 +33,47 @@
   gap: 8px 10px;
 }
 
+/* Bloc "Principal" : 2 colonnes fixes (PdV/PA/PM/PO à gauche, le reste à
+   droite), contrairement à .stats-personnage__liste qui répartit ses lignes
+   automatiquement entre les 2 colonnes. */
+.stats-personnage__deux-colonnes {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px 10px;
+  padding: 10px 12px;
+}
+
+.stats-personnage__colonne {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
 .stats-personnage__ligne {
   display: flex;
   align-items: center;
   gap: 6px;
   min-width: 0;
+}
+
+/* PdV : légèrement plus grand que les 7 autres stats du bloc Principal, pour
+   ressortir un peu sans être criard. */
+.stats-personnage__ligne--vedette .stats-personnage__valeur {
+  font-size: 18px;
+}
+
+.stats-personnage__ligne--vedette .stats-personnage__icone {
+  width: 23px;
+  height: 23px;
+  font-size: 12px;
+}
+
+.stats-personnage__ligne--vedette .stats-personnage__libelle {
+  font-weight: 600;
+  color: var(--texte);
 }
 
 .stats-personnage__icone {
@@ -71,14 +107,14 @@
 
 .stats-personnage__carac-entetes {
   display: flex;
-  justify-content: flex-end;
-  gap: 44px;
+  justify-content: space-between;
   font-size: 11px;
   color: var(--texte-attenue);
   padding: 10px 12px 4px;
 }
 
-.stats-personnage__carac-entetes span {
+.stats-personnage__carac-entetes span:last-child {
+  flex: 0 0 auto;
   width: 64px;
   text-align: center;
 }
@@ -111,35 +147,45 @@
   text-align: right;
 }
 
-.stats-personnage__carac-boutons {
+/* Puissance + boutons de remplissage 0/100/150 sur une même ligne : les
+   boutons sont petits et poussés à droite (moins de la moitié de la largeur
+   sur mobile), l'espace gagné à gauche accueille la ligne Puissance qui
+   n'a plus besoin d'être isolée sur sa propre ligne. */
+.stats-personnage__carac-puissance-ligne {
   display: flex;
-  gap: 8px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin: 0;
   padding: 8px 12px;
 }
 
+.stats-personnage__carac-puissance-stat {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  min-width: 0;
+}
+
+.stats-personnage__carac-boutons {
+  display: flex;
+  flex: 0 0 auto;
+  gap: 6px;
+}
+
 .stats-personnage__carac-boutons button {
-  flex: 1;
-  padding: 6px;
-  border-radius: 6px;
+  padding: 4px 10px;
+  border-radius: 5px;
   border: 1px solid var(--bordure);
   background: var(--bg-carte-survol);
   color: var(--texte);
-  font-size: 13px;
+  font-size: 12px;
   cursor: pointer;
 }
 
 .stats-personnage__carac-boutons button:hover {
   background: var(--couleur-lumiere);
   color: #1a1a1a;
-}
-
-.stats-personnage__carac-puissance {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  margin: 0;
-  padding: 6px 12px 12px;
-  border-top: 1px solid var(--bordure);
 }
 
 .stats-personnage__erreur {
@@ -154,7 +200,8 @@
     max-width: 700px;
   }
 
-  .stats-personnage__liste {
+  .stats-personnage__liste,
+  .stats-personnage__deux-colonnes {
     gap: 10px 24px;
   }
 }

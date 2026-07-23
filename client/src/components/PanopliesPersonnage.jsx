@@ -64,60 +64,82 @@ function meilleureFamille(panoplies) {
   })[0]?.famille;
 }
 
-// N'affiche que les familles avec un ensemble actif (>= 2 cubes) — une seule à la
-// fois pour éviter une page à rallonge quand plusieurs sont actives en même temps
-// (ex: des cubes Chaos comptant dans les 5 familles) ; les autres sont accessibles
-// via le menu déroulant qui s'ouvre au clic sur le nom de la famille affichée.
+// Somme les bonus de toutes les familles actives, stat par stat (pour l'option
+// "Cumuler les bonus" du menu déroulant).
+function cumulerBonus(panoplies) {
+  const total = {};
+  for (const p of panoplies) {
+    for (const [cle, valeur] of Object.entries(p.bonus)) {
+      total[cle] = (total[cle] || 0) + valeur;
+    }
+  }
+  return total;
+}
+
+// Sélection spéciale (à côté d'un nom de famille) représentant la vue "Cumuler
+// les bonus" du menu déroulant.
+const CUMUL = '__cumul__';
+
+// N'affiche qu'un seul ensemble à la fois (ou le cumul de tous) — pour éviter
+// une page à rallonge quand plusieurs familles sont actives en même temps (ex:
+// des cubes Chaos comptant dans les 5 familles) ; les autres options sont
+// accessibles via le menu déroulant qui s'ouvre au clic sur le nom affiché.
 function PanopliesPersonnage({ panoplies }) {
-  const [familleAffichee, setFamilleAffichee] = useState(null);
+  const [selection, setSelection] = useState(null);
   const [menuOuvert, setMenuOuvert] = useState(false);
 
   useEffect(() => {
-    if (!panoplies.some((p) => p.famille === familleAffichee)) {
-      setFamilleAffichee(meilleureFamille(panoplies));
+    const selectionValide =
+      (selection === CUMUL && panoplies.length >= 2) || panoplies.some((p) => p.famille === selection);
+    if (!selectionValide) {
+      setSelection(meilleureFamille(panoplies));
     }
-  }, [panoplies, familleAffichee]);
+  }, [panoplies, selection]);
 
   if (!panoplies || panoplies.length === 0) return null;
 
-  const active = panoplies.find((p) => p.famille === familleAffichee) || panoplies[0];
-  const autres = panoplies.filter((p) => p.famille !== active.famille);
+  const estCumul = selection === CUMUL && panoplies.length >= 2;
+  const active = !estCumul ? panoplies.find((p) => p.famille === selection) || panoplies[0] : null;
+  const bonusAffiche = estCumul ? cumulerBonus(panoplies) : active.bonus;
+  const autresFamilles = panoplies.filter((p) => p.famille !== active?.famille);
+  const peutCumuler = panoplies.length >= 2;
+  const menuDisponible = autresFamilles.length > 0 || (peutCumuler && !estCumul);
+
+  const libelleDeclencheur = estCumul
+    ? `Bonus cumulés (${panoplies.length} ensembles)`
+    : `Ensemble de Cubes ${active.famille} (${active.nombre})`;
 
   return (
     <div className="panoplies-personnage">
       <p className="panoplies-personnage__label">Bonus de panoplie :</p>
 
       <div className="panoplies-personnage__selecteur">
-        {autres.length > 0 ? (
+        {menuDisponible ? (
           <button
             type="button"
             className="panoplies-personnage__declencheur"
             onClick={() => setMenuOuvert((o) => !o)}
             aria-expanded={menuOuvert}
           >
-            <span>
-              Ensemble de Cubes {active.famille} ({active.nombre})
-            </span>
+            <span>{libelleDeclencheur}</span>
             <span className={`panoplies-personnage__fleche ${menuOuvert ? 'panoplies-personnage__fleche--ouvert' : ''}`}>
               ▼
             </span>
           </button>
         ) : (
           <div className="panoplies-personnage__declencheur panoplies-personnage__declencheur--seul">
-            <span>
-              Ensemble de Cubes {active.famille} ({active.nombre})
-            </span>
+            <span>{libelleDeclencheur}</span>
           </div>
         )}
 
-        {menuOuvert && autres.length > 0 && (
+        {menuOuvert && menuDisponible && (
           <ul className="panoplies-personnage__menu">
-            {autres.map((p) => (
+            {autresFamilles.map((p) => (
               <li key={p.famille}>
                 <button
                   type="button"
                   onClick={() => {
-                    setFamilleAffichee(p.famille);
+                    setSelection(p.famille);
                     setMenuOuvert(false);
                   }}
                 >
@@ -125,12 +147,26 @@ function PanopliesPersonnage({ panoplies }) {
                 </button>
               </li>
             ))}
+            {peutCumuler && !estCumul && (
+              <li>
+                <button
+                  type="button"
+                  className="panoplies-personnage__menu-cumul"
+                  onClick={() => {
+                    setSelection(CUMUL);
+                    setMenuOuvert(false);
+                  }}
+                >
+                  Cumuler les bonus
+                </button>
+              </li>
+            )}
           </ul>
         )}
       </div>
 
       <ul className="panoplies-personnage__stats">
-        {Object.entries(active.bonus).map(([cle, valeur]) => {
+        {Object.entries(bonusAffiche).map(([cle, valeur]) => {
           const { icone, couleur } = iconeStat(cle);
           return (
             <li key={cle} className="panoplies-personnage__ligne">

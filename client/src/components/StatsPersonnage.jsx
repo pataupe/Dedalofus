@@ -8,20 +8,24 @@ import './StatsPersonnage.css';
 // `_TOTAL`/`_TOTALE` exact, ce sont les noms réellement produits par ce module.
 // `icone`/`couleur` : simples emoji + couleur d'élément existante (pas de vraies
 // icônes en V1), juste pour retrouver visuellement le repère DofusBook.
+// Bloc "Principal" affiché en 2 colonnes fixes (pas l'auto-répartition des
+// autres blocs) : PdV/PA/PM/PO à gauche, le reste à droite. PdV a `vedette:
+// true` pour ressortir légèrement des 7 autres stats du bloc.
+const PRINCIPAL_GAUCHE = [
+  { cle: 'VITALITE_TOTALE', libelle: 'PdV', icone: '❤️', couleur: 'var(--couleur-feu)', vedette: true },
+  { cle: 'PA_TOTAL', libelle: 'PA', icone: '⭐', couleur: 'var(--couleur-lumiere)' },
+  { cle: 'PM_TOTAL', libelle: 'PM', icone: '🔷', couleur: 'var(--couleur-air)' },
+  { cle: 'PO', libelle: 'PO', icone: '👁️', couleur: 'var(--couleur-eau)' },
+];
+
+const PRINCIPAL_DROITE = [
+  { cle: 'INVOCATION_TOTALE', libelle: 'Invoc.', icone: '👹', couleur: 'var(--couleur-chaos)' },
+  { cle: 'INITIATIVE_TOTALE', libelle: 'Init.', icone: '🪽', couleur: 'var(--couleur-chaos)' },
+  { cle: '%_COUP_CRITIQUE', libelle: 'Crit. %', icone: '❗', couleur: 'var(--couleur-feu)' },
+  { cle: 'SOIN', libelle: 'Soin', icone: '✚', couleur: 'var(--couleur-feu)' },
+];
+
 const BLOCS = [
-  {
-    titre: 'Principal',
-    lignes: [
-      { cle: 'VITALITE_TOTALE', libelle: 'PdV', icone: '❤️', couleur: 'var(--couleur-feu)' },
-      { cle: 'PA_TOTAL', libelle: 'PA', icone: '⭐', couleur: 'var(--couleur-lumiere)' },
-      { cle: 'PM_TOTAL', libelle: 'PM', icone: '🔷', couleur: 'var(--couleur-air)' },
-      { cle: 'PO', libelle: 'PO', icone: '👁️', couleur: 'var(--couleur-eau)' },
-      { cle: 'INVOCATION_TOTALE', libelle: 'Invoc.', icone: '👹', couleur: 'var(--couleur-chaos)' },
-      { cle: 'INITIATIVE_TOTALE', libelle: 'Init.', icone: '🪽', couleur: 'var(--couleur-chaos)' },
-      { cle: '%_COUP_CRITIQUE', libelle: 'Crit. %', icone: '❗', couleur: 'var(--couleur-feu)' },
-      { cle: 'SOIN', libelle: 'Soin', icone: '✚', couleur: 'var(--couleur-feu)' },
-    ],
-  },
   {
     titre: 'Mobilité',
     lignes: [
@@ -84,9 +88,9 @@ function Icone({ emoji, couleur }) {
   );
 }
 
-function LigneStat({ cle, libelle, icone, couleur, valeur }) {
+function LigneStat({ cle, libelle, icone, couleur, valeur, vedette }) {
   return (
-    <li className="stats-personnage__ligne">
+    <li className={`stats-personnage__ligne ${vedette ? 'stats-personnage__ligne--vedette' : ''}`}>
       <span className="stats-personnage__valeur">{valeur}</span>
       <Icone emoji={icone} couleur={couleur} />
       <span className="stats-personnage__libelle">{libelle}</span>
@@ -128,16 +132,21 @@ function StatsPersonnage({ stats, parcho, token, personnageId, onParchoSauvegard
 
   return (
     <div className="stats-personnage">
-      {BLOCS.slice(0, 1).map((bloc) => (
-        <div key={bloc.titre} className="stats-personnage__bloc">
-          <h2 className="stats-personnage__titre">{bloc.titre}</h2>
-          <ul className="stats-personnage__liste">
-            {bloc.lignes.map((ligne) => (
+      <div className="stats-personnage__bloc">
+        <h2 className="stats-personnage__titre">Principal</h2>
+        <div className="stats-personnage__deux-colonnes">
+          <ul className="stats-personnage__colonne">
+            {PRINCIPAL_GAUCHE.map((ligne) => (
+              <LigneStat key={ligne.cle} {...ligne} valeur={stats[ligne.cle] || 0} />
+            ))}
+          </ul>
+          <ul className="stats-personnage__colonne">
+            {PRINCIPAL_DROITE.map((ligne) => (
               <LigneStat key={ligne.cle} {...ligne} valeur={stats[ligne.cle] || 0} />
             ))}
           </ul>
         </div>
-      ))}
+      </div>
 
       <div className="stats-personnage__bloc">
         <h2 className="stats-personnage__titre">Caractéristiques</h2>
@@ -169,22 +178,24 @@ function StatsPersonnage({ stats, parcho, token, personnageId, onParchoSauvegard
             />
           </div>
         ))}
-        <div className="stats-personnage__carac-boutons">
-          {BOUTONS_REMPLISSAGE.map((valeur) => (
-            <button key={valeur} type="button" onClick={() => remplirTout(valeur)}>
-              {valeur}
-            </button>
-          ))}
+        <div className="stats-personnage__carac-puissance-ligne">
+          <span className="stats-personnage__carac-puissance-stat">
+            <span className="stats-personnage__valeur">{stats.PUISSANCE || 0}</span>
+            <Icone emoji="⚡" couleur="var(--couleur-lumiere)" />
+            <span className="stats-personnage__libelle">Puissance</span>
+          </span>
+          <div className="stats-personnage__carac-boutons">
+            {BOUTONS_REMPLISSAGE.map((valeur) => (
+              <button key={valeur} type="button" onClick={() => remplirTout(valeur)}>
+                {valeur}
+              </button>
+            ))}
+          </div>
         </div>
-        <p className="stats-personnage__carac-puissance">
-          <span className="stats-personnage__valeur">{stats.PUISSANCE || 0}</span>
-          <Icone emoji="⚡" couleur="var(--couleur-lumiere)" />
-          <span className="stats-personnage__libelle">Puissance</span>
-        </p>
         {erreurParcho && <p className="stats-personnage__erreur">{erreurParcho}</p>}
       </div>
 
-      {BLOCS.slice(1).map((bloc) => (
+      {BLOCS.map((bloc) => (
         <div key={bloc.titre} className="stats-personnage__bloc">
           <h2 className="stats-personnage__titre">{bloc.titre}</h2>
           <ul className="stats-personnage__liste">

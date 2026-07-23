@@ -99,6 +99,13 @@
   color: var(--couleur-lumiere);
 }
 
+/* Option "Cumuler les bonus" : mise en avant (gras + accent) pour la distinguer
+   des entrées d'ensembles individuels au-dessus. */
+.panoplies-personnage__menu-cumul {
+  font-weight: 700;
+  color: var(--couleur-lumiere) !important;
+}
+
 .panoplies-personnage__stats {
   list-style: none;
   margin: 0;
