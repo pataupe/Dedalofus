@@ -5,6 +5,11 @@
   overflow: hidden;
   display: flex;
   flex-direction: column;
+  /* Étire la carte pour occuper toute la hauteur de sa colonne dans la grille
+     (les cartes voisines peuvent être plus hautes si elles ont une description) :
+     sans ça, seul le conteneur (carte + bouton Équiper) s'étire, pas la carte
+     elle-même, ce qui donnait des cartes de hauteurs visuellement différentes. */
+  flex: 1;
 }
 
 .carte-sort__entete {
@@ -17,17 +22,81 @@
 
 .carte-sort__corps {
   padding: 12px;
-  font-size: 13px;
-  color: var(--texte-attenue);
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 10px;
+  flex: 1;
 }
 
-.carte-sort__corps p {
+/* Ligne des dégâts mise en avant (façon DofusBook) : un bloc par valeur,
+   séparateur vertical entre les deux quand les deux existent. */
+.carte-sort__degats {
+  display: flex;
+  border: 1px solid var(--bordure);
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.carte-sort__degats-bloc {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  padding: 8px 4px;
+  text-align: center;
+}
+
+.carte-sort__degats-bloc + .carte-sort__degats-bloc {
+  border-left: 1px solid var(--bordure);
+}
+
+.carte-sort__degats-valeur {
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--texte);
+}
+
+.carte-sort__degats-bloc--critique .carte-sort__degats-valeur {
+  color: var(--couleur-feu);
+}
+
+.carte-sort__degats-libelle {
+  font-size: 11px;
+  color: var(--texte-attenue);
+}
+
+/* Stats secondaires en grille 2 colonnes, comme les caractéristiques de DofusBook. */
+.carte-sort__stats {
+  list-style: none;
   margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px 12px;
+  font-size: 13px;
+  color: var(--texte-attenue);
+}
+
+.carte-sort__stats li {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* Réservé pour une future icône par stat (vide pour l'instant), même
+   convention que .carte-cube__stat-icone. */
+.carte-sort__stat-icone {
+  width: 14px;
+  height: 14px;
+  flex: 0 0 14px;
+  border-radius: 3px;
+  background: var(--bordure);
 }
 
 .carte-sort__description {
+  margin: 0;
   font-style: italic;
+  font-size: 13px;
+  color: var(--texte-attenue);
 }

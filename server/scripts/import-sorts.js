@@ -29,6 +29,24 @@ function parsePlageDegats(valeur) {
   return { min: parseInt(correspondance[1], 10), max: parseInt(correspondance[2], 10) };
 }
 
+// Certains sorts (poisons, pièges, glyphes, invocations...) n'ont pas de valeur dans
+// "Dégâts de base"/"Dégâts critique" : les dégâts sont écrits en texte libre dans
+// "Effet du sort"/"Effet du sort (Critique)" à la place (ex: "16 à 18 (dommages Feu)
+// (2 tours)"). Recherche le premier segment (séparés par "/") qui ressemble à des
+// dégâts, en ignorant les segments de soin ("PV rendus" — un sort de soin n'inflige
+// pas de dégâts, même s'il contient une plage "X à Y").
+function parseDegatsDepuisEffet(effetTexte) {
+  if (!effetTexte) return { min: null, max: null };
+  for (const segment of effetTexte.split('/')) {
+    if (/PV rendus/i.test(segment)) continue;
+    const correspondance = segment.match(/(\d+)\s*à\s*(\d+)/);
+    if (correspondance) {
+      return { min: parseInt(correspondance[1], 10), max: parseInt(correspondance[2], 10) };
+    }
+  }
+  return { min: null, max: null };
+}
+
 // Nettoie les champs texte simples : "-" et "" deviennent NULL
 function nettoyerTexte(valeur) {
   if (!valeur) return null;
@@ -73,8 +91,10 @@ async function main() {
     const nom = (ligne['Nom du sort'] || '').trim();
     if (!nom) continue;
 
-    const degats = parsePlageDegats(ligne['Dégâts de base']);
-    const degatsCrit = parsePlageDegats(ligne['Dégâts critique']);
+    let degats = parsePlageDegats(ligne['Dégâts de base']);
+    if (degats.min === null) degats = parseDegatsDepuisEffet(ligne['Effet du sort']);
+    let degatsCrit = parsePlageDegats(ligne['Dégâts critique']);
+    if (degatsCrit.min === null) degatsCrit = parseDegatsDepuisEffet(ligne['Effet du sort (Critique)']);
 
     await connexion.execute(
       `INSERT INTO Sort (
