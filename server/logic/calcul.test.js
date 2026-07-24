@@ -129,9 +129,9 @@ describe('calculerStatsPersonnage — bonus de panoplie', () => {
   it('plusieurs panoplies actives en même temps se cumulent entre elles', () => {
     const stats = calculerStatsPersonnage([
       cube({}, 'Air'), cube({}, 'Air'), // palier 2 Air : +50 vita, +50 agi, +10 do_air
-      cube({}, 'Lumière'), cube({}, 'Lumière'), // palier 2 Lumière : +1 PM
+      cube({}, 'Lumière'), cube({}, 'Lumière'), // palier 2 Lumière : +1 PM, +50 vita
     ]);
-    expect(stats.VITALITE_TOTALE).toBe(1050 + 50);
+    expect(stats.VITALITE_TOTALE).toBe(1050 + 50 + 50);
     expect(stats.PM_TOTAL).toBe(3 + 1);
   });
 
@@ -203,7 +203,7 @@ describe('calculerPanopliesActives', () => {
 
     const lumiere = actives.find((a) => a.famille === 'Lumière');
     expect(lumiere.palier).toBe(3);
-    expect(lumiere.bonus).toEqual({ PM: 1, PA: 1 });
+    expect(lumiere.bonus).toEqual({ PM: 1, PA: 1, VITALITE: 75, SOIN: 10, DO_CRIT: 10 });
   });
 
   it('un cube Chaos compte dans les 5 familles à la fois', () => {

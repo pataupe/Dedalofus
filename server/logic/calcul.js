@@ -34,24 +34,18 @@ const BASES_PERSONNAGE = {
 // Bonus de panoplie : équiper N cubes d'une même famille (élément, ou Lumière) donne un
 // bonus de stats. Le bonus au palier N remplace celui du palier N-1 (pas cumulatif entre
 // paliers). Un cube Chaos compte comme 1 cube de CHAQUE famille ci-dessous (pas de bonus
-// propre). Lumière et Air : valeurs données par le porteur de projet, sauf les paliers
-// 7-9 qui restent des valeurs FICTIVES en attendant les vraies données. Terre/Eau/Feu :
-// aucune vraie donnée fournie pour l'instant — en attendant, mêmes valeurs que Air à
-// l'identique (tous paliers, y compris 2-6), juste la caractéristique et la stat de
-// dommages direct adaptées à l'élément (Terre→FORCE/DO_TERRE, Eau→CHANCE/DO_EAU,
-// Feu→INTELLIGENCE/DO_FEU) — à corriger ici dès que les vraies valeurs arrivent, aucun
-// autre fichier à toucher.
+// propre).
 const PANOPLIES = {
   'Lumière': {
-    2: { PM: 1 },
-    3: { PM: 1, PA: 1 },
-    4: { PM: 1, PA: 1, PO: 1 },
-    // paliers 5 à 9 : fictifs, à corriger
-    5: { PM: 1, PA: 1, PO: 2 },
-    6: { PM: 2, PA: 1, PO: 2 },
-    7: { PM: 2, PA: 2, PO: 2 },
-    8: { PM: 2, PA: 2, PO: 2 },
-    9: { PM: 2, PA: 2, PO: 2, INVOCATION: 1 },
+    2: { PM: 1, VITALITE: 50, SOIN: 5, DO_CRIT: 5 },
+    3: { PM: 1, PA: 1, VITALITE: 75, SOIN: 10, DO_CRIT: 10 },
+    4: { PM: 1, PA: 1, PO: 1, VITALITE: 100, SOIN: 15, DO_CRIT: 15 },
+    // palier 9 : généré par Windsurf, à corriger
+    5: { PM: 1, PA: 1, PO: 1, VITALITE: 150, SOIN: 20, DO_CRIT: 20 },
+    6: { PM: 2, PA: 1, PO: 1, VITALITE: 175, SOIN: 25, DO_CRIT: 25 },
+    7: { PM: 2, PA: 2, PO: 1, VITALITE: 200, SOIN: 30, DO_CRIT: 30 },
+    8: { PM: 2, PA: 2, PO: 2, VITALITE: 225, SOIN: 35, DO_CRIT: 35 },
+    9: { PM: 2, PA: 2, PO: 2, VITALITE: 250, SOIN: 40, DO_CRIT: 40 },
   },
   Air: {
     2: { VITALITE: 50, AGILITE: 50, DO_AIR: 10 },
@@ -59,13 +53,10 @@ const PANOPLIES = {
     4: { VITALITE: 150, AGILITE: 150, DO_AIR: 30, PUISSANCE: 25, DOMMAGES: 5 },
     5: { VITALITE: 200, AGILITE: 150, DO_AIR: 30, PUISSANCE: 50, DOMMAGES: 10 },
     6: { VITALITE: 250, AGILITE: 150, DO_AIR: 30, PUISSANCE: 75, DOMMAGES: 15 },
-    // paliers 7 à 9 : fictifs, à corriger
     7: { VITALITE: 300, AGILITE: 150, DO_AIR: 30, PUISSANCE: 100, DOMMAGES: 20 },
     8: { VITALITE: 350, AGILITE: 150, DO_AIR: 30, PUISSANCE: 125, DOMMAGES: 25 },
     9: { VITALITE: 400, AGILITE: 150, DO_AIR: 30, PUISSANCE: 150, DOMMAGES: 30 },
   },
-  // Terre/Eau/Feu : entièrement FICTIFS (copie de Air), à corriger dès que les
-  // vraies valeurs seront fournies par le porteur de projet.
   Terre: {
     2: { VITALITE: 50, FORCE: 50, DO_TERRE: 10 },
     3: { VITALITE: 100, FORCE: 100, DO_TERRE: 20 },

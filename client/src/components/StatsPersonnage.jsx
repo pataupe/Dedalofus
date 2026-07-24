@@ -19,9 +19,9 @@ const PRINCIPAL_GAUCHE = [
 ];
 
 const PRINCIPAL_DROITE = [
-  { cle: 'INVOCATION_TOTALE', libelle: 'Invoc.', icone: '👹', couleur: 'var(--couleur-chaos)' },
-  { cle: 'INITIATIVE_TOTALE', libelle: 'Init.', icone: '🪽', couleur: 'var(--couleur-chaos)' },
-  { cle: '%_COUP_CRITIQUE', libelle: 'Crit. %', icone: '❗', couleur: 'var(--couleur-feu)' },
+  { cle: 'INITIATIVE_TOTALE', libelle: 'Initiative', icone: '🪽', couleur: 'var(--couleur-chaos)' },
+  { cle: '%_COUP_CRITIQUE', libelle: '% Critique', icone: '❗', couleur: 'var(--couleur-feu)' },
+  { cle: 'INVOCATION_TOTALE', libelle: 'Invocation', icone: '👹', couleur: 'var(--couleur-chaos)' },
   { cle: 'SOIN', libelle: 'Soin', icone: '✚', couleur: 'var(--couleur-feu)' },
 ];
 
