@@ -7,6 +7,7 @@ const breloquesRouter = require('./routes/breloques');
 const sortsRouter = require('./routes/sorts');
 const authRouter = require('./routes/auth');
 const personnagesRouter = require('./routes/personnages');
+const partageRouter = require('./routes/partage');
 
 const app = express();
 app.use(cors());
@@ -21,6 +22,7 @@ app.use('/api/breloques', breloquesRouter);
 app.use('/api/sorts', sortsRouter);
 app.use('/api/auth', authRouter);
 app.use('/api/personnages', personnagesRouter);
+app.use('/api/partage', partageRouter);
 
 // Express 5 route automatiquement les erreurs des handlers async ici.
 app.use((err, req, res, next) => {

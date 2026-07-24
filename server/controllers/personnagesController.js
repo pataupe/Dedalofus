@@ -61,13 +61,10 @@ async function trouverPersonnage(id, utilisateurId) {
   return personnages[0] || null;
 }
 
-// GET /api/personnages/:id
-async function obtenirPersonnage(req, res) {
-  const personnage = await trouverPersonnage(req.params.id, req.utilisateur.id);
-  if (!personnage) {
-    return res.status(404).json({ erreur: 'Personnage introuvable' });
-  }
-
+// Construit la fiche complète (stats, panoplies, équipement, dégâts) d'un
+// personnage déjà identifié — partagé entre la route privée (obtenirPersonnage,
+// vérifie utilisateur_id) et la route publique de partage (vérifie lien_partage).
+async function construireFichePersonnage(personnage) {
   const [cubes] = await pool.query(
     `SELECT ec.emplacement, c.id, c.nom, c.element, c.rang, c.numero
      FROM EquipementCube ec
@@ -97,7 +94,7 @@ async function obtenirPersonnage(req, res) {
   );
 
   const [equipements] = await pool.query(
-    `SELECT parcho_vitalite, parcho_sagesse, parcho_force, parcho_intelligence, parcho_chance, parcho_agilite
+    `SELECT lien_partage, parcho_vitalite, parcho_sagesse, parcho_force, parcho_intelligence, parcho_chance, parcho_agilite
      FROM Equipement WHERE personnage_id = ?`,
     [personnage.id]
   );
@@ -143,9 +140,10 @@ async function obtenirPersonnage(req, res) {
     }));
   const degats = calculerDegats(statsPersonnage, sortsEquipesPourCalcul);
 
-  res.json({
+  return {
     id: personnage.id,
     nom: personnage.nom,
+    lienPartage: eq.lien_partage,
     stats: statsPersonnage,
     panoplies,
     parcho,
@@ -162,7 +160,35 @@ async function obtenirPersonnage(req, res) {
       emplacement,
       breloque: id ? { id, nom, rang, effet } : null,
     })),
-  });
+  };
+}
+
+// GET /api/personnages/:id
+async function obtenirPersonnage(req, res) {
+  const personnage = await trouverPersonnage(req.params.id, req.utilisateur.id);
+  if (!personnage) {
+    return res.status(404).json({ erreur: 'Personnage introuvable' });
+  }
+
+  res.json(await construireFichePersonnage(personnage));
+}
+
+// GET /api/partage/:lienPartage — route publique (sans authentification),
+// consultation en lecture seule d'un stuff partagé via son lien unique.
+async function obtenirPersonnagePartage(req, res) {
+  const [personnages] = await pool.query(
+    `SELECT p.id, p.nom
+     FROM Personnage p
+     JOIN Equipement e ON e.personnage_id = p.id
+     WHERE e.lien_partage = ?`,
+    [req.params.lienPartage]
+  );
+  const personnage = personnages[0];
+  if (!personnage) {
+    return res.status(404).json({ erreur: 'Lien de partage introuvable' });
+  }
+
+  res.json(await construireFichePersonnage(personnage));
 }
 
 const EMPLACEMENTS_MAX = { cubes: 9, sorts: 9, breloques: 7 };
@@ -365,6 +391,7 @@ module.exports = {
   creerPersonnage,
   listerPersonnages,
   obtenirPersonnage,
+  obtenirPersonnagePartage,
   equiperCube,
   equiperSort,
   equiperBreloque,

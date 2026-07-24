@@ -21,6 +21,21 @@
   color: var(--texte);
 }
 
+.page-personnage-detail__partage {
+  margin-bottom: 12px;
+  padding: 6px 14px;
+  border-radius: 20px;
+  border: 1px solid var(--bordure);
+  background: var(--bg-carte);
+  color: var(--texte);
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.page-personnage-detail__partage:hover {
+  background: var(--bg-carte-survol);
+}
+
 .page-personnage-detail__bouton-desequiper {
   display: block;
   width: 100%;

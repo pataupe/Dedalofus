@@ -34,6 +34,7 @@ function PersonnageDetailPage() {
   const [erreurAction, setErreurAction] = useState(null);
   const [modale, setModale] = useState(null);
   const [ongletActif, setOngletActif] = useState('equipement');
+  const [lienCopie, setLienCopie] = useState(false);
 
   useEffect(() => {
     if (!session) navigate('/connexion', { replace: true });
@@ -65,6 +66,17 @@ function PersonnageDetailPage() {
     );
   }
 
+  function copierLienPartage() {
+    const url = `${window.location.origin}/partage/${personnage.lienPartage}`;
+    navigator.clipboard.writeText(url).then(
+      () => {
+        setLienCopie(true);
+        setTimeout(() => setLienCopie(false), 2000);
+      },
+      () => setErreurAction('Impossible de copier le lien (accès au presse-papier refusé par le navigateur).')
+    );
+  }
+
   async function desequiper(type, emplacement) {
     setErreurAction(null);
     try {
@@ -91,6 +103,9 @@ function PersonnageDetailPage() {
         ← Retour à mes personnages
       </Link>
       <h1>{personnage.nom}</h1>
+      <button type="button" className="page-personnage-detail__partage" onClick={copierLienPartage}>
+        {lienCopie ? 'Lien copié !' : '🔗 Copier le lien de partage'}
+      </button>
       {erreurAction && <p className="page-personnage-detail__erreur">{erreurAction}</p>}
 
       <div className="page-personnage-detail__onglets">

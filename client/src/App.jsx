@@ -9,6 +9,7 @@ import ConnexionPage from './pages/ConnexionPage';
 import InscriptionPage from './pages/InscriptionPage';
 import PersonnagePage from './pages/PersonnagePage';
 import PersonnageDetailPage from './pages/PersonnageDetailPage';
+import PartagePage from './pages/PartagePage';
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
         <Route path="/inscription" element={<InscriptionPage />} />
         <Route path="/personnage" element={<PersonnagePage />} />
         <Route path="/personnage/:id" element={<PersonnageDetailPage />} />
+        <Route path="/partage/:lienPartage" element={<PartagePage />} />
       </Routes>
     </>
   );

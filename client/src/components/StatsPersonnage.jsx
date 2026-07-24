@@ -98,7 +98,7 @@ function LigneStat({ cle, libelle, icone, couleur, valeur, vedette }) {
   );
 }
 
-function StatsPersonnage({ stats, parcho, token, personnageId, onParchoSauvegarde }) {
+function StatsPersonnage({ stats, parcho, token, personnageId, onParchoSauvegarde, lectureSeule }) {
   const [parchoLocal, setParchoLocal] = useState(parcho);
   const [erreurParcho, setErreurParcho] = useState(null);
 
@@ -161,21 +161,27 @@ function StatsPersonnage({ stats, parcho, token, personnageId, onParchoSauvegard
               <Icone emoji={icone} couleur={couleur} />
               <span className="stats-personnage__libelle">{libelle}</span>
             </span>
-            <input
-              type="number"
-              min="0"
-              className="stats-personnage__carac-parcho"
-              value={parchoLocal[cle] ?? 0}
-              onChange={(e) => modifierParcho(cle, e.target.value)}
-              onBlur={(e) => {
-                // On relit la valeur directement dans le champ plutôt que dans
-                // parchoLocal : évite de sauvegarder une valeur pas encore à
-                // jour si le blur arrive avant que le re-render du onChange
-                // n'ait eu lieu (rare mais possible en saisie rapide).
-                const valeur = e.target.value === '' ? 0 : Math.max(0, parseInt(e.target.value, 10) || 0);
-                sauvegarder({ ...parchoLocal, [cle]: valeur });
-              }}
-            />
+            {lectureSeule ? (
+              <span className="stats-personnage__carac-parcho stats-personnage__carac-parcho--lecture">
+                {parcho[cle] ?? 0}
+              </span>
+            ) : (
+              <input
+                type="number"
+                min="0"
+                className="stats-personnage__carac-parcho"
+                value={parchoLocal[cle] ?? 0}
+                onChange={(e) => modifierParcho(cle, e.target.value)}
+                onBlur={(e) => {
+                  // On relit la valeur directement dans le champ plutôt que dans
+                  // parchoLocal : évite de sauvegarder une valeur pas encore à
+                  // jour si le blur arrive avant que le re-render du onChange
+                  // n'ait eu lieu (rare mais possible en saisie rapide).
+                  const valeur = e.target.value === '' ? 0 : Math.max(0, parseInt(e.target.value, 10) || 0);
+                  sauvegarder({ ...parchoLocal, [cle]: valeur });
+                }}
+              />
+            )}
           </div>
         ))}
         <div className="stats-personnage__carac-puissance-ligne">
@@ -184,13 +190,15 @@ function StatsPersonnage({ stats, parcho, token, personnageId, onParchoSauvegard
             <Icone emoji="⚡" couleur="var(--couleur-lumiere)" />
             <span className="stats-personnage__libelle">Puissance</span>
           </span>
-          <div className="stats-personnage__carac-boutons">
-            {BOUTONS_REMPLISSAGE.map((valeur) => (
-              <button key={valeur} type="button" onClick={() => remplirTout(valeur)}>
-                {valeur}
-              </button>
-            ))}
-          </div>
+          {!lectureSeule && (
+            <div className="stats-personnage__carac-boutons">
+              {BOUTONS_REMPLISSAGE.map((valeur) => (
+                <button key={valeur} type="button" onClick={() => remplirTout(valeur)}>
+                  {valeur}
+                </button>
+              ))}
+            </div>
+          )}
         </div>
         {erreurParcho && <p className="stats-personnage__erreur">{erreurParcho}</p>}
       </div>

@@ -137,11 +137,16 @@
   opacity: 0.85;
 }
 
+/* Largeur fixe + alignement à droite, même logique que StatsPersonnage.css :
+   la valeur s'étend vers la gauche selon son nombre de chiffres, l'icône
+   reste toujours à la même position. */
 .panoplies-personnage__valeur {
   flex: 0 0 auto;
+  width: 38px;
   font-weight: 700;
   font-size: 15px;
   color: var(--texte);
+  text-align: right;
 }
 
 .panoplies-personnage__libelle {

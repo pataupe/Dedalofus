@@ -50,8 +50,8 @@ const PANOPLIES = {
     5: { PM: 1, PA: 1, PO: 2 },
     6: { PM: 2, PA: 1, PO: 2 },
     7: { PM: 2, PA: 2, PO: 2 },
-    8: { PM: 2, PA: 2, PO: 3 },
-    9: { PM: 2, PA: 2, PO: 3, INVOCATION: 1 },
+    8: { PM: 2, PA: 2, PO: 2 },
+    9: { PM: 2, PA: 2, PO: 2, INVOCATION: 1 },
   },
   Air: {
     2: { VITALITE: 50, AGILITE: 50, DO_AIR: 10 },

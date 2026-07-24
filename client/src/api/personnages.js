@@ -64,3 +64,12 @@ export function equiperBreloqueAuto(token, personnageId, breloqueId) {
 export function sauvegarderParcho(token, personnageId, parcho) {
   return appelPersonnages(`/${personnageId}/parcho`, token, { method: 'PUT', body: JSON.stringify(parcho) });
 }
+
+// Route publique (sans authentification) : consultation en lecture seule d'un
+// stuff partagé via son lien unique.
+export async function obtenirPersonnagePartage(lienPartage) {
+  const reponse = await fetch(`${BASE_URL}/partage/${lienPartage}`);
+  const donnees = await reponse.json();
+  if (!reponse.ok) throw new Error(donnees.erreur || 'Une erreur est survenue');
+  return donnees;
+}

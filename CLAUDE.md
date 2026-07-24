@@ -217,8 +217,8 @@ Index utiles à prévoir au minimum : `element`, `rang`/`evolution` sur `Cube` (
 6. **Authentification (inscription/connexion, bcrypt, JWT)** ✅ FAIT — voir "État d'avancement" ci-dessous
 7. **Création de personnage + emplacements d'équipement** ✅ FAIT — voir "État d'avancement" ci-dessous
 8. **Branchement du calculateur sur la fiche perso (onglet Sorts)** ✅ FAIT — voir "État d'avancement" ci-dessous
-9. Sauvegarde automatique du stuff
-10. Partage par lien unique (`share_token`, route publique sans auth)
+9. **Sauvegarde automatique du stuff** ✅ FAIT (déjà acquise depuis la Tâche 7 — voir "État d'avancement" ci-dessous)
+10. **Partage par lien unique** ✅ FAIT — voir "État d'avancement" ci-dessous
 11. Déploiement (hébergeur à choisir — doit supporter Node.js + Express + MySQL, **Vercel exclu** car pensé pour Next.js/serverless)
 
 Règles d'enchaînement :
@@ -377,6 +377,25 @@ Règles d'enchaînement :
 - `SortCard.jsx` : nouvelle prop optionnelle `calcul` (résultat de `calculerDegats` pour ce sort) — quand fournie, remplace les dégâts/élément/% critique de base par les valeurs calculées ; PA/Portée/Lancers restent toujours ceux du sort (pas liés au calcul). Sans cette prop (page `/sorts` publique), comportement inchangé. Une seule carte pour les deux affichages plutôt qu'une carte dupliquée.
 - Nouveau composant `client/src/components/OngletSorts.jsx` : grille de `SortCard` (avec `calcul`) pour chaque sort équipé ; un sort à 2 éléments (cas géré par `calculerDegats` mais pas encore rencontré dans les vraies données) produirait 2 cartes, une par élément.
 - `PersonnageDetailPage.jsx` : deux onglets "Équipement"/"Sorts" (state `ongletActif`, boutons façon filtres existants) — "Équipement" = grille + `StatsPersonnage` + `PanopliesPersonnage` (contenu inchangé, juste déplacé dans une branche de condition) ; "Sorts" = `OngletSorts`. La modale de détail reste commune aux deux onglets.
+
+### ✅ Polish visuel post-Tâche 8 — icônes stats/panoplies, header mobile, mise en page Principal/Caractéristiques
+- `StatsPersonnage.jsx`/`PanopliesPersonnage.jsx` : chaque stat affiche désormais une petite icône emoji colorée (couleur d'élément existante, pas de vraie icône en V1) + libellé abrégé façon DofusBook (ex: "Do Feu", "Ré Terre", "Esq. PA") pour tenir sur 2 colonnes même en portrait mobile ; chaque bloc a un bandeau de titre coloré (même convention que l'en-tête `SortCard`). `ICONES_STATS` (Panoplies) couvre les 35 stats de `STATS_CUBES` avec un repli générique si une stat imprévue apparaît dans un bonus.
+- **Alignement des icônes corrigé** (retour DofusBook comparé) : `.stats-personnage__valeur`/`.panoplies-personnage__valeur` ont une largeur fixe + `text-align: right` — la valeur s'étend vers la gauche selon son nombre de chiffres, l'icône reste toujours à la même position (avant : l'icône se décalait vers la droite avec des valeurs à plus de chiffres).
+- Bloc "Principal" : mise en page à 2 colonnes **fixes** (`PRINCIPAL_GAUCHE`/`PRINCIPAL_DROITE`, pas l'auto-répartition des autres blocs) — PdV/PA/PM/PO à gauche, Invoc./Init./Crit. %/Soin à droite. PdV a une prop `vedette` (légèrement plus grand, 18px vs 15px) pour ressortir un peu des 7 autres stats du bloc, sans être criard.
+- Bloc "Caractéristiques" : l'en-tête "Total" était mal centré (flottait entre les 2 colonnes) → aligné à gauche au-dessus des valeurs. Les boutons de remplissage Parcho 0/100/150 sont maintenant petits et poussés à droite (< la moitié de la largeur sur mobile), ce qui a permis de remonter la ligne Puissance sur la même ligne qu'eux (elle était isolée à tort) ; le séparateur entre cette ligne et les Caractéristiques au-dessus a été retiré.
+- **Bonus de panoplie "Cumuler les bonus"** : nouvelle option dans le menu déroulant (`PanopliesPersonnage.jsx`), visible dès que ≥ 2 familles sont actives — additionne stat par stat les bonus de toutes les familles actives (`cumulerBonus`), plutôt que d'afficher une seule famille à la fois. Depuis cette vue, le menu propose de rebasculer vers n'importe quelle famille individuelle.
+- `Header.jsx`/`.css` refondu pour mobile : menu hamburger (3 barres → croix animée) qui déroule un panneau vertical sous le point de rupture 720px (corrige au passage un débordement horizontal de 16px qui existait déjà sur la nav) ; header rendu `sticky`. Lien "Personnage" renommé **"Mes stuffs"** et distingué visuellement des 3 listes consultables librement (Cubes/Breloques/Sorts en pastille neutre grise, "Mes stuffs" en accent doré — même traitement que le bouton Connexion, car c'est le seul lien qui mène au compte du joueur).
+
+### ✅ Tâche 9 (déjà acquise) — Sauvegarde automatique du stuff
+- Aucun développement supplémentaire nécessaire : chaque action (équiper/déséquiper un cube/sort/breloque, sauvegarder le Parcho) persiste déjà immédiatement en base via son propre appel API (voir Tâche 7/8) — pas de bouton "Sauvegarder" à ajouter, pas d'état non synchronisé côté client à gérer.
+
+### ✅ Tâche 10 terminée — Partage par lien unique
+- `lien_partage` (généré à la création du personnage depuis la Tâche 7, jamais exploité jusqu'ici) est maintenant renvoyé par `GET /api/personnages/:id` (`{ ..., lienPartage }`), pour que le propriétaire puisse le récupérer/copier depuis sa fiche.
+- `personnagesController.js` refactorisé : la construction de la fiche complète (stats, panoplies, équipement, dégâts) est extraite dans `construireFichePersonnage(personnage)`, partagée entre `obtenirPersonnage` (privée, vérifie `utilisateur_id`) et la nouvelle `obtenirPersonnagePartage` (publique, vérifie `lien_partage`) — pas de logique dupliquée entre les deux routes.
+- Nouvelle route **publique** (sans `verifierToken`) `GET /api/partage/:lienPartage`, montée depuis un routeur dédié `server/routes/partage.js` (`/api/partage`) plutôt que dans `routes/personnages.js`, pour qu'aucun middleware d'auth ne s'y applique par erreur. 404 générique si le lien est invalide.
+- `PersonnageDetailPage.jsx` : bouton "🔗 Copier le lien de partage" sous le nom du personnage (`navigator.clipboard.writeText`, feedback "Lien copié !" pendant 2s ; message d'erreur si le presse-papier est refusé par le navigateur).
+- Nouvelle page publique `client/src/pages/PartagePage.jsx` (route `/partage/:lienPartage`, sans compte nécessaire) : réutilise la même grille d'équipement + `StatsPersonnage` + `PanopliesPersonnage` + `OngletSorts`, mais **en lecture seule** — pas de lien "Équiper" sur les cases vides (pas de prop `lien`), pas de croix de déséquipement (pas de prop `onDesequiper`), pas de bouton "Déséquiper" dans la modale de détail. Les cases remplies restent cliquables pour voir le détail de l'item (modale commune, réutilise `CubeCard`/`SortCard`/`BreloqueCard` comme sur la fiche privée).
+- `StatsPersonnage.jsx` : nouvelle prop `lectureSeule` — quand `true`, la colonne Parcho s'affiche en texte simple (pas d'`<input>`) et les boutons 0/100/150 sont masqués ; `token`/`personnageId`/`onParchoSauvegarde` deviennent inutiles dans ce mode (un visiteur ne doit pas pouvoir modifier le stuff de quelqu'un d'autre).
 
 ## Points encore en suspens
 

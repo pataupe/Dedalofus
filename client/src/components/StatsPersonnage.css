@@ -62,6 +62,7 @@
 /* PdV : légèrement plus grand que les 7 autres stats du bloc Principal, pour
    ressortir un peu sans être criard. */
 .stats-personnage__ligne--vedette .stats-personnage__valeur {
+  width: 46px;
   font-size: 18px;
 }
 
@@ -89,11 +90,16 @@
   opacity: 0.85;
 }
 
+/* Largeur fixe + alignement à droite : la valeur s'étend vers la gauche quand
+   elle a plus de chiffres, l'icône reste toujours à la même position (comme
+   sur DofusBook), au lieu de pousser l'icône vers la droite. */
 .stats-personnage__valeur {
   flex: 0 0 auto;
+  width: 38px;
   font-weight: 700;
   font-size: 15px;
   color: var(--texte);
+  text-align: right;
 }
 
 .stats-personnage__libelle {
@@ -145,6 +151,16 @@
   color: var(--texte);
   font-size: 14px;
   text-align: right;
+}
+
+/* Fiche partagée (lecture seule) : même gabarit que l'input, sans bordure ni
+   interactivité, juste la valeur affichée. */
+.stats-personnage__carac-parcho--lecture {
+  display: inline-block;
+  box-sizing: border-box;
+  border-color: transparent;
+  background: transparent;
+  color: var(--texte-attenue);
 }
 
 /* Puissance + boutons de remplissage 0/100/150 sur une même ligne : les
