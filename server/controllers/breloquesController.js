@@ -36,7 +36,7 @@ async function listerBreloques(req, res) {
   const whereClause = conditions.length ? `WHERE ${conditions.join(' AND ')}` : '';
 
   const [breloques] = await pool.query(
-    `SELECT id, nom, rang, effet FROM Breloque ${whereClause} ORDER BY id LIMIT ? OFFSET ?`,
+    `SELECT id, nom, rang, effet, image_url FROM Breloque ${whereClause} ORDER BY id LIMIT ? OFFSET ?`,
     [...params, limite, offset]
   );
 

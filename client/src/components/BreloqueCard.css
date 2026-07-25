@@ -15,9 +15,37 @@
   font-size: 14px;
 }
 
+.carte-breloque__corps {
+  display: flex;
+  align-items: center;
+  padding: 12px;
+  gap: 12px;
+}
+
+.carte-breloque__image {
+  flex: 0 0 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.carte-breloque__image img {
+  max-width: 100%;
+  max-height: 100%;
+}
+
+.carte-breloque__placeholder {
+  width: 40px;
+  height: 40px;
+  background: var(--texte-attenue);
+  opacity: 0.35;
+  clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+}
+
 .carte-breloque__effet {
   margin: 0;
-  padding: 12px;
   font-size: 13px;
   color: var(--texte-attenue);
+  flex: 1;
 }

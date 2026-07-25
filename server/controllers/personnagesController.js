@@ -66,7 +66,7 @@ async function trouverPersonnage(id, utilisateurId) {
 // vérifie utilisateur_id) et la route publique de partage (vérifie lien_partage).
 async function construireFichePersonnage(personnage) {
   const [cubes] = await pool.query(
-    `SELECT ec.emplacement, c.id, c.nom, c.element, c.rang, c.numero
+    `SELECT ec.emplacement, c.id, c.nom, c.element, c.rang, c.numero, c.image_url
      FROM EquipementCube ec
      JOIN Equipement e ON e.id = ec.equipement_id
      LEFT JOIN \`Cube\` c ON c.id = ec.cube_id
@@ -84,7 +84,7 @@ async function construireFichePersonnage(personnage) {
     [personnage.id]
   );
   const [breloques] = await pool.query(
-    `SELECT eb.emplacement, b.id, b.nom, b.rang, b.effet
+    `SELECT eb.emplacement, b.id, b.nom, b.rang, b.effet, b.image_url
      FROM EquipementBreloque eb
      JOIN Equipement e ON e.id = eb.equipement_id
      LEFT JOIN Breloque b ON b.id = eb.breloque_id
@@ -148,17 +148,17 @@ async function construireFichePersonnage(personnage) {
     panoplies,
     parcho,
     degats,
-    cubes: cubes.map(({ emplacement, id, nom, element, rang, numero }) => ({
+    cubes: cubes.map(({ emplacement, id, nom, element, rang, numero, image_url }) => ({
       emplacement,
-      cube: id ? { id, nom, element, rang, numero } : null,
+      cube: id ? { id, nom, element, rang, numero, image_url } : null,
     })),
     sorts: sorts.map(({ emplacement, ...sort }) => ({
       emplacement,
       sort: sort.id ? sort : null,
     })),
-    breloques: breloques.map(({ emplacement, id, nom, rang, effet }) => ({
+    breloques: breloques.map(({ emplacement, id, nom, rang, effet, image_url }) => ({
       emplacement,
-      breloque: id ? { id, nom, rang, effet } : null,
+      breloque: id ? { id, nom, rang, effet, image_url } : null,
     })),
   };
 }

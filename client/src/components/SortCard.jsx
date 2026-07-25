@@ -18,7 +18,14 @@ function SortCard({ sort, calcul }) {
 
   return (
     <div className="carte-sort">
-      <div className="carte-sort__entete">{sort.nom}</div>
+      <div className="carte-sort__entete">
+        {sort.image_url ? (
+          <img src={sort.image_url} alt="" className="carte-sort__icone" />
+        ) : (
+          <span className="carte-sort__icone-placeholder" aria-hidden="true" />
+        )}
+        <span>{sort.nom}</span>
+      </div>
       <div className="carte-sort__corps">
         {(aDesDegats || aDesDegatsCritiques) && (
           <div className="carte-sort__degats">
