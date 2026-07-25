@@ -1,0 +1,116 @@
+Nom du sort,Classe,Élément principal,Description,Coût en PA,Portée min,Portée max,Portée modifiable,Ligne de vue requise,Zone d’effet,Lancers par tour,Lancers par combat,Lancers par cible,Portée en diagonale / ligne,Intervalle de relance (CD),Interval de relance initial,Durée de l’effet,Cumul des effets,Dégâts de base,Type de dégâts,Effet du sort,Condition d’activation,Dégâts critique,Effet du sort (Critique),Chance de critique,État appliqué,Icône / visuel du sort
+Assaut Magique,All,Meilleur élément,-,3,1,5,Non,Oui,Monocible,2,,-,-,-,-,-,-,19 à 23,Meilleur élément,-,-,24 à 28,-,15%,-,-
+Absorption Magique,All,Meilleur élément,-,4,1,1,Non,Oui,Monocible,1,,-,-,-,-,-,-,29 à 33,Meilleur élément,-,-,34 à 38 ,-,20%,-,-
+Botte - Novice,Roublard,-,-,2,0,6,Oui,Oui,Croix de 3 cases,1,,-,Ligne,-,-,2 Tours,2,-,-,20 Dommages,-,-,-,-,-,-
+Aimantation - Novice,Roublard,-,-,1,0,5,Oui,Oui,Croix de 5 cases,3,,2,-,-,-,-,-,-,-,Attire de 1 case(s),-,-,-,-,-,-
+Rémission - Novice,Roublard,-,-,2,0,5,Oui,Oui,Monocible,1,,-,-,4,-,3 Tours,-,-,-,Dommages Subis x80% / Refoulage - Novice,Dégâts subis au CAC,-,-,-,Refoulage - Novice,-
+Vulnérabilité - Novice,Pandawa,-,-,1,1,6,Non,Oui,Monocible,1,,1,Ligne,-,-,-,-,-,-,-,-,-,-,-,-,-
+Picole - Novice,Pandawa,-,-,1,0,0,Non,Non,Monocible,2,,2,-,-,-,-,-,-,-,État Saoul (Infini) / Enlève l'état Saoul / Augmente dommages finaux 10% / Ajoute +2 PA,État Saoul / Sans État,-,-,-,-,-
+Stabilisation - Novice,Pandawa,-,-,2,0,5,Oui,Non,Monocible,1,,1,Ligne,2,-,1 Tour,-,-,-,État Enraciné (1 tour) / 40 Esquive PM (1 tour),-,-,-,-,-,-
+Téléportation - Novice,Xelor,-,-,2,1,5,Non,Oui,Monocible,1,,-,-,2,-,-,-,-,-,-,État interdit : Pesanteur,-,-,-,-,-
+Gelure - Novice,Xelor,-,-,2,1,8,Oui,Oui,Monocible,3,,2,-,-,-,-,-,-,-,-,-,-,-,-,-,-
+Fuite - Novice,Xelor,-,-,2,0,0,Non,Non,Monocible,2,,-,-,-,-,-,-,-,-,-,"État interdit : Enraciné,Pesanteur,Indéplaçable",-,-,-,-,-
+Déplacement Félin - Novice,Osamodas,-,-,2,0,6,Non,Oui,Monocible,1,,-,-,1,-,2 Tours,1,-,-,4PM (Invoc) / 2 PM (Allié) / 1PM (Lanceur),-,-,-,-,-,-
+Crapaud - Novice,Osamodas,-,-,2,0,5,Non,Oui,Monocible,1,,-,-,1,-,1 Tour,1,-,-,Dommages Subis x85% (Invoc) / Dommages Subis x95% (Alliés) / Dommages Subis x90% (Lanceur) ,-,-,-,-,-,-
+Piqûre Motivante - Novice,Osamodas,-,-,3,0,5,Non,Oui,Monocible,1,,-,Ligne,2,-,2 Tours,1,-,-,4 PA (Invoc) / 2 PA (Allié & Lanceur),-,-,-,-,-,-
+Bond du Félin - Novice,Ecaflip,-,-,1,0,2,Non,Oui,Monocible,3,,3,-,-,-,1 Tour,3,-,-,1 PM / 5 Fuite,-,-,-,-,-,-
+Trèfle - Novice,Ecaflip,-,-,2,0,5,Oui,Non,Monocible,1,,-,-,4,-,1 Tour,1,-,-,200% Coups Critiques (1 tour) / -200% Coups Critiques (dans 1 tour) / -200% Coups Critiques (1 tour) / 200% Coups Critiques (dans 1 tour),-,-,-,-,-,-
+Odorat - Novice,Ecaflip,-,-,3,0,1,Non,Oui,Cercle de 3 cases,1,,-,-,3,-,1 Tour,-,-,-,- 3 PA (1 tour) / 3 PM (1 tour) / -3 PM (dans 1 tour) / 3 PA (dans 1 tour) / 3PA (1 tour),-,-,-,-,-,-
+Invocation d'Arbre - Novice,Sadida,-,-,2,1,6,Oui,Non,-,1,,-,-,2,-,-,-,-,-,-,-,-,-,-,-,-
+Ronce Insolente - Novice,Sadida,-,-,3,0,5,Oui,Oui,Monocible,-,,-,Ligne,2,-,-,-,-,-,- 2 Durée des effets,-,-,-,-,-,-
+Herbe Folle - Novice,Sadida,-,-,3,0,6,Oui,Oui,Cercle de 2 cases,2,,-,Ligne,-,-,1 Tour,1,-,-,- 2 PM (1 tour),-,-,-,-,-,-
+Bond - Novice,Iop,-,-,3,1,4,Non,Non,-,-,,-,-,2,-,-,-,-,-,Téléporte sur la case ciblée,"État interdit : Pesanteur, Enraciné, Indéplaçable",-,-,-,-,-
+Puissance - Novice,Iop,-,-,3,0,5,Non,Oui,Monocible,-,,-,-,5,-,3 Tours,1,-,-,Augmente les dommages finaux occasionnés de 15% (3 tours),-,-,-,-,-,-
+Brokle - Novice,Iop,-,-,2,0,5,Non,Non,Monocible,-,,-,-,4,-,2 Tours,1,-,-,Maximise les effets aléatoires (2 tours),-,-,-,-,-,-
+Maladresse - Novice,Enutrof,-,-,2,1,6,Oui,Oui,Monocible,2,,1,-,-,-,1 Tour,1,-,-,-3 PM (1tour),-,-,-,-,-,-
+Clé Réductrice - Novice,Enutrof,-,-,2,1,6,Oui,Oui,Monocible,-,,-,-,3,-,2 Tours,1,-,-,-4 PO (2 tours),-,-,-,-,-,-
+Corruption - Novice,Enutrof,-,-,4,2,5,Oui,Oui,Monocible,-,,-,-,6,-,-,-,-,-,Réduit les dommages finaux occasionnés de 40% (1 tour) / 30% des PV en bouclier (2 tours) / 2 PA (1 tour),-,-,-,-,-,-
+Châtiment du Martyr - Novice,Sacrieur,-,-,3,0,0,Non,Oui,-,-,,-,-,5,-,4 Tours,-,-,-,Châtiment de 200 sur tour(s) (4 tours) / 50 Puissance (4 tours),-,-,-,-,-,-
+Transposition - Novice,Sacrieur,-,-,3,1,6,Oui,Non,-,-,,-,-,3,1,-,-,--,-,Échange de positions,"État interdit : Pesanteur, Enraciné, Indéplaçable",-,-,-,-,-
+Attirance - Novice,Sacrieur,-,-,3,2,8,Non,Oui,-,2,,1,Ligne,-,-,-,-,-,-,Attire de 7 case(s),-,-,-,-,-,-
+Rempart - Novice,Feca,-,-,2,0,0,Non,Oui,Cercle de 3 cases,-,,-,-,4,-,2 Tours,1,-,-,Dommages Subis x85% (2 tours),-,-,-,-,-,-
+Téléglyphe - Novice,Feca,-,-,3,1,6,Non,Non,-,-,,-,-,4,-,-,-,-,-,Téléporte sur la case ciblée / Déclenche les glyphes,"État interdit : Pesanteur, Enraciné, Indéplaçable",-,-,-,-,-
+Mise en garde - Novice,Feca,-,-,2,0,0,Non,Oui,-,-,,-,-,5,-,-,1,-,-,Déclenche les glyphes / Dissiper les glyphes de la cible / 150 Puissance (2 tours),-,-,-,-,-,-
+Double - Novice,Sram,-,-,3,1,2,Non,Oui,-,-,,-,Ligne,4,-,-,-,-,-,Créer un double du lanceur de sort,-,-,-,-,-,-
+Peur - Novice ,Sram,-,-,2,2,5,Non,Non,-,-,,-,Ligne,-,-,-,-,-,-,Pousse jusqu'à la case visée,-,-,-,-,-,-
+Piège répulsif - Novice,Sram,-,-,3,1,6,Oui,Non,Cercle de 1 case,-,,-,-,1,-,-,-,-,-,Pose un piège de rang 1 / Repousse de 2 case(s),-,-,-,-,-,-
+Maîtrise de l'Arc - Novice,Crâ,-,-,2,0,0,Non,Oui,Cercle de 2 cases,-,,-,-,4,-,2 Tours,1,-,-,2 PO (2 tours) / 10% Coups Critiques (2 tours) / Augmente les dommages finaux occasionnés de 5% (2 tours),-,-,-,-,-,-
+Flèche Grappin - Novice,Crâ,-,-,2,2,5,Non,Oui,-,1,,-,Ligne,-,-,-,-,-,-,Avance de 5 case(s) / Avance de 1 case(s),"État interdit : Enraciné, Indéplaçable, Inébranlable",-,-,-,-,-
+Flèche de Dispersion - Novice,Crâ,-,-,3,1,5,Non,Oui,Croix de 2 cases,-,,-,-,3,-,-,-,-,-,Repousse de 2 case(s),-,-,-,-,-,-
+Mot Stimulant - Novice,Eniripsa,-,-,2,0,0,Non,Oui,Croix de 3 cases,-,,-,-,4,3,3 Tours,1,-,-,2 PA (3 tours) / État Stimulé (3 tours),-,-,-,-,-,-
+Mot de Frayeur - Novice,Eniripsa,-,-,1,1,4,Non,Oui,-,3,,2,Ligne,-,-,-,-,-,-,Repousse de 1 case(s),-,-,-,-,-,-
+Mot de Jouvence - Novice,Eniripsa,-,-,3,0,4,Oui,Oui,-,-,,-,-,4,-,-,-,-,-,-3 Durée des effets,-,-,-,-,-,-
+Plastron - Novice,Zobal,-,-,4,0,0,Non,Oui,Cercle de 2 cases,-,,-,-,4,-,2 Tours,1,-,-,40% des PV en bouclier (2 tours) / 20% des PV en bouclier (2 tours),-,-,-,-,-,-
+Masque du Psychopathe - Novice,Zobal,-,-,1,0,0,Non,Oui,Croix de 1 case,-,,-,-,4,-,2 Tours,1,-,-,10% Dommages occasionnés en melée (2 tours),-,-,-,-,-,-
+Fougue - Novice,Zobal,-,-,2,0,1,Oui,Oui,-,-,,-,-,3,-,1 Tour,1,-,-,État Insoignable (1 tour) / État Intacable (1 tour),-,-,-,-,-,-
+Aspiration - Novice,Steamer,-,-,2,2,7,Oui,Oui,-,2,,1,"Ligne, Diagonale",-,-,-,-,-,-,Avance de 5 case(s) / Avance de 2 case(s),-,-,-,-,-,-
+Armure de Sel - Novice,Steamer,-,-,2,1,5,Non,Oui,-,-,,-,-,3,-,2 Tours,1,-,-,10% Résistance distance (2 tours) / État Indéplaçable (2 tours),-,-,-,-,-,-
+Scaphandre - Novice,Steamer,-,-,2,0,0,Non,Oui,Croix de 1 case,-,,-,-,4,-,2 Tours,4,-,-,1 PM (2 tours) / 1 PA (2 tours) / 25 dommages (2 tours) / 40 Dommages Poussée (2 tours),-,-,-,-,-,-
+Lancer de Pièces - Feu,All,Feu,-,2,1,7,Oui,Oui,Monocible,3,,2,-,-,-,-,-,18 à 20,Feu,-,-,21 à 23,-,5%,-,-
+Lancer de Pièces - Terre,All,Terre,-,2,1,7,Oui,Oui,Monocible,3,,2,-,-,-,-,-,18 à 20,Terre,-,-,21 à 23,-,5%,-,-
+Félintion - Eau,All,Eau,-,4,2,6,Non,Oui,Monocible,2,,1,Ligne,-,-,-,-,30 à 33,Eau,Repousse de 3 case(s) (1 tour),-,33 à 36,Repousse de 3 case(s) (1 tour),20%,-,-
+Félintion - Terre,All,Terre,-,4,2,6,Non,Oui,Monocible,2,,1,Ligne,-,-,-,-,30 à 33,Terre,Repousse de 3 case(s) (1 tour),-,33 à 36,Repousse de 3 case(s) (1 tour),20%,-,-
+Boliche - Feu,All,Feu,-,3,1,5,Non,Oui,Monocible,2,,-,Ligne,-,-,-,2,23 à 27,Feu,35 Dommages Poussé (2 tours) / Avance de 3 case(s) / Repousse de 2 case(s),-,25 à 29,35 Dommages Poussé (2 tours) / Avance de 3 case(s) / Repousse de 2 case(s),15%,-,-
+Boliche - Air,All,Air,-,3,1,5,Non,Oui,Monocible,2,,-,Ligne,-,-,-,2,23 à 27,Air,35 Dommages Poussé (2 tours) / Avance de 3 case(s) / Repousse de 2 case(s),-,25 à 29,35 Dommages Poussé (2 tours) / Avance de 3 case(s) / Repousse de 2 case(s),15%,-,-
+Schnaps - Eau,All,Eau,-,4,2,6,Non,Non,Croix de 1 case,2,,-,Diagonale,-,-,-,-,32 à 34,Eau,-,-,36 à 38,-,20%,-,-
+Schnaps - Feu,All,Feu,-,4,2,6,Non,Non,Croix de 1 case,2,,-,Diagonale,-,-,-,-,32 à 34,Feu,-,-,36 à 38,-,20%,-,-
+Escarre face - Terre,All,Terre,-,3,1,6,Non,Oui,Monocible,1,,-,-,-,-,2 Tours,-,-,Terre,Escare face - Expert (2 tours),-,-,-,-,-,-
+Escarre face - Air,All,Air,-,3,1,6,Non,Oui,Monocible,1,,-,-,-,-,2 Tours,-,-,Air,Escare face - Expert (2 tours),-,-,-,-,-,-
+Mot Soignant - Air,All ,Air,-,4,0,4,Oui,Oui,Croix de 1 case,1,5,-,-,-,-,-,-,-,Air,20 à 22 (PV rendus),-,,23 à 25 (PV rendus),5%,-,-
+Mot Soignant - Terre,All ,Terre,-,4,0,4,Oui,Oui,Croix de 1 case,1,5,-,-,-,-,-,-,-,Terre,20 à 22 (PV rendus),-,,23 à 25 (PV rendus),5%,-,-
+Épée du Destin - Feu,All,Feu,-,4,1,1,Non,Oui,Monocible,-,-,-,-,2,-,-,-,41 à 45,Feu,22% des PV érodés de la cible (dommages Feu) (1 tour) / Augmente les dégâts de base du sort Épée du Destin - Expert de 30 (dans 2 tours),-,46 à 50,25% des PV érodés de la cible (dommages Feu) (1 tour) / Augmente les dégâts de base du sort Épée du Destin - Expert de 36 (dans 2 tours),20%,-,-
+Épée du Destin - Air,All,Air,-,4,1,1,Non,Oui,Monocible,-,-,-,-,2,-,-,-,41 à 45,Air,22% des PV érodés de la cible (dommages Air) (1 tour) / Augmente les dégâts de base du sort Épée du Destin - Expert de 30 (dans 2 tours),-,46 à 50,25% des PV érodés de la cible (dommages Air) (1 tour) / Augmente les dégâts de base du sort Épée du Destin - Expert  de 36 (dans 2 tours),20%,-,-
+Foène,All,Meilleur élément,-,4,2,6,Non,Oui,Monocible,2,-,-,-,-,-,2 Tours,1,22 à 26,Meilleur élément,9 à 11 (meilleur élément) (2 tours),-,25 à 29,11 à 13 (meilleur élément) (2 tours),20%,-,-
+Fulgurance - Air,All,Air,-,4,4,4,Non,Non,-,2,-,-,Ligne,1,-,-,-,31 à 35,Air,Téléporte sur la case ciblée / Fulgurance - Expert : -1 tour(s) de relance,-,33 à 37,Téléporte sur la case ciblée / Fulgurance - Expert : -1 tour(s) de relance,20%,-,-
+Fulgurance - Terre,All,Terre,-,4,4,4,Non,Non,-,2,-,-,Ligne,1,-,-,-,31 à 35,Terre,Téléporte sur la case ciblée / Fulgurance - Expert : -1 tour(s) de relance,-,33 à 37,Téléporte sur la case ciblée / Fulgurance - Expert : -1 tour(s) de relance,20%,-,-
+Sablier du Xélor - Eau,All,Eau,-,3,1,4,Non,Oui,-,2,-,1,-,-,-,-,2,26 à 29,Eau,9 à 11 (dommages Eau) (2 tours),-,29 à 32,9 à 11 (dommages Eau) (2 tours),15%,-,-
+Sablier du Xélor - Terre,All,Terre,-,3,1,4,Non,Oui,-,2,-,1,-,-,-,-,2,26 à 29,Terre,9 à 11 (dommages Terre) (2 tours),-,29 à 32,9 à 11 (dommages Terre) (2 tours),15%,-,-
+Poison Insideux - Feu,All,Feu,-,3,1,7,Non,Non,Monocible,2,-,1,Ligne,-,-,2 Tours,-,,Feu,20 à 22 (dommage Feu) (2 tours),-,-,23 à 25 (dommages Feu) (2 tours),15%,-,-
+Poison Insideux - Air,All,Air,-,3,1,7,Non,Non,Monocible,2,-,1,Ligne,-,-,2 Tours,-,,Air,20 à 22 (dommage Air) (2 tours),-,-,23 à 25 (dommages Air) (2 tours),15%,-,-
+Ronce Agressives - Terre,All,Terre,-,4,1,6,Oui,Oui,Monocible,2,-,1,Ligne,-,-,-,-,35 à 40,Terre,Vole 2 PM,-,41 à 46,Vole 2 PM,20%,-,-
+Ronce Agressives - Feu,All,Feu,-,4,1,6,Oui,Oui,Monocible,2,-,1,Ligne,-,-,-,-,35 à 40,Feu,Vole 2 PM,-,41 à 46,Vole 2 PM,20%,-,-
+Mot Curatif - Feu,All ,Feu,-,3,1,6,Oui,Oui,Monocible,2,7,1,-,-,-,-,-,-,Feu,16 à 18 (PV rendus),-,-,19 à 21 (PV rendus),5%,-,-
+Mot Curatif - Eau,All ,Eau,-,3,1,6,Oui,Oui,Monocible,2,7,1,-,-,-,-,-,-,Eau,16 à 18 (PV rendus),-,-,19 à 21 (PV rendus),5%,-,-
+Frappe du Craqueleur - Terre,All,Terre,-,4,1,2,Non,Oui,Cercle de 2 cases,1,-,-,Ligne,-,-,1 Tour,1,31 à 35,Terre,60% du niveau en bouclier (1 tour),-,35 à 39,80% du niveau en bouclier (1 tour),20%,-,-
+Frappe du Craqueleur - Air,All,Air,-,4,1,2,Non,Oui,Cercle de 2 cases,1,-,-,Ligne,-,-,1 Tour,1,31 à 35,Air,60% du niveau en bouclier (1 tour),-,35 à 39,80% du niveau en bouclier (1 tour),20%,-,-
+Piège sournois - Terre,All,Terre,-,3,1,5,Oui,Non,Croix de 1 case,2,-,-,-,-,-,-,-,29 à 31,Terre,Attire de 1 case(s),-,-,-,-,-,-
+Piège sournois - Feu,All,Feu,-,3,1,5,Oui,Non,Croix de 1 case,2,-,-,-,-,-,-,-,29 à 31,Feu,Attire de 1 case(s),-,-,-,-,-,-
+Épée de Iop - Terre,All,Terre,-,4,1,6,Non,Oui,Croix de 3 cases,2,-,-,-,-,-,-,-,35 à 39,Terre,-,-,38 à 42,-,20%,-,-
+Épée de Iop - Air,All,Air,-,4,1,6,Non,Oui,Croix de 3 cases,2,-,-,-,-,-,-,-,35 à 39,Air,-,-,38 à 42,-,20%,-,-
+Lancer de Pelle - Air,All,Air,-,3,1,6,Oui,Oui,Monocible,-,-,2,-,-,-,-,-,30 à 33,Air,-1 PO (1 tour),-,33 à 36,-1 PO (1 tour),15%,-,-
+Lancer de Pelle - Eau,All,Eau,-,3,1,6,Oui,Oui,Monocible,-,-,2,-,-,-,-,-,30 à 33,Eau,-1 PO (1 tour),-,33 à 36,-1 PO (1 tour),15%,-,-
+Larme - Eau,All,Eau,-,3,1,7,Oui,Non,Monocible,3,-,2,Ligne,-,-,-,-,27 à 30,Eau,-,-,30 à 33,-,15%,-,-
+Larme - Air,All,Air,-,3,1,7,Oui,Non,Monocible,3,-,2,Ligne,-,-,-,-,27 à 30,Air,-,-,30 à 33,-,15%,-,-
+Projection - Eau,All,Eau,-,2,1,2,Non,Oui,-,2,-,1,"Ligne, Diagonale",-,-,-,-,24 à 26,Eau,Echange de position avec la cible,-,26 à 28,Echange de position avec la cible,5%,-,-
+Projection - Air,All,Air,-,2,1,2,Non,Oui,-,2,-,1,"Ligne, Diagonale",-,-,-,-,24 à 26,Air,Echange de position avec la cible,-,26 à 28,Echange de position avec la cible,5%,-,-
+Piège empoisonné - Eau,All,Eau,-,3,1,10,Oui,Non,Croix de 1 case,-,-,-,-,2,-,-,-,-,Eau,Pose un piège de rang 1 / 14 à 16 (dommage Eau) (3 tours),-,-,-,-,-,-
+Piège empoisonné - Terre,All,Terre,-,3,1,10,Oui,Non,Croix de 1 case,-,-,-,-,2,-,-,-,-,Terre,Pose un piège de rang 1 / 14 à 16 (dommage Terre) (3 tours),-,-,-,-,-,-
+Ressac - Feu,All,Feu,-,3,1,3,Non,Oui,-,2,-,1,Diagonale,-,-,-,-,19 à 23,Feu,Repousse de 2 case(s),-,22 à 26,Repousse de 2 case(s),15%,-,-
+Ressac - Eau,All,Eau,-,3,1,3,Non,Oui,-,2,-,1,Diagonale,-,-,-,-,19 à 23,Eau,Repousse de 2 case(s),-,22 à 26,Repousse de 2 case(s),15%,-,-
+Glyphe d'Entrave - Air,All,Air,-,4,1,4,Non,Non,Carré de 2 cases,-,-,-,Ligne,3,-,2 Tours,-,-,Air,Pose un glyphe de rang 1 / 40 à 42 (dommage Air) / Retire des PM,-,-,-,,,
+Glyphe d'Entrave - Feu,All,Feu,-,4,1,4,Non,Non,Carré de 2 cases,-,-,-,Ligne,3,-,2 Tours,-,-,Feu,Pose un glyphe de rang 1 / 40 à 42 (dommage Feu) / Retire des PM,-,-,-,,,
+Griffe Joueuse - Eau,All,Eau,-,4,1,5,Oui,Oui,Ligne de 4 cases,2,-,-,Ligne,-,-,-,-,36 à 39,Eau,-,-,39 à 42,-,20%,-,-
+Griffe Joueuse - Air,All,Air,-,4,1,5,Oui,Oui,Ligne de 4 cases,2,-,-,Ligne,-,-,-,-,36 à 39,Air,-,-,39 à 42,-,20%,-,-
+Cabriole - Eau,All,Eau,-,3,1,1,Non,Non,Croix de 1 case,2,-,-,"Ligne,Diagonale",-,-,2 Tours,2,30 à 34,Eau,Téléporte sur la case ciblée / 80 Puissance (2 tours),-,33 à 37,Téléporte sur la case ciblée / 80 Puissance (2 tours),15%,-,-
+Cabriole - Terre,All,Terre,-,3,1,1,Non,Non,Croix de 1 case,2,-,-,"Ligne,Diagonale",-,-,2 Tours,2,30 à 34,Terre,Téléporte sur la case ciblée / 80 Puissance (2 tours),-,33 à 37,Téléporte sur la case ciblée / 80 Puissance (2 tours),15%,-,-
+Invocation de Stalak,All ,-,-,4,1,2,Non,Oui,-,-,-,-,-,5,-,-,-,-,-,Invoque : Stalak invoqué / PV : 9 / PA : 10 / PM : 4 / Esquive (PA) : 165 / Esquive (PM) : 165 / Neutre (%) : -30 / Terre (%) : 20 / Feu (%) : 34 / Eau (%) : 14 / Air (%) : 23,-,-,-,-,-,-
+Tourbillon Embrasé,All,"Feu, Air",-,4,1,5,Oui,Oui,Cercle de 1 case,1,-,-,-,-,-,-,-,-,-,32 à 36 (dommage Feu) / 35 à 39 (dommage Air) / 19 à 23 (dommage Feu) / 19 à 23 (dommage Air),-,-,35 à 39 (dommage Feu) / 38 à 42 (dommage Air) / 22 à 26 (dommage Feu) / 22 à 26 (dommage Air),20%,-,-
+Mot Revitalisant,All ,Meilleur élément,-,2,1,3,Non,Oui,Cercle de 2 cases,2,10,-,-,-,-,-,-,-,Meilleur élément,11 à 12 (PV rendus),-,-,13 à 14 (PV rendus),5%,-,-
+Furie - Feu,All,Feu,-,3,1,6,Non,Oui,Croix de 1 case,2,-,1,Ligne,-,-,3 Tours,3,27 à 30,Feu,Inflige 5% des points de vie érodés du lanceur / 10 Dommages (3 tours),-,31 à 34,Inflige 5% des points de vie érodés du lanceur / 10 Dommages (3 tours),15%,-,-
+Furie - Eau,All,Eau,-,3,1,6,Non,Oui,Croix de 1 case,2,-,1,Ligne,-,-,3 Tours,3,27 à 30,Eau,Inflige 5% des points de vie érodés du lanceur / 10 Dommages (3 tours),-,31 à 34,Inflige 5% des points de vie érodés du lanceur / 10 Dommages (3 tours),15%,-,-
+Invocation du Mulou,All,-,-,4,1,2,Non,Oui,-,-,-,-,-,5,-,-,-,-,-,Invoque Mulou invoqué /  PV : 9 / PA : 10 / PM : 4 / Esquive (PA) : 165 / Esquive (PM) : 165 / Neutre (%) : 24 / Terre (%) : 33 / Feu (%) : 19 / Eau (%) : -31 / Air (%) : 13,-,-,-,-,-,-
+"Invocation, de Yukisamara",All,-,-,4,1,2,Non,Oui,-,-,-,-,-,5,-,-,-,-,-,Invoque : Yukisamara invoqué /  PV : 9 / PA : 10 / PM : 4 / Esquive (PA) : 165 / Esquive (PM) : 165 / Neutre (%) : 33 / Terre (%) : -31 / Feu (%) : 19 / Eau (%) : 24 / Air (%) : 13,-,-,-,-,-,-
+Invocation d'Empaillé,All,-,-,4,1,2,Non,Oui,-,-,-,-,-,5,-,-,-,-,-,Invoque : Empaillé invoqué /  PV : 9 / PA : 10 / PM : 4 / Esquive (PA) : 165 / Esquive (PM) : 165 / Neutre (%) : 24 / Terre (%) : 13 / Feu (%) : 19 / Eau (%) : 33 / Air (%) : -31,,,,,,
+Piège de Masse,All,Eau,,4,1,6,Oui,Non,Cercle de 2 cases,1,-,-,-,-,-,-,-,-,Eau,Pose un piège de rang 1 / 24 à 27 (dommages Eau),-,-,-,-,-,-
+Piège de Masse,All,Terre,,4,1,6,Oui,Non,Cercle de 2 cases,1,-,-,-,-,-,-,-,-,Terre,Pose un piège de rang 1 / 24 à 27 (dommages Terre),-,-,-,-,-,-
+Piège d'entaille,All,Air,-,2,1,6,Non,Non,-,2,-,-,-,-,-,-,-,-,Air,Pose un piège de rang 1 / 10 à 11 (dommages Air),-,-,-,-,-,-
+Piège d'entaille,All,Feu,-,2,1,6,Non,Non,-,2,-,-,-,-,-,-,-,-,Feu,Pose un piège de rang 1 / 10 à 11 (dommages Feu),-,-,-,-,-,-
+Pulsar,All,Feu,-,4,3,6,Non,Oui,-,-,-,1,-,-,-,-,-,48 à 52,Feu,-,-,56 à 60,-,20%,-,-
+Pulsar,All,Terre,-,4,3,6,Non,Oui,-,-,-,1,-,-,-,-,-,48 à 52,Terre,-,-,56 à 60,-,20%,-,-
+Cinquième Quart,All,-,Augmente d'un tour la durée des effets présent sur la cible,2,0,4,Non,Oui,-,2,1,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-
+Bluff,All ,"Feu, Terre",,3,1,5,Non,Oui,,2,1,-,-,-,-,-,-,-,-,28 à 32 (dommages Feu) (50% des cas) / 28 à 32 (dommages Terre) (50% des cas),,,33 à 37 (dommages Feu) (50% des cas) / 33 à 37 (dommages Terre) (50% des cas),15%,-,-
+Bluff,All ,"Air, Eau",,3,1,5,Non,Oui,,2,1,-,-,-,-,-,-,-,-,28 à 32 (dommages Air) (50% des cas) / 28 à 32 (dommages Eau) (50% des cas),,,33 à 37 (dommages Air) (50% des cas) / 33 à 37 (dommages Eau) (50% des cas),15%,-,-
+Explobombe,All,Feu,-,3,1,6,Non,Oui,-,1,-,-,-,-,-,-,-,-,-,Invoque : Explobombe / 12 à 13 (dommages Feu),-,-,-,-,-,-
+Bombe à eau ,All,Eau,-,3,1,6,Non,Oui,-,1,-,-,-,-,-,-,-,-,-,Invoque : Explobombe / 12 à 13 (dommages Eau),-,-,-,-,-,-
+Échange,All,,"Si une seconde cible en jeu possède cet effet, échange la position des deux entités et retire l'état.",2,2,5,Non,Oui,-,2,-,-,-,-,-,-,-,-,-,État Échange (3 tours) / Échange de position,-,-,-,-,-,-
+Martel,All,Meilleur élément,,3,1,1,Non,Oui,-,2,-,1,-,-,-,-,-,22 à 25,Meilleur élément,Augmente les dégâts de base du sort Martel - Expert de 4 (infini),-,-,-,-,-,-

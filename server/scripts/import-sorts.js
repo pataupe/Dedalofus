@@ -71,7 +71,7 @@ function parseEntier(valeur) {
 }
 
 async function main() {
-  const cheminCsv = path.join(__dirname, '..', '..', 'data', 'DEDALE - SORTS.csv');
+  const cheminCsv = path.join(__dirname, '..', '..', 'data', 'DEDALE - SORTS NOVICE.csv');
   const contenu = fs.readFileSync(cheminCsv, 'utf-8');
   const lignes = parse(contenu, { columns: true, skip_empty_lines: true });
 
