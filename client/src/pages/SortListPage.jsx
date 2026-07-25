@@ -1,12 +1,13 @@
 import { useEffect, useRef, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { listerSorts } from '../api/sorts';
-import { equiperSortAuto } from '../api/personnages';
+import { equiperSortAuto, equiperSort, obtenirPersonnage } from '../api/personnages';
 import { useAuth } from '../context/AuthContext';
 import { ELEMENTS_SORTS } from '../constants/elementsSorts';
 import { RANGS_MAITRISE } from '../constants/rangsMaitrise';
 import SortCard from '../components/SortCard';
 import Toast from '../components/Toast';
+import ModaleRemplacement from '../components/ModaleRemplacement';
 import './SortListPage.css';
 
 const DUREE_TOAST_MS = 3000;
@@ -27,9 +28,10 @@ function SortListPage() {
   const [sorts, setSorts] = useState([]);
   const [chargement, setChargement] = useState(true);
   const [erreur, setErreur] = useState(null);
-  const [erreurEquipement, setErreurEquipement] = useState(null);
+  const [toastContenu, setToastContenu] = useState({ texte: '' });
   const [toastVisible, setToastVisible] = useState(false);
   const toastTimeout = useRef(null);
+  const [remplacement, setRemplacement] = useState(null);
 
   const { session } = useAuth();
   const [searchParams] = useSearchParams();
@@ -38,15 +40,39 @@ function SortListPage() {
 
   useEffect(() => () => clearTimeout(toastTimeout.current), []);
 
+  function afficherToast(contenu) {
+    setToastContenu(contenu);
+    setToastVisible(true);
+    clearTimeout(toastTimeout.current);
+    toastTimeout.current = setTimeout(() => setToastVisible(false), DUREE_TOAST_MS);
+  }
+
   async function equiper(sortId) {
-    setErreurEquipement(null);
     try {
       await equiperSortAuto(session.token, perso, sortId);
-      setToastVisible(true);
-      clearTimeout(toastTimeout.current);
-      toastTimeout.current = setTimeout(() => setToastVisible(false), DUREE_TOAST_MS);
-    } catch {
-      setErreurEquipement("Impossible d'équiper ce sort.");
+      afficherToast({ texte: 'Équipé !', lien: `/personnage/${perso}` });
+    } catch (err) {
+      if (err.code === 'COMPLET') {
+        try {
+          const p = await obtenirPersonnage(session.token, perso);
+          setRemplacement({ sortId, emplacements: p.sorts });
+        } catch {
+          afficherToast({ texte: "Impossible de charger l'équipement actuel.", erreur: true });
+        }
+      } else {
+        afficherToast({ texte: err.message, erreur: true });
+      }
+    }
+  }
+
+  async function remplacerSort(emplacement) {
+    try {
+      await equiperSort(session.token, perso, emplacement, remplacement.sortId);
+      setRemplacement(null);
+      afficherToast({ texte: 'Équipé !', lien: `/personnage/${perso}` });
+    } catch (err) {
+      setRemplacement(null);
+      afficherToast({ texte: err.message, erreur: true });
     }
   }
 
@@ -108,7 +134,6 @@ function SortListPage() {
       </div>
 
       {erreur && <p className="page-sorts__erreur">{erreur}</p>}
-      {erreurEquipement && <p className="page-sorts__erreur">{erreurEquipement}</p>}
       {chargement && <p>Chargement...</p>}
       {!chargement && !erreur && sorts.length === 0 && <p>Aucun sort ne correspond à ta recherche.</p>}
 
@@ -135,7 +160,18 @@ function SortListPage() {
         </button>
       </div>
 
-      {modeEquipement && <Toast visible={toastVisible} lien={`/personnage/${perso}`} />}
+      {modeEquipement && (
+        <Toast visible={toastVisible} texte={toastContenu.texte} lien={toastContenu.lien} erreur={toastContenu.erreur} />
+      )}
+
+      {remplacement && (
+        <ModaleRemplacement
+          type="sort"
+          emplacements={remplacement.emplacements}
+          onChoisir={remplacerSort}
+          onClose={() => setRemplacement(null)}
+        />
+      )}
     </div>
   );
 }

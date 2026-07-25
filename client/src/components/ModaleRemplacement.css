@@ -1,0 +1,12 @@
+.modale-remplacement__titre {
+  margin: 0 0 16px;
+  text-align: center;
+  font-size: 15px;
+}
+
+.modale-remplacement__grille {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+}

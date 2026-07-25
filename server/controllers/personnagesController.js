@@ -265,7 +265,7 @@ async function equiperCubeAuto(req, res) {
 
   const emplacement = await trouverEmplacementLibre(personnage.id, 'EquipementCube', 'cube_id');
   if (!emplacement) {
-    return res.status(409).json({ erreur: 'Tous les emplacements cubes sont déjà occupés.' });
+    return res.status(409).json({ erreur: 'Tous les emplacements cubes sont déjà occupés.', code: 'COMPLET' });
   }
 
   await pool.query(
@@ -296,7 +296,7 @@ async function equiperAuto(req, res, { table, colonne, type, valeur }) {
 
   const emplacement = await trouverEmplacementLibre(personnage.id, table, colonne);
   if (!emplacement) {
-    return res.status(409).json({ erreur: `Tous les emplacements ${type} sont déjà occupés.` });
+    return res.status(409).json({ erreur: `Tous les emplacements ${type} sont déjà occupés.`, code: 'COMPLET' });
   }
 
   await pool.query(

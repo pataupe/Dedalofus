@@ -23,6 +23,14 @@
   pointer-events: auto;
 }
 
+.toast--erreur {
+  border-color: var(--couleur-feu);
+}
+
+.toast--erreur span {
+  color: var(--couleur-feu);
+}
+
 .toast__lien {
   color: var(--couleur-lumiere);
   font-weight: 600;

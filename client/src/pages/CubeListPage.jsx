@@ -1,13 +1,14 @@
 import { useEffect, useRef, useState } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
 import { listerCubes } from '../api/cubes';
-import { equiperCubeAuto } from '../api/personnages';
+import { equiperCubeAuto, equiperCube, obtenirPersonnage } from '../api/personnages';
 import { useAuth } from '../context/AuthContext';
 import { ELEMENTS } from '../constants/elements';
 import { RANGS } from '../constants/rangs';
 import { STATS_CUBES } from '../constants/statsCubes';
 import CubeCard from '../components/CubeCard';
 import Toast from '../components/Toast';
+import ModaleRemplacement from '../components/ModaleRemplacement';
 import './CubeListPage.css';
 
 const DUREE_TOAST_MS = 3000;
@@ -33,9 +34,10 @@ function CubeListPage() {
   const [cubes, setCubes] = useState([]);
   const [chargement, setChargement] = useState(true);
   const [erreur, setErreur] = useState(null);
-  const [erreurEquipement, setErreurEquipement] = useState(null);
+  const [toastContenu, setToastContenu] = useState({ texte: '' });
   const [toastVisible, setToastVisible] = useState(false);
   const toastTimeout = useRef(null);
+  const [remplacement, setRemplacement] = useState(null);
 
   const { session } = useAuth();
   const [searchParams] = useSearchParams();
@@ -44,15 +46,39 @@ function CubeListPage() {
 
   useEffect(() => () => clearTimeout(toastTimeout.current), []);
 
+  function afficherToast(contenu) {
+    setToastContenu(contenu);
+    setToastVisible(true);
+    clearTimeout(toastTimeout.current);
+    toastTimeout.current = setTimeout(() => setToastVisible(false), DUREE_TOAST_MS);
+  }
+
   async function equiper(cubeId) {
-    setErreurEquipement(null);
     try {
       await equiperCubeAuto(session.token, perso, cubeId);
-      setToastVisible(true);
-      clearTimeout(toastTimeout.current);
-      toastTimeout.current = setTimeout(() => setToastVisible(false), DUREE_TOAST_MS);
+      afficherToast({ texte: 'Équipé !', lien: `/personnage/${perso}` });
     } catch (err) {
-      setErreurEquipement(err.message);
+      if (err.code === 'COMPLET') {
+        try {
+          const p = await obtenirPersonnage(session.token, perso);
+          setRemplacement({ cubeId, emplacements: p.cubes });
+        } catch {
+          afficherToast({ texte: "Impossible de charger l'équipement actuel.", erreur: true });
+        }
+      } else {
+        afficherToast({ texte: err.message, erreur: true });
+      }
+    }
+  }
+
+  async function remplacerCube(emplacement) {
+    try {
+      await equiperCube(session.token, perso, emplacement, remplacement.cubeId);
+      setRemplacement(null);
+      afficherToast({ texte: 'Équipé !', lien: `/personnage/${perso}` });
+    } catch (err) {
+      setRemplacement(null);
+      afficherToast({ texte: err.message, erreur: true });
     }
   }
 
@@ -149,7 +175,6 @@ function CubeListPage() {
       </div>
 
       {erreur && <p className="page-cubes__erreur">{erreur}</p>}
-      {erreurEquipement && <p className="page-cubes__erreur">{erreurEquipement}</p>}
       {chargement && <p>Chargement...</p>}
 
       {!chargement && !erreur && cubes.length === 0 && <p>Aucun cube ne correspond à ta recherche.</p>}
@@ -179,7 +204,18 @@ function CubeListPage() {
         </button>
       </div>
 
-      {modeEquipement && <Toast visible={toastVisible} lien={`/personnage/${perso}`} />}
+      {modeEquipement && (
+        <Toast visible={toastVisible} texte={toastContenu.texte} lien={toastContenu.lien} erreur={toastContenu.erreur} />
+      )}
+
+      {remplacement && (
+        <ModaleRemplacement
+          type="cube"
+          emplacements={remplacement.emplacements}
+          onChoisir={remplacerCube}
+          onClose={() => setRemplacement(null)}
+        />
+      )}
     </div>
   );
 }

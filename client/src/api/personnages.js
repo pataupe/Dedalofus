@@ -6,7 +6,11 @@ async function appelPersonnages(chemin, token, options = {}) {
     headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}`, ...options.headers },
   });
   const donnees = await reponse.json();
-  if (!reponse.ok) throw new Error(donnees.erreur || 'Une erreur est survenue');
+  if (!reponse.ok) {
+    const erreur = new Error(donnees.erreur || 'Une erreur est survenue');
+    erreur.code = donnees.code;
+    throw erreur;
+  }
   return donnees;
 }
 
