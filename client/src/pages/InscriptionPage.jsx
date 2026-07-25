@@ -36,6 +36,10 @@ function InscriptionPage() {
   return (
     <div className="page-auth">
       <h1>Créer un compte</h1>
+      <p className="page-auth__avertissement">
+        ⚠️ Ce site est un outil de fan, indépendant d'Ankama. N'utilise <strong>surtout pas</strong> le même email et le
+        même mot de passe que ton compte Dofus Touch — crée des identifiants différents, spécifiques à ce site.
+      </p>
       <form onSubmit={soumettre} className="formulaire-auth">
         <label>
           Email

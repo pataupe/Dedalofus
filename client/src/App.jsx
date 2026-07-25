@@ -1,5 +1,6 @@
 import { Routes, Route } from 'react-router-dom';
 import Header from './components/Header';
+import Footer from './components/Footer';
 import HomePage from './pages/HomePage';
 import CubeListPage from './pages/CubeListPage';
 import CubeDetailPage from './pages/CubeDetailPage';
@@ -27,6 +28,7 @@ function App() {
         <Route path="/personnage/:id" element={<PersonnageDetailPage />} />
         <Route path="/partage/:lienPartage" element={<PartagePage />} />
       </Routes>
+      <Footer />
     </>
   );
 }

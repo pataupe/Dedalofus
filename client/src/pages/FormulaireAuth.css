@@ -9,6 +9,17 @@
   margin-bottom: 24px;
 }
 
+.page-auth__avertissement {
+  margin: 0 0 20px;
+  padding: 12px 14px;
+  border: 1px solid var(--couleur-feu);
+  border-radius: 8px;
+  background: rgba(217, 83, 79, 0.12);
+  color: var(--texte);
+  font-size: 13px;
+  line-height: 1.5;
+}
+
 .formulaire-auth {
   display: flex;
   flex-direction: column;

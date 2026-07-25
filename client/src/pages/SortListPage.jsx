@@ -36,6 +36,7 @@ function SortListPage() {
   const { session } = useAuth();
   const [searchParams] = useSearchParams();
   const perso = searchParams.get('perso');
+  const emplacementCible = searchParams.get('emplacement');
   const modeEquipement = Boolean(perso && session);
 
   useEffect(() => () => clearTimeout(toastTimeout.current), []);
@@ -48,6 +49,18 @@ function SortListPage() {
   }
 
   async function equiper(sortId) {
+    // Venu du bouton "Remplacer" (fiche perso) : cible directement l'emplacement
+    // choisi, plutôt que le premier libre.
+    if (emplacementCible) {
+      try {
+        await equiperSort(session.token, perso, emplacementCible, sortId);
+        afficherToast({ texte: 'Équipé !', lien: `/personnage/${perso}` });
+      } catch (err) {
+        afficherToast({ texte: err.message, erreur: true });
+      }
+      return;
+    }
+
     try {
       await equiperSortAuto(session.token, perso, sortId);
       afficherToast({ texte: 'Équipé !', lien: `/personnage/${perso}` });
@@ -143,7 +156,7 @@ function SortListPage() {
             <SortCard sort={sort} />
             {modeEquipement && (
               <button type="button" className="page-sorts__bouton-equiper" onClick={() => equiper(sort.id)}>
-                Équiper
+                {emplacementCible ? 'Remplacer' : 'Équiper'}
               </button>
             )}
           </div>

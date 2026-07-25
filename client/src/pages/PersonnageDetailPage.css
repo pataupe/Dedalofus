@@ -36,6 +36,25 @@
   background: var(--bg-carte-survol);
 }
 
+.page-personnage-detail__bouton-remplacer {
+  display: block;
+  width: 100%;
+  margin-top: 12px;
+  padding: 10px;
+  border: none;
+  border-radius: 6px;
+  background: var(--couleur-lumiere);
+  color: #1a1a1a;
+  font-weight: 600;
+  text-align: center;
+  cursor: pointer;
+  box-sizing: border-box;
+}
+
+.page-personnage-detail__bouton-remplacer:hover {
+  filter: brightness(1.1);
+}
+
 .page-personnage-detail__bouton-desequiper {
   display: block;
   width: 100%;

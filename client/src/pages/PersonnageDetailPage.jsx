@@ -22,6 +22,7 @@ const BREUVAGES_VIDES = [1, 2, 3];
 // GET /api/personnages/:id (cubes[].cube, sorts[].sort, breloques[].breloque).
 const EQUIPER_PAR_TYPE = { cube: equiperCube, sort: equiperSort, breloque: equiperBreloque };
 const CLE_LISTE_PAR_TYPE = { cube: 'cubes', sort: 'sorts', breloque: 'breloques' };
+const CHEMIN_PAR_TYPE = { cube: 'cubes', sort: 'sorts', breloque: 'breloques' };
 
 function PersonnageDetailPage() {
   const { id } = useParams();
@@ -199,6 +200,12 @@ function PersonnageDetailPage() {
           {modale.type === 'cube' && <CubeCard cube={modale.data} />}
           {modale.type === 'sort' && <SortCard sort={modale.data} />}
           {modale.type === 'breloque' && <BreloqueCard breloque={modale.data} />}
+          <Link
+            to={`/${CHEMIN_PAR_TYPE[modale.type]}?perso=${id}&emplacement=${modale.emplacement}`}
+            className="page-personnage-detail__bouton-remplacer"
+          >
+            Remplacer
+          </Link>
           <button
             type="button"
             className="page-personnage-detail__bouton-desequiper"

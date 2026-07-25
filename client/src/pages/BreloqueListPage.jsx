@@ -39,6 +39,7 @@ function BreloqueListPage() {
   const { session } = useAuth();
   const [searchParams] = useSearchParams();
   const perso = searchParams.get('perso');
+  const emplacementCible = searchParams.get('emplacement');
   const modeEquipement = Boolean(perso && session);
 
   useEffect(() => () => clearTimeout(toastTimeout.current), []);
@@ -51,6 +52,18 @@ function BreloqueListPage() {
   }
 
   async function equiper(breloqueId) {
+    // Venu du bouton "Remplacer" (fiche perso) : cible directement l'emplacement
+    // choisi, plutôt que le premier libre.
+    if (emplacementCible) {
+      try {
+        await equiperBreloque(session.token, perso, emplacementCible, breloqueId);
+        afficherToast({ texte: 'Équipé !', lien: `/personnage/${perso}` });
+      } catch (err) {
+        afficherToast({ texte: err.message, erreur: true });
+      }
+      return;
+    }
+
     try {
       await equiperBreloqueAuto(session.token, perso, breloqueId);
       afficherToast({ texte: 'Équipé !', lien: `/personnage/${perso}` });
@@ -158,7 +171,7 @@ function BreloqueListPage() {
                 className="page-breloques__bouton-equiper"
                 onClick={() => equiper(breloque.id)}
               >
-                Équiper
+                {emplacementCible ? 'Remplacer' : 'Équiper'}
               </button>
             )}
           </div>

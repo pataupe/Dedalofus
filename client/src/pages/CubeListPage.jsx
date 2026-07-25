@@ -42,6 +42,7 @@ function CubeListPage() {
   const { session } = useAuth();
   const [searchParams] = useSearchParams();
   const perso = searchParams.get('perso');
+  const emplacementCible = searchParams.get('emplacement');
   const modeEquipement = Boolean(perso && session);
 
   useEffect(() => () => clearTimeout(toastTimeout.current), []);
@@ -54,6 +55,19 @@ function CubeListPage() {
   }
 
   async function equiper(cubeId) {
+    // Venu du bouton "Remplacer" (fiche perso) : cible directement l'emplacement
+    // choisi, plutôt que le premier libre — sinon ça équiperait ailleurs si
+    // d'autres emplacements sont libres, au lieu de remplacer celui visé.
+    if (emplacementCible) {
+      try {
+        await equiperCube(session.token, perso, emplacementCible, cubeId);
+        afficherToast({ texte: 'Équipé !', lien: `/personnage/${perso}` });
+      } catch (err) {
+        afficherToast({ texte: err.message, erreur: true });
+      }
+      return;
+    }
+
     try {
       await equiperCubeAuto(session.token, perso, cubeId);
       afficherToast({ texte: 'Équipé !', lien: `/personnage/${perso}` });
@@ -187,7 +201,7 @@ function CubeListPage() {
             </Link>
             {modeEquipement && (
               <button type="button" className="page-cubes__bouton-equiper" onClick={() => equiper(cube.id)}>
-                Équiper
+                {emplacementCible ? 'Remplacer' : 'Équiper'}
               </button>
             )}
           </div>
