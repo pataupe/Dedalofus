@@ -5,6 +5,11 @@
   overflow: hidden;
   display: flex;
   flex-direction: column;
+  /* Étire la carte pour occuper toute la hauteur de sa colonne dans la grille
+     (les cartes voisines peuvent être plus hautes si leur effet est plus long) :
+     sans ça, seul le conteneur (carte + bouton Équiper) s'étire, pas la carte
+     elle-même, ce qui donnait des cartes de hauteurs visuellement différentes. */
+  flex: 1;
 }
 
 .carte-breloque__entete {

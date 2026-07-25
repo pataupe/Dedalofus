@@ -8,7 +8,7 @@ import './EmplacementSlot.css';
 // Remplie + onDesequiper -> petite croix dans le coin pour déséquiper directement.
 // `bordure`/`lueur` : couleur de bordure par rang (bronze/argent/or/écarlate/diamant
 // pour les cubes, argent/or pour les breloques et sorts), purement décoratif.
-function EmplacementSlot({ vide, libelle, couleur, bordure, lueur, lien, onClick, onDesequiper }) {
+function EmplacementSlot({ vide, libelle, image, couleur, bordure, lueur, lien, onClick, onDesequiper }) {
   const style = {
     '--couleur-emplacement': couleur || undefined,
     '--couleur-bordure-rang': bordure || undefined,
@@ -26,7 +26,7 @@ function EmplacementSlot({ vide, libelle, couleur, bordure, lueur, lien, onClick
   return (
     <div className="emplacement-slot-conteneur">
       <button type="button" className="emplacement-slot emplacement-slot--rempli" style={style} onClick={onClick}>
-        {libelle}
+        {image ? <img src={image} alt={libelle} className="emplacement-slot__image" /> : libelle}
       </button>
       {onDesequiper && (
         <button

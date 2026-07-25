@@ -18,68 +18,71 @@ function SortCard({ sort, calcul }) {
 
   return (
     <div className="carte-sort">
-      <div className="carte-sort__entete">
-        {sort.image_url ? (
-          <img src={sort.image_url} alt="" className="carte-sort__icone" />
-        ) : (
-          <span className="carte-sort__icone-placeholder" aria-hidden="true" />
-        )}
-        <span>{sort.nom}</span>
-      </div>
+      <div className="carte-sort__entete">{sort.nom}</div>
       <div className="carte-sort__corps">
-        {(aDesDegats || aDesDegatsCritiques) && (
-          <div className="carte-sort__degats">
-            {aDesDegats && (
-              <div className="carte-sort__degats-bloc">
-                <span className="carte-sort__degats-valeur">
-                  {degatsMin} à {degatsMax}
-                </span>
-                <span className="carte-sort__degats-libelle">Dégâts ({element})</span>
-              </div>
-            )}
-            {aDesDegatsCritiques && (
-              <div className="carte-sort__degats-bloc carte-sort__degats-bloc--critique">
-                <span className="carte-sort__degats-valeur">
-                  {degatsCritiqueMin} à {degatsCritiqueMax}
-                </span>
-                <span className="carte-sort__degats-libelle">Critique</span>
-              </div>
-            )}
-          </div>
-        )}
+        <div className="carte-sort__image">
+          {sort.image_url ? (
+            <img src={sort.image_url} alt="" />
+          ) : (
+            <div className="carte-sort__image-placeholder" aria-hidden="true" />
+          )}
+        </div>
 
-        <ul className="carte-sort__stats">
-          <li>
-            <span className="carte-sort__stat-icone" aria-hidden="true" />
-            {sort.cout_pa} PA
-          </li>
-          {sort.portee_min != null && sort.portee_max != null && (
-            <li>
-              <span className="carte-sort__stat-icone" aria-hidden="true" />
-              Portée {sort.portee_min} à {sort.portee_max}
-            </li>
+        <div className="carte-sort__contenu">
+          {(aDesDegats || aDesDegatsCritiques) && (
+            <div className="carte-sort__degats">
+              {aDesDegats && (
+                <div className="carte-sort__degats-bloc">
+                  <span className="carte-sort__degats-valeur">
+                    {degatsMin} à {degatsMax}
+                  </span>
+                  <span className="carte-sort__degats-libelle">Dégâts ({element})</span>
+                </div>
+              )}
+              {aDesDegatsCritiques && (
+                <div className="carte-sort__degats-bloc carte-sort__degats-bloc--critique">
+                  <span className="carte-sort__degats-valeur">
+                    {degatsCritiqueMin} à {degatsCritiqueMax}
+                  </span>
+                  <span className="carte-sort__degats-libelle">Critique</span>
+                </div>
+              )}
+            </div>
           )}
-          {chanceCritique != null && (
-            <li>
-              <span className="carte-sort__stat-icone" aria-hidden="true" />
-              {chanceCritique}% critique
-            </li>
-          )}
-          {sort.lancers_par_tour && (
-            <li>
-              <span className="carte-sort__stat-icone" aria-hidden="true" />
-              {sort.lancers_par_tour} / tour
-            </li>
-          )}
-          {sort.lancers_par_cible && (
-            <li>
-              <span className="carte-sort__stat-icone" aria-hidden="true" />
-              {sort.lancers_par_cible} / cible
-            </li>
-          )}
-        </ul>
 
-        {sort.description && <p className="carte-sort__description">{sort.description}</p>}
+          <ul className="carte-sort__stats">
+            <li>
+              <span className="carte-sort__stat-icone" aria-hidden="true" />
+              {sort.cout_pa} PA
+            </li>
+            {sort.portee_min != null && sort.portee_max != null && (
+              <li>
+                <span className="carte-sort__stat-icone" aria-hidden="true" />
+                Portée {sort.portee_min} à {sort.portee_max}
+              </li>
+            )}
+            {chanceCritique != null && (
+              <li>
+                <span className="carte-sort__stat-icone" aria-hidden="true" />
+                {chanceCritique}% critique
+              </li>
+            )}
+            {sort.lancers_par_tour && (
+              <li>
+                <span className="carte-sort__stat-icone" aria-hidden="true" />
+                {sort.lancers_par_tour} / tour
+              </li>
+            )}
+            {sort.lancers_par_cible && (
+              <li>
+                <span className="carte-sort__stat-icone" aria-hidden="true" />
+                {sort.lancers_par_cible} / cible
+              </li>
+            )}
+          </ul>
+
+          {sort.description && <p className="carte-sort__description">{sort.description}</p>}
+        </div>
       </div>
     </div>
   );

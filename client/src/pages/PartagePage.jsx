@@ -84,6 +84,7 @@ function PartagePage() {
                     key={emplacement}
                     vide={!cube}
                     libelle={cube ? `${cube.element} ${cube.numero}` : null}
+                    image={cube?.image_url}
                     couleur={cube ? couleurElement(cube.element) : null}
                     bordure={cube ? couleurRangCube(cube.rang) : null}
                     lueur={cube ? lueurRangCube(cube.rang) : null}
@@ -98,6 +99,7 @@ function PartagePage() {
                     key={emplacement}
                     vide={!sort}
                     libelle={sort?.nom}
+                    image={sort?.image_url}
                     bordure={sort ? couleurRangMaitrise(sort.rang_evolution) : null}
                     onClick={sort ? () => setModale({ type: 'sort', data: sort }) : undefined}
                   />
@@ -117,6 +119,7 @@ function PartagePage() {
                   key={emplacement}
                   vide={!breloque}
                   libelle={breloque?.nom}
+                  image={breloque?.image_url}
                   bordure={breloque ? couleurRangMaitrise(breloque.rang) : null}
                   onClick={breloque ? () => setModale({ type: 'breloque', data: breloque }) : undefined}
                 />

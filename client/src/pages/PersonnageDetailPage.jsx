@@ -138,6 +138,7 @@ function PersonnageDetailPage() {
                     key={emplacement}
                     vide={!cube}
                     libelle={cube ? `${cube.element} ${cube.numero}` : null}
+                    image={cube?.image_url}
                     couleur={cube ? couleurElement(cube.element) : null}
                     bordure={cube ? couleurRangCube(cube.rang) : null}
                     lueur={cube ? lueurRangCube(cube.rang) : null}
@@ -154,6 +155,7 @@ function PersonnageDetailPage() {
                     key={emplacement}
                     vide={!sort}
                     libelle={sort?.nom}
+                    image={sort?.image_url}
                     bordure={sort ? couleurRangMaitrise(sort.rang_evolution) : null}
                     lien={`/sorts?perso=${id}`}
                     onClick={sort ? () => setModale({ type: 'sort', data: sort, emplacement }) : undefined}
@@ -175,6 +177,7 @@ function PersonnageDetailPage() {
                   key={emplacement}
                   vide={!breloque}
                   libelle={breloque?.nom}
+                  image={breloque?.image_url}
                   bordure={breloque ? couleurRangMaitrise(breloque.rang) : null}
                   lien={`/breloques?perso=${id}`}
                   onClick={breloque ? () => setModale({ type: 'breloque', data: breloque, emplacement }) : undefined}

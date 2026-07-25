@@ -18,32 +18,44 @@
   font-weight: 600;
   padding: 8px 12px;
   font-size: 14px;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.carte-sort__icone {
-  width: 22px;
-  height: 22px;
-  flex: 0 0 22px;
-  object-fit: contain;
-}
-
-.carte-sort__icone-placeholder {
-  width: 18px;
-  height: 18px;
-  flex: 0 0 18px;
-  border-radius: 4px;
-  background: rgba(0, 0, 0, 0.15);
 }
 
 .carte-sort__corps {
   padding: 12px;
   display: flex;
+  gap: 12px;
+  flex: 1;
+}
+
+/* Image du sort, plus grande que l'ancienne icône d'en-tête (comme CubeCard). */
+.carte-sort__image {
+  flex: 0 0 56px;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.carte-sort__image img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+
+.carte-sort__image-placeholder {
+  width: 44px;
+  height: 44px;
+  border-radius: 8px;
+  background: var(--couleur-lumiere);
+  opacity: 0.3;
+}
+
+.carte-sort__contenu {
+  display: flex;
   flex-direction: column;
   gap: 10px;
   flex: 1;
+  min-width: 0;
 }
 
 /* Ligne des dégâts mise en avant (façon DofusBook) : un bloc par valeur,
