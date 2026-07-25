@@ -38,3 +38,10 @@
   font-size: 12px;
   color: var(--texte-attenue);
 }
+
+.pied-de-page__credit {
+  margin: 0;
+  font-size: 11px;
+  color: var(--texte-attenue);
+  opacity: 0.7;
+}

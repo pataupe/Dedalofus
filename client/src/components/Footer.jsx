@@ -22,6 +22,7 @@ function Footer() {
       </div>
 
       <p className="pied-de-page__copyright">© {new Date().getFullYear()} Dédalofus</p>
+      <p className="pied-de-page__credit">Site développé par Pataupe</p>
     </footer>
   );
 }

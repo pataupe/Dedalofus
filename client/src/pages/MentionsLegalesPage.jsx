@@ -8,14 +8,13 @@ function MentionsLegalesPage() {
       <section>
         <h2>Éditeur du site</h2>
         <p>
-          Le site Dédalofus (dedalofus.fr) est édité, à titre non professionnel et non commercial, par :
-          <br />
-          Nathan Degorce
-          <br />
-          Contact : <a href="mailto:nathandegorce@yahoo.fr">nathandegorce@yahoo.fr</a>
+          Le site Dédalofus (dedalofus.fr) est édité, à titre non professionnel et non commercial, par une personne
+          physique. Conformément à l'article 6-III de la loi n° 2004-575 du 21 juin 2004 pour la confiance dans
+          l'économie numérique, l'éditeur exerce son droit de rester anonyme vis-à-vis du public ; son identité
+          complète est communiquée à son hébergeur et reste accessible aux autorités judiciaires sur demande.
         </p>
         <p>
-          Directeur de la publication : Nathan Degorce.
+          Contact : <a href="https://discord.gg/WDxuStWyh" target="_blank" rel="noreferrer">serveur Discord</a>
         </p>
       </section>
 
@@ -62,8 +61,8 @@ function MentionsLegalesPage() {
         <p>
           Ces données servent uniquement au fonctionnement du site (connexion, sauvegarde de tes stuffs) et ne sont
           ni vendues, ni partagées, ni utilisées à des fins publicitaires. Conformément au RGPD, tu peux demander à
-          tout moment l'accès, la rectification ou la suppression de tes données en écrivant à{' '}
-          <a href="mailto:nathandegorce@yahoo.fr">nathandegorce@yahoo.fr</a>.
+          tout moment l'accès, la rectification ou la suppression de tes données en contactant l'éditeur via le{' '}
+          <a href="https://discord.gg/WDxuStWyh" target="_blank" rel="noreferrer">serveur Discord</a>.
         </p>
       </section>
 
