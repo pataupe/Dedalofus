@@ -61,6 +61,7 @@ CREATE TABLE Breloque (
   nom VARCHAR(150) NOT NULL,
   rang VARCHAR(50) NOT NULL,
   effet TEXT NOT NULL,
+  image_url VARCHAR(255) NULL,
   INDEX idx_breloque_rang (rang)
 ) ENGINE=InnoDB;
 
@@ -95,6 +96,7 @@ CREATE TABLE Sort (
   -- Sorts utilitaires sans dégâts (ex: "Botte - Novice", "Aimantation - Novice") : hors
   -- sujet pour un calculateur de dégâts, masqués du site mais conservés en base.
   visible TINYINT(1) NOT NULL DEFAULT 1,
+  image_url VARCHAR(255) NULL,
   INDEX idx_sort_element (element),
   INDEX idx_sort_rang_evolution (rang_evolution)
 ) ENGINE=InnoDB;

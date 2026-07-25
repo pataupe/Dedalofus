@@ -16,7 +16,7 @@ function Footer() {
         <Link to="/mentions-legales">Mentions légales</Link>
       </div>
 
-      <p className="pied-de-page__disclaimer">Site de fan non affilié à Ankama Games.</p>
+      <p className="pied-de-page__disclaimer">Site non affilié à Ankama Games.</p>
 
       <p className="pied-de-page__copyright">© {new Date().getFullYear()} Dédalofus</p>
       <p className="pied-de-page__credit">Site développé par Pataupe</p>
