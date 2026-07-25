@@ -219,7 +219,7 @@ Index utiles à prévoir au minimum : `element`, `rang`/`evolution` sur `Cube` (
 8. **Branchement du calculateur sur la fiche perso (onglet Sorts)** ✅ FAIT — voir "État d'avancement" ci-dessous
 9. **Sauvegarde automatique du stuff** ✅ FAIT (déjà acquise depuis la Tâche 7 — voir "État d'avancement" ci-dessous)
 10. **Partage par lien unique** ✅ FAIT — voir "État d'avancement" ci-dessous
-11. Déploiement (hébergeur à choisir — doit supporter Node.js + Express + MySQL, **Vercel exclu** car pensé pour Next.js/serverless)
+11. **Déploiement** ✅ FAIT — voir "État d'avancement" ci-dessous
 
 Règles d'enchaînement :
 - Tâches 1 à 4 : strictement séquentielles
@@ -397,11 +397,24 @@ Règles d'enchaînement :
 - Nouvelle page publique `client/src/pages/PartagePage.jsx` (route `/partage/:lienPartage`, sans compte nécessaire) : réutilise la même grille d'équipement + `StatsPersonnage` + `PanopliesPersonnage` + `OngletSorts`, mais **en lecture seule** — pas de lien "Équiper" sur les cases vides (pas de prop `lien`), pas de croix de déséquipement (pas de prop `onDesequiper`), pas de bouton "Déséquiper" dans la modale de détail. Les cases remplies restent cliquables pour voir le détail de l'item (modale commune, réutilise `CubeCard`/`SortCard`/`BreloqueCard` comme sur la fiche privée).
 - `StatsPersonnage.jsx` : nouvelle prop `lectureSeule` — quand `true`, la colonne Parcho s'affiche en texte simple (pas d'`<input>`) et les boutons 0/100/150 sont masqués ; `token`/`personnageId`/`onParchoSauvegarde` deviennent inutiles dans ce mode (un visiteur ne doit pas pouvoir modifier le stuff de quelqu'un d'autre).
 
+### ✅ Tâche 11 terminée — Déploiement
+- **Nom de domaine** : `dedalofus.fr` acheté chez OVHcloud.
+- **Hébergeur** : VPS OVH (gamme VPS-1, 2 vCores/4 Go RAM/40 Go SSD, datacenter Strasbourg), payé au mois sans engagement — largement suffisant pour le trafic attendu (dizaines d'utilisateurs). IP : `164.132.198.133`.
+- **Serveur** : Ubuntu 26.04, Node.js 22 (LTS), MySQL 8.4 — pas de contrainte de version dans le projet, choisi indépendamment du Node 18 utilisé en local (cf. section Vulnérabilités ci-dessous, propre au poste de dev).
+- **Process serveur** : géré par **PM2** (`pm2 start index.js --name dedalofus-api`), configuré pour redémarrer automatiquement au boot du VPS (`pm2 startup` + `pm2 save`) et en cas de crash.
+- **Nginx** en reverse proxy : sert les fichiers statiques du build React (`client/dist`) et route `/api/*` vers Node en local (port 3001). Le port 3001 n'est **pas** exposé publiquement (bloqué par le pare-feu `ufw`, seuls 22/80/443 sont ouverts) — tout passe obligatoirement par Nginx.
+- **HTTPS** : certificat Let's Encrypt via Certbot (plugin nginx), renouvellement automatique programmé, redirection HTTP→HTTPS automatique.
+- **SSH** : authentification par clé uniquement (mot de passe désactivé côté serveur après mise en place de la clé), pour limiter les tentatives de brute-force sur le port 22 exposé publiquement.
+- **Secrets de prod** : `server/.env` du VPS a son **propre** mot de passe MySQL et son propre `JWT_SECRET`, générés directement sur le serveur (jamais saisis dans une commande locale) — aucun secret partagé avec l'environnement de dev local.
+- **Base de données** : recréée à partir de `schema.sql` + les 3 scripts d'import (420 cubes, 116 breloques, 115 sorts). Point notable : le masquage des 45 sorts "- Novice" (`Sort.visible = 0`, Tâche 8 Bout 6) est une correction **ponctuelle** faite uniquement sur la base locale à l'époque, jamais répercutée dans `import-sorts.js` — a dû être réappliquée manuellement après l'import sur le VPS (`UPDATE Sort SET visible = 0 WHERE nom LIKE '%- Novice'`). ⚠️ Si la base est un jour réimportée de zéro (VPS ou autre), ne pas oublier cette étape — le script d'import ne la fait pas tout seul.
+- **DNS** : zone DNS `dedalofus.fr` chez OVH — enregistrements `A` et `AAAA` (IPv4 et IPv6) pointés vers le VPS pour `@` et `www`. Les autres enregistrements (MX/SRV/CNAME liés aux emails OVH, NS, SPF, TXT) n'ont pas été touchés.
+- Parcours complet testé en conditions réelles sur `https://dedalofus.fr` après déploiement (inscription, création de personnage, équipement d'un cube, lien de partage public) — toutes les données de test ensuite supprimées de la base de prod.
+
 ## Points encore en suspens
 
 - **Responsive mobile-first sur les pages déjà construites** (Tâche 5 : accueil, Cubes/Breloques/Sorts, Connexion/Inscription) : aucune media query pour l'instant, pas testé sur petit écran. La convention mobile-first ne s'applique qu'au code écrit *à partir de* la Tâche 7 — une passe dédiée reste à faire sur l'existant.
-- **Vulnérabilités npm (Dependabot)** : 9 signalées sur GitHub, dues au downgrade de Vite (8→5) et Vitest (4→2) pour compatibilité Node 18. Dépendances de développement uniquement (pas exposées en prod) — disparaîtront si le projet passe un jour à Node 20+.
-- **Hébergeur** : pas encore choisi (doit supporter Node + Express + MySQL)
+- **Vulnérabilités npm (Dependabot)** : 9 signalées sur GitHub, dues au downgrade de Vite (8→5) et Vitest (4→2) pour compatibilité Node 18 **en local**. Dépendances de développement uniquement (jamais exposées en prod — le VPS tourne sur Node 22 et ne installe que les deps de prod côté serveur) — disparaîtront si le projet local passe un jour à Node 20+.
+- **Redéploiement** : pas encore de procédure automatisée (CI/CD) — une mise à jour du code en prod nécessite pour l'instant une connexion SSH manuelle (`git pull`, rebuild client, `pm2 restart`). À formaliser si les mises à jour deviennent fréquentes.
 - **Bonus de panoplie Terre/Eau/Feu** : valeurs actuellement fictives (copie de Air) en attendant que le porteur de projet fournisse les vraies — à corriger dans `PANOPLIES` (`calcul.js`)
 - **Paliers 5-9 (Lumière) et 7-9 (Air/Terre/Eau/Feu) des panoplies** : valeurs actuellement fictives en attendant les vraies (voir section "Stats dérivées et bonus de panoplie")
 - **`DO_CRIT` (bonus cube) et dommages poussée** : formules connues mais pas encore intégrées à `calculerDegats` (pas de modélisation du jet critique — se produit ou non — ni du nombre de cases de poussée pour l'instant) — pas urgent. La plage de dégâts critiques du **sort** lui-même (`degats_critique_min/max`) et le `%` critique total sont eux déjà calculés (Tâche 8, onglet Sorts).
