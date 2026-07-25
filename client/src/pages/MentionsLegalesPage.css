@@ -1,0 +1,37 @@
+.page-mentions-legales {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 40px 24px 60px;
+  color: var(--texte);
+}
+
+.page-mentions-legales h1 {
+  margin: 0 0 24px;
+}
+
+.page-mentions-legales h2 {
+  font-size: 17px;
+  color: var(--couleur-lumiere);
+  margin: 32px 0 8px;
+}
+
+.page-mentions-legales section:first-of-type h2 {
+  margin-top: 0;
+}
+
+.page-mentions-legales p {
+  margin: 0 0 10px;
+  line-height: 1.6;
+  color: var(--texte-attenue);
+}
+
+.page-mentions-legales ul {
+  margin: 0 0 10px;
+  padding-left: 20px;
+  color: var(--texte-attenue);
+  line-height: 1.6;
+}
+
+.page-mentions-legales a {
+  color: var(--couleur-lumiere);
+}

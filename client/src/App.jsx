@@ -11,6 +11,7 @@ import InscriptionPage from './pages/InscriptionPage';
 import PersonnagePage from './pages/PersonnagePage';
 import PersonnageDetailPage from './pages/PersonnageDetailPage';
 import PartagePage from './pages/PartagePage';
+import MentionsLegalesPage from './pages/MentionsLegalesPage';
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
         <Route path="/personnage" element={<PersonnagePage />} />
         <Route path="/personnage/:id" element={<PersonnageDetailPage />} />
         <Route path="/partage/:lienPartage" element={<PartagePage />} />
+        <Route path="/mentions-legales" element={<MentionsLegalesPage />} />
       </Routes>
       <Footer />
     </>

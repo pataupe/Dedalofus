@@ -18,6 +18,7 @@ function Footer() {
         <a href={DISCORD_URL} target="_blank" rel="noreferrer">
           Discord
         </a>
+        <Link to="/mentions-legales">Mentions légales</Link>
       </div>
 
       <p className="pied-de-page__copyright">© {new Date().getFullYear()} Dédalofus</p>
