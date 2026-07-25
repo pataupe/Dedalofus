@@ -6,11 +6,6 @@ const DISCORD_URL = 'https://discord.gg/WDxuStWyh';
 function Footer() {
   return (
     <footer className="pied-de-page">
-      <p className="pied-de-page__disclaimer">
-        Dédalofus est un site de fan, créé indépendamment et non affilié, associé, autorisé ou soutenu par Ankama
-        Games. Dofus Touch est une marque déposée d'Ankama.
-      </p>
-
       <div className="pied-de-page__liens">
         <Link to="/cubes">Cubes</Link>
         <Link to="/breloques">Breloques</Link>
@@ -20,6 +15,8 @@ function Footer() {
         </a>
         <Link to="/mentions-legales">Mentions légales</Link>
       </div>
+
+      <p className="pied-de-page__disclaimer">Site de fan non affilié à Ankama Games.</p>
 
       <p className="pied-de-page__copyright">© {new Date().getFullYear()} Dédalofus</p>
       <p className="pied-de-page__credit">Site développé par Pataupe</p>

@@ -15,23 +15,25 @@ import MentionsLegalesPage from './pages/MentionsLegalesPage';
 
 function App() {
   return (
-    <>
+    <div className="app-mise-en-page">
       <Header />
-      <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/cubes" element={<CubeListPage />} />
-        <Route path="/cubes/:id" element={<CubeDetailPage />} />
-        <Route path="/breloques" element={<BreloqueListPage />} />
-        <Route path="/sorts" element={<SortListPage />} />
-        <Route path="/connexion" element={<ConnexionPage />} />
-        <Route path="/inscription" element={<InscriptionPage />} />
-        <Route path="/personnage" element={<PersonnagePage />} />
-        <Route path="/personnage/:id" element={<PersonnageDetailPage />} />
-        <Route path="/partage/:lienPartage" element={<PartagePage />} />
-        <Route path="/mentions-legales" element={<MentionsLegalesPage />} />
-      </Routes>
+      <main className="app-contenu">
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/cubes" element={<CubeListPage />} />
+          <Route path="/cubes/:id" element={<CubeDetailPage />} />
+          <Route path="/breloques" element={<BreloqueListPage />} />
+          <Route path="/sorts" element={<SortListPage />} />
+          <Route path="/connexion" element={<ConnexionPage />} />
+          <Route path="/inscription" element={<InscriptionPage />} />
+          <Route path="/personnage" element={<PersonnagePage />} />
+          <Route path="/personnage/:id" element={<PersonnageDetailPage />} />
+          <Route path="/partage/:lienPartage" element={<PartagePage />} />
+          <Route path="/mentions-legales" element={<MentionsLegalesPage />} />
+        </Routes>
+      </main>
       <Footer />
-    </>
+    </div>
   );
 }
 

@@ -31,6 +31,19 @@ body {
   min-height: 100vh;
 }
 
+/* Mise en page "footer collant" : le contenu de la page (.app-contenu) prend
+   tout l'espace disponible, le footer reste toujours en bas de l'écran même
+   quand une page a peu de contenu, au lieu de laisser un grand vide dessous. */
+.app-mise-en-page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.app-contenu {
+  flex: 1;
+}
+
 a {
   color: inherit;
   text-decoration: none;
