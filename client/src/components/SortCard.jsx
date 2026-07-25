@@ -18,7 +18,9 @@ function SortCard({ sort, calcul }) {
 
   return (
     <div className="carte-sort">
-      <div className="carte-sort__entete">{sort.nom}</div>
+      <div className="carte-sort__entete">
+        {sort.nom} — {sort.rang_evolution}
+      </div>
       <div className="carte-sort__corps">
         <div className="carte-sort__image">
           {sort.image_url ? (
