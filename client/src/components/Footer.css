@@ -30,7 +30,7 @@
 }
 
 .pied-de-page__liens a:hover {
-  color: var(--couleur-lumiere);
+  color: var(--accent);
 }
 
 .pied-de-page__copyright {

@@ -1,10 +1,12 @@
 .carte-breloque {
-  background: var(--bg-carte);
-  border: 1px solid var(--bordure);
-  border-radius: 8px;
+  background: var(--panneau-fond);
+  color: var(--panneau-texte);
+  border: 1px solid var(--bordure-or-forte);
+  border-radius: 10px;
   overflow: hidden;
   display: flex;
   flex-direction: column;
+  box-shadow: var(--ombre-panneau);
   /* Étire la carte pour occuper toute la hauteur de sa colonne dans la grille
      (les cartes voisines peuvent être plus hautes si leur effet est plus long) :
      sans ça, seul le conteneur (carte + bouton Équiper) s'étire, pas la carte
@@ -12,9 +14,11 @@
   flex: 1;
 }
 
+/* Bandeau violet, même convention que SortCard (les breloques n'ont pas
+   d'élément associé, donc pas de couleur fonctionnelle à préserver ici). */
 .carte-breloque__entete {
-  background: var(--texte-attenue);
-  color: #1a1a1a;
+  background: var(--primaire);
+  color: var(--primaire-texte);
   font-weight: 600;
   padding: 8px 12px;
   font-size: 14px;
@@ -33,24 +37,27 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  overflow: hidden;
+  border-radius: 8px;
 }
 
 .carte-breloque__image img {
   max-width: 100%;
   max-height: 100%;
+  transform: scale(1.21);
 }
 
 .carte-breloque__placeholder {
   width: 40px;
   height: 40px;
-  background: var(--texte-attenue);
-  opacity: 0.35;
+  background: var(--panneau-fond-sombre);
   clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
 }
 
 .carte-breloque__effet {
   margin: 0;
   font-size: 13px;
-  color: var(--texte-attenue);
+  font-weight: 500;
+  color: var(--panneau-texte);
   flex: 1;
 }

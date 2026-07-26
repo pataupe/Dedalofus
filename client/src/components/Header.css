@@ -24,6 +24,12 @@
   letter-spacing: 0.01em;
 }
 
+.entete__beta {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--texte-attenue);
+}
+
 .entete__logo img {
   height: 34px;
   width: 34px;

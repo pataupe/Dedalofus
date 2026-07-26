@@ -11,10 +11,15 @@ function SortCard({ sort, calcul }) {
   const degatsMax = calcul?.degatsMax ?? sort.degats_max;
   const degatsCritiqueMin = calcul?.degatsCritiqueMin ?? sort.degats_critique_min;
   const degatsCritiqueMax = calcul?.degatsCritiqueMax ?? sort.degats_critique_max;
-  const chanceCritique = calcul?.chanceCritiqueTotal ?? sort.chance_critique;
+  // % CC de base (toujours celui du sort) et % CC total (sort + stat du
+  // personnage) affichés séparément quand `calcul` est fourni (onglet Sorts).
+  const chanceCritiqueBase = sort.chance_critique;
+  const chanceCritiqueTotal = calcul?.chanceCritiqueTotal;
 
   const aDesDegats = degatsMin != null && degatsMax != null;
   const aDesDegatsCritiques = degatsCritiqueMin != null && degatsCritiqueMax != null;
+  const lancerLigne = sort.portee_diagonale_ligne?.includes('Ligne');
+  const lancerDiagonale = sort.portee_diagonale_ligne?.includes('Diagonale');
 
   return (
     <div className="carte-sort">
@@ -60,25 +65,55 @@ function SortCard({ sort, calcul }) {
             {sort.portee_min != null && sort.portee_max != null && (
               <li>
                 <span className="carte-sort__stat-icone" aria-hidden="true" />
-                Portée {sort.portee_min} à {sort.portee_max}
+                PO : {sort.portee_min} - {sort.portee_max}
               </li>
             )}
-            {chanceCritique != null && (
+            {sort.portee_modifiable === 'Oui' && (
               <li>
                 <span className="carte-sort__stat-icone" aria-hidden="true" />
-                {chanceCritique}% critique
+                PO modifiable
+              </li>
+            )}
+            {lancerLigne && (
+              <li>
+                <span className="carte-sort__stat-icone" aria-hidden="true" />
+                Lancer en ligne
+              </li>
+            )}
+            {lancerDiagonale && (
+              <li>
+                <span className="carte-sort__stat-icone" aria-hidden="true" />
+                Lancer en diagonale
+              </li>
+            )}
+            {sort.intervalle_relance_cd != null && (
+              <li>
+                <span className="carte-sort__stat-icone" aria-hidden="true" />
+                Relance : {sort.intervalle_relance_cd} tours
+              </li>
+            )}
+            {chanceCritiqueBase != null && (
+              <li>
+                <span className="carte-sort__stat-icone" aria-hidden="true" />
+                {chanceCritiqueBase}% CC
+              </li>
+            )}
+            {chanceCritiqueTotal != null && (
+              <li>
+                <span className="carte-sort__stat-icone" aria-hidden="true" />
+                {chanceCritiqueTotal}% CC Total
               </li>
             )}
             {sort.lancers_par_tour && (
               <li>
                 <span className="carte-sort__stat-icone" aria-hidden="true" />
-                {sort.lancers_par_tour} / tour
+                {sort.lancers_par_tour} par tour
               </li>
             )}
             {sort.lancers_par_cible && (
               <li>
                 <span className="carte-sort__stat-icone" aria-hidden="true" />
-                {sort.lancers_par_cible} / cible
+                {sort.lancers_par_cible} par cible
               </li>
             )}
           </ul>

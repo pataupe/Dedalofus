@@ -136,8 +136,8 @@
   padding: 8px;
   border-radius: 6px;
   border: none;
-  background: var(--couleur-lumiere);
-  color: #1a1a1a;
+  background: var(--primaire);
+  color: var(--primaire-texte);
   font-weight: 600;
 }
 

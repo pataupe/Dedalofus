@@ -1,12 +1,18 @@
 .carte-cube {
-  background: var(--bg-carte);
-  border: 1px solid var(--bordure);
-  border-radius: 8px;
+  background: var(--panneau-fond);
+  color: var(--panneau-texte);
+  border: 1px solid var(--bordure-or-forte);
+  border-radius: 10px;
   overflow: hidden;
   display: flex;
   flex-direction: column;
+  box-shadow: var(--ombre-panneau);
+  flex: 1;
 }
 
+/* Bandeau coloré par élément conservé tel quel : contrairement au jaune
+   générique des cartes sort/breloque, cette couleur est une info fonctionnelle
+   (l'élément du cube), pas un simple accent décoratif. */
 .carte-cube__entete {
   background: var(--couleur-cube);
   color: #1a1a1a;
@@ -19,6 +25,7 @@
   display: flex;
   padding: 12px;
   gap: 12px;
+  flex: 1;
 }
 
 .carte-cube__image {
@@ -27,11 +34,14 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  overflow: hidden;
+  border-radius: 8px;
 }
 
 .carte-cube__image img {
   max-width: 100%;
   max-height: 100%;
+  transform: scale(1.21);
 }
 
 .carte-cube__placeholder {
@@ -42,12 +52,15 @@
   clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
 }
 
+/* Texte en pleine opacité (pas de blanc en dur, qui devenait illisible sur le
+   nouveau fond beige) — même traitement de contraste que carte-sort__stats. */
 .carte-cube__stats {
   list-style: none;
   margin: 0;
   padding: 0;
   font-size: 13px;
-  color: #fff;
+  font-weight: 600;
+  color: var(--panneau-texte);
   display: flex;
   flex-direction: column;
   gap: 4px;
@@ -60,9 +73,11 @@
   gap: 6px;
 }
 
-/* Réservé pour une future icône par stat (vide pour l'instant). */
+/* Puce ronde, même convention que carte-sort__stat-icone. */
 .carte-cube__stat-icone {
-  width: 14px;
-  height: 14px;
-  flex: 0 0 14px;
+  width: 6px;
+  height: 6px;
+  flex: 0 0 6px;
+  border-radius: 50%;
+  background: var(--accent);
 }

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import logo from '../assets/logo.webp';
 import { useAuth } from '../context/AuthContext';
@@ -9,6 +9,7 @@ function Header() {
   const navigate = useNavigate();
   const [menuOuvert, setMenuOuvert] = useState(false);
   const [menuItemsOuvert, setMenuItemsOuvert] = useState(false);
+  const selecteurRef = useRef(null);
 
   function seDeconnecter() {
     setMenuOuvert(false);
@@ -21,12 +22,29 @@ function Header() {
     setMenuItemsOuvert(false);
   }
 
+  // Ferme le menu "Liste des items" au clic en dehors de son conteneur (le
+  // clic sur le déclencheur lui-même reste géré par son propre onClick).
+  useEffect(() => {
+    if (!menuItemsOuvert) return;
+
+    function surClicExterieur(e) {
+      if (selecteurRef.current && !selecteurRef.current.contains(e.target)) {
+        setMenuItemsOuvert(false);
+      }
+    }
+
+    document.addEventListener('mousedown', surClicExterieur);
+    return () => document.removeEventListener('mousedown', surClicExterieur);
+  }, [menuItemsOuvert]);
+
   return (
     <header className="entete">
       <div className="entete__barre">
         <Link to="/" className="entete__logo" onClick={fermerMenu}>
           <img src={logo} alt="Dédalofus" />
-          <span>Dédalofus</span>
+          <span>
+            Dédalofus <span className="entete__beta">– Bêta</span>
+          </span>
         </Link>
         <button
           type="button"
@@ -46,7 +64,7 @@ function Header() {
           {/* Regroupe Cubes/Breloques/Sorts (+ Breuvages à venir) derrière un seul
               déclencheur : laisse de la place dans le header pour du contenu futur
               (guides, news, tutos) sans multiplier les boutons de premier niveau. */}
-          <div className="entete__items-selecteur">
+          <div className="entete__items-selecteur" ref={selecteurRef}>
             <button
               type="button"
               className="entete__items-declencheur"

@@ -1,10 +1,12 @@
 .carte-sort {
-  background: var(--bg-carte);
-  border: 1px solid var(--bordure);
-  border-radius: 8px;
+  background: var(--panneau-fond);
+  color: var(--panneau-texte);
+  border: 1px solid var(--bordure-or-forte);
+  border-radius: 10px;
   overflow: hidden;
   display: flex;
   flex-direction: column;
+  box-shadow: var(--ombre-panneau);
   /* Étire la carte pour occuper toute la hauteur de sa colonne dans la grille
      (les cartes voisines peuvent être plus hautes si elles ont une description) :
      sans ça, seul le conteneur (carte + bouton Équiper) s'étire, pas la carte
@@ -13,8 +15,8 @@
 }
 
 .carte-sort__entete {
-  background: var(--couleur-lumiere);
-  color: #1a1a1a;
+  background: var(--primaire);
+  color: var(--primaire-texte);
   font-weight: 600;
   padding: 8px 12px;
   font-size: 14px;
@@ -34,20 +36,25 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  overflow: hidden;
+  border-radius: 8px;
 }
 
 .carte-sort__image img {
   max-width: 100%;
   max-height: 100%;
   object-fit: contain;
+  /* Réduit la marge noire intégrée aux images (le conteneur en overflow:hidden
+     rogne le débordement) — zoom propre à ces cartes, ne pas réutiliser cette
+     valeur pour EmplacementSlot (fiche perso), qui a son propre réglage. */
+  transform: scale(1.21);
 }
 
 .carte-sort__image-placeholder {
   width: 44px;
   height: 44px;
   border-radius: 8px;
-  background: var(--couleur-lumiere);
-  opacity: 0.3;
+  background: var(--panneau-fond-sombre);
 }
 
 .carte-sort__contenu {
@@ -62,9 +69,10 @@
    séparateur vertical entre les deux quand les deux existent. */
 .carte-sort__degats {
   display: flex;
-  border: 1px solid var(--bordure);
-  border-radius: 6px;
+  border: 1px solid var(--bordure-or);
+  border-radius: 8px;
   overflow: hidden;
+  background: var(--panneau-fond-sombre);
 }
 
 .carte-sort__degats-bloc {
@@ -78,13 +86,13 @@
 }
 
 .carte-sort__degats-bloc + .carte-sort__degats-bloc {
-  border-left: 1px solid var(--bordure);
+  border-left: 1px solid var(--bordure-or);
 }
 
 .carte-sort__degats-valeur {
   font-size: 17px;
   font-weight: 700;
-  color: var(--texte);
+  color: var(--panneau-texte);
 }
 
 .carte-sort__degats-bloc--critique .carte-sort__degats-valeur {
@@ -92,11 +100,15 @@
 }
 
 .carte-sort__degats-libelle {
-  font-size: 11px;
-  color: var(--texte-attenue);
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--panneau-texte);
 }
 
-/* Stats secondaires en grille 2 colonnes, comme les caractéristiques de DofusBook. */
+/* Stats secondaires en grille 2 colonnes, comme les caractéristiques de DofusBook.
+   Texte en pleine opacité (pas atténué) : ce sont des infos primaires de la
+   carte, pas des légendes secondaires — un ton trop clair sur fond beige les
+   rendait peu lisibles. */
 .carte-sort__stats {
   list-style: none;
   margin: 0;
@@ -105,7 +117,8 @@
   grid-template-columns: 1fr 1fr;
   gap: 6px 12px;
   font-size: 13px;
-  color: var(--texte-attenue);
+  font-weight: 600;
+  color: var(--panneau-texte);
 }
 
 .carte-sort__stats li {
@@ -114,19 +127,18 @@
   gap: 6px;
 }
 
-/* Réservé pour une future icône par stat (vide pour l'instant), même
-   convention que .carte-cube__stat-icone. */
+/* Puce ronde (liste), plus discrète qu'un carré style case à cocher. */
 .carte-sort__stat-icone {
-  width: 14px;
-  height: 14px;
-  flex: 0 0 14px;
-  border-radius: 3px;
-  background: var(--bordure);
+  width: 6px;
+  height: 6px;
+  flex: 0 0 6px;
+  border-radius: 50%;
+  background: var(--accent);
 }
 
 .carte-sort__description {
   margin: 0;
   font-style: italic;
   font-size: 13px;
-  color: var(--texte-attenue);
+  color: var(--panneau-texte-attenue);
 }

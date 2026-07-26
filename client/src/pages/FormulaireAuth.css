@@ -47,8 +47,8 @@
   padding: 12px;
   border-radius: 6px;
   border: none;
-  background: var(--couleur-lumiere);
-  color: #1a1a1a;
+  background: var(--primaire);
+  color: var(--primaire-texte);
   font-weight: 600;
   font-size: 15px;
 }
@@ -72,5 +72,5 @@
 }
 
 .page-auth__lien a {
-  color: var(--couleur-lumiere);
+  color: var(--accent);
 }

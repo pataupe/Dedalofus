@@ -11,7 +11,7 @@
 
 .page-mentions-legales h2 {
   font-size: 17px;
-  color: var(--couleur-lumiere);
+  color: var(--accent);
   margin: 32px 0 8px;
 }
 
@@ -33,5 +33,5 @@
 }
 
 .page-mentions-legales a {
-  color: var(--couleur-lumiere);
+  color: var(--accent);
 }
