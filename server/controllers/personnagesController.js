@@ -285,13 +285,56 @@ async function trouverEmplacementLibre(personnageId, table, colonne) {
   return libres[0]?.emplacement || null;
 }
 
+// Même nom déjà équipé ailleurs sur ce personnage, rang différent inclus (ex:
+// "Bluff" Novice et "Bluff" Expert s'excluent mutuellement) ? Retourne
+// l'emplacement en conflit, ou null. Même principe que la contrainte cube
+// (equiperCube/equiperCubeAuto, par élément + numéro), appliquée ici par `nom`
+// puisque sorts et breloques n'ont pas d'équivalent élément+numéro.
+// `emplacementAIgnorer` sert à equiper() (emplacement précis, ex: remplacement)
+// pour ne pas se comparer à soi-même.
+async function trouverEmplacementDoublonParNom(personnageId, table, colonne, refTable, valeurId, emplacementAIgnorer) {
+  if (!valeurId) return null;
+
+  const [cibles] = await pool.query(`SELECT nom FROM ${refTable} WHERE id = ?`, [valeurId]);
+  const cible = cibles[0];
+  if (!cible) return null;
+
+  const params = [personnageId, cible.nom];
+  let conditionEmplacement = '';
+  if (emplacementAIgnorer != null) {
+    conditionEmplacement = 'AND t.emplacement != ?';
+    params.push(emplacementAIgnorer);
+  }
+
+  const [doublons] = await pool.query(
+    `SELECT t.emplacement
+     FROM ${table} t
+     JOIN Equipement e ON e.id = t.equipement_id
+     JOIN ${refTable} r ON r.id = t.${colonne}
+     WHERE e.personnage_id = ? AND r.nom = ? ${conditionEmplacement}`,
+    params
+  );
+  return doublons[0]?.emplacement || null;
+}
+
+function messageDoublon(refTable, emplacement) {
+  return refTable === 'Sort'
+    ? `Ce sort est déjà équipé (rang différent inclus) à l'emplacement ${emplacement}.`
+    : `Cette breloque est déjà équipée (rang différent inclus) à l'emplacement ${emplacement}.`;
+}
+
 // PUT /api/personnages/:id/sorts et /api/personnages/:id/breloques — même
-// principe que equiperCubeAuto (premier emplacement libre), sans contrainte de
-// doublon (seuls les cubes ont la règle "un seul exemplaire par élément+numéro").
-async function equiperAuto(req, res, { table, colonne, type, valeur }) {
+// principe que equiperCubeAuto (premier emplacement libre), avec la même
+// contrainte de doublon que les cubes (voir trouverEmplacementDoublonParNom).
+async function equiperAuto(req, res, { table, colonne, type, refTable, valeur }) {
   const personnage = await trouverPersonnage(req.params.id, req.utilisateur.id);
   if (!personnage) {
     return res.status(404).json({ erreur: 'Personnage introuvable' });
+  }
+
+  const conflitEmplacement = await trouverEmplacementDoublonParNom(personnage.id, table, colonne, refTable, valeur);
+  if (conflitEmplacement) {
+    return res.status(409).json({ erreur: messageDoublon(refTable, conflitEmplacement) });
   }
 
   const emplacement = await trouverEmplacementLibre(personnage.id, table, colonne);
@@ -308,7 +351,13 @@ async function equiperAuto(req, res, { table, colonne, type, valeur }) {
 }
 
 async function equiperSortAuto(req, res) {
-  await equiperAuto(req, res, { table: 'EquipementSort', colonne: 'sort_id', type: 'sorts', valeur: req.body.sortId });
+  await equiperAuto(req, res, {
+    table: 'EquipementSort',
+    colonne: 'sort_id',
+    type: 'sorts',
+    refTable: 'Sort',
+    valeur: req.body.sortId,
+  });
 }
 
 async function equiperBreloqueAuto(req, res) {
@@ -316,6 +365,7 @@ async function equiperBreloqueAuto(req, res) {
     table: 'EquipementBreloque',
     colonne: 'breloque_id',
     type: 'breloques',
+    refTable: 'Breloque',
     valeur: req.body.breloqueId,
   });
 }
@@ -326,6 +376,7 @@ async function equiperSort(req, res) {
     table: 'EquipementSort',
     colonne: 'sort_id',
     type: 'sorts',
+    refTable: 'Sort',
     valeur: req.body.sortId,
   });
 }
@@ -336,11 +387,12 @@ async function equiperBreloque(req, res) {
     table: 'EquipementBreloque',
     colonne: 'breloque_id',
     type: 'breloques',
+    refTable: 'Breloque',
     valeur: req.body.breloqueId,
   });
 }
 
-async function equiper(req, res, { table, colonne, type, valeur }) {
+async function equiper(req, res, { table, colonne, type, refTable, valeur }) {
   const personnage = await trouverPersonnage(req.params.id, req.utilisateur.id);
   if (!personnage) {
     return res.status(404).json({ erreur: 'Personnage introuvable' });
@@ -349,6 +401,11 @@ async function equiper(req, res, { table, colonne, type, valeur }) {
   const emplacement = Number(req.params.emplacement);
   if (!Number.isInteger(emplacement) || emplacement < 1 || emplacement > EMPLACEMENTS_MAX[type]) {
     return res.status(400).json({ erreur: 'Emplacement invalide' });
+  }
+
+  const conflitEmplacement = await trouverEmplacementDoublonParNom(personnage.id, table, colonne, refTable, valeur, emplacement);
+  if (conflitEmplacement) {
+    return res.status(409).json({ erreur: messageDoublon(refTable, conflitEmplacement) });
   }
 
   await pool.query(
