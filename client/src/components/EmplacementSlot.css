@@ -38,7 +38,7 @@ a.emplacement-slot--vide:hover {
 
 .emplacement-slot--rempli {
   background: var(--couleur-emplacement, var(--bg-carte));
-  border: 5px solid var(--couleur-bordure-rang, var(--bordure));
+  border: 4px solid var(--couleur-bordure-rang, var(--bordure));
   box-shadow: 0 0 6px 1px var(--lueur-rang, transparent);
   cursor: pointer;
   font-weight: 600;

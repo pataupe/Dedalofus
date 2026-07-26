@@ -31,6 +31,7 @@ function ModaleRemplacement({ type, emplacements, onChoisir, onClose }) {
               key={e.emplacement}
               vide={false}
               libelle={libelleItem(type, item)}
+              image={item.image_url}
               couleur={type === 'cube' ? couleurElement(item.element) : null}
               bordure={bordureItem(type, item)}
               lueur={type === 'cube' ? lueurRangCube(item.rang) : null}
