@@ -1,37 +1,39 @@
-.page-mentions-legales {
+/* Style partagé par les pages légales (Mentions légales, Politique de
+   confidentialité, CGU) : même structure titre/section/paragraphe. */
+.page-legale {
   max-width: 720px;
   margin: 0 auto;
   padding: 40px 24px 60px;
   color: var(--texte);
 }
 
-.page-mentions-legales h1 {
+.page-legale h1 {
   margin: 0 0 24px;
 }
 
-.page-mentions-legales h2 {
+.page-legale h2 {
   font-size: 17px;
   color: var(--accent);
   margin: 32px 0 8px;
 }
 
-.page-mentions-legales section:first-of-type h2 {
+.page-legale section:first-of-type h2 {
   margin-top: 0;
 }
 
-.page-mentions-legales p {
+.page-legale p {
   margin: 0 0 10px;
   line-height: 1.6;
   color: var(--texte-attenue);
 }
 
-.page-mentions-legales ul {
+.page-legale ul {
   margin: 0 0 10px;
   padding-left: 20px;
   color: var(--texte-attenue);
   line-height: 1.6;
 }
 
-.page-mentions-legales a {
+.page-legale a {
   color: var(--accent);
 }

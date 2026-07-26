@@ -1,8 +1,9 @@
-import './MentionsLegalesPage.css';
+import { Link } from 'react-router-dom';
+import './PageLegale.css';
 
 function MentionsLegalesPage() {
   return (
-    <div className="page-mentions-legales">
+    <div className="page-legale">
       <h1>Mentions légales</h1>
 
       <section>
@@ -51,27 +52,12 @@ function MentionsLegalesPage() {
       </section>
 
       <section>
-        <h2>Données personnelles</h2>
-        <p>Créer un compte sur Dédalofus implique la collecte des données suivantes :</p>
-        <ul>
-          <li>Adresse email et pseudo (fournis à l'inscription)</li>
-          <li>Mot de passe, jamais stocké en clair (uniquement sous forme chiffrée)</li>
-          <li>Les personnages et équipements que tu choisis de créer/sauvegarder</li>
-        </ul>
+        <h2>Données personnelles et conditions d'utilisation</h2>
         <p>
-          Ces données servent uniquement au fonctionnement du site (connexion, sauvegarde de tes stuffs) et ne sont
-          ni vendues, ni partagées, ni utilisées à des fins publicitaires. Conformément au RGPD, tu peux demander à
-          tout moment l'accès, la rectification ou la suppression de tes données en contactant l'éditeur via le{' '}
-          <a href="https://discord.gg/WDxuStWyh" target="_blank" rel="noreferrer">serveur Discord</a>.
-        </p>
-      </section>
-
-      <section>
-        <h2>Cookies et traceurs</h2>
-        <p>
-          Ce site n'utilise aucun cookie publicitaire ni outil de mesure d'audience (pas de Google Analytics ni
-          équivalent). Seule une donnée technique strictement nécessaire à la connexion (le jeton de session) est
-          conservée dans ton navigateur, indispensable pour rester connecté à ton compte.
+          Le détail des données collectées, de leurs finalités et de tes droits est disponible sur la page{' '}
+          <Link to="/politique-de-confidentialite">Politique de confidentialité</Link>. Les règles d'usage du site
+          sont détaillées dans les{' '}
+          <Link to="/conditions-generales-utilisation">Conditions générales d'utilisation</Link>.
         </p>
       </section>
 
