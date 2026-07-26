@@ -34,8 +34,10 @@ function Footer() {
           Site non affilié à Ankama Games. Dofus Touch et les éléments de jeu mentionnés sont des marques et
           contenus appartenant à Ankama Games.
         </p>
-        <p className="pied-de-page__mention">© {new Date().getFullYear()} Dédalofus</p>
-        <p className="pied-de-page__mention">Site développé par Pataupe</p>
+        <div className="pied-de-page__credits">
+          <p className="pied-de-page__mention">© {new Date().getFullYear()} Dédalofus</p>
+          <p className="pied-de-page__mention">Site développé par Pataupe</p>
+        </div>
       </div>
     </footer>
   );

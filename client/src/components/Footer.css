@@ -1,6 +1,6 @@
 .pied-de-page {
   margin-top: 48px;
-  padding: 28px 24px 20px;
+  padding: 8px 24px 20px;
   border-top: 1px solid var(--bordure-or);
   background: var(--bg-surface);
 }
@@ -61,12 +61,19 @@
   margin: 0;
   font-size: 11px;
   line-height: 1.5;
+  text-align: center;
   color: var(--texte-attenue);
+}
+
+.pied-de-page__credits {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  margin-top: 10px;
 }
 
 .pied-de-page__mention {
   margin: 0;
-  text-align: center;
   font-size: 11px;
   color: var(--texte-attenue);
   opacity: 0.7;
@@ -77,10 +84,15 @@
    du desktop, la structure (3 colonnes) reste identique aux deux tailles. */
 @media (min-width: 720px) {
   .pied-de-page {
-    padding: 36px 32px 24px;
+    padding: 16px 32px 24px;
   }
 
   .pied-de-page__colonnes {
     gap: 32px;
+  }
+
+  .pied-de-page__credits {
+    flex-direction: column;
+    align-items: center;
   }
 }
