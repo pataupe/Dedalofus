@@ -6,12 +6,13 @@ const fs = require('fs');
 const path = require('path');
 const db = require('../config/db');
 
-let satori, Resvg;
+let satori, Resvg, sharp;
 try {
   satori = require('satori').default;
   ({ Resvg } = require('@resvg/resvg-js'));
+  sharp = require('sharp');
 } catch (e) {
-  console.warn('[og-image] Satori/Resvg indisponible — génération désactivée:', e.message);
+  console.warn('[og-image] Dépendance manquante — génération désactivée:', e.message);
 }
 
 let fontCache = null;
@@ -33,18 +34,24 @@ async function obtenirPolice() {
   return fontCache;
 }
 
-function lireImageBase64(imageUrl) {
-  if (!imageUrl) return null;
-  if (imageCache.has(imageUrl)) return imageCache.get(imageUrl);
-  const p = path.join(__dirname, '../../client/public', imageUrl);
-  try {
-    const b64 = `data:image/webp;base64,${fs.readFileSync(p).toString('base64')}`;
-    imageCache.set(imageUrl, b64);
-    return b64;
-  } catch {
-    imageCache.set(imageUrl, null);
-    return null;
-  }
+// Convertit webp → PNG avant d'embarquer en base64 (resvg ne supporte pas webp dans les SVG)
+async function chargerImagesPng(urls) {
+  const result = new Map();
+  await Promise.all([...new Set(urls.filter(Boolean))].map(async (url) => {
+    if (imageCache.has(url)) { result.set(url, imageCache.get(url)); return; }
+    const p = path.join(__dirname, '../../client/public', url);
+    try {
+      const pngBuf = await sharp(p).png().toBuffer();
+      const b64 = `data:image/png;base64,${pngBuf.toString('base64')}`;
+      imageCache.set(url, b64);
+      result.set(url, b64);
+    } catch (e) {
+      console.error('[og-image] Image illisible:', p, e.message);
+      imageCache.set(url, null);
+      result.set(url, null);
+    }
+  }));
+  return result;
 }
 
 const COULEURS_ELEMENT = {
@@ -55,9 +62,9 @@ const COULEURS_ELEMENT = {
 const T = 85;
 const G = 10;
 
-function creerSlot(item) {
+function creerSlot(item, images) {
   const couleur = item?.element ? (COULEURS_ELEMENT[item.element] || '#6f6555') : null;
-  const img64 = item ? lireImageBase64(item.image_url) : null;
+  const img64 = item?.image_url ? (images.get(item.image_url) || null) : null;
   const filled = Boolean(item);
 
   return {
@@ -81,14 +88,14 @@ function creerSlot(item) {
   };
 }
 
-function creerGrille(items, cols) {
+function creerGrille(items, cols, images) {
   const rows = [];
   for (let i = 0; i < items.length; i += cols) {
     rows.push({
       type: 'div',
       props: {
         style: { display: 'flex', gap: G },
-        children: items.slice(i, i + cols).map(creerSlot)
+        children: items.slice(i, i + cols).map(item => creerSlot(item, images))
       }
     });
   }
@@ -139,7 +146,13 @@ router.get('/:lienPartage', async (req, res) => {
     const breloques = breloquesRows.map(r => r.breloque_id ? { image_url: r.image_url } : null);
     const breuvages = [null, null, null];
 
-    const fontData = await obtenirPolice();
+    // Chargement des images (webp → png) et de la police en parallèle
+    const toutesUrls = [...cubes, ...sorts, ...breloques]
+      .filter(Boolean).map(i => i.image_url);
+    const [images, fontData] = await Promise.all([
+      chargerImagesPng(toutesUrls),
+      obtenirPolice(),
+    ]);
 
     const element = {
       type: 'div',
@@ -179,13 +192,13 @@ router.get('/:lienPartage', async (req, res) => {
                   props: {
                     style: { display: 'flex', gap: 20, alignItems: 'flex-start' },
                     children: [
-                      creerGrille(cubes, 3),
-                      creerGrille(sorts, 3),
+                      creerGrille(cubes, 3, images),
+                      creerGrille(sorts, 3, images),
                       {
                         type: 'div',
                         props: {
                           style: { display: 'flex', flexDirection: 'column', gap: G },
-                          children: breuvages.map(() => creerSlot(null))
+                          children: breuvages.map(() => creerSlot(null, images))
                         }
                       }
                     ]
@@ -197,8 +210,8 @@ router.get('/:lienPartage', async (req, res) => {
                   props: {
                     style: { display: 'flex', flexDirection: 'column', gap: G, alignItems: 'center' },
                     children: [
-                      { type: 'div', props: { style: { display: 'flex', gap: G }, children: breloques.slice(0, 4).map(creerSlot) } },
-                      { type: 'div', props: { style: { display: 'flex', gap: G }, children: breloques.slice(4).map(creerSlot) } },
+                      { type: 'div', props: { style: { display: 'flex', gap: G }, children: breloques.slice(0, 4).map(b => creerSlot(b, images)) } },
+                      { type: 'div', props: { style: { display: 'flex', gap: G }, children: breloques.slice(4).map(b => creerSlot(b, images)) } },
                     ]
                   }
                 }
