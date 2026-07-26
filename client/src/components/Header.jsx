@@ -8,6 +8,7 @@ function Header() {
   const { session, deconnecter } = useAuth();
   const navigate = useNavigate();
   const [menuOuvert, setMenuOuvert] = useState(false);
+  const [menuItemsOuvert, setMenuItemsOuvert] = useState(false);
 
   function seDeconnecter() {
     setMenuOuvert(false);
@@ -17,6 +18,7 @@ function Header() {
 
   function fermerMenu() {
     setMenuOuvert(false);
+    setMenuItemsOuvert(false);
   }
 
   return (
@@ -41,15 +43,44 @@ function Header() {
 
       <nav className={`entete__nav ${menuOuvert ? 'entete__nav--ouvert' : ''}`}>
         <div className="entete__liens">
-          <Link to="/cubes" className="entete__lien" onClick={fermerMenu}>
-            Cubes
-          </Link>
-          <Link to="/breloques" className="entete__lien" onClick={fermerMenu}>
-            Breloques
-          </Link>
-          <Link to="/sorts" className="entete__lien" onClick={fermerMenu}>
-            Sorts
-          </Link>
+          {/* Regroupe Cubes/Breloques/Sorts (+ Breuvages à venir) derrière un seul
+              déclencheur : laisse de la place dans le header pour du contenu futur
+              (guides, news, tutos) sans multiplier les boutons de premier niveau. */}
+          <div className="entete__items-selecteur">
+            <button
+              type="button"
+              className="entete__items-declencheur"
+              onClick={() => setMenuItemsOuvert((o) => !o)}
+              aria-expanded={menuItemsOuvert}
+            >
+              <span>Liste des items</span>
+              <span className={`entete__items-fleche ${menuItemsOuvert ? 'entete__items-fleche--ouvert' : ''}`}>
+                ▾
+              </span>
+            </button>
+            {menuItemsOuvert && (
+              <ul className="entete__items-menu">
+                <li>
+                  <Link to="/cubes" onClick={fermerMenu}>
+                    Cubes
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/breloques" onClick={fermerMenu}>
+                    Breloques
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/sorts" onClick={fermerMenu}>
+                    Sorts
+                  </Link>
+                </li>
+                <li>
+                  <span className="entete__items-bientot">Breuvages (bientôt)</span>
+                </li>
+              </ul>
+            )}
+          </div>
           {session && (
             <Link to="/personnage" className="entete__lien entete__lien--compte" onClick={fermerMenu}>
               Mes stuffs

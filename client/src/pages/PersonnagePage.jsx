@@ -53,6 +53,7 @@ function PersonnagePage() {
       <h1>Mes personnages</h1>
 
       <form onSubmit={soumettre} className="formulaire-personnage">
+        <p className="formulaire-personnage__titre">Nouveau personnage</p>
         <label>
           Nom du personnage
           <input type="text" value={nom} onChange={(e) => setNom(e.target.value)} required />
@@ -73,7 +74,11 @@ function PersonnagePage() {
       <ul className="page-personnage__liste">
         {personnages.map((p) => (
           <li key={p.id} className="page-personnage__item">
-            <Link to={`/personnage/${p.id}`}>{p.nom}</Link>
+            <Link to={`/personnage/${p.id}`}>
+              <span className="page-personnage__avatar">{p.nom.charAt(0).toUpperCase()}</span>
+              <span className="page-personnage__nom">{p.nom}</span>
+              <span className="page-personnage__chevron">›</span>
+            </Link>
           </li>
         ))}
       </ul>

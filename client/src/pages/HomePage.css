@@ -8,10 +8,11 @@
 }
 
 .page-accueil__logo {
-  width: 120px;
-  height: 120px;
+  width: 130px;
+  height: 130px;
   border-radius: 50%;
-  margin-bottom: 8px;
+  margin-bottom: 12px;
+  box-shadow: 0 10px 32px rgba(90, 61, 107, 0.4);
 }
 
 .page-accueil h1 {
@@ -22,6 +23,7 @@
 .page-accueil p {
   color: var(--texte-attenue);
   margin: 0 0 24px;
+  font-size: 16px;
 }
 
 .page-accueil__boutons {
@@ -34,21 +36,33 @@
 
 .page-accueil__bouton {
   padding: 16px 32px;
-  border-radius: 8px;
+  border-radius: 10px;
   font-weight: 600;
   font-size: 16px;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, background-color 0.15s ease;
 }
 
 .page-accueil__bouton--principal {
-  padding: 22px 48px;
-  font-size: 20px;
-  background: var(--couleur-lumiere);
-  color: #1a1a1a;
-  box-shadow: 0 4px 16px rgba(232, 197, 71, 0.35);
+  padding: 20px 48px;
+  font-size: 19px;
+  background: var(--primaire);
+  color: var(--primaire-texte);
+  box-shadow: 0 8px 24px rgba(90, 61, 107, 0.45);
+}
+
+.page-accueil__bouton--principal:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 28px rgba(90, 61, 107, 0.55);
 }
 
 .page-accueil__bouton--secondaire {
   background: transparent;
-  border: 2px solid var(--bordure);
+  border: 2px solid var(--bordure-or);
   color: var(--texte);
+}
+
+.page-accueil__bouton--secondaire:hover {
+  border-color: var(--bordure-or-forte);
+  background: var(--bg-surface);
+  transform: translateY(-2px);
 }

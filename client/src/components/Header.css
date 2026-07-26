@@ -2,8 +2,9 @@
   position: sticky;
   top: 0;
   z-index: 30;
-  background: var(--bg);
-  border-bottom: 1px solid var(--bordure);
+  background: var(--bg-surface);
+  border-bottom: 1px solid var(--bordure-or);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.35);
 }
 
 .entete__barre {
@@ -20,6 +21,7 @@
   gap: 10px;
   font-size: 18px;
   font-weight: 700;
+  letter-spacing: 0.01em;
 }
 
 .entete__logo img {
@@ -38,10 +40,15 @@
   gap: 5px;
   width: 36px;
   height: 36px;
-  border: 1px solid var(--bordure);
+  border: 1px solid var(--bordure-or);
   border-radius: 8px;
-  background: var(--bg-carte);
+  background: var(--bg);
   padding: 0;
+  transition: border-color 0.15s ease;
+}
+
+.entete__hamburger:hover {
+  border-color: var(--bordure-or-forte);
 }
 
 .entete__hamburger span {
@@ -80,28 +87,19 @@
   gap: 10px;
 }
 
-/* Boutons de navigation (Cubes/Breloques/Sorts) : neutres, bien distincts du
-   bouton "Mes stuffs" ci-dessous (accès au compte, mis en valeur en accent). */
-.entete__lien {
-  padding: 8px 16px;
-  border-radius: 20px;
-  background: var(--bg-carte);
-  color: var(--texte);
-  font-size: 14px;
-  font-weight: 600;
-}
-
-.entete__lien:hover {
-  background: var(--bg-carte-survol);
-}
-
 /* "Mes stuffs" : seul lien qui mène au compte du joueur (pas juste une liste
-   consultable librement) — accent doré pour bien le séparer visuellement des
-   3 listes Cubes/Breloques/Sorts, même traitement que le bouton Connexion. */
+   consultable librement) — accent violet pour bien le séparer visuellement du
+   sélecteur "Liste des items", même traitement que le bouton Connexion. Rayon
+   plus sobre (8px) qu'une pilule pleine : plus "site" que "bouton d'appli". */
 .entete__lien--compte {
+  padding: 7px 16px;
+  border-radius: 8px;
   background: transparent;
   border: 2px solid var(--primaire);
   color: var(--texte);
+  font-size: 14px;
+  font-weight: 600;
+  transition: background-color 0.15s ease, color 0.15s ease;
 }
 
 .entete__lien--compte:hover {
@@ -110,12 +108,13 @@
 }
 
 .entete__connexion {
-  padding: 8px 18px;
-  border-radius: 20px;
+  padding: 7px 16px;
+  border-radius: 8px;
   border: 2px solid var(--primaire);
   color: var(--texte);
   font-size: 14px;
   font-weight: 600;
+  transition: background-color 0.15s ease, color 0.15s ease;
 }
 
 .entete__connexion:hover {
@@ -138,10 +137,100 @@
 .entete__deconnexion {
   background: transparent;
   border: 1px solid var(--couleur-feu);
-  border-radius: 20px;
+  border-radius: 8px;
   padding: 6px 14px;
   color: var(--couleur-feu);
   font-size: 14px;
+}
+
+/* Sélecteur "Liste des items" : bouton + flèche qui pivote à l'ouverture,
+   menu qui s'ouvre avec une petite transition rapide — même convention que
+   PanopliesPersonnage (clic pour ouvrir/choisir, pas de survol). */
+.entete__items-selecteur {
+  position: relative;
+}
+
+.entete__items-declencheur {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 14px;
+  border-radius: 8px;
+  background: var(--bg);
+  border: 1px solid var(--bordure);
+  color: var(--texte);
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: border-color 0.15s ease, transform 0.15s ease;
+}
+
+.entete__items-declencheur:hover {
+  border-color: var(--bordure-or-forte);
+  transform: translateY(-1px);
+}
+
+.entete__items-fleche {
+  font-size: 10px;
+  color: var(--texte-attenue);
+  transition: transform 0.15s ease;
+}
+
+.entete__items-fleche--ouvert {
+  transform: rotate(180deg);
+}
+
+.entete__items-menu {
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 0;
+  z-index: 40;
+  list-style: none;
+  margin: 0;
+  padding: 4px;
+  min-width: 170px;
+  background: var(--bg-surface);
+  border: 1px solid var(--bordure-or);
+  border-radius: 8px;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.45);
+  animation: entete-items-menu-ouverture 0.15s ease;
+}
+
+@keyframes entete-items-menu-ouverture {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.entete__items-menu li + li {
+  border-top: 1px solid var(--bordure);
+}
+
+.entete__items-menu a,
+.entete__items-menu span {
+  display: block;
+  padding: 9px 12px;
+  font-size: 14px;
+  border-radius: 4px;
+}
+
+.entete__items-menu a {
+  color: var(--texte);
+}
+
+.entete__items-menu a:hover {
+  background: var(--bg-carte-survol);
+  color: var(--accent);
+}
+
+.entete__items-bientot {
+  color: var(--texte-attenue);
+  font-style: italic;
 }
 
 .entete__deconnexion:hover {
@@ -172,8 +261,22 @@
     flex-direction: column;
   }
 
-  .entete__lien {
+  .entete__lien--compte {
     text-align: center;
+  }
+
+  /* Le menu déroulant passe en statique (pousse le contenu au lieu de flotter
+     par-dessus) : plus adapté à la nav empilée en pleine largeur du mobile. */
+  .entete__items-declencheur {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .entete__items-menu {
+    position: static;
+    width: 100%;
+    box-sizing: border-box;
+    margin-top: 6px;
   }
 
   .entete__compte {
