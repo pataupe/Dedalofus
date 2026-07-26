@@ -114,8 +114,21 @@
     gap: 14px;
   }
 
+  .page-partage__section--cubes {
+    order: 1;
+  }
+
+  .page-partage__section--sorts {
+    order: 2;
+  }
+
+  .page-partage__breuvages {
+    order: 3;
+  }
+
   .page-partage__breloques {
     gap: 14px;
+    margin-top: 10px;
     max-width: calc(80px * 7 + 14px * 6);
   }
 

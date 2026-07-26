@@ -187,8 +187,25 @@
     gap: 14px;
   }
 
+  /* Sur desktop, tout tient sur une seule ligne (voir plus haut) : l'ordre
+     visuel peut donc suivre la maquette (cubes, sorts, breuvages) sans casser
+     l'appariement cubes+breuvages nécessaire au retour à la ligne sur mobile,
+     qui reste régi par l'ordre du DOM (inchangé). */
+  .page-personnage-detail__section--cubes {
+    order: 1;
+  }
+
+  .page-personnage-detail__section--sorts {
+    order: 2;
+  }
+
+  .page-personnage-detail__breuvages {
+    order: 3;
+  }
+
   .page-personnage-detail__breloques {
     gap: 14px;
+    margin-top: 10px;
     max-width: calc(80px * 7 + 14px * 6);
   }
 
