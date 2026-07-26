@@ -8,17 +8,20 @@
 }
 
 .stats-personnage__bloc {
-  background: var(--bg-carte);
-  border: 1px solid var(--bordure);
+  background: var(--panneau-fond);
+  color: var(--panneau-texte);
+  border: 1px solid var(--bordure-or-forte);
   border-radius: 8px;
+  box-shadow: var(--ombre-panneau);
   overflow: hidden;
 }
 
-/* Bandeau de titre coloré, même convention que .carte-sort__entete. */
+/* Bandeau de titre violet (palette DofusBook : violet = accent principal,
+   l'or reste réservé aux liserés/bordures fines, pas aux aplats pleins). */
 .stats-personnage__titre {
   margin: 0;
-  background: var(--couleur-lumiere);
-  color: #1a1a1a;
+  background: var(--primaire);
+  color: var(--primaire-texte);
   font-weight: 600;
   font-size: 14px;
   padding: 8px 12px;
@@ -74,7 +77,7 @@
 
 .stats-personnage__ligne--vedette .stats-personnage__libelle {
   font-weight: 600;
-  color: var(--texte);
+  color: var(--panneau-texte);
 }
 
 .stats-personnage__icone {
@@ -98,14 +101,14 @@
   width: 38px;
   font-weight: 700;
   font-size: 15px;
-  color: var(--texte);
+  color: var(--panneau-texte);
   text-align: right;
 }
 
 .stats-personnage__libelle {
   flex: 1 1 auto;
   font-size: 12px;
-  color: var(--texte-attenue);
+  color: var(--panneau-texte-attenue);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -115,7 +118,7 @@
   display: flex;
   justify-content: space-between;
   font-size: 11px;
-  color: var(--texte-attenue);
+  color: var(--panneau-texte-attenue);
   padding: 10px 12px 4px;
 }
 
@@ -146,9 +149,9 @@
   width: 64px;
   padding: 4px 8px;
   border-radius: 6px;
-  border: 1px solid var(--bordure);
-  background: var(--bg);
-  color: var(--texte);
+  border: 1px solid var(--bordure-or);
+  background: var(--panneau-fond-sombre);
+  color: var(--panneau-texte);
   font-size: 14px;
   text-align: right;
 }
@@ -160,7 +163,7 @@
   box-sizing: border-box;
   border-color: transparent;
   background: transparent;
-  color: var(--texte-attenue);
+  color: var(--panneau-texte-attenue);
 }
 
 /* Puissance + boutons de remplissage 0/100/150 sur une même ligne : les
@@ -192,16 +195,16 @@
 .stats-personnage__carac-boutons button {
   padding: 4px 10px;
   border-radius: 5px;
-  border: 1px solid var(--bordure);
-  background: var(--bg-carte-survol);
-  color: var(--texte);
+  border: 1px solid var(--bordure-or);
+  background: var(--panneau-fond-sombre);
+  color: var(--panneau-texte);
   font-size: 12px;
   cursor: pointer;
 }
 
 .stats-personnage__carac-boutons button:hover {
-  background: var(--couleur-lumiere);
-  color: #1a1a1a;
+  background: var(--primaire);
+  color: var(--primaire-texte);
 }
 
 .stats-personnage__erreur {

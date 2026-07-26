@@ -78,7 +78,7 @@ function PartagePage() {
         <>
           <div className="page-partage__stuff">
             <div className="page-partage__grille">
-              <div className="page-partage__section">
+              <div className="page-partage__section page-partage__section--cubes">
                 {personnage.cubes.map(({ emplacement, cube }) => (
                   <EmplacementSlot
                     key={emplacement}
@@ -93,7 +93,13 @@ function PartagePage() {
                 ))}
               </div>
 
-              <div className="page-partage__section">
+              <div className="page-partage__breuvages">
+                {BREUVAGES_VIDES.map((n) => (
+                  <EmplacementSlot key={n} vide />
+                ))}
+              </div>
+
+              <div className="page-partage__section page-partage__section--sorts">
                 {personnage.sorts.map(({ emplacement, sort }) => (
                   <EmplacementSlot
                     key={emplacement}
@@ -103,12 +109,6 @@ function PartagePage() {
                     bordure={sort ? couleurRangMaitrise(sort.rang_evolution) : null}
                     onClick={sort ? () => setModale({ type: 'sort', data: sort }) : undefined}
                   />
-                ))}
-              </div>
-
-              <div className="page-partage__breuvages">
-                {BREUVAGES_VIDES.map((n) => (
-                  <EmplacementSlot key={n} vide />
                 ))}
               </div>
             </div>

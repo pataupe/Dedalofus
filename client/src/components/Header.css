@@ -100,27 +100,27 @@
    3 listes Cubes/Breloques/Sorts, même traitement que le bouton Connexion. */
 .entete__lien--compte {
   background: transparent;
-  border: 2px solid var(--couleur-lumiere);
-  color: var(--couleur-lumiere);
+  border: 2px solid var(--primaire);
+  color: var(--texte);
 }
 
 .entete__lien--compte:hover {
-  background: var(--couleur-lumiere);
-  color: #1a1a1a;
+  background: var(--primaire);
+  color: var(--primaire-texte);
 }
 
 .entete__connexion {
   padding: 8px 18px;
   border-radius: 20px;
-  border: 2px solid var(--couleur-lumiere);
-  color: var(--couleur-lumiere);
+  border: 2px solid var(--primaire);
+  color: var(--texte);
   font-size: 14px;
   font-weight: 600;
 }
 
 .entete__connexion:hover {
-  background: var(--couleur-lumiere);
-  color: #1a1a1a;
+  background: var(--primaire);
+  color: var(--primaire-texte);
 }
 
 .entete__compte {
@@ -130,7 +130,7 @@
 }
 
 .entete__pseudo {
-  color: var(--couleur-lumiere);
+  color: var(--accent);
   font-size: 17px;
   font-weight: 700;
 }

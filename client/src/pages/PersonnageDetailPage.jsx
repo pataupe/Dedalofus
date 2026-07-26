@@ -131,8 +131,15 @@ function PersonnageDetailPage() {
       ) : (
         <>
           <div className="page-personnage-detail__stuff">
+            {/* Un seul conteneur flex-wrap pour cubes + breuvages + sorts, dans cet
+                ordre précis : sur mobile (étroit), cubes+breuvages tiennent sur une
+                ligne et sorts passe seul à la ligne suivante ; sur desktop (assez
+                large), les 3 groupes tiennent sur une seule ligne, comme la maquette
+                (maquetteEquipementPerso.png) qui montre cubes/sorts/breuvages côte à
+                côte. Le flex-wrap gère cette bascule automatiquement, sans media
+                query dédiée à la structure. */}
             <div className="page-personnage-detail__grille">
-              <div className="page-personnage-detail__section">
+              <div className="page-personnage-detail__section page-personnage-detail__section--cubes">
                 {personnage.cubes.map(({ emplacement, cube }) => (
                   <EmplacementSlot
                     key={emplacement}
@@ -149,7 +156,13 @@ function PersonnageDetailPage() {
                 ))}
               </div>
 
-              <div className="page-personnage-detail__section">
+              <div className="page-personnage-detail__breuvages">
+                {BREUVAGES_VIDES.map((n) => (
+                  <EmplacementSlot key={n} vide />
+                ))}
+              </div>
+
+              <div className="page-personnage-detail__section page-personnage-detail__section--sorts">
                 {personnage.sorts.map(({ emplacement, sort }) => (
                   <EmplacementSlot
                     key={emplacement}
@@ -161,12 +174,6 @@ function PersonnageDetailPage() {
                     onClick={sort ? () => setModale({ type: 'sort', data: sort, emplacement }) : undefined}
                     onDesequiper={sort ? () => desequiper('sort', emplacement) : undefined}
                   />
-                ))}
-              </div>
-
-              <div className="page-personnage-detail__breuvages">
-                {BREUVAGES_VIDES.map((n) => (
-                  <EmplacementSlot key={n} vide />
                 ))}
               </div>
             </div>

@@ -2,8 +2,8 @@
   width: 100%;
   max-width: 500px;
   margin-top: 12px;
-  background: var(--bg-carte);
-  border: 1px solid var(--bordure);
+  background: var(--bg-surface);
+  border: 1px solid var(--bordure-or);
   border-radius: 8px;
   padding: 12px 16px;
 }
@@ -29,7 +29,7 @@
   gap: 8px;
   width: 100%;
   background: var(--bg);
-  border: 1px solid var(--bordure);
+  border: 1px solid var(--bordure-or);
   border-radius: 6px;
   padding: 8px 8px 8px 12px;
   color: var(--texte);
@@ -50,8 +50,8 @@
   flex-shrink: 0;
   width: 28px;
   height: 24px;
-  background: var(--couleur-lumiere);
-  color: #1a1a1a;
+  background: var(--primaire);
+  color: var(--primaire-texte);
   border-radius: 4px;
   font-size: 10px;
   transition: transform 0.15s ease;
@@ -96,14 +96,14 @@
 
 .panoplies-personnage__menu button:hover {
   background: var(--bg-carte-survol);
-  color: var(--couleur-lumiere);
+  color: var(--accent);
 }
 
 /* Option "Cumuler les bonus" : mise en avant (gras + accent) pour la distinguer
    des entrées d'ensembles individuels au-dessus. */
 .panoplies-personnage__menu-cumul {
   font-weight: 700;
-  color: var(--couleur-lumiere) !important;
+  color: var(--accent) !important;
 }
 
 .panoplies-personnage__stats {

@@ -1,5 +1,9 @@
 :root {
-  --bg: #4a433b;
+  /* Brun très sombre façon DofusBook (mesuré sur le vrai site : rgb(46,41,36)).
+     Ni trop clair/désaturé ("cigarette pack", ancien #4a433b) ni trop orangé
+     ("caca", tentative précédente #45301f) : sombre et discret, avec juste
+     assez de chaleur pour ne pas paraître gris. */
+  --bg: #2e2419;
   --bg-carte: #5c5346;
   --bg-carte-survol: #6b6153;
   --bordure: #6f6555;
@@ -13,7 +17,29 @@
   --couleur-chaos: #9b59b6;
   --couleur-lumiere: #e8c547;
 
-  font-family: system-ui, 'Segoe UI', Roboto, sans-serif;
+  /* Palette DofusBook (redesign Lovable) — nouveaux tokens ajoutés à côté des
+     anciens, rien n'est retiré ici pour ne pas casser les 22 fichiers CSS qui
+     utilisent déjà --bg-carte/--texte avec l'hypothèse "carte = fond sombre". */
+  --rayon: 0.375rem;
+  --bg-surface: #211a12;
+
+  /* Panneau clair (beige) : à utiliser avec --panneau-texte, jamais --texte seul. */
+  --panneau-fond: #e6dbb9;
+  --panneau-fond-sombre: #d9ccaa;
+  --panneau-texte: #3b352e;
+  --panneau-texte-attenue: rgba(59, 53, 46, 0.65);
+
+  --primaire: #5a3d6b;
+  --primaire-texte: #f4eede;
+  --accent: #7a5591;
+  --or: #d4af37;
+  --bordure-or: rgba(212, 175, 55, 0.28);
+  --bordure-or-forte: rgba(212, 175, 55, 0.6);
+
+  --ombre-panneau: 0 1px 0 rgba(244, 238, 220, 0.08) inset, 0 2px 6px rgba(0, 0, 0, 0.35);
+  --ombre-case: 0 1px 2px rgba(0, 0, 0, 0.4);
+
+  font-family: 'Work Sans', system-ui, 'Segoe UI', Roboto, sans-serif;
   color-scheme: dark;
 }
 
@@ -52,4 +78,41 @@ a {
 button {
   font-family: inherit;
   cursor: pointer;
+}
+
+/* Panneau clair beige à liseré doré (ex: bloc de stats). */
+.panneau {
+  background-color: var(--panneau-fond);
+  color: var(--panneau-texte);
+  border: 1px solid var(--bordure-or-forte);
+  border-radius: var(--rayon);
+  box-shadow: var(--ombre-panneau);
+}
+
+/* Panneau sombre secondaire (ex: sélecteur de panoplie). */
+.panneau-sombre {
+  background-color: var(--bg-surface);
+  color: var(--texte);
+  border: 1px solid var(--bordure-or);
+  border-radius: var(--rayon);
+}
+
+/* Bouton d'action principal (violet). */
+.bouton-principal {
+  background-color: var(--primaire);
+  color: var(--primaire-texte);
+  border: none;
+  border-radius: var(--rayon);
+}
+
+/* Cible tactile >= 44px (accessibilité mobile). */
+.tap {
+  min-height: 44px;
+  min-width: 44px;
+}
+
+/* Nombres alignés (colonnes de stats). */
+.num {
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: 'tnum';
 }
