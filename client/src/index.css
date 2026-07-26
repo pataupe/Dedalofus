@@ -3,9 +3,9 @@
      Ni trop clair/désaturé ("cigarette pack", ancien #4a433b) ni trop orangé
      ("caca", tentative précédente #45301f) : sombre et discret, avec juste
      assez de chaleur pour ne pas paraître gris. */
-  --bg: #2e2419;
-  --bg-carte: #5c5346;
-  --bg-carte-survol: #6b6153;
+  --bg: #1F1C18;
+  --bg-carte: #4a453f;
+  --bg-carte-survol: #5a544c;
   --bordure: #6f6555;
   --texte: #ede6da;
   --texte-attenue: #b8ae9e;
@@ -21,7 +21,7 @@
      anciens, rien n'est retiré ici pour ne pas casser les 22 fichiers CSS qui
      utilisent déjà --bg-carte/--texte avec l'hypothèse "carte = fond sombre". */
   --rayon: 0.375rem;
-  --bg-surface: #211a12;
+  --bg-surface: #15130f;
 
   /* Panneau clair (beige) : à utiliser avec --panneau-texte, jamais --texte seul. */
   --panneau-fond: #e6dbb9;
