@@ -141,6 +141,30 @@
   text-align: right;
 }
 
+/* Sur mobile, le slider + son libellé ("dommages finaux x1.75"...) côte à côte
+   prennent facilement plus de la moitié de la largeur de la case, écrasant la
+   colonne nom/effet (min-width: 0 la laisse rétrécir jusqu'à 1 mot par ligne).
+   Empilés en colonne, ils tiennent dans une largeur bien plus étroite — ne
+   touche que .boost-range (pas les toggles/accumulateurs) et seulement sous
+   600px (desktop inchangé). */
+@media (max-width: 599px) {
+  .boost-range {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2px;
+  }
+
+  .boost-range input[type='range'] {
+    width: 90px;
+  }
+
+  .boost-range__valeur {
+    min-width: 0;
+    max-width: 100px;
+    text-align: left;
+  }
+}
+
 .boost-accumulateur {
   display: flex;
   align-items: center;
