@@ -1,14 +1,16 @@
-// Catégories de filtres demandées par le porteur de projet — PAS ENCORE DÉCIDÉES
-// définitivement, et aucune donnée de catégorie n'existe en base pour l'instant
-// (voir CLAUDE.md, section "Points encore en suspens"). Les boutons existent déjà
-// dans l'UI (BreloqueListPage) mais ne filtrent rien tant que la table Breloque n'a
-// pas de colonne catégorie et que les 116 breloques n'ont pas été classées.
+// Catégories de filtres, désormais branchées sur Breloque.tag (colonne ajoutée
+// par DEDALE - BRELOQUES_NEW.csv, onglet "Boosts breloques") : une breloque peut
+// avoir plusieurs tags à la fois (ex: "Breloque boss + Dégâts + Entrave"), le
+// filtre serveur fait un LIKE par tag sélectionné (OR entre eux, comme les
+// éléments des sorts). Les libellés ci-dessous doivent matcher exactement les
+// tokens présents en base (vérifiés via `SELECT DISTINCT tag`) — "Breloque boss"
+// est bien au singulier en base, pas "Breloques boss".
 export const CATEGORIES_BRELOQUES = [
   'Dégâts',
   'Mobilité',
   'Soin - Protection',
   'Entrave',
   'Bonus PA/PO',
-  'Bonus divers',
-  'Breloques boss',
+  'Bonus Divers',
+  'Breloque boss',
 ];

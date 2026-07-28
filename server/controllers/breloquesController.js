@@ -13,12 +13,17 @@ function parserListe(valeur) {
   return valeur ? valeur.split(',').filter(Boolean) : [];
 }
 
-// GET /api/breloques?nom=&rangs=&limit=&offset=
-// `rangs` accepte plusieurs valeurs séparées par des virgules (plusieurs filtres
-// actifs en même temps, combinés en OR entre eux).
+// GET /api/breloques?nom=&rangs=&tags=&limit=&offset=
+// `rangs` et `tags` acceptent plusieurs valeurs séparées par des virgules
+// (plusieurs filtres actifs en même temps, combinés en OR entre eux). `rangs`
+// accepte aussi la valeur "Unique" (rang réel en base des breloques de boss,
+// affiché "Boss" côté filtre) en plus de Novice/Expert/Maître α/Maître ẞ.
+// `tags` fait un LIKE par tag : une breloque peut avoir plusieurs tags à la
+// fois dans une seule colonne texte (ex: "Breloque boss + Dégâts + Entrave").
 async function listerBreloques(req, res) {
   const { nom } = req.query;
   const rangs = parserListe(req.query.rangs);
+  const tags = parserListe(req.query.tags);
   const { limite, offset } = parserPagination(req.query);
 
   const conditions = [];
@@ -31,6 +36,10 @@ async function listerBreloques(req, res) {
   if (rangs.length) {
     conditions.push(`(${rangs.map(() => 'rang = ?').join(' OR ')})`);
     params.push(...rangs);
+  }
+  if (tags.length) {
+    conditions.push(`(${tags.map(() => 'tag LIKE ?').join(' OR ')})`);
+    tags.forEach((tag) => params.push(`%${tag}%`));
   }
 
   const whereClause = conditions.length ? `WHERE ${conditions.join(' AND ')}` : '';

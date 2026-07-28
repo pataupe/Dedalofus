@@ -1,9 +1,10 @@
 const BASE_URL = '/api';
 
-export async function listerBreloques({ nom = '', rangs = [], limite = 24, offset = 0 } = {}) {
+export async function listerBreloques({ nom = '', rangs = [], tags = [], limite = 24, offset = 0 } = {}) {
   const params = new URLSearchParams();
   if (nom) params.set('nom', nom);
   if (rangs.length) params.set('rangs', rangs.join(','));
+  if (tags.length) params.set('tags', tags.join(','));
   params.set('limit', limite);
   params.set('offset', offset);
 

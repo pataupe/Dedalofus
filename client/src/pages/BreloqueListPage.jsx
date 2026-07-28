@@ -14,6 +14,13 @@ const DUREE_TOAST_MS = 3000;
 
 const PAR_PAGE = 24;
 
+// Rangs filtrables pour les breloques : les 4 rangs de maîtrise (partagés avec
+// les sorts, via RANGS_MAITRISE) + "Boss", propre aux breloques (rang réel en
+// base "Unique" — le libellé affiché diffère de la valeur envoyée à l'API,
+// donc pas question d'ajouter "Unique" à RANGS_MAITRISE qui est aussi utilisée
+// par la page Sorts, qui n'a pas ce rang).
+const RANGS_BRELOQUES = [...RANGS_MAITRISE.map((rang) => ({ valeur: rang, libelle: rang })), { valeur: 'Unique', libelle: 'Boss' }];
+
 // Plusieurs filtres actifs en même temps (ajoute/retire de la liste).
 function basculerMulti(liste, valeur) {
   return liste.includes(valeur) ? liste.filter((v) => v !== valeur) : [...liste, valeur];
@@ -22,9 +29,6 @@ function basculerMulti(liste, valeur) {
 function BreloqueListPage() {
   const [recherche, setRecherche] = useState('');
   const [rangsActifs, setRangsActifs] = useState([]);
-  // Filtre catégorie : purement visuel pour l'instant, pas envoyé à l'API. La table
-  // Breloque n'a pas encore de colonne catégorie (catégories pas encore décidées
-  // définitivement côté porteur de projet, voir CLAUDE.md) — à brancher plus tard.
   const [categoriesActives, setCategoriesActives] = useState([]);
   const [filtresOuverts, setFiltresOuverts] = useState(false);
   const [page, setPage] = useState(0);
@@ -94,17 +98,23 @@ function BreloqueListPage() {
 
   useEffect(() => {
     setPage(0);
-  }, [recherche, rangsActifs]);
+  }, [recherche, rangsActifs, categoriesActives]);
 
   useEffect(() => {
     setChargement(true);
     setErreur(null);
 
-    listerBreloques({ nom: recherche, rangs: rangsActifs, limite: PAR_PAGE, offset: page * PAR_PAGE })
+    listerBreloques({
+      nom: recherche,
+      rangs: rangsActifs,
+      tags: categoriesActives,
+      limite: PAR_PAGE,
+      offset: page * PAR_PAGE,
+    })
       .then(setBreloques)
       .catch(() => setErreur('Impossible de charger les breloques. Le serveur est-il lancé ?'))
       .finally(() => setChargement(false));
-  }, [recherche, rangsActifs, page]);
+  }, [recherche, rangsActifs, categoriesActives, page]);
 
   return (
     <div className="page-breloques">
@@ -119,13 +129,13 @@ function BreloqueListPage() {
         />
 
         <div className="page-breloques__rangs">
-          {RANGS_MAITRISE.map((rang) => (
+          {RANGS_BRELOQUES.map(({ valeur, libelle }) => (
             <button
-              key={rang}
-              className={rangsActifs.includes(rang) ? 'actif' : ''}
-              onClick={() => setRangsActifs((actuels) => basculerMulti(actuels, rang))}
+              key={valeur}
+              className={rangsActifs.includes(valeur) ? 'actif' : ''}
+              onClick={() => setRangsActifs((actuels) => basculerMulti(actuels, valeur))}
             >
-              {rang}
+              {libelle}
             </button>
           ))}
         </div>
@@ -141,7 +151,7 @@ function BreloqueListPage() {
 
         <div className={`page-breloques__plus-filtres ${filtresOuverts ? 'ouvert' : ''}`}>
           <div className="page-breloques__plus-filtres-contenu">
-            <p className="page-breloques__categories-note">Filtres par catégorie (bientôt actifs)</p>
+            <p className="page-breloques__categories-note">Filtres par catégorie</p>
             <div className="page-breloques__categories-grille">
               {CATEGORIES_BRELOQUES.map((categorie) => (
                 <button
