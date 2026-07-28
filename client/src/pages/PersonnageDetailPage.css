@@ -76,22 +76,26 @@
 
 /* Style "bouton pressé/enclenché" (pas un simple soulignement) : l'onglet actif
    a un fond violet et une ombre intérieure qui donne l'impression d'être
-   enfoncé ; l'inactif est un bouton normal, légèrement "relevé". Bien écartés
-   l'un de l'autre plutôt que collés. */
+   enfoncé ; l'inactif est un bouton normal, légèrement "relevé". Écart et
+   padding réduits sur mobile (3 boutons désormais, dont "Boosts breloques" au
+   texte long) : un gap fixe de 40px poussait la rangée plus large que l'écran
+   et faisait déborder toute la page horizontalement — flex-wrap en filet de
+   sécurité si jamais ça redevient trop serré. */
 .page-personnage-detail__onglets {
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
-  gap: 40px;
+  gap: 10px;
   margin-bottom: 24px;
 }
 
 .page-personnage-detail__onglets button {
-  padding: 10px 28px;
+  padding: 9px 16px;
   border-radius: 8px;
   border: 1px solid var(--bordure-or);
   background: var(--bg-surface);
   color: var(--texte-attenue);
-  font-size: 15px;
+  font-size: 14px;
   font-weight: 600;
   cursor: pointer;
   box-shadow: 0 2px 0 rgba(0, 0, 0, 0.35);
@@ -167,6 +171,15 @@
 @media (min-width: 600px) {
   .page-personnage-detail {
     padding: 32px;
+  }
+
+  .page-personnage-detail__onglets {
+    gap: 24px;
+  }
+
+  .page-personnage-detail__onglets button {
+    padding: 10px 28px;
+    font-size: 15px;
   }
 
   .page-personnage-detail__stuff {
