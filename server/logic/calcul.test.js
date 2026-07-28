@@ -317,4 +317,73 @@ describe('calculerDegats', () => {
     const resultats = calculerDegats(stats, [{ id: 1, degatsMin: 20, degatsMax: 20, element: 'Feu' }]);
     expect(resultats[0].chanceCritiqueTotal).toBeUndefined();
   });
+
+  it('un multiplicateur de breloque (dommages finaux) s\'applique aux dégâts normaux ET critiques', () => {
+    const stats = calculerStatsPersonnage([]);
+    const resultats = calculerDegats(
+      stats,
+      [{ id: 1, degatsMin: 20, degatsMax: 20, degatsCritiqueMin: 25, degatsCritiqueMax: 25, element: 'Feu' }],
+      { multiplicateursBreloques: [{ type: 'finaux', valeur: 1.5 }] }
+    );
+    expect(resultats[0].degatsMin).toBe(30);
+    expect(resultats[0].degatsCritiqueMin).toBe(38); // 25 * 1.5 = 37.5 -> arrondi 38
+  });
+
+  it('un multiplicateur "finaux distance" ne s\'applique pas en mode mêlée', () => {
+    const stats = calculerStatsPersonnage([]);
+    const sorts = [{ id: 1, degatsMin: 20, degatsMax: 20, element: 'Feu' }];
+    const distance = calculerDegats(stats, sorts, {
+      multiplicateursBreloques: [{ type: 'finaux_distance', valeur: 2 }],
+      modeAttaque: 'distance',
+    });
+    const melee = calculerDegats(stats, sorts, {
+      multiplicateursBreloques: [{ type: 'finaux_distance', valeur: 2 }],
+      modeAttaque: 'melee',
+    });
+    expect(distance[0].degatsMin).toBe(40);
+    expect(melee[0].degatsMin).toBe(20);
+  });
+
+  it('sans options (rétrocompatible), aucun multiplicateur appliqué', () => {
+    const stats = calculerStatsPersonnage([]);
+    const resultats = calculerDegats(stats, [{ id: 1, degatsMin: 20, degatsMax: 20, element: 'Feu' }]);
+    expect(resultats[0].degatsMin).toBe(20);
+  });
+});
+
+describe('calculerStatsPersonnage — effets de breloques (onglet Boosts)', () => {
+  it('les bonus plats de breloques s\'ajoutent comme le Parcho (ex: PA)', () => {
+    const stats = calculerStatsPersonnage([], {}, { statsPlates: { PA: 3 }, pdvPourcent: 0 });
+    expect(stats.PA_TOTAL).toBe(7 + 3);
+  });
+
+  it('pdvPourcent (Hémophile) multiplie VITALITE_TOTALE au lieu de s\'additionner', () => {
+    const stats = calculerStatsPersonnage([cube({ VITALITE: 950 })], {}, { statsPlates: {}, pdvPourcent: 50 });
+    // base 1050 + 950 = 2000, x1.5 = 3000
+    expect(stats.VITALITE_TOTALE).toBe(3000);
+  });
+
+  it('RETRAIT_PA/PM_BRELOQUE s\'ajoutent au palier Sagesse (pas de stat cube équivalente)', () => {
+    const stats = calculerStatsPersonnage(
+      [cube({ SAGESSE: 20 })],
+      {},
+      { statsPlates: { RETRAIT_PA_BRELOQUE: 20, RETRAIT_PM_BRELOQUE: 10 }, pdvPourcent: 0 }
+    );
+    expect(stats.RETRAIT_PA_TOTAL).toBe(2 + 20);
+    expect(stats.RETRAIT_PM_TOTAL).toBe(2 + 10);
+  });
+
+  it('ESQUIVE_PA/PM de breloque partage la même clé que la stat cube (s\'additionnent)', () => {
+    const stats = calculerStatsPersonnage(
+      [cube({ SAGESSE: 10, ESQUIVE_PA: 5 })],
+      {},
+      { statsPlates: { ESQUIVE_PA: -10 }, pdvPourcent: 0 }
+    );
+    expect(stats.ESQUIVE_PA_TOTALE).toBe(1 + 5 - 10);
+  });
+
+  it('sans 3e argument (rétrocompatible), comportement inchangé', () => {
+    const stats = calculerStatsPersonnage([cube({ VITALITE: 100 })], { VITALITE: 50 });
+    expect(stats.VITALITE_TOTALE).toBe(1050 + 100 + 50);
+  });
 });

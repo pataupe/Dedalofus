@@ -1,6 +1,8 @@
 // Module de calcul de dégâts — Tâche 3
 // Fonctions pures, sans dépendance à Express ni MySQL, testables unitairement.
 
+const { combinerMultiplicateurs } = require('./effetsBreloques');
+
 // Éléments de frappe réels (Chaos et Lumière ne sont pas des éléments de frappe :
 // ce sont des familles de cubes, et les sorts Chaos/Lumière tapent soit dans le
 // "meilleur élément", soit dans 2 éléments à la fois, soit pas de dégâts du tout).
@@ -157,14 +159,19 @@ function calculerBonusPanoplies(cubesEquipes) {
  *   { VITALITE, SAGESSE, FORCE, INTELLIGENCE, CHANCE, AGILITE }), ajouté aux stats brutes
  *   avant tout calcul dérivé — pour que PdV/Initiative/Tacle/Fuite/Retrait/Esquive en
  *   tiennent compte automatiquement, comme pour les bonus de cubes/panoplie.
- * @returns {Object} Stats brutes sommées par clé (cubes + bonus de panoplie + Parcho
- *   inclus), plus les stats dérivées : `INITIATIVE_TOTALE`, `VITALITE_TOTALE`,
+ * @param {Object} [effetsBreloques] Résultat de `calculerEffetsBreloques` (effetsBreloques.js) :
+ *   `{ statsPlates, pdvPourcent }`. `statsPlates` fusionné comme le Parcho ; `pdvPourcent`
+ *   (breloque de l'Hémophile) appliqué en multiplicateur sur `VITALITE_TOTALE`, après coup
+ *   (ce n'est pas une stat brute qu'on additionne).
+ * @returns {Object} Stats brutes sommées par clé (cubes + bonus de panoplie + Parcho +
+ *   bonus de breloques inclus), plus les stats dérivées : `INITIATIVE_TOTALE`, `VITALITE_TOTALE`,
  *   `PA_TOTAL`, `PM_TOTAL`, `INVOCATION_TOTALE`, `TACLE_TOTAL`, `FUITE_TOTALE`,
  *   `RETRAIT_PA_TOTAL`, `RETRAIT_PM_TOTAL`, `ESQUIVE_PA_TOTALE`, `ESQUIVE_PM_TOTALE`,
  *   `DOMMAGES_FEU_TOTAL`, `DOMMAGES_TERRE_TOTAL`, `DOMMAGES_EAU_TOTAL`, `DOMMAGES_AIR_TOTAL`.
  */
-function calculerStatsPersonnage(cubesEquipes, bonusParcho = {}) {
+function calculerStatsPersonnage(cubesEquipes, bonusParcho = {}, effetsBreloques = {}) {
   const stats = {};
+  const { statsPlates: bonusBreloques = {}, pdvPourcent = 0 } = effetsBreloques;
 
   for (const cube of cubesEquipes || []) {
     if (!cube || !cube.stats) continue;
@@ -187,14 +194,23 @@ function calculerStatsPersonnage(cubesEquipes, bonusParcho = {}) {
     stats[cle] = (stats[cle] || 0) + (valeur || 0);
   }
 
+  // Bonus de breloques (onglet "Boosts breloques") actuellement actives : même
+  // traitement que Parcho/panoplie, sauf RETRAIT_PA/PM_BRELOQUE et pdvPourcent
+  // (Hémophile) traités à part plus bas, pas de stat brute équivalente.
+  for (const [cle, valeur] of Object.entries(bonusBreloques)) {
+    stats[cle] = (stats[cle] || 0) + (valeur || 0);
+  }
+
   // Initiative = somme des 4 caractéristiques offensives + bonus Initiative éventuel
   // (cubes Lumière). Ne rentre jamais dans le calcul de dégâts, affichage seulement.
   stats.INITIATIVE_TOTALE =
     (stats.FORCE || 0) + (stats.INTELLIGENCE || 0) + (stats.CHANCE || 0) +
     (stats.AGILITE || 0) + (stats.INITIATIVE || 0);
 
-  // Stats avec une valeur de base non nulle hors équipement.
-  stats.VITALITE_TOTALE = BASES_PERSONNAGE.VITALITE + (stats.VITALITE || 0);
+  // Stats avec une valeur de base non nulle hors équipement. `pdvPourcent`
+  // (breloque de l'Hémophile) s'applique en multiplicateur sur le total, pas
+  // en addition — arrondi ici (pas de calcul ultérieur qui en dépend).
+  stats.VITALITE_TOTALE = Math.round((BASES_PERSONNAGE.VITALITE + (stats.VITALITE || 0)) * (1 + pdvPourcent / 100));
   stats.PA_TOTAL = BASES_PERSONNAGE.PA + (stats.PA || 0);
   stats.PM_TOTAL = BASES_PERSONNAGE.PM + (stats.PM || 0);
   stats.INVOCATION_TOTALE = BASES_PERSONNAGE.INVOCATION + (stats.INVOCATION || 0);
@@ -206,11 +222,13 @@ function calculerStatsPersonnage(cubesEquipes, bonusParcho = {}) {
 
   // Retrait PA/PM et Esquive PA/PM partent toutes du même palier : 1 par tranche de 10
   // Sagesse (troncature). Esquive PA/PM peut en plus être augmentée directement par des
-  // cubes (stat ESQUIVE_PA/ESQUIVE_PM). Retrait PA/PM n'a pas de stat cube équivalente ;
-  // seules les breloques pourront l'augmenter (non géré ici, cubes uniquement).
+  // cubes ou des breloques (stat ESQUIVE_PA/ESQUIVE_PM, même clé pour les deux sources,
+  // déjà fusionnée dans `stats` ci-dessus). Retrait PA/PM n'a pas de stat cube
+  // équivalente ; seules les breloques l'augmentent, via RETRAIT_PA/PM_BRELOQUE
+  // (clés dédiées, calculerEffetsBreloques/effetsBreloques.js).
   const palierSagesse = Math.floor((stats.SAGESSE || 0) / 10);
-  stats.RETRAIT_PA_TOTAL = palierSagesse;
-  stats.RETRAIT_PM_TOTAL = palierSagesse;
+  stats.RETRAIT_PA_TOTAL = palierSagesse + (stats.RETRAIT_PA_BRELOQUE || 0);
+  stats.RETRAIT_PM_TOTAL = palierSagesse + (stats.RETRAIT_PM_BRELOQUE || 0);
   stats.ESQUIVE_PA_TOTALE = palierSagesse + (stats.ESQUIVE_PA || 0);
   stats.ESQUIVE_PM_TOTALE = palierSagesse + (stats.ESQUIVE_PM || 0);
 
@@ -298,6 +316,14 @@ function resoudreElements(statsPersonnage, sort) {
  *   degatsCritiqueMax?: number|null, chanceCritique?: number|null } | null>} sortsEquipes
  *   `degatsCritiqueMin/Max` et `chanceCritique` sont optionnels : absents, ils ne
  *   produisent simplement pas les clés correspondantes dans le résultat.
+ * @param {Object} [options]
+ * @param {Array<{type: string, valeur: number}>} [options.multiplicateursBreloques] Résultat
+ *   de `calculerEffetsBreloques(...).multiplicateurs` (effetsBreloques.js) — multiplicateurs
+ *   de dégâts des breloques actuellement actives, combinés via `combinerMultiplicateurs`
+ *   selon `modeAttaque` puis appliqués en facteur final sur chaque dégât (normal ET critique).
+ * @param {'distance'|'melee'} [options.modeAttaque] Une attaque est toujours soit distance
+ *   soit mêlée, jamais les deux (choix du joueur, onglet Sorts) — détermine quels
+ *   multiplicateurs "finaux distance"/"finaux mêlée" s'appliquent. Par défaut 'distance'.
  * @returns {Array<{ sortId: number|string, element: string, degatsMin: number,
  *   degatsMax: number, degatsCritiqueMin?: number, degatsCritiqueMax?: number,
  *   chanceCritiqueTotal?: number }>} Un élément du tableau par sort ET par élément de
@@ -307,7 +333,9 @@ function resoudreElements(statsPersonnage, sort) {
  *   `chanceCritiqueTotal` = % critique de base du sort + stat `%_COUP_CRITIQUE` du
  *   personnage (jamais arrondi, c'est déjà un entier des deux côtés).
  */
-function calculerDegats(statsPersonnage, sortsEquipes) {
+function calculerDegats(statsPersonnage, sortsEquipes, options = {}) {
+  const { multiplicateursBreloques = [], modeAttaque = 'distance' } = options;
+  const multiplicateurFinal = combinerMultiplicateurs(multiplicateursBreloques, modeAttaque);
   const resultats = [];
 
   for (const sort of sortsEquipes || []) {
@@ -318,16 +346,16 @@ function calculerDegats(statsPersonnage, sortsEquipes) {
       const resultat = {
         sortId: sort.id,
         element,
-        degatsMin: Math.round(calculerDegatsPourElement(statsPersonnage, sort.degatsMin, element)),
-        degatsMax: Math.round(calculerDegatsPourElement(statsPersonnage, sort.degatsMax, element)),
+        degatsMin: Math.round(calculerDegatsPourElement(statsPersonnage, sort.degatsMin, element) * multiplicateurFinal),
+        degatsMax: Math.round(calculerDegatsPourElement(statsPersonnage, sort.degatsMax, element) * multiplicateurFinal),
       };
 
       if (sort.degatsCritiqueMin != null && sort.degatsCritiqueMax != null) {
         resultat.degatsCritiqueMin = Math.round(
-          calculerDegatsPourElement(statsPersonnage, sort.degatsCritiqueMin, element)
+          calculerDegatsPourElement(statsPersonnage, sort.degatsCritiqueMin, element) * multiplicateurFinal
         );
         resultat.degatsCritiqueMax = Math.round(
-          calculerDegatsPourElement(statsPersonnage, sort.degatsCritiqueMax, element)
+          calculerDegatsPourElement(statsPersonnage, sort.degatsCritiqueMax, element) * multiplicateurFinal
         );
       }
 

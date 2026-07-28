@@ -74,7 +74,11 @@ function LigneBoost({ emplacement, breloque, token, personnageId, onSauvegarde, 
     setEnCours(true);
     try {
       await sauvegarderBoostBreloque(token, personnageId, emplacement, nouvelleValeur);
-      onSauvegarde(emplacement, nouvelleValeur);
+      // Recharge la fiche perso depuis le serveur plutôt qu'une mise à jour
+      // locale optimiste : les dégâts calculés (personnage.degats) dépendent
+      // aussi de ce boost, même logique que le Parcho (onParchoSauvegarde),
+      // pas de duplication du calcul côté client.
+      await onSauvegarde?.();
     } catch {
       // Erreur silencieuse volontaire : bornage déjà fait côté client (mêmes
       // min/max que le serveur), un échec ici n'a en pratique pas de cause

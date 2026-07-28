@@ -1,9 +1,47 @@
+.onglet-sorts {
+  width: 100%;
+  max-width: 900px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+.onglet-sorts__options {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+}
+
+.onglet-sorts__toggle {
+  display: flex;
+  border-radius: 20px;
+  border: 2px solid var(--bordure);
+  overflow: hidden;
+}
+
+.onglet-sorts__toggle button {
+  padding: 6px 14px;
+  border: none;
+  background: transparent;
+  color: var(--texte);
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.onglet-sorts__toggle button.actif {
+  background: var(--couleur-lumiere);
+  color: #1a1a1a;
+}
+
 .onglet-sorts__grille {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
   gap: 16px;
   width: 100%;
-  max-width: 900px;
 }
 
 .onglet-sorts__vide {

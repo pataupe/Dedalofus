@@ -2,6 +2,7 @@ const crypto = require('crypto');
 const pool = require('../config/db');
 const { calculerStatsPersonnage, calculerPanopliesActives, calculerDegats } = require('../logic/calcul');
 const { construireBoost, valeurBoostParDefaut, clamperValeurBoost } = require('../logic/boosts');
+const { calculerEffetsBreloques } = require('../logic/effetsBreloques');
 
 const NOM_MAX = 100;
 
@@ -126,7 +127,19 @@ async function construireFichePersonnage(personnage) {
   const cubesEquipesPourCalcul = cubes
     .filter((c) => c.id)
     .map((c) => ({ element: c.element, stats: statsParCube[c.id] || [] }));
-  const statsPersonnage = calculerStatsPersonnage(cubesEquipesPourCalcul, parcho);
+
+  // Effets actuellement actifs des breloques équipées (onglet "Boosts breloques") :
+  // bonus de stats plates + pdvPourcent fusionnés dans calculerStatsPersonnage comme
+  // le Parcho, multiplicateurs de dégâts réservés à calculerDegats (2 appels plus bas,
+  // un par mode d'attaque — le joueur choisit distance/mêlée côté client, sans recharger
+  // la fiche : les deux résultats sont calculés d'avance et renvoyés ensemble).
+  const breloquesEquipeesPourCalcul = breloques.filter((b) => b.id).map((b) => ({
+    nom: b.nom,
+    boost: construireBoost(b, b.boost_valeur),
+  }));
+  const effetsBreloques = calculerEffetsBreloques(breloquesEquipeesPourCalcul);
+
+  const statsPersonnage = calculerStatsPersonnage(cubesEquipesPourCalcul, parcho, effetsBreloques);
   const panoplies = calculerPanopliesActives(cubesEquipesPourCalcul);
 
   const sortsEquipesPourCalcul = sorts
@@ -140,7 +153,16 @@ async function construireFichePersonnage(personnage) {
       degatsCritiqueMax: s.degats_critique_max,
       chanceCritique: s.chance_critique,
     }));
-  const degats = calculerDegats(statsPersonnage, sortsEquipesPourCalcul);
+  const degats = {
+    distance: calculerDegats(statsPersonnage, sortsEquipesPourCalcul, {
+      multiplicateursBreloques: effetsBreloques.multiplicateurs,
+      modeAttaque: 'distance',
+    }),
+    melee: calculerDegats(statsPersonnage, sortsEquipesPourCalcul, {
+      multiplicateursBreloques: effetsBreloques.multiplicateurs,
+      modeAttaque: 'melee',
+    }),
+  };
 
   return {
     id: personnage.id,

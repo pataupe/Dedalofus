@@ -79,26 +79,6 @@ function PersonnageDetailPage() {
     );
   }
 
-  function sauvegarderBoost(emplacement, valeur) {
-    setPersonnage((p) => ({
-      ...p,
-      breloques: p.breloques.map((item) =>
-        item.emplacement === emplacement && item.breloque
-          ? {
-              ...item,
-              breloque: {
-                ...item.breloque,
-                boost:
-                  item.breloque.boost.type === 'toggle'
-                    ? { ...item.breloque.boost, actif: valeur === 1 }
-                    : { ...item.breloque.boost, valeur },
-              },
-            }
-          : item
-      ),
-    }));
-  }
-
   async function desequiper(type, emplacement) {
     setErreurAction(null);
     try {
@@ -161,7 +141,7 @@ function PersonnageDetailPage() {
           breloques={personnage.breloques}
           token={session.token}
           personnageId={id}
-          onSauvegarde={sauvegarderBoost}
+          onSauvegarde={rafraichir}
         />
       ) : (
         <>
