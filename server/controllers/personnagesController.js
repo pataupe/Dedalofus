@@ -1,6 +1,7 @@
 const crypto = require('crypto');
 const pool = require('../config/db');
 const { calculerStatsPersonnage, calculerPanopliesActives, calculerDegats } = require('../logic/calcul');
+const { construireBoost, valeurBoostParDefaut, clamperValeurBoost } = require('../logic/boosts');
 
 const NOM_MAX = 100;
 
@@ -84,7 +85,8 @@ async function construireFichePersonnage(personnage) {
     [personnage.id]
   );
   const [breloques] = await pool.query(
-    `SELECT eb.emplacement, b.id, b.nom, b.rang, b.effet, b.image_url
+    `SELECT eb.emplacement, eb.boost_valeur, b.id, b.nom, b.rang, b.effet, b.image_url,
+       b.type_input, b.bonus_min_texte, b.bonus_increment_texte, b.bonus_max_texte, b.bonus_defaut_texte
      FROM EquipementBreloque eb
      JOIN Equipement e ON e.id = eb.equipement_id
      LEFT JOIN Breloque b ON b.id = eb.breloque_id
@@ -156,9 +158,9 @@ async function construireFichePersonnage(personnage) {
       emplacement,
       sort: sort.id ? sort : null,
     })),
-    breloques: breloques.map(({ emplacement, id, nom, rang, effet, image_url }) => ({
+    breloques: breloques.map(({ emplacement, id, nom, rang, effet, image_url, boost_valeur, ...boostColonnes }) => ({
       emplacement,
-      breloque: id ? { id, nom, rang, effet, image_url } : null,
+      breloque: id ? { id, nom, rang, effet, image_url, boost: construireBoost(boostColonnes, boost_valeur) } : null,
     })),
   };
 }
@@ -323,6 +325,19 @@ function messageDoublon(refTable, emplacement) {
     : `Cette breloque est déjà équipée (rang différent inclus) à l'emplacement ${emplacement}.`;
 }
 
+// Valeur initiale de EquipementBreloque.boost_valeur au moment d'équiper une
+// breloque (colonne "Bonus par défaut" du CSV) — null pour les sorts (pas de
+// notion de boost), pour un déséquipement (valeurId null), ou une breloque
+// sans bonus conditionnel.
+async function calculerValeurBoostInitiale(refTable, valeurId) {
+  if (refTable !== 'Breloque' || !valeurId) return null;
+  const [lignes] = await pool.query(
+    'SELECT type_input, bonus_min_texte, bonus_defaut_texte FROM Breloque WHERE id = ?',
+    [valeurId]
+  );
+  return valeurBoostParDefaut(lignes[0]);
+}
+
 // PUT /api/personnages/:id/sorts et /api/personnages/:id/breloques — même
 // principe que equiperCubeAuto (premier emplacement libre), avec la même
 // contrainte de doublon que les cubes (voir trouverEmplacementDoublonParNom).
@@ -342,9 +357,11 @@ async function equiperAuto(req, res, { table, colonne, type, refTable, valeur })
     return res.status(409).json({ erreur: `Tous les emplacements ${type} sont déjà occupés.`, code: 'COMPLET' });
   }
 
+  const boostValeur = await calculerValeurBoostInitiale(refTable, valeur);
+  const colonneBoost = refTable === 'Breloque' ? ', t.boost_valeur = ?' : '';
   await pool.query(
-    `UPDATE ${table} t JOIN Equipement e ON e.id = t.equipement_id SET t.${colonne} = ? WHERE e.personnage_id = ? AND t.emplacement = ?`,
-    [valeur, personnage.id, emplacement]
+    `UPDATE ${table} t JOIN Equipement e ON e.id = t.equipement_id SET t.${colonne} = ?${colonneBoost} WHERE e.personnage_id = ? AND t.emplacement = ?`,
+    refTable === 'Breloque' ? [valeur, boostValeur, personnage.id, emplacement] : [valeur, personnage.id, emplacement]
   );
 
   res.json({ emplacement, [colonne]: valeur });
@@ -408,12 +425,52 @@ async function equiper(req, res, { table, colonne, type, refTable, valeur }) {
     return res.status(409).json({ erreur: messageDoublon(refTable, conflitEmplacement) });
   }
 
+  const boostValeur = await calculerValeurBoostInitiale(refTable, valeur);
+  const colonneBoost = refTable === 'Breloque' ? ', t.boost_valeur = ?' : '';
   await pool.query(
-    `UPDATE ${table} t JOIN Equipement e ON e.id = t.equipement_id SET t.${colonne} = ? WHERE e.personnage_id = ? AND t.emplacement = ?`,
-    [valeur, personnage.id, emplacement]
+    `UPDATE ${table} t JOIN Equipement e ON e.id = t.equipement_id SET t.${colonne} = ?${colonneBoost} WHERE e.personnage_id = ? AND t.emplacement = ?`,
+    refTable === 'Breloque' ? [valeur, boostValeur, personnage.id, emplacement] : [valeur, personnage.id, emplacement]
   );
 
   res.json({ emplacement, [colonne]: valeur });
+}
+
+// PUT /api/personnages/:id/breloques/:emplacement/boost — modifie uniquement
+// le bonus conditionnel (toggle/range/accumulateur) d'une breloque déjà
+// équipée, sans la déséquiper/rééquiper.
+async function sauvegarderBoostBreloque(req, res) {
+  const personnage = await trouverPersonnage(req.params.id, req.utilisateur.id);
+  if (!personnage) {
+    return res.status(404).json({ erreur: 'Personnage introuvable' });
+  }
+
+  const emplacement = Number(req.params.emplacement);
+  if (!Number.isInteger(emplacement) || emplacement < 1 || emplacement > EMPLACEMENTS_MAX.breloques) {
+    return res.status(400).json({ erreur: 'Emplacement invalide' });
+  }
+
+  const [lignes] = await pool.query(
+    `SELECT b.type_input, b.bonus_min_texte, b.bonus_max_texte
+     FROM EquipementBreloque eb
+     JOIN Equipement e ON e.id = eb.equipement_id
+     JOIN Breloque b ON b.id = eb.breloque_id
+     WHERE e.personnage_id = ? AND eb.emplacement = ?`,
+    [personnage.id, emplacement]
+  );
+  const breloque = lignes[0];
+  if (!breloque || !breloque.type_input) {
+    return res.status(400).json({ erreur: 'Aucune breloque à bonus conditionnel sur cet emplacement.' });
+  }
+
+  const valeur = clamperValeurBoost(breloque, req.body.valeur);
+
+  await pool.query(
+    `UPDATE EquipementBreloque eb JOIN Equipement e ON e.id = eb.equipement_id
+     SET eb.boost_valeur = ? WHERE e.personnage_id = ? AND eb.emplacement = ?`,
+    [valeur, personnage.id, emplacement]
+  );
+
+  res.json({ emplacement, valeur });
 }
 
 // PUT /api/personnages/:id/parcho — bonus de caractéristiques éditable par le
@@ -456,4 +513,5 @@ module.exports = {
   equiperSortAuto,
   equiperBreloqueAuto,
   sauvegarderParcho,
+  sauvegarderBoostBreloque,
 };

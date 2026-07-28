@@ -69,6 +69,13 @@ export function sauvegarderParcho(token, personnageId, parcho) {
   return appelPersonnages(`/${personnageId}/parcho`, token, { method: 'PUT', body: JSON.stringify(parcho) });
 }
 
+export function sauvegarderBoostBreloque(token, personnageId, emplacement, valeur) {
+  return appelPersonnages(`/${personnageId}/breloques/${emplacement}/boost`, token, {
+    method: 'PUT',
+    body: JSON.stringify({ valeur }),
+  });
+}
+
 // Route publique (sans authentification) : consultation en lecture seule d'un
 // stuff partagé via son lien unique.
 export async function obtenirPersonnagePartage(lienPartage) {

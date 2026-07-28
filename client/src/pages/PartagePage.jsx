@@ -9,6 +9,7 @@ import EmplacementSlot from '../components/EmplacementSlot';
 import StatsPersonnage from '../components/StatsPersonnage';
 import PanopliesPersonnage from '../components/PanopliesPersonnage';
 import OngletSorts from '../components/OngletSorts';
+import OngletBoosts from '../components/OngletBoosts';
 import Modal from '../components/Modal';
 import CubeCard from '../components/CubeCard';
 import SortCard from '../components/SortCard';
@@ -67,6 +68,9 @@ function PartagePage() {
         >
           Équipement
         </button>
+        <button type="button" className={ongletActif === 'boosts' ? 'actif' : ''} onClick={() => setOngletActif('boosts')}>
+          Boosts breloques
+        </button>
         <button type="button" className={ongletActif === 'sorts' ? 'actif' : ''} onClick={() => setOngletActif('sorts')}>
           Sorts
         </button>
@@ -74,6 +78,8 @@ function PartagePage() {
 
       {ongletActif === 'sorts' ? (
         <OngletSorts personnage={personnage} />
+      ) : ongletActif === 'boosts' ? (
+        <OngletBoosts breloques={personnage.breloques} lectureSeule />
       ) : (
         <>
           <div className="page-partage__stuff">

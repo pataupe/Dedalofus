@@ -62,6 +62,20 @@ CREATE TABLE Breloque (
   rang VARCHAR(50) NOT NULL,
   effet TEXT NOT NULL,
   image_url VARCHAR(255) NULL,
+  -- Catégorie de filtre (ex: "Dégâts", "Soin - Protection") et famille d'ensemble
+  -- de breloques (ex: "Ensemble de Guerre") — CSV "DEDALE - BRELOQUES_NEW.csv".
+  tag VARCHAR(150) NULL,
+  ensemble_lie VARCHAR(150) NULL,
+  -- Bonus conditionnel (onglet "Boosts breloques" de la fiche perso) : type de
+  -- contrôle affiché (toggle/range/accumulateur) + les 4 valeurs associées,
+  -- conservées en texte brut tel que dans le CSV (ex: "10 soins", "dommages
+  -- finaux x1.5") — le nombre exploitable est extrait à l'affichage/sauvegarde
+  -- via parseValeurBoost (server/logic/boosts.js), pas ici.
+  type_input VARCHAR(20) NULL,
+  bonus_min_texte VARCHAR(255) NULL,
+  bonus_increment_texte VARCHAR(100) NULL,
+  bonus_max_texte VARCHAR(255) NULL,
+  bonus_defaut_texte VARCHAR(255) NULL,
   INDEX idx_breloque_rang (rang)
 ) ENGINE=InnoDB;
 
@@ -134,6 +148,12 @@ CREATE TABLE EquipementBreloque (
   equipement_id INT NOT NULL,
   emplacement TINYINT NOT NULL,   -- 1 à 7
   breloque_id INT NULL,
+  -- Valeur actuelle du bonus conditionnel (onglet "Boosts breloques"), réglée
+  -- par le joueur. Sémantique dépendante de Breloque.type_input : toggle -> 0/1
+  -- (off/on), range/accumulateur -> la valeur numérique choisie dans la plage
+  -- [bonus_min_texte, bonus_max_texte]. NULL si la breloque équipée n'a pas de
+  -- bonus conditionnel (type_input NULL).
+  boost_valeur DECIMAL(10,3) NULL,
   PRIMARY KEY (equipement_id, emplacement),
   FOREIGN KEY (equipement_id) REFERENCES Equipement(id) ON DELETE CASCADE,
   FOREIGN KEY (breloque_id) REFERENCES Breloque(id) ON DELETE SET NULL

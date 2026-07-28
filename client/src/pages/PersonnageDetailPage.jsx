@@ -10,6 +10,7 @@ import EmplacementSlot from '../components/EmplacementSlot';
 import StatsPersonnage from '../components/StatsPersonnage';
 import PanopliesPersonnage from '../components/PanopliesPersonnage';
 import OngletSorts from '../components/OngletSorts';
+import OngletBoosts from '../components/OngletBoosts';
 import Modal from '../components/Modal';
 import CubeCard from '../components/CubeCard';
 import SortCard from '../components/SortCard';
@@ -78,6 +79,26 @@ function PersonnageDetailPage() {
     );
   }
 
+  function sauvegarderBoost(emplacement, valeur) {
+    setPersonnage((p) => ({
+      ...p,
+      breloques: p.breloques.map((item) =>
+        item.emplacement === emplacement && item.breloque
+          ? {
+              ...item,
+              breloque: {
+                ...item.breloque,
+                boost:
+                  item.breloque.boost.type === 'toggle'
+                    ? { ...item.breloque.boost, actif: valeur === 1 }
+                    : { ...item.breloque.boost, valeur },
+              },
+            }
+          : item
+      ),
+    }));
+  }
+
   async function desequiper(type, emplacement) {
     setErreurAction(null);
     try {
@@ -119,6 +140,13 @@ function PersonnageDetailPage() {
         </button>
         <button
           type="button"
+          className={ongletActif === 'boosts' ? 'actif' : ''}
+          onClick={() => setOngletActif('boosts')}
+        >
+          Boosts breloques
+        </button>
+        <button
+          type="button"
           className={ongletActif === 'sorts' ? 'actif' : ''}
           onClick={() => setOngletActif('sorts')}
         >
@@ -128,6 +156,13 @@ function PersonnageDetailPage() {
 
       {ongletActif === 'sorts' ? (
         <OngletSorts personnage={personnage} />
+      ) : ongletActif === 'boosts' ? (
+        <OngletBoosts
+          breloques={personnage.breloques}
+          token={session.token}
+          personnageId={id}
+          onSauvegarde={sauvegarderBoost}
+        />
       ) : (
         <>
           <div className="page-personnage-detail__stuff">

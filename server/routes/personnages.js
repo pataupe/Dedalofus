@@ -10,6 +10,7 @@ const {
   equiperSortAuto,
   equiperBreloqueAuto,
   sauvegarderParcho,
+  sauvegarderBoostBreloque,
 } = require('../controllers/personnagesController');
 const verifierToken = require('../middleware/verifierToken');
 
@@ -25,5 +26,6 @@ router.put('/:id/breloques', verifierToken, equiperBreloqueAuto);
 router.put('/:id/cubes/:emplacement', verifierToken, equiperCube);
 router.put('/:id/sorts/:emplacement', verifierToken, equiperSort);
 router.put('/:id/breloques/:emplacement', verifierToken, equiperBreloque);
+router.put('/:id/breloques/:emplacement/boost', verifierToken, sauvegarderBoostBreloque);
 
 module.exports = router;
