@@ -33,8 +33,8 @@
 }
 
 .onglet-sorts__toggle button.actif {
-  background: var(--couleur-lumiere);
-  color: #1a1a1a;
+  background: #5A3D6B;
+  color: #fff;
 }
 
 .onglet-sorts__grille {

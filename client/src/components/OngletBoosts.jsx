@@ -129,7 +129,7 @@ function OngletBoosts({ breloques, token, personnageId, onSauvegarde, lectureSeu
   if (avecBoost.length === 0) {
     return (
       <p className="onglet-boosts__vide">
-        Aucune breloque équipée avec un bonus conditionnel pour l'instant.
+        Aucune breloque équipée avec un bonus activable pour l'instant.
       </p>
     );
   }

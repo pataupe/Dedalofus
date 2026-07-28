@@ -32,7 +32,7 @@
 }
 
 .toast__lien {
-  color: var(--accent);
+  color: white;
   font-weight: 600;
   text-decoration: none;
   white-space: nowrap;

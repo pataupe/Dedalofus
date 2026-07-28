@@ -5,7 +5,7 @@ export async function listerCubes({
   element = '',
   rang = '',
   stats = [],
-  limite = 24,
+  limite = 40,
   offset = 0,
 } = {}) {
   const params = new URLSearchParams();

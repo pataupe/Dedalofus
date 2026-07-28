@@ -135,8 +135,8 @@
 }
 
 .entete__pseudo {
-  color: var(--accent);
-  font-size: 17px;
+  color: #efefef;
+  font-size: 20px;
   font-weight: 700;
 }
 

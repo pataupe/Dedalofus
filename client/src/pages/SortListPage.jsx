@@ -12,7 +12,7 @@ import './SortListPage.css';
 
 const DUREE_TOAST_MS = 3000;
 
-const PAR_PAGE = 24;
+const PAR_PAGE = 40;
 
 // Plusieurs filtres actifs en même temps sur une ligne (contrairement aux cubes,
 // où un seul élément/rang est actif à la fois) : on ajoute/retire de la liste.

@@ -20,10 +20,14 @@
   font-size: 40px;
 }
 
+.page-accueil p:first-of-type {
+  margin-bottom: 4px;
+}
+
 .page-accueil p {
   color: var(--texte-attenue);
-  margin: 0 0 24px;
-  font-size: 16px;
+  margin: 10px 0 24px;
+  font-size: 18px;
 }
 
 .page-accueil__boutons {
@@ -38,13 +42,13 @@
   padding: 16px 32px;
   border-radius: 10px;
   font-weight: 600;
-  font-size: 16px;
+  font-size: 18px;
   transition: transform 0.15s ease, box-shadow 0.15s ease, background-color 0.15s ease;
 }
 
 .page-accueil__bouton--principal {
   padding: 20px 48px;
-  font-size: 19px;
+  font-size: 20px;
   background: var(--primaire);
   color: var(--primaire-texte);
   box-shadow: 0 8px 24px rgba(90, 61, 107, 0.45);

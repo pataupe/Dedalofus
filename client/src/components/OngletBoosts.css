@@ -113,13 +113,13 @@
 }
 
 .boost-toggle--actif {
-  background: var(--couleur-lumiere);
+  background: #5A3D6B;
   border-color: var(--couleur-lumiere);
 }
 
 .boost-toggle--actif .boost-toggle__curseur {
   transform: translateX(18px);
-  background: #2a2620;
+  background: #efefef;
   opacity: 1;
 }
 
@@ -130,7 +130,7 @@
 }
 
 .boost-range input[type='range'] {
-  accent-color: var(--couleur-lumiere);
+  accent-color: #5A3D6B;
   width: 110px;
 }
 

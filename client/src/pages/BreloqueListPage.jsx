@@ -12,7 +12,7 @@ import './BreloqueListPage.css';
 
 const DUREE_TOAST_MS = 3000;
 
-const PAR_PAGE = 24;
+const PAR_PAGE = 40;
 
 // Rangs filtrables pour les breloques : les 4 rangs de maîtrise (partagés avec
 // les sorts, via RANGS_MAITRISE) + "Boss", propre aux breloques (rang réel en

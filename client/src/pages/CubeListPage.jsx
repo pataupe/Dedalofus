@@ -13,7 +13,7 @@ import './CubeListPage.css';
 
 const DUREE_TOAST_MS = 3000;
 
-const PAR_PAGE = 24;
+const PAR_PAGE = 40;
 
 // Reclique sur le filtre déjà actif → le décoche (retour à "Tous").
 function basculer(valeurActuelle, valeurCliquee) {
