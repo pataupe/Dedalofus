@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { listerPersonnages, creerPersonnage } from '../api/personnages';
 import { useAuth } from '../context/AuthContext';
+import { tempsRelatif } from '../utils/temps';
 import './PersonnagePage.css';
 
 function PersonnagePage() {
@@ -76,7 +77,13 @@ function PersonnagePage() {
           <li key={p.id} className="page-personnage__item">
             <Link to={`/personnage/${p.id}`}>
               <span className="page-personnage__avatar">{p.nom.charAt(0).toUpperCase()}</span>
-              <span className="page-personnage__nom">{p.nom}</span>
+              <span className="page-personnage__infos">
+                <span className="page-personnage__nom">{p.nom}</span>
+                <span className="page-personnage__meta">
+                  🕒 {tempsRelatif(p.mis_a_jour_le)}
+                  {p.vues_partage > 0 && ` · 👁️ ${p.vues_partage}`}
+                </span>
+              </span>
               <span className="page-personnage__chevron">›</span>
             </Link>
           </li>

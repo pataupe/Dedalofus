@@ -1,0 +1,11 @@
+.lien-retour-fiche {
+  display: inline-block;
+  margin-bottom: 12px;
+  color: var(--texte-attenue);
+  text-decoration: none;
+  font-size: 14px;
+}
+
+.lien-retour-fiche:hover {
+  color: var(--texte);
+}

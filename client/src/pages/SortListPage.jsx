@@ -8,6 +8,7 @@ import { RANGS_MAITRISE } from '../constants/rangsMaitrise';
 import SortCard from '../components/SortCard';
 import Toast from '../components/Toast';
 import ModaleRemplacement from '../components/ModaleRemplacement';
+import LienRetourFiche from '../components/LienRetourFiche';
 import './SortListPage.css';
 
 const DUREE_TOAST_MS = 3000;
@@ -111,6 +112,7 @@ function SortListPage() {
 
   return (
     <div className="page-sorts">
+      <LienRetourFiche perso={perso} visible={modeEquipement} />
       <h1>Sorts du Dédale</h1>
 
       <div className="page-sorts__filtres">

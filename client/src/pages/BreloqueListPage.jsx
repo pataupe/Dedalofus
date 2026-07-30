@@ -8,6 +8,7 @@ import { CATEGORIES_BRELOQUES } from '../constants/categoriesBreloques';
 import BreloqueCard from '../components/BreloqueCard';
 import Toast from '../components/Toast';
 import ModaleRemplacement from '../components/ModaleRemplacement';
+import LienRetourFiche from '../components/LienRetourFiche';
 import './BreloqueListPage.css';
 
 const DUREE_TOAST_MS = 3000;
@@ -118,6 +119,7 @@ function BreloqueListPage() {
 
   return (
     <div className="page-breloques">
+      <LienRetourFiche perso={perso} visible={modeEquipement} />
       <h1>Breloques du Dédale</h1>
 
       <div className="page-breloques__filtres">

@@ -45,10 +45,15 @@ async function creerPersonnage(req, res) {
   res.status(201).json({ id: resultat.insertId, nom });
 }
 
-// GET /api/personnages
+// GET /api/personnages — triés par dernière modification (pas par création),
+// pour que le personnage qu'on vient de modifier remonte en haut de la liste.
 async function listerPersonnages(req, res) {
   const [personnages] = await pool.query(
-    'SELECT id, nom, cree_le FROM Personnage WHERE utilisateur_id = ? ORDER BY cree_le DESC',
+    `SELECT p.id, p.nom, p.cree_le, e.mis_a_jour_le, e.vues_partage
+     FROM Personnage p
+     JOIN Equipement e ON e.personnage_id = p.id
+     WHERE p.utilisateur_id = ?
+     ORDER BY e.mis_a_jour_le DESC`,
     [req.utilisateur.id]
   );
 
@@ -61,6 +66,13 @@ async function trouverPersonnage(id, utilisateurId) {
     [id, utilisateurId]
   );
   return personnages[0] || null;
+}
+
+// Marque le personnage comme modifié maintenant (Equipement.mis_a_jour_le) —
+// appelé après chaque action qui change son stuff/nom, pour que la liste
+// (listerPersonnages, triée par cette colonne) le remonte en haut.
+async function marquerModifie(personnageId) {
+  await pool.query('UPDATE Equipement SET mis_a_jour_le = NOW() WHERE personnage_id = ?', [personnageId]);
 }
 
 // Construit la fiche complète (stats, panoplies, équipement, dégâts) d'un
@@ -212,6 +224,19 @@ async function obtenirPersonnagePartage(req, res) {
     return res.status(404).json({ erreur: 'Lien de partage introuvable' });
   }
 
+  // Compteur de vues affiché au propriétaire sur sa liste de personnages
+  // (listerPersonnages) — uniquement les consultations via le lien public,
+  // pas les visites de la fiche privée par le propriétaire lui-même.
+  // `mis_a_jour_le = mis_a_jour_le` : assignation explicite pour empêcher le
+  // ON UPDATE CURRENT_TIMESTAMP automatique de la colonne (voir schema.sql) de
+  // se déclencher ici — une simple consultation du lien public ne doit pas
+  // faire remonter le personnage dans la liste du propriétaire (contrairement
+  // à marquerModifie, qui le fait exprès pour les vraies modifications).
+  await pool.query(
+    'UPDATE Equipement SET vues_partage = vues_partage + 1, mis_a_jour_le = mis_a_jour_le WHERE personnage_id = ?',
+    [personnage.id]
+  );
+
   res.json(await construireFichePersonnage(personnage));
 }
 
@@ -255,6 +280,7 @@ async function equiperCube(req, res) {
     'UPDATE EquipementCube ec JOIN Equipement e ON e.id = ec.equipement_id SET ec.cube_id = ? WHERE e.personnage_id = ? AND ec.emplacement = ?',
     [cubeId, personnage.id, emplacement]
   );
+  await marquerModifie(personnage.id);
 
   res.json({ emplacement, cube_id: cubeId });
 }
@@ -296,6 +322,7 @@ async function equiperCubeAuto(req, res) {
     'UPDATE EquipementCube ec JOIN Equipement e ON e.id = ec.equipement_id SET ec.cube_id = ? WHERE e.personnage_id = ? AND ec.emplacement = ?',
     [cubeId, personnage.id, emplacement]
   );
+  await marquerModifie(personnage.id);
 
   res.json({ emplacement, cube_id: cubeId });
 }
@@ -385,6 +412,7 @@ async function equiperAuto(req, res, { table, colonne, type, refTable, valeur })
     `UPDATE ${table} t JOIN Equipement e ON e.id = t.equipement_id SET t.${colonne} = ?${colonneBoost} WHERE e.personnage_id = ? AND t.emplacement = ?`,
     refTable === 'Breloque' ? [valeur, boostValeur, personnage.id, emplacement] : [valeur, personnage.id, emplacement]
   );
+  await marquerModifie(personnage.id);
 
   res.json({ emplacement, [colonne]: valeur });
 }
@@ -453,6 +481,7 @@ async function equiper(req, res, { table, colonne, type, refTable, valeur }) {
     `UPDATE ${table} t JOIN Equipement e ON e.id = t.equipement_id SET t.${colonne} = ?${colonneBoost} WHERE e.personnage_id = ? AND t.emplacement = ?`,
     refTable === 'Breloque' ? [valeur, boostValeur, personnage.id, emplacement] : [valeur, personnage.id, emplacement]
   );
+  await marquerModifie(personnage.id);
 
   res.json({ emplacement, [colonne]: valeur });
 }
@@ -491,6 +520,7 @@ async function sauvegarderBoostBreloque(req, res) {
      SET eb.boost_valeur = ? WHERE e.personnage_id = ? AND eb.emplacement = ?`,
     [valeur, personnage.id, emplacement]
   );
+  await marquerModifie(personnage.id);
 
   res.json({ emplacement, valeur });
 }
@@ -512,6 +542,7 @@ async function renommerPersonnage(req, res) {
   }
 
   await pool.query('UPDATE Personnage SET nom = ? WHERE id = ?', [nom, personnage.id]);
+  await marquerModifie(personnage.id);
 
   res.json({ id: personnage.id, nom });
 }
@@ -538,6 +569,7 @@ async function desequiperTout(req, res) {
     'UPDATE EquipementBreloque eb JOIN Equipement e ON e.id = eb.equipement_id SET eb.breloque_id = NULL, eb.boost_valeur = NULL WHERE e.personnage_id = ?',
     [personnage.id]
   );
+  await marquerModifie(personnage.id);
 
   res.json(await construireFichePersonnage(personnage));
 }
@@ -576,7 +608,7 @@ async function sauvegarderParcho(req, res) {
 
   await pool.query(
     `UPDATE Equipement
-     SET parcho_vitalite = ?, parcho_sagesse = ?, parcho_force = ?, parcho_intelligence = ?, parcho_chance = ?, parcho_agilite = ?
+     SET parcho_vitalite = ?, parcho_sagesse = ?, parcho_force = ?, parcho_intelligence = ?, parcho_chance = ?, parcho_agilite = ?, mis_a_jour_le = NOW()
      WHERE personnage_id = ?`,
     [parcho.VITALITE, parcho.SAGESSE, parcho.FORCE, parcho.INTELLIGENCE, parcho.CHANCE, parcho.AGILITE, personnage.id]
   );

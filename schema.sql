@@ -132,6 +132,9 @@ CREATE TABLE Equipement (
   parcho_intelligence INT NOT NULL DEFAULT 0,
   parcho_chance INT NOT NULL DEFAULT 0,
   parcho_agilite INT NOT NULL DEFAULT 0,
+  -- Nombre de consultations de la fiche via le lien de partage public (voir
+  -- obtenirPersonnagePartage), affiché au propriétaire sur sa liste de personnages.
+  vues_partage INT NOT NULL DEFAULT 0,
   FOREIGN KEY (personnage_id) REFERENCES Personnage(id) ON DELETE CASCADE
 ) ENGINE=InnoDB;
 

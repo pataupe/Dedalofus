@@ -9,6 +9,7 @@ import { STATS_CUBES } from '../constants/statsCubes';
 import CubeCard from '../components/CubeCard';
 import Toast from '../components/Toast';
 import ModaleRemplacement from '../components/ModaleRemplacement';
+import LienRetourFiche from '../components/LienRetourFiche';
 import './CubeListPage.css';
 
 const DUREE_TOAST_MS = 3000;
@@ -120,6 +121,7 @@ function CubeListPage() {
 
   return (
     <div className="page-cubes">
+      <LienRetourFiche perso={perso} visible={modeEquipement} />
       <h1>Cubes du Dédale</h1>
 
       <div className="page-cubes__filtres">
