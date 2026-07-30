@@ -6,14 +6,14 @@ import './EmplacementSlot.css';
 // Vide sans lien (breuvages, pas encore de data) -> juste affichée, inerte.
 // Remplie + onClick -> ouvre la modale de détail de l'item posé.
 // Remplie + onDesequiper -> petite croix dans le coin pour déséquiper directement.
-// `bordure`/`lueur` : couleur de bordure par rang (bronze/argent/or/écarlate/diamant
+// `bordure` : couleur de bordure par rang (bronze/argent/or/écarlate/diamant
 // pour les cubes, argent/or pour les breloques et sorts), purement décoratif.
-function EmplacementSlot({ vide, libelle, image, couleur, bordure, lueur, lien, onClick, onDesequiper }) {
-  const style = {
-    '--couleur-emplacement': couleur || undefined,
-    '--couleur-bordure-rang': bordure || undefined,
-    '--lueur-rang': lueur || undefined,
-  };
+// `sansBordure` : masque cette bordure de rang (utilisé pour les cubes, qui ont
+// maintenant une vraie image — la bordure colorée par rang reste utile pour
+// sorts/breloques, qui n'ont pas cette distinction visuelle par ailleurs).
+function EmplacementSlot({ vide, libelle, image, bordure, sansBordure, lien, onClick, onDesequiper }) {
+  const style = { '--couleur-bordure-rang': bordure || undefined };
+  const classeRempli = `emplacement-slot emplacement-slot--rempli${sansBordure ? ' emplacement-slot--sans-bordure' : ''}`;
 
   if (vide) {
     const classe = 'emplacement-slot emplacement-slot--vide';
@@ -25,7 +25,7 @@ function EmplacementSlot({ vide, libelle, image, couleur, bordure, lueur, lien, 
 
   return (
     <div className="emplacement-slot-conteneur">
-      <button type="button" className="emplacement-slot emplacement-slot--rempli" style={style} onClick={onClick}>
+      <button type="button" className={classeRempli} style={style} onClick={onClick}>
         {image ? <img src={image} alt={libelle} className="emplacement-slot__image" /> : libelle}
       </button>
       {onDesequiper && (

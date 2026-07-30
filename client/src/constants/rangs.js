@@ -13,8 +13,3 @@ const COULEURS_RANG = {
 export function couleurRangCube(rang) {
   return COULEURS_RANG[rang] || 'var(--bordure)';
 }
-
-// Léger halo lumineux réservé à l'Éxalté (effet "diamant"), absent des autres rangs.
-export function lueurRangCube(rang) {
-  return rang === 'Éxalté' ? 'rgba(207, 239, 255, 0.75)' : 'transparent';
-}

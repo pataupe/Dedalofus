@@ -41,19 +41,26 @@ a.emplacement-slot--vide:hover {
 }
 
 .emplacement-slot--rempli {
-  /* Fond sombre (pas le panneau beige) : les images de sorts/breloques ont un
-     fond noir plein baké dedans (pas de transparence) — un fond clair créerait
-     un anneau beige visible entre la bordure de rang et l'image elle-même. */
-  background: var(--couleur-emplacement, var(--bg-surface));
+  /* Fond sombre (pas le panneau beige) : les images ont un fond noir plein
+     baké dedans (pas de transparence) — un fond clair créerait un anneau
+     beige visible entre la bordure de rang et l'image elle-même. */
+  background: var(--bg-surface);
   color: var(--texte);
-  border: 4px solid var(--couleur-bordure-rang, var(--bordure-or-forte));
-  box-shadow: 0 0 6px 1px var(--lueur-rang, transparent);
+  border: 3px solid var(--couleur-bordure-rang, var(--bordure-or-forte));
   cursor: pointer;
   font-weight: 600;
 }
 
 .emplacement-slot--rempli:hover {
   filter: brightness(1.15);
+}
+
+/* Cubes uniquement (voir `sansBordure` sur EmplacementSlot) : la bordure de
+   rang est masquée (couleur transparente, largeur conservée pour ne pas
+   décaler la taille de la case) — contrairement aux sorts/breloques, qui
+   gardent leur bordure colorée par rang. */
+.emplacement-slot--sans-bordure {
+  border-color: transparent;
 }
 
 .emplacement-slot-conteneur {

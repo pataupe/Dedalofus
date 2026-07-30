@@ -11,6 +11,9 @@ const {
   equiperBreloqueAuto,
   sauvegarderParcho,
   sauvegarderBoostBreloque,
+  renommerPersonnage,
+  desequiperTout,
+  supprimerPersonnage,
 } = require('../controllers/personnagesController');
 const verifierToken = require('../middleware/verifierToken');
 
@@ -19,6 +22,9 @@ const router = express.Router();
 router.post('/', verifierToken, creerPersonnage);
 router.get('/', verifierToken, listerPersonnages);
 router.get('/:id', verifierToken, obtenirPersonnage);
+router.put('/:id/nom', verifierToken, renommerPersonnage);
+router.put('/:id/desequiper-tout', verifierToken, desequiperTout);
+router.delete('/:id', verifierToken, supprimerPersonnage);
 router.put('/:id/parcho', verifierToken, sauvegarderParcho);
 router.put('/:id/cubes', verifierToken, equiperCubeAuto);
 router.put('/:id/sorts', verifierToken, equiperSortAuto);

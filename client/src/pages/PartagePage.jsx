@@ -2,8 +2,7 @@ import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { obtenirPersonnagePartage } from '../api/personnages';
 import { obtenirCube } from '../api/cubes';
-import { couleurElement } from '../constants/elements';
-import { couleurRangCube, lueurRangCube } from '../constants/rangs';
+import { couleurRangCube } from '../constants/rangs';
 import { couleurRangMaitrise } from '../constants/rangsMaitrise';
 import EmplacementSlot from '../components/EmplacementSlot';
 import StatsPersonnage from '../components/StatsPersonnage';
@@ -91,9 +90,8 @@ function PartagePage() {
                     vide={!cube}
                     libelle={cube ? `${cube.element} ${cube.numero}` : null}
                     image={cube?.image_url}
-                    couleur={cube ? couleurElement(cube.element) : null}
                     bordure={cube ? couleurRangCube(cube.rang) : null}
-                    lueur={cube ? lueurRangCube(cube.rang) : null}
+                    sansBordure
                     onClick={cube ? () => ouvrirCube(cube) : undefined}
                   />
                 ))}

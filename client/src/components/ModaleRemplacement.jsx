@@ -1,7 +1,6 @@
 import Modal from './Modal';
 import EmplacementSlot from './EmplacementSlot';
-import { couleurElement } from '../constants/elements';
-import { couleurRangCube, lueurRangCube } from '../constants/rangs';
+import { couleurRangCube } from '../constants/rangs';
 import { couleurRangMaitrise } from '../constants/rangsMaitrise';
 import './ModaleRemplacement.css';
 
@@ -32,9 +31,8 @@ function ModaleRemplacement({ type, emplacements, onChoisir, onClose }) {
               vide={false}
               libelle={libelleItem(type, item)}
               image={item.image_url}
-              couleur={type === 'cube' ? couleurElement(item.element) : null}
               bordure={bordureItem(type, item)}
-              lueur={type === 'cube' ? lueurRangCube(item.rang) : null}
+              sansBordure={type === 'cube'}
               onClick={() => onChoisir(e.emplacement)}
             />
           );

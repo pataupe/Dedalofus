@@ -495,6 +495,67 @@ async function sauvegarderBoostBreloque(req, res) {
   res.json({ emplacement, valeur });
 }
 
+// PUT /api/personnages/:id/nom — renomme un personnage existant, même
+// validation que la création (creerPersonnage).
+async function renommerPersonnage(req, res) {
+  const personnage = await trouverPersonnage(req.params.id, req.utilisateur.id);
+  if (!personnage) {
+    return res.status(404).json({ erreur: 'Personnage introuvable' });
+  }
+
+  const { nom } = req.body;
+  if (!nom) {
+    return res.status(400).json({ erreur: 'Le nom du personnage est requis' });
+  }
+  if (nom.length > NOM_MAX) {
+    return res.status(400).json({ erreur: `Le nom doit faire au maximum ${NOM_MAX} caractères` });
+  }
+
+  await pool.query('UPDATE Personnage SET nom = ? WHERE id = ?', [nom, personnage.id]);
+
+  res.json({ id: personnage.id, nom });
+}
+
+// PUT /api/personnages/:id/desequiper-tout — vide en une fois les 9 cubes,
+// 9 sorts et 7 breloques (et remet boost_valeur à NULL) ; renvoie la fiche
+// complète à jour, comme obtenirPersonnage, pour que le front n'ait qu'à
+// remplacer son état local.
+async function desequiperTout(req, res) {
+  const personnage = await trouverPersonnage(req.params.id, req.utilisateur.id);
+  if (!personnage) {
+    return res.status(404).json({ erreur: 'Personnage introuvable' });
+  }
+
+  await pool.query(
+    'UPDATE EquipementCube ec JOIN Equipement e ON e.id = ec.equipement_id SET ec.cube_id = NULL WHERE e.personnage_id = ?',
+    [personnage.id]
+  );
+  await pool.query(
+    'UPDATE EquipementSort es JOIN Equipement e ON e.id = es.equipement_id SET es.sort_id = NULL WHERE e.personnage_id = ?',
+    [personnage.id]
+  );
+  await pool.query(
+    'UPDATE EquipementBreloque eb JOIN Equipement e ON e.id = eb.equipement_id SET eb.breloque_id = NULL, eb.boost_valeur = NULL WHERE e.personnage_id = ?',
+    [personnage.id]
+  );
+
+  res.json(await construireFichePersonnage(personnage));
+}
+
+// DELETE /api/personnages/:id — supprime le personnage ; les lignes Equipement/
+// EquipementCube/EquipementSort/EquipementBreloque sont retirées en cascade
+// (ON DELETE CASCADE, voir schema.sql).
+async function supprimerPersonnage(req, res) {
+  const personnage = await trouverPersonnage(req.params.id, req.utilisateur.id);
+  if (!personnage) {
+    return res.status(404).json({ erreur: 'Personnage introuvable' });
+  }
+
+  await pool.query('DELETE FROM Personnage WHERE id = ?', [personnage.id]);
+
+  res.json({ id: personnage.id });
+}
+
 // PUT /api/personnages/:id/parcho — bonus de caractéristiques éditable par le
 // joueur (façon scrolls), 6 valeurs entières >= 0, persistées sur l'Equipement.
 async function sauvegarderParcho(req, res) {
@@ -536,4 +597,7 @@ module.exports = {
   equiperBreloqueAuto,
   sauvegarderParcho,
   sauvegarderBoostBreloque,
+  renommerPersonnage,
+  desequiperTout,
+  supprimerPersonnage,
 };

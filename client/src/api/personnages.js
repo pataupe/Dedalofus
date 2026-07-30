@@ -76,6 +76,20 @@ export function sauvegarderBoostBreloque(token, personnageId, emplacement, valeu
   });
 }
 
+export function renommerPersonnage(token, personnageId, nom) {
+  return appelPersonnages(`/${personnageId}/nom`, token, { method: 'PUT', body: JSON.stringify({ nom }) });
+}
+
+// Vide en une fois les cubes/sorts/breloques équipés ; renvoie la fiche
+// personnage complète à jour (mêmes clés que obtenirPersonnage).
+export function desequiperTout(token, personnageId) {
+  return appelPersonnages(`/${personnageId}/desequiper-tout`, token, { method: 'PUT' });
+}
+
+export function supprimerPersonnage(token, personnageId) {
+  return appelPersonnages(`/${personnageId}`, token, { method: 'DELETE' });
+}
+
 // Route publique (sans authentification) : consultation en lecture seule d'un
 // stuff partagé via son lien unique.
 export async function obtenirPersonnagePartage(lienPartage) {

@@ -1,10 +1,17 @@
 import { useEffect, useState } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
-import { obtenirPersonnage, equiperCube, equiperSort, equiperBreloque } from '../api/personnages';
+import {
+  obtenirPersonnage,
+  equiperCube,
+  equiperSort,
+  equiperBreloque,
+  renommerPersonnage,
+  desequiperTout,
+  supprimerPersonnage,
+} from '../api/personnages';
 import { obtenirCube } from '../api/cubes';
 import { useAuth } from '../context/AuthContext';
-import { couleurElement } from '../constants/elements';
-import { couleurRangCube, lueurRangCube } from '../constants/rangs';
+import { couleurRangCube } from '../constants/rangs';
 import { couleurRangMaitrise } from '../constants/rangsMaitrise';
 import EmplacementSlot from '../components/EmplacementSlot';
 import StatsPersonnage from '../components/StatsPersonnage';
@@ -37,6 +44,13 @@ function PersonnageDetailPage() {
   const [modale, setModale] = useState(null);
   const [ongletActif, setOngletActif] = useState('equipement');
   const [lienCopie, setLienCopie] = useState(false);
+  const [renommage, setRenommage] = useState(false);
+  const [nouveauNom, setNouveauNom] = useState('');
+  const [erreurRenommage, setErreurRenommage] = useState(null);
+  const [suppressionOuverte, setSuppressionOuverte] = useState(false);
+  const [suppressionEnCours, setSuppressionEnCours] = useState(false);
+  const [desequipementOuvert, setDesequipementOuvert] = useState(false);
+  const [desequipementEnCours, setDesequipementEnCours] = useState(false);
 
   useEffect(() => {
     if (!session) navigate('/connexion', { replace: true });
@@ -94,6 +108,48 @@ function PersonnageDetailPage() {
     }
   }
 
+  function ouvrirRenommage() {
+    setNouveauNom(personnage.nom);
+    setErreurRenommage(null);
+    setRenommage(true);
+  }
+
+  async function validerRenommage(e) {
+    e.preventDefault();
+    try {
+      const { nom } = await renommerPersonnage(session.token, id, nouveauNom);
+      setPersonnage((p) => ({ ...p, nom }));
+      setRenommage(false);
+    } catch (err) {
+      setErreurRenommage(err.message);
+    }
+  }
+
+  async function confirmerToutDesequiper() {
+    setDesequipementEnCours(true);
+    setErreurAction(null);
+    try {
+      setPersonnage(await desequiperTout(session.token, id));
+      setDesequipementOuvert(false);
+    } catch {
+      setErreurAction('Impossible de tout déséquiper.');
+    } finally {
+      setDesequipementEnCours(false);
+    }
+  }
+
+  async function confirmerSuppression() {
+    setSuppressionEnCours(true);
+    try {
+      await supprimerPersonnage(session.token, id);
+      navigate('/personnage');
+    } catch {
+      setErreurAction('Impossible de supprimer ce personnage.');
+      setSuppressionEnCours(false);
+      setSuppressionOuverte(false);
+    }
+  }
+
   if (!session) return null;
   if (chargement) return <p>Chargement...</p>;
   if (erreur) return <p className="page-personnage-detail__erreur">{erreur}</p>;
@@ -104,10 +160,54 @@ function PersonnageDetailPage() {
       <Link to="/personnage" className="page-personnage-detail__retour">
         ← Retour à mes personnages
       </Link>
-      <h1>{personnage.nom}</h1>
+      {renommage ? (
+        <form className="page-personnage-detail__form-renommage" onSubmit={validerRenommage}>
+          <input
+            type="text"
+            value={nouveauNom}
+            onChange={(e) => setNouveauNom(e.target.value)}
+            maxLength={100}
+            autoFocus
+          />
+          <button type="submit">Valider</button>
+          <button type="button" onClick={() => setRenommage(false)}>
+            Annuler
+          </button>
+        </form>
+      ) : (
+        <div className="page-personnage-detail__titre">
+          <h1>{personnage.nom}</h1>
+          <button
+            type="button"
+            className="page-personnage-detail__bouton-renommer"
+            onClick={ouvrirRenommage}
+            aria-label="Renommer le personnage"
+            title="Renommer"
+          >
+            ✏️
+          </button>
+        </div>
+      )}
+      {erreurRenommage && <p className="page-personnage-detail__erreur">{erreurRenommage}</p>}
+
       <button type="button" className="page-personnage-detail__partage" onClick={copierLienPartage}>
         {lienCopie ? 'Lien copié !' : '🔗 Copier le lien de partage'}
       </button>
+
+      <div className="page-personnage-detail__actions-perso">
+        <button type="button" onClick={() => setDesequipementOuvert(true)}>
+          Tout déséquiper
+        </button>
+        <button
+          type="button"
+          className="page-personnage-detail__bouton-supprimer"
+          onClick={() => setSuppressionOuverte(true)}
+          aria-label="Supprimer ce personnage"
+          title="Supprimer ce personnage"
+        >
+          🗑️
+        </button>
+      </div>
       {erreurAction && <p className="page-personnage-detail__erreur">{erreurAction}</p>}
 
       <div className="page-personnage-detail__onglets">
@@ -161,9 +261,8 @@ function PersonnageDetailPage() {
                     vide={!cube}
                     libelle={cube ? `${cube.element} ${cube.numero}` : null}
                     image={cube?.image_url}
-                    couleur={cube ? couleurElement(cube.element) : null}
                     bordure={cube ? couleurRangCube(cube.rang) : null}
-                    lueur={cube ? lueurRangCube(cube.rang) : null}
+                    sansBordure
                     lien={`/cubes?perso=${id}`}
                     onClick={cube ? () => ouvrirCube(cube, emplacement) : undefined}
                     onDesequiper={cube ? () => desequiper('cube', emplacement) : undefined}
@@ -237,6 +336,53 @@ function PersonnageDetailPage() {
             onClick={() => desequiper(modale.type, modale.emplacement)}
           >
             Déséquiper
+          </button>
+        </Modal>
+      )}
+
+      {desequipementOuvert && (
+        <Modal onClose={() => setDesequipementOuvert(false)}>
+          <p>Déséquiper tous les cubes, sorts et breloques de ce personnage ?</p>
+          <button
+            type="button"
+            className="page-personnage-detail__bouton-desequiper"
+            onClick={confirmerToutDesequiper}
+            disabled={desequipementEnCours}
+          >
+            {desequipementEnCours ? 'Déséquipement...' : 'Tout déséquiper'}
+          </button>
+          <button
+            type="button"
+            className="page-personnage-detail__bouton-annuler"
+            onClick={() => setDesequipementOuvert(false)}
+            disabled={desequipementEnCours}
+          >
+            Annuler
+          </button>
+        </Modal>
+      )}
+
+      {suppressionOuverte && (
+        <Modal onClose={() => setSuppressionOuverte(false)}>
+          <p>
+            Supprimer définitivement <strong>{personnage.nom}</strong> ? Le stuff sauvegardé sera perdu, cette action
+            est irréversible.
+          </p>
+          <button
+            type="button"
+            className="page-personnage-detail__bouton-desequiper"
+            onClick={confirmerSuppression}
+            disabled={suppressionEnCours}
+          >
+            {suppressionEnCours ? 'Suppression...' : 'Supprimer définitivement'}
+          </button>
+          <button
+            type="button"
+            className="page-personnage-detail__bouton-annuler"
+            onClick={() => setSuppressionOuverte(false)}
+            disabled={suppressionEnCours}
+          >
+            Annuler
           </button>
         </Modal>
       )}

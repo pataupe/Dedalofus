@@ -21,6 +21,104 @@
   color: var(--texte);
 }
 
+.page-personnage-detail__titre {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 30px;
+}
+
+.page-personnage-detail__titre h1 {
+  margin: 0;
+}
+
+.page-personnage-detail__bouton-renommer {
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--bordure-or);
+  border-radius: 6px;
+  background: var(--bg-surface);
+  font-size: 13px;
+  cursor: pointer;
+  opacity: 0.8;
+}
+
+.page-personnage-detail__bouton-renommer:hover {
+  opacity: 1;
+}
+
+.page-personnage-detail__form-renommage {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 4px;
+}
+
+.page-personnage-detail__form-renommage input {
+  font-size: 18px;
+  padding: 4px 8px;
+  border-radius: 6px;
+  border: 1px solid var(--bordure-or);
+  background: var(--bg-surface);
+  color: var(--texte);
+}
+
+.page-personnage-detail__form-renommage button {
+  padding: 6px 12px;
+  border-radius: 6px;
+  border: 1px solid var(--bordure-or);
+  background: var(--bg-surface);
+  color: var(--texte);
+  cursor: pointer;
+}
+
+.page-personnage-detail__actions-perso {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  margin: 12px 0;
+}
+
+.page-personnage-detail__actions-perso button {
+  padding: 8px 16px;
+  border-radius: 20px;
+  border: 1px solid var(--primaire);
+  background: rgba(90, 61, 107, 0.18);
+  color: var(--texte);
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.page-personnage-detail__actions-perso button:hover {
+  background: var(--primaire);
+  color: var(--primaire-texte);
+}
+
+.page-personnage-detail__actions-perso .page-personnage-detail__bouton-supprimer {
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  font-size: 16px;
+  border-color: var(--couleur-feu);
+  color: var(--couleur-feu);
+  background: rgba(200, 60, 60, 0.12);
+}
+
+.page-personnage-detail__actions-perso .page-personnage-detail__bouton-supprimer:hover {
+  background: var(--couleur-feu);
+  color: #fff;
+}
+
 .page-personnage-detail__partage {
   margin-bottom: 12px;
   padding: 8px 18px;
@@ -71,6 +169,29 @@
 }
 
 .page-personnage-detail__bouton-desequiper:hover {
+  filter: brightness(1.1);
+}
+
+.page-personnage-detail__bouton-desequiper:disabled {
+  opacity: 0.6;
+  cursor: default;
+}
+
+.page-personnage-detail__bouton-annuler {
+  display: block;
+  width: 100%;
+  margin-top: 8px;
+  padding: 10px;
+  border: 1px solid var(--bordure-or);
+  border-radius: 6px;
+  background: var(--bg-surface);
+  color: var(--texte);
+  font-weight: 600;
+  cursor: pointer;
+  box-sizing: border-box;
+}
+
+.page-personnage-detail__bouton-annuler:hover {
   filter: brightness(1.1);
 }
 
@@ -182,6 +303,7 @@
     font-size: 15px;
   }
 
+
   .page-personnage-detail__stuff {
     max-width: 900px;
   }
@@ -229,3 +351,4 @@
     height: 80px;
   }
 }
+
