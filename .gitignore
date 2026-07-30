@@ -1,3 +1,9 @@
 node_modules/
 .env
 *.log
+
+# Images sources brutes (avant conversion webp) : seul le .webp est commité,
+# converti puis copié dans client/public/images/<type>/<id>.webp.
+data/images/**/*.png
+data/images/**/*.jpg
+data/images/**/*.jpeg
