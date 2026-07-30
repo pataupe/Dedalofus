@@ -14,8 +14,8 @@
 .page-cubes__filtres input {
   padding: 10px 14px;
   border-radius: 6px;
-  border: 1px solid var(--bordure);
-  background: var(--bg-carte);
+  border: 1px solid var(--bordure-or-forte);
+  background: var(--bg-surface);
   color: var(--texte);
   font-size: 15px;
   max-width: 320px;
@@ -37,7 +37,10 @@
 }
 
 .page-cubes__elements button.actif {
-  background: var(--couleur-bouton, var(--bordure));
+  /* Repli sur --texte-attenue (pas --bordure, trop sombre pour du texte noir
+     dessus : contraste ~3:1 seulement, sous le minimum WCAG 4.5:1 pour du texte
+     de cette taille) — utilisé par "Tous", qui n'a pas de couleur d'élément. */
+  background: var(--couleur-bouton, var(--texte-attenue));
   color: #1a1a1a;
   font-weight: 600;
 }
@@ -67,13 +70,15 @@
   align-self: flex-start;
   padding: 6px 14px;
   border-radius: 20px;
-  border: 1px solid var(--bordure);
-  background: var(--bg-carte);
+  border: 1px solid var(--bordure-or-forte);
+  background: var(--bg-surface);
   color: var(--texte);
   font-size: 14px;
+  font-weight: 600;
 }
 
 .page-cubes__bouton-plus-filtres:hover {
+  border-color: var(--or);
   background: var(--bg-carte-survol);
 }
 
@@ -98,7 +103,8 @@
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   gap: 8px 20px;
   padding: 16px;
-  background: var(--bg-carte);
+  background: var(--bg-surface);
+  border: 1px solid var(--bordure-or-forte);
   border-radius: 8px;
 }
 

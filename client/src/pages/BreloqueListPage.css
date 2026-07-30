@@ -14,8 +14,8 @@
 .page-breloques__filtres input {
   padding: 10px 14px;
   border-radius: 6px;
-  border: 1px solid var(--bordure);
-  background: var(--bg-carte);
+  border: 1px solid var(--bordure-or-forte);
+  background: var(--bg-surface);
   color: var(--texte);
   font-size: 15px;
   max-width: 320px;
@@ -46,13 +46,15 @@
   align-self: flex-start;
   padding: 6px 14px;
   border-radius: 20px;
-  border: 1px solid var(--bordure);
-  background: var(--bg-carte);
+  border: 1px solid var(--bordure-or-forte);
+  background: var(--bg-surface);
   color: var(--texte);
   font-size: 14px;
+  font-weight: 600;
 }
 
 .page-breloques__bouton-plus-filtres:hover {
+  border-color: var(--or);
   background: var(--bg-carte-survol);
 }
 
@@ -84,7 +86,8 @@
   gap: 8px;
   max-width: 500px;
   padding: 16px;
-  background: var(--bg-carte);
+  background: var(--bg-surface);
+  border: 1px solid var(--bordure-or-forte);
   border-radius: 8px;
 }
 

@@ -24,7 +24,16 @@ function ToggleBoost({ boost, disabled, onChange }) {
   );
 }
 
-function RangeBoost({ boost, disabled, onChange }) {
+// Pas de prop `disabled` ici, contrairement à ToggleBoost/AccumulateurBoost :
+// désactiver l'input pendant la sauvegarde (déclenchée à chaque `onChange`,
+// donc à chaque cran glissé) coupait le suivi natif du glisser-déposer du
+// navigateur en plein milieu du geste — l'utilisateur devait relâcher la
+// souris puis recliquer pour chaque cran suivant. Un slider est un geste
+// continu (contrairement à un clic sur toggle/accumulateur, qui se termine
+// avant que l'état "en cours" ne soit même posé) ; chaque sauvegarde étant de
+// toute façon bornée et idempotente côté serveur, laisser l'input actif
+// pendant l'appel réseau ne pose pas de risque réel.
+function RangeBoost({ boost, onChange }) {
   return (
     <div className="boost-range">
       <input
@@ -33,7 +42,6 @@ function RangeBoost({ boost, disabled, onChange }) {
         max={boost.max}
         step={boost.increment || 1}
         value={boost.valeur}
-        disabled={disabled}
         onChange={(e) => onChange(Number(e.target.value))}
       />
       <span className="boost-range__valeur">{texteValeur(boost)}</span>
@@ -113,7 +121,7 @@ function LigneBoost({ emplacement, breloque, token, personnageId, onSauvegarde, 
         ) : boost.type === 'accumulateur' ? (
           <AccumulateurBoost boost={boost} disabled={enCours} onChange={changer} />
         ) : (
-          <RangeBoost boost={boost} disabled={enCours} onChange={changer} />
+          <RangeBoost boost={boost} onChange={changer} />
         )}
       </div>
     </li>

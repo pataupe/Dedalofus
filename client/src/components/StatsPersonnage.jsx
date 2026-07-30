@@ -67,6 +67,10 @@ const BLOCS = [
   },
 ];
 
+// Même borne que côté serveur (sauvegarderParcho) — purement pour le retour
+// visuel immédiat dans le champ, la vraie limite est appliquée par l'API.
+const PARCHO_MAX = 1000;
+
 // Les 6 caractéristiques qui ont une case "Parcho" éditable (dans cet ordre
 // précis, façon DofusBook). Puissance n'a pas de Parcho, elle reste à part.
 const CARACTERISTIQUES_EDITABLES = [
@@ -120,7 +124,7 @@ function StatsPersonnage({ stats, parcho, token, personnageId, onParchoSauvegard
   }
 
   function modifierParcho(cle, valeurBrute) {
-    const valeur = valeurBrute === '' ? 0 : Math.max(0, parseInt(valeurBrute, 10) || 0);
+    const valeur = valeurBrute === '' ? 0 : Math.min(PARCHO_MAX, Math.max(0, parseInt(valeurBrute, 10) || 0));
     setParchoLocal((p) => ({ ...p, [cle]: valeur }));
   }
 
@@ -169,6 +173,7 @@ function StatsPersonnage({ stats, parcho, token, personnageId, onParchoSauvegard
               <input
                 type="number"
                 min="0"
+                max={PARCHO_MAX}
                 className="stats-personnage__carac-parcho"
                 value={parchoLocal[cle] ?? 0}
                 onChange={(e) => modifierParcho(cle, e.target.value)}
@@ -177,7 +182,8 @@ function StatsPersonnage({ stats, parcho, token, personnageId, onParchoSauvegard
                   // parchoLocal : évite de sauvegarder une valeur pas encore à
                   // jour si le blur arrive avant que le re-render du onChange
                   // n'ait eu lieu (rare mais possible en saisie rapide).
-                  const valeur = e.target.value === '' ? 0 : Math.max(0, parseInt(e.target.value, 10) || 0);
+                  const valeur =
+                    e.target.value === '' ? 0 : Math.min(PARCHO_MAX, Math.max(0, parseInt(e.target.value, 10) || 0));
                   sauvegarder({ ...parchoLocal, [cle]: valeur });
                 }}
               />

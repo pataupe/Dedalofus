@@ -588,15 +588,20 @@ async function supprimerPersonnage(req, res) {
   res.json({ id: personnage.id });
 }
 
+const PARCHO_MAX = 1000;
+
 // PUT /api/personnages/:id/parcho — bonus de caractéristiques éditable par le
-// joueur (façon scrolls), 6 valeurs entières >= 0, persistées sur l'Equipement.
+// joueur (façon scrolls), 6 valeurs entières entre 0 et PARCHO_MAX, persistées
+// sur l'Equipement. Bornage serveur : pas de limite côté client jusqu'ici,
+// une valeur énorme envoyée directement à l'API (contournant le champ input)
+// pouvait fausser tous les calculs dérivés (stats, dégâts...).
 async function sauvegarderParcho(req, res) {
   const personnage = await trouverPersonnage(req.params.id, req.utilisateur.id);
   if (!personnage) {
     return res.status(404).json({ erreur: 'Personnage introuvable' });
   }
 
-  const entier = (v) => Math.max(0, parseInt(v, 10) || 0);
+  const entier = (v) => Math.min(PARCHO_MAX, Math.max(0, parseInt(v, 10) || 0));
   const parcho = {
     VITALITE: entier(req.body.VITALITE),
     SAGESSE: entier(req.body.SAGESSE),

@@ -9,16 +9,27 @@
   color: var(--couleur-feu);
 }
 
+/* Légèrement mis en valeur (bordure + fond dorés discrets, même recette que
+   LienRetourFiche), pas un gros bouton arrondi. */
 .page-personnage-detail__retour {
   align-self: flex-start;
+  display: inline-flex;
+  align-items: center;
   margin-bottom: 12px;
-  color: var(--texte-attenue);
+  padding: 6px 12px;
+  border-radius: 6px;
+  border: 1px solid var(--bordure-or-forte);
+  background: rgba(212, 175, 55, 0.08);
+  color: var(--texte);
   text-decoration: none;
-  font-size: 14px;
+  font-size: 13px;
+  font-weight: 600;
+  transition: background 0.15s ease, border-color 0.15s ease;
 }
 
 .page-personnage-detail__retour:hover {
-  color: var(--texte);
+  background: rgba(212, 175, 55, 0.16);
+  border-color: var(--or);
 }
 
 .page-personnage-detail__titre {

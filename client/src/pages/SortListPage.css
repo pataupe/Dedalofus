@@ -14,8 +14,8 @@
 .page-sorts__filtres input {
   padding: 10px 14px;
   border-radius: 6px;
-  border: 1px solid var(--bordure);
-  background: var(--bg-carte);
+  border: 1px solid var(--bordure-or-forte);
+  background: var(--bg-surface);
   color: var(--texte);
   font-size: 15px;
   max-width: 320px;
