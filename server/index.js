@@ -10,6 +10,7 @@ const personnagesRouter = require('./routes/personnages');
 const partageRouter = require('./routes/partage');
 const partageOgRouter = require('./routes/partageOg');
 const ogImageRouter = require('./routes/ogImage');
+const partageMonstreRouter = require('./routes/partageMonstre');
 
 const app = express();
 app.use(cors());
@@ -27,6 +28,7 @@ app.use('/api/personnages', personnagesRouter);
 app.use('/api/partage', partageRouter);
 app.use('/api/og-image', ogImageRouter);
 app.use('/partage', partageOgRouter);
+app.use('/monstre', partageMonstreRouter);
 
 // Express 5 route automatiquement les erreurs des handlers async ici.
 app.use((err, req, res, next) => {

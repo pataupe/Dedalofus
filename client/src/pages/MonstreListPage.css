@@ -124,3 +124,15 @@
     gap: 18px;
   }
 }
+
+/* Vrai desktop : 3 colonnes fixes plutôt que "autant de colonnes que ça
+   rentre" (auto-fill donnait 5 ou 6 colonnes sur un écran large, ce qui
+   cassait la mise en page dès qu'une famille n'a que 5-6 monstres — une
+   rangée pleine + une quasi vide). Les cartes s'élargissent avec la colonne,
+   ce qui laisse plus de place au texte avant troncature. */
+@media (min-width: 900px) {
+  .page-monstres__grille {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+}

@@ -1,6 +1,22 @@
+import { useState } from 'react';
 import './MonstreDetail.css';
 
 function MonstreDetail({ monstre, famille }) {
+  const [lienCopie, setLienCopie] = useState(false);
+  const [erreurPartage, setErreurPartage] = useState(null);
+
+  function partager() {
+    setErreurPartage(null);
+    const url = `${window.location.origin}/monstre/${monstre.slug}`;
+    navigator.clipboard.writeText(url).then(
+      () => {
+        setLienCopie(true);
+        setTimeout(() => setLienCopie(false), 2000);
+      },
+      () => setErreurPartage('Impossible de copier le lien (accès au presse-papier refusé par le navigateur).')
+    );
+  }
+
   return (
     <div className="detail-monstre">
       <div className="detail-monstre__entete">
@@ -19,6 +35,11 @@ function MonstreDetail({ monstre, famille }) {
           </h2>
         </div>
       </div>
+
+      <button type="button" className="detail-monstre__partage" onClick={partager}>
+        {lienCopie ? 'Lien copié !' : '🔗 Partager cette fiche'}
+      </button>
+      {erreurPartage && <p className="detail-monstre__erreur-partage">{erreurPartage}</p>}
 
       {famille.passif && (
         <div className="detail-monstre__bloc detail-monstre__bloc--passif">

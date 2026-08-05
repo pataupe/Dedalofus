@@ -7,6 +7,7 @@ import CubeDetailPage from './pages/CubeDetailPage';
 import BreloqueListPage from './pages/BreloqueListPage';
 import SortListPage from './pages/SortListPage';
 import MonstreListPage from './pages/MonstreListPage';
+import MonstrePartagePage from './pages/MonstrePartagePage';
 import ConnexionPage from './pages/ConnexionPage';
 import InscriptionPage from './pages/InscriptionPage';
 import PersonnagePage from './pages/PersonnagePage';
@@ -28,6 +29,7 @@ function App() {
           <Route path="/breloques" element={<BreloqueListPage />} />
           <Route path="/sorts" element={<SortListPage />} />
           <Route path="/monstres" element={<MonstreListPage />} />
+          <Route path="/monstre/:slug" element={<MonstrePartagePage />} />
           <Route path="/connexion" element={<ConnexionPage />} />
           <Route path="/inscription" element={<InscriptionPage />} />
           <Route path="/personnage" element={<PersonnagePage />} />

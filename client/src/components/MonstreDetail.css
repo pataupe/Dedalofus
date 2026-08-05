@@ -9,6 +9,28 @@
   gap: 14px;
 }
 
+.detail-monstre__partage {
+  align-self: flex-start;
+  padding: 7px 16px;
+  border-radius: 20px;
+  border: 1px solid var(--primaire);
+  background: rgba(90, 61, 107, 0.14);
+  color: var(--panneau-texte);
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.detail-monstre__partage:hover {
+  background: var(--primaire);
+  color: var(--primaire-texte);
+}
+
+.detail-monstre__erreur-partage {
+  margin: -8px 0 0;
+  font-size: 12px;
+  color: var(--couleur-feu);
+}
+
 .detail-monstre__entete {
   display: flex;
   align-items: center;
