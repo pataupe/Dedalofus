@@ -84,6 +84,7 @@
 .carte-monstre__extrait {
   margin: 0;
   font-size: 14px;
+  font-weight: 500;
   line-height: 1.45;
   color: var(--panneau-texte);
   display: -webkit-box;

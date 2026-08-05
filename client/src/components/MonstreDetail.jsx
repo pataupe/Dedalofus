@@ -35,6 +35,7 @@ function copierTexte(texte) {
 function MonstreDetail({ monstre, famille }) {
   const [lienCopie, setLienCopie] = useState(false);
   const [erreurPartage, setErreurPartage] = useState(null);
+  const [passifOuvert, setPassifOuvert] = useState(false);
 
   function partager() {
     setErreurPartage(null);
@@ -74,8 +75,22 @@ function MonstreDetail({ monstre, famille }) {
 
       {famille.passif && (
         <div className="detail-monstre__bloc detail-monstre__bloc--passif">
-          <strong>Passif de famille</strong>
-          <p>{famille.passif}</p>
+          <button
+            type="button"
+            className="detail-monstre__bloc-declencheur"
+            onClick={() => setPassifOuvert((o) => !o)}
+            aria-expanded={passifOuvert}
+          >
+            <strong>Passif de famille</strong>
+            <span className={`detail-monstre__bloc-fleche ${passifOuvert ? 'detail-monstre__bloc-fleche--ouvert' : ''}`}>
+              ▾
+            </span>
+          </button>
+          <div className={`detail-monstre__bloc-repli ${passifOuvert ? 'ouvert' : ''}`}>
+            <div className="detail-monstre__bloc-repli-interieur">
+              <p>{famille.passif}</p>
+            </div>
+          </div>
         </div>
       )}
 

@@ -93,6 +93,7 @@
   margin: 0;
   font-size: 15px;
   line-height: 1.55;
+  font-weight: 600;
 }
 
 /* Fond teinté (pas juste --panneau-fond-sombre, trop proche du fond de carte
@@ -116,6 +117,7 @@
   margin: 0;
   font-size: 15px;
   line-height: 1.55;
+  font-weight: 500;
 }
 
 .detail-monstre__bloc--passif {
@@ -125,6 +127,54 @@
 
 .detail-monstre__bloc--passif strong {
   color: #8a6d10;
+}
+
+/* Replié par défaut : le déclencheur est un bouton (accessible au clavier),
+   le contenu se déplie via la technique grid-template-rows 0fr -> 1fr déjà
+   utilisée ailleurs sur le site (transition fluide sans hauteur fixée en dur). */
+.detail-monstre__bloc-declencheur {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  width: 100%;
+  background: none;
+  border: none;
+  padding: 0;
+  text-align: left;
+}
+
+.detail-monstre__bloc-declencheur strong {
+  margin-bottom: 0;
+}
+
+.detail-monstre__bloc-fleche {
+  flex-shrink: 0;
+  font-size: 12px;
+  color: #8a6d10;
+  transition: transform 0.15s ease;
+}
+
+.detail-monstre__bloc-fleche--ouvert {
+  transform: rotate(180deg);
+}
+
+.detail-monstre__bloc-repli {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.2s ease;
+}
+
+.detail-monstre__bloc-repli.ouvert {
+  grid-template-rows: 1fr;
+}
+
+.detail-monstre__bloc-repli-interieur {
+  overflow: hidden;
+}
+
+.detail-monstre__bloc-repli-interieur p {
+  margin-top: 8px;
 }
 
 .detail-monstre__bloc--mecanique {
