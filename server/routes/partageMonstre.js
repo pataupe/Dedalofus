@@ -49,9 +49,15 @@ router.get('/:slug', (req, res) => {
   const entree = indexMonstres.get(slug);
   if (!entree) return res.status(404).send('Introuvable');
 
-  const { monstre, famille, profondeur } = entree;
-  const premierTexte = monstre.paragraphes.find((p) => p.type === 'texte');
-  const description = tronquer(premierTexte ? premierTexte.texte : famille.passif || 'Monstre du Dédale.', 280);
+  const { monstre, famille } = entree;
+  // Tout le contenu (texte + Mécanique + Conseils pour les boss), pas
+  // seulement le premier paragraphe : c'est la vraie "stratégie" qu'on veut
+  // voir apparaître dans l'aperçu Discord. Coupé à 1000 caractères par
+  // sécurité (les plus longues fiches de boss dépassent 2000) — Discord
+  // applique de toute façon sa propre limite d'affichage côté aperçu de lien,
+  // qu'on ne contrôle pas depuis le site.
+  const texteComplet = monstre.paragraphes.map((p) => p.texte).join('\n\n');
+  const description = tronquer(texteComplet || famille.passif || 'Monstre du Dédale.', 1000);
 
   const titre = echapperHtml(`${monstre.nom}${monstre.boss ? ' (BOSS)' : ''} — Dédalofus`);
   const desc = echapperHtml(description);

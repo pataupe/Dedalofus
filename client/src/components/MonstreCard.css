@@ -105,3 +105,29 @@
     -webkit-line-clamp: 5;
   }
 }
+
+/* Vrai desktop (mêmes 3 colonnes que MonstreListPage.css) : carte à l'horizontale
+   (image à gauche ~30%, texte à droite ~70%) plutôt qu'empilée — même largeur
+   qu'avant, mais beaucoup moins haute. Ne touche pas au mobile/tablette
+   au-dessus, qui gardent la carte empilée verticalement. */
+@media (min-width: 900px) {
+  .carte-monstre {
+    flex-direction: row;
+  }
+
+  .carte-monstre__image {
+    flex: 0 0 30%;
+    width: 30%;
+    height: auto;
+  }
+
+  .carte-monstre__corps {
+    flex: 1;
+    padding: 14px 16px;
+    justify-content: center;
+  }
+
+  .carte-monstre__extrait {
+    -webkit-line-clamp: 4;
+  }
+}
