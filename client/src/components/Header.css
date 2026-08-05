@@ -244,6 +244,85 @@
   color: #fff;
 }
 
+/* "Liste des monstres" : bouton composé de 2 zones cliquables collées l'une à
+   l'autre (même hauteur/bordure que .entete__items-declencheur, coupé en 2) —
+   le texte navigue directement, la flèche ouvre un menu de raccourcis vers
+   chaque profondeur, sans devoir repasser par les filtres de la page. */
+.entete__monstres {
+  position: relative;
+  display: flex;
+}
+
+.entete__monstres-lien {
+  display: flex;
+  align-items: center;
+  padding: 7px 14px;
+  border-radius: 8px 0 0 8px;
+  background: var(--bg);
+  border: 1px solid var(--bordure);
+  border-right: 1px solid var(--bordure);
+  color: var(--texte);
+  font-size: 14px;
+  font-weight: 600;
+  transition: border-color 0.15s ease;
+}
+
+.entete__monstres-lien:hover {
+  border-color: var(--bordure-or-forte);
+}
+
+.entete__monstres-fleche {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 10px;
+  border-radius: 0 8px 8px 0;
+  background: var(--bg);
+  border: 1px solid var(--bordure);
+  border-left: none;
+  color: var(--texte-attenue);
+  font-size: 10px;
+  transition: border-color 0.15s ease, color 0.15s ease;
+}
+
+.entete__monstres-fleche:hover {
+  border-color: var(--bordure-or-forte);
+  color: var(--texte);
+}
+
+.entete__monstres-menu {
+  position: absolute;
+  top: calc(100% + 6px);
+  right: 0;
+  z-index: 40;
+  list-style: none;
+  margin: 0;
+  padding: 4px;
+  min-width: 190px;
+  background: var(--bg-surface);
+  border: 1px solid var(--bordure-or);
+  border-radius: 8px;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.45);
+  animation: entete-items-menu-ouverture 0.15s ease;
+}
+
+.entete__monstres-menu li + li {
+  border-top: 1px solid var(--bordure);
+}
+
+.entete__monstres-menu a {
+  display: block;
+  padding: 9px 12px;
+  font-size: 14px;
+  border-radius: 4px;
+  color: var(--texte);
+}
+
+.entete__monstres-menu a:hover {
+  background: var(--bg-carte-survol);
+  color: var(--accent);
+}
+
 /* En dessous du point de rupture : la nav devient un panneau déroulant
    (masqué par défaut, ouvert via le hamburger), le hamburger apparaît. */
 @media (max-width: 719px) {
@@ -279,6 +358,24 @@
   }
 
   .entete__items-menu {
+    position: static;
+    width: 100%;
+    box-sizing: border-box;
+    margin-top: 6px;
+  }
+
+  /* Même traitement que le sélecteur "Liste des items" : pleine largeur,
+     menu statique qui pousse le contenu plutôt que de flotter par-dessus. */
+  .entete__monstres {
+    width: 100%;
+  }
+
+  .entete__monstres-lien {
+    flex: 1;
+    justify-content: center;
+  }
+
+  .entete__monstres-menu {
     position: static;
     width: 100%;
     box-sizing: border-box;

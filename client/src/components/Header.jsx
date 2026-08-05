@@ -1,15 +1,20 @@
 import { useEffect, useRef, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import logo from '../assets/logo.webp';
+import monstresData from '../data/monstres.json';
 import { useAuth } from '../context/AuthContext';
 import './Header.css';
+
+const PROFONDEURS_MONSTRES = monstresData.map(({ cle, titre }) => ({ cle, titre }));
 
 function Header() {
   const { session, deconnecter } = useAuth();
   const navigate = useNavigate();
   const [menuOuvert, setMenuOuvert] = useState(false);
   const [menuItemsOuvert, setMenuItemsOuvert] = useState(false);
+  const [menuProfondeursOuvert, setMenuProfondeursOuvert] = useState(false);
   const selecteurRef = useRef(null);
+  const monstresRef = useRef(null);
 
   function seDeconnecter() {
     setMenuOuvert(false);
@@ -20,6 +25,7 @@ function Header() {
   function fermerMenu() {
     setMenuOuvert(false);
     setMenuItemsOuvert(false);
+    setMenuProfondeursOuvert(false);
   }
 
   // Ferme le menu "Liste des items" au clic en dehors de son conteneur (le
@@ -36,6 +42,20 @@ function Header() {
     document.addEventListener('mousedown', surClicExterieur);
     return () => document.removeEventListener('mousedown', surClicExterieur);
   }, [menuItemsOuvert]);
+
+  // Même logique pour le menu "profondeur" du bouton "Liste des monstres".
+  useEffect(() => {
+    if (!menuProfondeursOuvert) return;
+
+    function surClicExterieur(e) {
+      if (monstresRef.current && !monstresRef.current.contains(e.target)) {
+        setMenuProfondeursOuvert(false);
+      }
+    }
+
+    document.addEventListener('mousedown', surClicExterieur);
+    return () => document.removeEventListener('mousedown', surClicExterieur);
+  }, [menuProfondeursOuvert]);
 
   return (
     <header className="entete">
@@ -99,6 +119,37 @@ function Header() {
               </ul>
             )}
           </div>
+
+          {/* Bouton composé : la zone principale mène directement à la liste
+              complète (le geste le plus courant), la petite flèche ouvre un
+              menu pour sauter droit sur une profondeur précise sans repasser
+              par les filtres de la page. */}
+          <div className="entete__monstres" ref={monstresRef}>
+            <Link to="/monstres" className="entete__monstres-lien" onClick={fermerMenu}>
+              Liste des monstres
+            </Link>
+            <button
+              type="button"
+              className="entete__monstres-fleche"
+              aria-label="Choisir une profondeur"
+              aria-expanded={menuProfondeursOuvert}
+              onClick={() => setMenuProfondeursOuvert((o) => !o)}
+            >
+              ▾
+            </button>
+            {menuProfondeursOuvert && (
+              <ul className="entete__monstres-menu">
+                {PROFONDEURS_MONSTRES.map(({ cle, titre }) => (
+                  <li key={cle}>
+                    <Link to={`/monstres?profondeur=${cle}`} onClick={fermerMenu}>
+                      {titre}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            )}
+          </div>
+
           {session && (
             <Link to="/personnage" className="entete__lien entete__lien--compte" onClick={fermerMenu}>
               Mes stuffs

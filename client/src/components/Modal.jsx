@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import './Modal.css';
 
-function Modal({ onClose, children }) {
+function Modal({ onClose, children, large = false }) {
   useEffect(() => {
     function surEchap(e) {
       if (e.key === 'Escape') onClose();
@@ -12,7 +12,10 @@ function Modal({ onClose, children }) {
 
   return (
     <div className="modale__fond" onClick={onClose}>
-      <div className="modale__contenu" onClick={(e) => e.stopPropagation()}>
+      <div
+        className={`modale__contenu ${large ? 'modale__contenu--large' : ''}`}
+        onClick={(e) => e.stopPropagation()}
+      >
         <button type="button" className="modale__fermer" onClick={onClose} aria-label="Fermer">
           ×
         </button>

@@ -15,6 +15,11 @@
   width: 100%;
 }
 
+/* Variante plus large, pour du contenu long-form (ex: détail d'un monstre). */
+.modale__contenu--large {
+  max-width: 640px;
+}
+
 .modale__corps {
   max-height: 85vh;
   overflow-y: auto;

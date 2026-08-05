@@ -1,0 +1,141 @@
+.detail-monstre {
+  background: var(--panneau-fond);
+  color: var(--panneau-texte);
+  border: 1px solid var(--bordure-or-forte);
+  border-radius: 10px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.detail-monstre__entete {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.detail-monstre__image {
+  flex: 0 0 72px;
+  width: 72px;
+  height: 72px;
+  border-radius: 8px;
+  overflow: hidden;
+  background: var(--panneau-fond-sombre);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.detail-monstre__image img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.detail-monstre__placeholder {
+  width: 40px;
+  height: 40px;
+  background: var(--panneau-fond-sombre);
+  clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+}
+
+.detail-monstre__famille {
+  margin: 0 0 2px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--panneau-texte-attenue);
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.detail-monstre__nom {
+  margin: 0;
+  font-size: 19px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.detail-monstre__badge {
+  background: var(--couleur-lumiere);
+  color: #1a1a1a;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.03em;
+  padding: 2px 8px;
+  border-radius: 4px;
+}
+
+.detail-monstre__texte {
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.55;
+}
+
+/* Fond teinté (pas juste --panneau-fond-sombre, trop proche du fond de carte
+   --panneau-fond pour qu'on distingue le bloc) : chaque type de bloc reprend
+   la couleur de sa bordure en très atténué, pour un vrai contraste visuel. */
+.detail-monstre__bloc {
+  border-left: 4px solid var(--bordure);
+  border-radius: 0 6px 6px 0;
+  padding: 10px 14px;
+}
+
+.detail-monstre__bloc strong {
+  display: block;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin-bottom: 4px;
+}
+
+.detail-monstre__bloc p {
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.55;
+}
+
+.detail-monstre__bloc--passif {
+  border-left-color: var(--couleur-lumiere);
+  background: rgba(232, 197, 71, 0.18);
+}
+
+.detail-monstre__bloc--passif strong {
+  color: #8a6d10;
+}
+
+.detail-monstre__bloc--mecanique {
+  border-left-color: var(--accent);
+  background: rgba(122, 85, 145, 0.16);
+}
+
+.detail-monstre__bloc--mecanique strong {
+  color: var(--accent);
+}
+
+.detail-monstre__bloc--conseils {
+  border-left-color: var(--couleur-feu);
+  background: rgba(217, 83, 79, 0.16);
+}
+
+.detail-monstre__bloc--conseils strong {
+  color: var(--couleur-feu);
+}
+
+@media (min-width: 600px) {
+  .detail-monstre {
+    padding: 20px;
+    gap: 16px;
+  }
+
+  .detail-monstre__image {
+    flex-basis: 88px;
+    width: 88px;
+    height: 88px;
+  }
+
+  .detail-monstre__nom {
+    font-size: 21px;
+  }
+}

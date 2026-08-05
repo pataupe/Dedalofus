@@ -1,0 +1,126 @@
+.page-monstres {
+  padding: 20px 16px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.page-monstres__intro {
+  margin: 4px 0 20px;
+  color: var(--texte-attenue);
+  font-size: 14px;
+}
+
+/* Sélecteur de profondeur : navigation principale de la page (un seul choix à
+   la fois), même convention "bouton enfoncé" que les onglets de la fiche perso
+   plutôt que le style pilule des filtres secondaires ci-dessous. */
+.page-monstres__profondeurs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 14px;
+}
+
+.page-monstres__profondeurs button {
+  padding: 9px 16px;
+  border-radius: 8px;
+  border: 1px solid var(--bordure-or);
+  background: var(--bg-surface);
+  color: var(--texte-attenue);
+  font-size: 14px;
+  font-weight: 700;
+  box-shadow: 0 2px 0 rgba(0, 0, 0, 0.35);
+}
+
+.page-monstres__profondeurs button:hover {
+  color: var(--texte);
+}
+
+.page-monstres__profondeurs button.actif {
+  background: var(--primaire);
+  border-color: var(--primaire);
+  color: var(--primaire-texte);
+  box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.5);
+  transform: translateY(1px);
+}
+
+/* Filtre secondaire (famille) : style pilule, même convention que les rangs/
+   catégories des pages Cubes/Breloques/Sorts. */
+.page-monstres__familles {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 24px;
+}
+
+.page-monstres__familles button {
+  padding: 6px 14px;
+  border-radius: 20px;
+  border: 2px solid var(--bordure);
+  background: transparent;
+  color: var(--texte);
+  font-size: 13px;
+}
+
+.page-monstres__familles button.actif {
+  background: var(--texte-attenue);
+  color: #1a1a1a;
+  font-weight: 600;
+}
+
+.page-monstres__biome {
+  margin-bottom: 28px;
+}
+
+.page-monstres__biome h2 {
+  font-size: 19px;
+  margin: 0 0 12px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--bordure-or);
+}
+
+.page-monstres__groupe-famille {
+  margin-bottom: 20px;
+}
+
+.page-monstres__groupe-famille h3 {
+  font-size: 15px;
+  margin: 0 0 6px;
+  color: var(--or);
+}
+
+/* Encart plus visible qu'un simple texte italique atténué : bordure + fond
+   teintés (même convention que les blocs de la modale de détail) pour que le
+   passif de famille se remarque au premier coup d'œil. */
+.page-monstres__passif {
+  margin: 0 0 14px;
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--texte);
+  border-left: 3px solid var(--couleur-lumiere);
+  background: rgba(232, 197, 71, 0.12);
+  border-radius: 0 6px 6px 0;
+  padding: 8px 12px;
+  max-width: 700px;
+}
+
+.page-monstres__grille {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+  gap: 14px;
+}
+
+@media (min-width: 600px) {
+  .page-monstres {
+    padding: 24px;
+  }
+
+  .page-monstres__profondeurs button {
+    padding: 10px 22px;
+    font-size: 15px;
+  }
+
+  .page-monstres__grille {
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 18px;
+  }
+}
