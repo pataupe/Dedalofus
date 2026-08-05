@@ -82,8 +82,11 @@ function MonstreDetail({ monstre, famille }) {
             aria-expanded={passifOuvert}
           >
             <strong>Passif de famille</strong>
-            <span className={`detail-monstre__bloc-fleche ${passifOuvert ? 'detail-monstre__bloc-fleche--ouvert' : ''}`}>
-              ▾
+            <span className="detail-monstre__bloc-indice">
+              {passifOuvert ? 'Masquer' : 'Afficher'}
+              <span className={`detail-monstre__bloc-fleche ${passifOuvert ? 'detail-monstre__bloc-fleche--ouvert' : ''}`}>
+                ▾
+              </span>
             </span>
           </button>
           <div className={`detail-monstre__bloc-repli ${passifOuvert ? 'ouvert' : ''}`}>

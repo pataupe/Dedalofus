@@ -131,27 +131,50 @@
 
 /* Replié par défaut : le déclencheur est un bouton (accessible au clavier),
    le contenu se déplie via la technique grid-template-rows 0fr -> 1fr déjà
-   utilisée ailleurs sur le site (transition fluide sans hauteur fixée en dur). */
+   utilisée ailleurs sur le site (transition fluide sans hauteur fixée en dur).
+   Doit se voir clairement comme cliquable — fond/bordure dédiés (pas juste du
+   texte nu comme les blocs Mécanique/Conseils non repliables), + un petit
+   texte "Afficher/Masquer" en plus de la flèche : la flèche seule passait
+   inaperçue comme indice d'interactivité. */
 .detail-monstre__bloc-declencheur {
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 8px;
-  width: 100%;
-  background: none;
+  margin: -10px -14px;
+  padding: 10px 14px;
+  width: calc(100% + 28px);
+  background: rgba(232, 197, 71, 0.14);
   border: none;
-  padding: 0;
+  border-radius: 6px 6px 0 0;
   text-align: left;
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+}
+
+.detail-monstre__bloc-declencheur:hover,
+.detail-monstre__bloc-declencheur:focus-visible {
+  background: rgba(232, 197, 71, 0.3);
 }
 
 .detail-monstre__bloc-declencheur strong {
   margin-bottom: 0;
 }
 
-.detail-monstre__bloc-fleche {
+.detail-monstre__bloc-indice {
+  display: flex;
+  align-items: center;
+  gap: 4px;
   flex-shrink: 0;
   font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
   color: #8a6d10;
+}
+
+.detail-monstre__bloc-fleche {
+  font-size: 12px;
   transition: transform 0.15s ease;
 }
 
