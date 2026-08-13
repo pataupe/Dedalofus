@@ -116,10 +116,16 @@
     flex-direction: row;
   }
 
+  /* Hauteur fixe (pas "auto") : avec une hauteur libre, une image au ratio
+     étroit/haut (monstre "maigre") forçait toute la case à devenir aussi
+     haute que l'image le demandait, et donc toute la carte avec elle — une
+     image élancée gonflait la carte entière. Avec une hauteur fixe, la case
+     ne bouge plus jamais ; object-fit: contain se charge de rétrécir
+     l'image pour qu'elle tienne dedans (comme sur mobile/tablette). */
   .carte-monstre__image {
     flex: 0 0 30%;
     width: 30%;
-    height: auto;
+    height: 170px;
   }
 
   .carte-monstre__corps {
