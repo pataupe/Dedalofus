@@ -54,18 +54,29 @@ async function chargerImagesPng(urls) {
   return result;
 }
 
-const COULEURS_ELEMENT = {
-  Feu: '#d9534f', Eau: '#4a90d9', Terre: '#a3763f', Air: '#7fd1c8',
-  Chaos: '#9b59b6', Lumière: '#e8c547', 'Meilleur élément': '#9b59b6',
-};
+// Reprend exactement la logique de couleurRangMaitrise (client/src/constants/rangsMaitrise.js) :
+// Novice n'a pas d'entrée dédiée (bordure par défaut, = --bordure), Expert argent, Maître α/ẞ or.
+const COULEURS_RANG_MAITRISE = { Expert: '#C0C0C0', 'Maître α': '#D4AF37', 'Maître ẞ': '#D4AF37' };
+function couleurRangMaitrise(rang) {
+  return COULEURS_RANG_MAITRISE[rang] || '#6f6555'; // --bordure
+}
+
+// Mêmes couleurs que EmplacementSlot.css (bg-surface, bordure-or, bordure-or-forte) — pas
+// de couleur d'élément : les cubes n'ont plus de bordure/fond teinté depuis les vraies images,
+// et sorts/breloques sont colorés par rang de maîtrise (Novice/Expert/Maître), pas par élément.
+const BG_SURFACE = '#15130f';
+const BORDURE_VIDE = 'rgba(212, 175, 55, 0.28)';
+const BORDURE_PLACEHOLDER = 'rgba(212, 175, 55, 0.6)';
 
 const T = 85;
 const G = 10;
 
 function creerSlot(item, images) {
-  const couleur = item?.element ? (COULEURS_ELEMENT[item.element] || '#6f6555') : null;
   const img64 = item?.image_url ? (images.get(item.image_url) || null) : null;
   const filled = Boolean(item);
+  // 'transparent' pour les cubes (posé par l'appelant) : même largeur de bordure conservée
+  // pour ne pas décaler la taille de la case, comme --sans-bordure côté site.
+  const bordure = item?.bordure || 'transparent';
 
   return {
     type: 'div',
@@ -74,15 +85,13 @@ function creerSlot(item, images) {
         width: T, height: T, borderRadius: 6, flexShrink: 0,
         display: 'flex', alignItems: 'center', justifyContent: 'center',
         overflow: 'hidden',
-        border: filled
-          ? `2px solid ${couleur || 'rgba(212,175,55,0.5)'}`
-          : '1px dashed rgba(212,175,55,0.25)',
-        background: filled ? (couleur ? couleur + '33' : '#15130f') : 'transparent',
+        border: filled ? `3px solid ${bordure}` : `1px dashed ${BORDURE_VIDE}`,
+        background: filled ? BG_SURFACE : 'transparent',
       },
       children: img64
-        ? [{ type: 'img', props: { src: img64, width: T, height: T, style: { objectFit: 'cover' } } }]
-        : couleur
-          ? [{ type: 'div', props: { style: { width: Math.round(T * 0.45), height: Math.round(T * 0.45), borderRadius: '50%', background: couleur, opacity: 0.65 } } }]
+        ? [{ type: 'img', props: { src: img64, width: T, height: T, style: { objectFit: 'contain' } } }]
+        : filled
+          ? [{ type: 'div', props: { style: { width: Math.round(T * 0.45), height: Math.round(T * 0.45), borderRadius: '50%', background: BORDURE_PLACEHOLDER, opacity: 0.65 } } }]
           : []
     }
   };
@@ -127,23 +136,26 @@ router.get('/:lienPartage', async (req, res) => {
     if (!perso) return res.status(404).send('Introuvable');
 
     const [[cubesRows], [sortsRows], [breloquesRows]] = await Promise.all([
-      db.query(`SELECT ec.emplacement, ec.cube_id, c.element, c.image_url
+      db.query(`SELECT ec.emplacement, ec.cube_id, c.image_url
         FROM EquipementCube ec JOIN Equipement e ON e.id = ec.equipement_id
         LEFT JOIN \`Cube\` c ON c.id = ec.cube_id
         WHERE e.lien_partage = ? ORDER BY ec.emplacement`, [lienPartage]),
-      db.query(`SELECT es.emplacement, es.sort_id, s.element, s.image_url
+      db.query(`SELECT es.emplacement, es.sort_id, s.rang_evolution, s.image_url
         FROM EquipementSort es JOIN Equipement e ON e.id = es.equipement_id
         LEFT JOIN Sort s ON s.id = es.sort_id
         WHERE e.lien_partage = ? ORDER BY es.emplacement`, [lienPartage]),
-      db.query(`SELECT eb.emplacement, eb.breloque_id, b.image_url
+      db.query(`SELECT eb.emplacement, eb.breloque_id, b.rang, b.image_url
         FROM EquipementBreloque eb JOIN Equipement e ON e.id = eb.equipement_id
         LEFT JOIN Breloque b ON b.id = eb.breloque_id
         WHERE e.lien_partage = ? ORDER BY eb.emplacement`, [lienPartage]),
     ]);
 
-    const cubes     = cubesRows.map(r => r.cube_id ? { element: r.element, image_url: r.image_url } : null);
-    const sorts     = sortsRows.map(r => r.sort_id ? { element: r.element, image_url: r.image_url } : null);
-    const breloques = breloquesRows.map(r => r.breloque_id ? { image_url: r.image_url } : null);
+    // bordure = 'transparent' pour les cubes (plus de bordure de rang depuis les vraies
+    // images, cf. EmplacementSlot--sans-bordure) ; sorts/breloques gardent leur bordure
+    // colorée par rang de maîtrise, comme sur la fiche perso.
+    const cubes     = cubesRows.map(r => r.cube_id ? { image_url: r.image_url, bordure: 'transparent' } : null);
+    const sorts     = sortsRows.map(r => r.sort_id ? { image_url: r.image_url, bordure: couleurRangMaitrise(r.rang_evolution) } : null);
+    const breloques = breloquesRows.map(r => r.breloque_id ? { image_url: r.image_url, bordure: couleurRangMaitrise(r.rang) } : null);
     const breuvages = [null, null, null];
 
     // Chargement des images (webp → png) et de la police en parallèle
