@@ -1,0 +1,179 @@
+"Nom du sort","Élément","Rang d'évolution","Dégâts min","Dégâts max","Dégâts critique min","Dégâts critique max","Chance de critique","Coût en PA","Portée min","Portée max","Portée modifiable","Portée diagonale/ligne","Lancers par tour","Lancers par cible","Intervalle de relance (CD)","Description","Ligne de vue requise","Zone d'effet","Lancers par combat","Durée de l'effet","Cumul des effets"
+"Exemple – Lame Tourbillonnante","Terre","Novice",10,14,14,18,5,4,1,1,"Non",,2,1,,"Frappe un ennemi au corps à corps.","Oui",,,,
+"Exemple – Lame Tourbillonnante","Terre","Expert",14,18,18,22,5,4,1,1,"Non",,2,1,,"Frappe un ennemi au corps à corps.","Oui",,,,
+"Exemple – Lame Tourbillonnante","Terre","Maître α",18,22,22,26,5,4,1,1,"Non",,2,1,,"Frappe un ennemi au corps à corps.","Oui",,,,
+"Exemple – Lame Tourbillonnante","Terre","Maître ẞ",18,22,22,26,5,4,1,1,"Non",,2,1,,"Frappe un ennemi au corps à corps.","Oui",,,,
+"Acharnement méthodique (Air)","Air","Novice",29,32,31,34,20,4,2,5,"Non",,2,1,,,"oui","Monocible",,2,5
+"Acharnement méthodique (Air)","Air","Expert",31,34,33,36,20,4,2,5,"Non",,2,1,,,"oui","Monocible",,2,5
+"Acharnement méthodique (Air)","Air","Maître α",35,38,37,40,20,4,2,5,"non",,2,1,,,"oui","Monocible",,2,5
+"Acharnement méthodique (Air)","Air","Maître ẞ",35,38,37,40,20,4,2,5,"non",,2,1,,,"oui","Monocible",,2,5
+"Acharnement méthodique (Feu)","Feu","Novice",,,,,,,,,,,,,,,,,,,
+"Acharnement méthodique (Feu)","Feu","Expert",,,,,,,,,,,,,,,,,,,
+"Acharnement méthodique (Feu)","Feu","Maître α",,,,,,,,,,,,,,,,,,,
+"Acharnement méthodique (Feu)","Feu","Maître ẞ",,,,,,,,,,,,,,,,,,,
+"Appétit (Chaos)",,"Novice",19,21,22,24,15,3,1,3,"non",,2,1,,,"oui","Monocible",,,
+"Appétit (Chaos)",,"Expert",22,24,25,27,15,3,1,5,"non",,2,1,,,"oui","Monocible",,,
+"Appétit (Chaos)",,"Maître α",26,28,29,31,15,3,1,5,"non",,2,1,,,"oui","Monocible",,,
+"Appétit (Chaos)",,"Maître ẞ",26,28,29,31,15,3,1,5,"non",,2,1,,,"oui","Croix de 1 case",,,
+"Croque-mitaine (Air)","Air","Novice",16,19,19,22,15,3,1,4,"non",,2,1,,,"oui","Monocible",5,,
+"Croque-mitaine (Air)","Air","Expert",19,22,22,25,15,3,1,5,"non",,2,1,,,"oui","Monocible",7,,
+"Croque-mitaine (Air)","Air","Maître α",22,25,25,28,15,3,1,5,"non",,2,1,,,"non","Monocible",10,,
+"Croque-mitaine (Air)","Air","Maître ẞ",22,25,25,28,15,3,1,5,"non",,2,1,,,"oui","Monocible",10,,
+"Croque-mitaine (Terre)","Terre","Novice",,,,,,,,,,,,,,,,,,,
+"Croque-mitaine (Terre)","Terre","Expert",,,,,,,,,,,,,,,,,,,
+"Croque-mitaine (Terre)","Terre","Maître α",,,,,,,,,,,,,,,,,,,
+"Croque-mitaine (Terre)","Terre","Maître ẞ",,,,,,,,,,,,,,,,,,,
+"Détonateur (Lumière)",,"Novice",,,,,,1,1,4,"oui",,1,,,,"non","Monocible",,,
+"Détonateur (Lumière)",,"Expert",,,,,,1,1,5,"oui",,2,,,,"non","Monocible",,,
+"Détonateur (Lumière)",,"Maître α",,,,,,1,1,6,"oui",,2,,,,"non","Monocible",,,
+"Détonateur (Lumière)",,"Maître ẞ",,,,,,1,1,6,"oui",,2,,,,"non","Cercle de 63 cases",,,
+"Épée Céleste (Eau)","Eau","Novice",28,32,34,38,20,4,1,4,"non",,1,,,,"oui","cercle de 2 cases",,2,3
+"Épée Céleste (Eau)","Eau","Expert",32,36,38,42,20,4,1,5,"non",,2,,,,"oui","cercle de 2 cases",,2,3
+"Épée Céleste (Eau)","Eau","Maître α",38,42,44,48,30,4,1,8,"non",,2,,,,"oui","cercle de 2 cases",,2,3
+"Épée Céleste (Eau)","Eau","Maître ẞ",36,40,42,46,20,4,1,7,"non",,2,,,,"oui","cercle de 2 cases",,2,3
+"Épée Céleste (Feu)","Feu","Novice",,,,,,,,,,,,,,,,,,,
+"Épée Céleste (Feu)","Feu","Expert",,,,,,,,,,,,,,,,,,,
+"Épée Céleste (Feu)","Feu","Maître α",,,,,,,,,,,,,,,,,,,
+"Épée Céleste (Feu)","Feu","Maître ẞ",,,,,,,,,,,,,,,,,,,
+"Épicentre (Eau)","Eau","Novice",36,40,39,43,20,4,,0,"non",,1,,,,"oui","croix de 2 cases",,,
+"Épicentre (Eau)","Eau","Expert",41,45,44,48,20,4,,0,"non",,2,,,,"oui","croix de 3 cases ",,,
+"Épicentre (Eau)","Eau","Maître α",41,45,44,48,20,3,,0,"non",,2,,,,"oui","croix de 3 cases ",,,
+"Épicentre (Eau)","Eau","Maître ẞ",41,45,44,48,20,4,,0,"non",,2,,,,"oui","croix de 3 cases ",,,
+"Épicentre (Terre)","Terre","Novice",,,,,,,,,,,,,,,,,,,
+"Épicentre (Terre)","Terre","Expert",,,,,,,,,,,,,,,,,,,
+"Épicentre (Terre)","Terre","Maître α",,,,,,,,,,,,,,,,,,,
+"Épicentre (Terre)","Terre","Maître ẞ",,,,,,,,,,,,,,,,,,,
+"Flèche de Concentration (Eau)","Eau","Novice",22,24,24,26,15,3,2,4,"oui",,1,,,,"oui","croix de 3 cases ",,,
+"Flèche de Concentration (Eau)","Eau","Expert",24,26,26,28,15,3,2,5,"oui",,1,,,,"oui","croix de 3 cases ",,,
+"Flèche de Concentration (Eau)","Eau","Maître α",24,26,26,28,15,3,2,5,"oui",,1,,,,"oui","croix de 4 cases",,,
+"Flèche de Concentration (Eau)","Eau","Maître ẞ",27,29,29,32,15,3,2,6,"oui",,2,,,,"oui","croix de 3 cases ",,,
+"Flèche de Concentration (Feu)","Feu","Novice",,,,,,,,,,,,,,,,,,,
+"Flèche de Concentration (Feu)","Feu","Expert",,,,,,,,,,,,,,,,,,,
+"Flèche de Concentration (Feu)","Feu","Maître α",,,,,,,,,,,,,,,,,,,
+"Flèche de Concentration (Feu)","Feu","Maître ẞ",,,,,,,,,,,,,,,,,,,
+"Glyphe Éblouissant (Eau)","Eau","Novice",31,33,,,,3,1,3,"non",,,,3,,"oui","cercle de 3 cases",,,
+"Glyphe Éblouissant (Eau)","Eau","Expert",33,35,,,,3,1,6,"non",,,,3,,"oui","cercle de 3 cases",,,
+"Glyphe Éblouissant (Eau)","Eau","Maître α",37,40,,,,3,1,7,"oui",,,,3,,"non","cercle de 3 cases",,,
+"Glyphe Éblouissant (Eau)","Eau","Maître ẞ",37,40,,,,3,1,7,"oui",,,,3,,"oui","cercle de 4 cases",,,
+"Glyphe Éblouissant (Terre)","Terre","Novice",,,,,,,,,,,,,,,,,,,
+"Glyphe Éblouissant (Terre)","Terre","Expert",,,,,,,,,,,,,,,,,,,
+"Glyphe Éblouissant (Terre)","Terre","Maître α",,,,,,,,,,,,,,,,,,,
+"Glyphe Éblouissant (Terre)","Terre","Maître ẞ",,,,,,,,,,,,,,,,,,,
+"Invocation de Bitouf Aérien (Lumière)",,"Novice",,,,,,4,1,2,"non",,,,5,,"oui",,,,
+"Invocation de Bitouf Aérien (Lumière)",,"Expert",,,,,,4,1,2,"non",,,,4,,"oui",,,,
+"Invocation de Bitouf Aérien (Lumière)",,"Maître α",,,,,,4,1,2,"non",,,,4,,"oui",,,,
+"Invocation de Bitouf Aérien (Lumière)",,"Maître ẞ",,,,,,4,1,2,"non",,,,4,,"oui",,,,
+"Invocation de Blérom (Lumière)",,"Novice",,,,,,4,1,2,"non",,,,5,,"oui",,,,
+"Invocation de Blérom (Lumière)",,"Expert",,,,,,4,1,2,"non",,,,4,,"oui",,,,
+"Invocation de Blérom (Lumière)",,"Maître α",,,,,,4,1,2,"non",,,,4,,"oui",,,,
+"Invocation de Blérom (Lumière)",,"Maître ẞ",,,,,,4,1,2,"non",,,,4,,"oui",,,,
+"Kaboom (Lumière)",,"Novice",,,,,,3,0,3,"oui",,,,4,,"non","Croix de 1 case",,2,
+"Kaboom (Lumière)",,"Expert",,,,,,3,0,5,"oui",,,,3,,"non","Croix de 1 case",,2,
+"Kaboom (Lumière)",,"Maître α",,,,,,3,,0,"non",,,,3,,"oui","Cercle de 63 cases",,2,
+"Kaboom (Lumière)",,"Maître ẞ",,,,,,2,0,5,"oui",,,,2,,"non","croix de 2 cases",,2,
+"Leurre (Lumière)",,"Novice",,,,,,3,2,5,"non",,1,,,,"oui","Monocible",,1,
+"Leurre (Lumière)",,"Expert",,,,,,3,2,7,"non",,1,,,,"oui","Monocible",,1,
+"Leurre (Lumière)",,"Maître α",17,20,,,,3,2,7,"non",,1,,,,"oui","Monocible",,1,
+"Leurre (Lumière)",,"Maître ẞ",,,,,,3,2,7,"non",,1,,,,,"Monocible",,1,
+"Machination (Chaos)",,"Novice",12,12,,,,2,1,5,"non",,,,3,,"oui","Monocible",,1,1
+"Machination (Chaos)",,"Expert",14,14,,,,2,1,6,"non",,,,3,,"oui","Monocible",,1,1
+"Machination (Chaos)",,"Maître α",18,18,,,,2,1,7,"non",,,,3,,"oui","Monocible",,2,1
+"Machination (Chaos)",,"Maître ẞ",18,18,,,,2,1,7,"non",,1,,,,"oui","Monocible",,1,1
+"Nausée (Air)","Air","Novice",24,26,26,28,15,3,1,4,"oui",,2,1,,,"oui","Monocible",,1,2
+"Nausée (Air)","Air","Expert",27,29,29,31,15,3,1,6,"oui",,2,1,,,"oui","Monocible",,1,2
+"Nausée (Air)","Air","Maître α",30,32,32,34,15,2,1,6,"oui",,2,1,,,"oui","Monocible",,1,2
+"Nausée (Air)","Air","Maître ẞ",30,32,32,34,15,3,1,6,"oui",,2,1,,,"oui","Monocible",,1,2
+"Nausée (Eau)","Eau","Novice",,,,,,,,,,,,,,,,,,,
+"Nausée (Eau)","Eau","Expert",,,,,,,,,,,,,,,,,,,
+"Nausée (Eau)","Eau","Maître α",,,,,,,,,,,,,,,,,,,
+"Nausée (Eau)","Eau","Maître ẞ",,,,,,,,,,,,,,,,,,,
+"Pelle Aveuglante (Chaos)",,"Novice",14,16,17,19,20,4,1,4,"non",,2,1,,"Dommages 8 à 10 meilleur element pour chaque retrait PO","oui","Monocible",,2,1
+"Pelle Aveuglante (Chaos)",,"Expert",17,19,20,22,20,4,1,5,"non",,2,1,,"Dommages 10 à 12 meilleur element pour chaque retrait PO","oui","Monocible",,2,1
+"Pelle Aveuglante (Chaos)",,"Maître α",20,22,23,25,20,4,1,5,"oui",,2,1,,"Dommages 12 à 14 meilleur element pour chaque retrait PO","oui","Monocible",,2,1
+"Pelle Aveuglante (Chaos)",,"Maître ẞ",17,19,20,22,20,4,1,5,"non",,2,1,,"Dommages 12 à 14 meilleur element pour chaque retrait PO","oui","Monocible",,2,1
+"Pelle Fantomatique (Chaos)",,"Novice",18,20,20,22,15,3,4,6,"non",,2,1,,,"oui","Monocible",,,
+"Pelle Fantomatique (Chaos)",,"Expert",20,22,22,24,15,3,2,6,"non",,2,1,,,"oui","Monocible",,,
+"Pelle Fantomatique (Chaos)",,"Maître α",22,24,24,26,15,3,0,6,"non",,2,1,,,"oui","Monocible",,,
+"Pelle Fantomatique (Chaos)",,"Maître ẞ",22,24,24,26,15,3,2,6,"non",,2,1,,,"oui","Monocible",,,
+"Piège d'immobilisation (Chaos)",,"Novice",24,28,,,,3,1,4,"oui",,,,3,,"oui","carré de 1 case",,2,
+"Piège d'immobilisation (Chaos)",,"Expert",26,30,,,,3,1,4,"oui",,,,2,,"oui","carré de 1 case",,2,
+"Piège d'immobilisation (Chaos)",,"Maître α",29,33,,,,3,1,4,"oui",,,,2,,"oui","carré de 1 case",,3,2
+"Piège d'immobilisation (Chaos)",,"Maître ẞ",29,33,,,,3,1,4,"oui",,2,,,,"oui","carré de 1 case",,2,
+"Pile ou Face (Air)","Air","Novice",19,22,23,26,20,3,1,6,"non",,2,1,,"ligne de dommages supplémentaire en cas de coup critique : 9 à 11 (dommages air)","oui","Monocible",,,
+"Pile ou Face (Air)","Air","Expert",22,25,26,29,25,3,1,6,"non",,2,1,,"ligne de dommages supplémentaire en cas de coup critique : 12 à 14 (dommages air)","oui","Monocible",,,
+"Pile ou Face (Air)","Air","Maître α",23,26,27,30,25,3,1,7,"non",,3,2,,"ligne de dommages supplémentaire en cas de coup critique : 13 à 15 (dommages air)","oui","Monocible",,,
+"Pile ou Face (Air)","Air","Maître ẞ",23,26,27,30,30,3,0,7,"oui",,2,1,,"ligne de dommages supplémentaire en cas de coup critique : 13 à 15 (dommages air)","oui","Monocible",,,
+"Pile ou Face (Terre)","Terre","Novice",,,,,,,,,,,,,,,,,,,
+"Pile ou Face (Terre)","Terre","Expert",,,,,,,,,,,,,,,,,,,
+"Pile ou Face (Terre)","Terre","Maître α",,,,,,,,,,,,,,,,,,,
+"Pile ou Face (Terre)","Terre","Maître ẞ",,,,,,,,,,,,,,,,,,,
+"Poigne de Xélor (Air)","Air","Novice",22,26,24,28,15,3,1,4,"non",,2,1,,,"oui","Monocible",,3,3
+"Poigne de Xélor (Air)","Air","Expert",28,32,32,36,15,3,1,5,"non",,2,1,,,"oui","Monocible",,3,3
+"Poigne de Xélor (Air)","Air","Maître α",28,32,32,36,15,2,1,5,"non",,2,1,,,"oui","Monocible",,3,3
+"Poigne de Xélor (Air)","Air","Maître ẞ",34,38,38,42,15,3,1,5,"non",,2,1,,,"non","Monocible",,3,3
+"Poigne de Xélor (Feu)","Feu","Novice",,,,,,,,,,,,,,,,,,,
+"Poigne de Xélor (Feu)","Feu","Expert",,,,,,,,,,,,,,,,,,,
+"Poigne de Xélor (Feu)","Feu","Maître α",,,,,,,,,,,,,,,,,,,
+"Poigne de Xélor (Feu)","Feu","Maître ẞ",,,,,,,,,,,,,,,,,,,
+"Poison Paralysant (Chaos)",,"Novice",14,16,17,19,20,4,1,4,"non",,2,1,,,"oui","Monocible",,2,
+"Poison Paralysant (Chaos)",,"Expert",17,19,20,22,20,4,1,5,"non",,2,1,,,"oui","Monocible",,2,
+"Poison Paralysant (Chaos)",,"Maître α",20,22,23,25,20,4,1,5,"oui",,2,1,,,"oui","Monocible",,2,
+"Poison Paralysant (Chaos)",,"Maître ẞ",17,19,20,22,20,4,1,5,"non",,2,1,,,"oui","Monocible",,2,
+"Resquille (Feu)","Feu","Novice",22,26,26,30,15,3,0,2,"non",,1,,,,"oui","anneau de 2 cases",,,1
+"Resquille (Feu)","Feu","Expert",25,29,29,33,15,3,0,3,"non",,2,,,,"oui","anneau de 2 cases",,,1
+"Resquille (Feu)","Feu","Maître α",30,34,34,38,15,3,0,5,"non",,2,,,,"non","anneau de 2 cases",,,1
+"Resquille (Feu)","Feu","Maître ẞ",33,37,37,41,15,3,0,3,"oui",,2,,,,"oui","anneau de 2 cases",,,1
+"Resquille (Terre)","Terre","Novice",,,,,,,,,,,,,,,,,,,
+"Resquille (Terre)","Terre","Expert",,,,,,,,,,,,,,,,,,,
+"Resquille (Terre)","Terre","Maître α",,,,,,,,,,,,,,,,,,,
+"Resquille (Terre)","Terre","Maître ẞ",,,,,,,,,,,,,,,,,,,
+"Ronce (Eau)","Eau","Novice",23,26,26,29,15,3,1,4,"oui",,2,1,,,"oui","Monocible",,1,2
+"Ronce (Eau)","Eau","Expert",25,28,28,31,15,3,1,5,"oui",,2,1,,,"oui","Monocible",,1,2
+"Ronce (Eau)","Eau","Maître α",27,30,30,33,15,3,1,5,"oui",,3,2,,,"oui","Monocible",,1,2
+"Ronce (Eau)","Eau","Maître ẞ",27,30,30,33,15,3,1,5,"oui",,2,1,,,"non","Monocible",,1,2
+"Ronce (Terre)","Terre","Novice",,,,,,,,,,,,,,,,,,,
+"Ronce (Terre)","Terre","Expert",,,,,,,,,,,,,,,,,,,
+"Ronce (Terre)","Terre","Maître α",,,,,,,,,,,,,,,,,,,
+"Ronce (Terre)","Terre","Maître ẞ",,,,,,,,,,,,,,,,,,,
+"Secousse Temporelle (Chaos)",,"Novice",8,10,,,,2,1,5,"oui",,,,3,,"oui","Monocible",,3,
+"Secousse Temporelle (Chaos)",,"Expert",8,10,,,,2,1,7,"oui",,,,2,,"oui","Monocible",,3,
+"Secousse Temporelle (Chaos)",,"Maître α",14,16,,,,2,1,8,"oui",,,,1,,"non","Croix de 1 case",,3,
+"Secousse Temporelle (Chaos)",,"Maître ẞ",8,10,,,,2,,0,"non",,,,3,,"oui","Cercle de 63 cases",,3,
+"Sismobombe (Terre)","Terre","Novice",8,9,,,,3,1,4,"non",,1,,,,"oui","Monocible",,1,
+"Sismobombe (Terre)","Terre","Expert",9,10,,,,3,1,6,"non",,1,,,,"oui","Monocible",,1,
+"Sismobombe (Terre)","Terre","Maître α",11,12,,,,3,1,7,"non",,1,,,,"non","Monocible",,1,
+"Sismobombe (Terre)","Terre","Maître ẞ",11,12,,,,3,1,7,"non",,1,,,,"oui","Monocible",,1,
+"Souffle impétueux (Chaos)",,"Novice",23,26,26,29,15,3,2,4,"oui","lancer en ligne",,,2,,"oui","Croix de 1 case",,,
+"Souffle impétueux (Chaos)",,"Expert",24,27,27,30,15,3,2,5,"oui","lancer en ligne",,,2,,"oui","Croix de 1 case",,,
+"Souffle impétueux (Chaos)",,"Maître α",25,28,28,31,15,3,0,5,"oui","lancer en ligne",,,2,,"oui","Croix de 1 case",,,
+"Souffle impétueux (Chaos)",,"Maître ẞ",25,28,28,31,15,3,2,5,"oui",,,,2,,"oui","Croix de 1 case",,,
+"Souvenir (Chaos)",,"Novice",23,26,27,30,15,3,1,5,"oui",,2,1,,,"oui","Monocible",,2,
+"Souvenir (Chaos)",,"Expert",27,30,31,34,15,3,1,6,"oui",,3,2,,,"oui","Monocible",,2,
+"Souvenir (Chaos)",,"Maître α",31,34,35,38,15,3,1,8,"oui",,3,2,,,"non","Monocible",,2,
+"Souvenir (Chaos)",,"Maître ẞ",41,44,45,48,20,4,1,6,"oui",,2,,,,,"carré de 1 case",,2,
+"Tornabombe (Air)","Air","Novice",8,9,,,,3,1,4,"non",,1,,,,"oui","Monocible",,1,
+"Tornabombe (Air)","Air","Expert",9,10,,,,3,1,6,"non",,1,,,,"oui","Monocible",,1,
+"Tornabombe (Air)","Air","Maître α",11,12,,,,3,1,7,"non",,1,,,,"non","Monocible",,1,
+"Tornabombe (Air)","Air","Maître ẞ",11,12,,,,3,1,7,"non",,,,,,"oui","Monocible",,1,
+"Typhon (Air)","Air","Novice",26,30,30,34,20,4,1,3,"non","lancer en ligne",1,,,,"oui","ligne perpendiculaire de 1 case",,,
+"Typhon (Air)","Air","Expert",31,35,35,39,20,4,1,4,"non","lancer en ligne",2,,,,"oui","ligne perpendiculaire de 1 case",,,
+"Typhon (Air)","Air","Maître α",36,40,40,44,20,4,1,5,"non","lancer en ligne",2,,,,"oui","ligne perpendiculaire de 1 case",,,
+"Typhon (Air)","Air","Maître ẞ",21,25,25,29,20,4,1,5,"non","lancer en ligne",2,,,,"oui","ligne perpendiculaire de 1 case",,,
+"Typhon (Eau)","Eau","Novice",,,,,,,,,,,,,,,,,,,
+"Typhon (Eau)","Eau","Expert",,,,,,,,,,,,,,,,,,,
+"Typhon (Eau)","Eau","Maître α",,,,,,,,,,,,,,,,,,,
+"Typhon (Eau)","Eau","Maître ẞ",,,,,,,,,,,,,,,,,,,
+"Amnésie progressive",,"Unique",,,,,,2,1,5,"oui",,,,2,,"oui","Monocible",,1,
+"Coup de main d'outre-tombe",,"Unique",,,,,,3,3,6,"non",,,,2,,"oui","Monocible",,,
+"Dîme étouffante",,"Unique",38,42,43,47,20,4,1,7,"non",,2,,,,"oui","Monocible",,2,1
+"Étreinte forcée",,"Unique",,,,,20,3,1,6,"non","lancer en ligne",2,1,,,"non","Monocible",,1,1
+"Funérailles Aériennes",,"Unique",41,45,51,55,20,4,3,7,"oui",,,,2,,"non","croix de 3 cases ",,,
+"Hulularvaire",,"Unique",36,45,46,55,20,4,1,4,"non","lancer en ligne",1,,,,"oui","ligne de 5 cases",,1,
+"Invocation de Pyrover domestique",,"Unique",,,,,,3,1,4,"non",,,,4,,"non","Monocible",,,
+"Peau de pierre",,"Unique",,,,,20,4,,0,"non",,,,5,,"oui","cercle de 2 cases",,2,1
+"Rendez-vous secret",,"Unique",,,,,,4,1,1,"non",,,,5,,"non","Monocible",2,1,
+"Sacrifice nécessaire",,"Unique",,,,,,3,1,5,"oui",,,,,,"oui","Monocible",2,,
+"Sh'hzx",,"Unique",,,,,,4,,0,"non",,,,2,,"oui","Cercle de 63 cases",,2,1
+"Toxines",,"Unique",21,25,24,28,20,4,1,5,"oui",,1,,,,"non","cercle de 2 cases",,2,3
+"Mon ami imaginaire",,"Unique",,,,,,3,1,3,"non",,,,4,,"non","Monocible",2,,
+"Kong Smash",,"Unique",31,35,36,40,20,4,1,1,"non",,,,3,,"oui","ligne perpendiculaire de 1 case",,,
