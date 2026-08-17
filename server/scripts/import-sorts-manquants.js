@@ -203,6 +203,16 @@ async function main() {
     const estUnique = lignesFamille[0]["Rang d'évolution"] === 'Unique';
     const nom = nomFinal(nomBrut);
 
+    // Rejouable : si un sort de ce nom existe déjà (même partiellement, un seul
+    // rang suffit), on saute toute la famille plutôt que de créer des doublons.
+    const [[{ n: dejaPresent }]] = await connexion.query(
+      'SELECT COUNT(*) AS n FROM Sort WHERE nom = ?', [nom]
+    );
+    if (dejaPresent > 0) {
+      console.log(`"${nom}" déjà en base — famille ignorée.`);
+      continue;
+    }
+
     // Élément : direct si présent (variantes Air/Terre/Eau/Feu), sinon déduit
     // pour Chaos/Lumière (Meilleur élément si dégâts sur au moins un rang, NULL sinon).
     let elementBrut = nettoyerTexte(lignesFamille[0]['Élément']);
