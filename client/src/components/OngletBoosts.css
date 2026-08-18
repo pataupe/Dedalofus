@@ -70,15 +70,28 @@
   opacity: 0.75;
 }
 
+/* min-width: 0 + max-width : sans ça, un texte long et non coupable (ex: une
+   breloque toggle à double effet type Tireur d'élite, "dommages finaux
+   distance x1.3, dommages finaux mêlée x0.7") force cette colonne à occuper
+   toute sa largeur naturelle sur une seule ligne, écrasant la colonne
+   nom/effet à côté (min-width: 0 la laisse rétrécir jusqu'à 1 mot par ligne)
+   — même bug que celui déjà corrigé sur .boost-range, mais sur le texte de
+   lecture seule (page de partage), jamais couvert par ce premier correctif. */
 .onglet-boosts__controle {
-  flex: 0 0 auto;
+  flex: 0 1 42%;
+  min-width: 0;
+  max-width: 42%;
   display: flex;
   align-items: center;
+  justify-content: flex-end;
 }
 
 .onglet-boosts__lecture {
   font-size: 13px;
   font-weight: 600;
+  text-align: right;
+  white-space: normal;
+  overflow-wrap: break-word;
 }
 
 /* Toggle on/off custom, couleurs du site (or = actif, comme les boutons

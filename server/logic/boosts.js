@@ -11,6 +11,13 @@
 // "10 soins" -> { valeur: 10, prefixe: '', suffixe: ' soins' }
 // "dommages finaux distance x1.6" -> { valeur: 1.6, prefixe: 'dommages finaux distance x', suffixe: '' }
 // "+20 Retrait PA + 20 Retrait PM" (texte composite, pas de nombre en tête) -> { valeur: null, ... }
+//
+// Note : `prefixe` garde volontairement le texte brut du CSV tel quel (pas
+// abrégé) — server/logic/effetsBreloques.js reconnaît la phrase littérale
+// "dommages finaux" dans ce même texte (`prefixe`/`texteActif`) pour détecter
+// les multiplicateurs de dégâts à appliquer au calcul ; l'abréger ici casserait
+// silencieusement ces breloques. L'abréviation pour l'affichage ("dmg" au lieu
+// de "dommages finaux") se fait uniquement côté frontend (OngletBoosts.jsx).
 function parseValeurBoost(texteBrut) {
   if (texteBrut == null) return null;
   const texte = String(texteBrut).trim();

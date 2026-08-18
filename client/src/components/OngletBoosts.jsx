@@ -2,11 +2,21 @@ import { useState } from 'react';
 import { sauvegarderBoostBreloque } from '../api/personnages';
 import './OngletBoosts.css';
 
+// "dommages finaux" -> "dmg" à l'affichage uniquement (le texte brut est
+// gardé tel quel côté serveur : server/logic/effetsBreloques.js reconnaît
+// cette phrase littérale pour appliquer le multiplicateur de dégâts réel,
+// l'abréger là-bas casserait silencieusement le calcul). `g` : certaines
+// breloques ont 2 occurrences dans un seul texte (distance + mêlée, ex:
+// Tireur d'élite).
+function abregerAffichage(texte) {
+  return (texte || '').replace(/dommages finaux/gi, 'dmg');
+}
+
 // Affiche/interpole une valeur numérique de boost avec son préfixe/suffixe
 // d'origine (ex: préfixe "dommages finaux x" + valeur 1.3, ou valeur 10 +
 // suffixe " soins") — voir server/logic/boosts.js pour la construction.
 function texteValeur({ prefixe, valeur, suffixe }) {
-  return `${prefixe}${valeur}${suffixe}`;
+  return abregerAffichage(`${prefixe}${valeur}${suffixe}`);
 }
 
 function ToggleBoost({ boost, disabled, onChange }) {
@@ -114,7 +124,7 @@ function LigneBoost({ emplacement, breloque, token, personnageId, onSauvegarde, 
       <div className="onglet-boosts__controle">
         {lectureSeule ? (
           <span className="onglet-boosts__lecture">
-            {boost.type === 'toggle' ? (boost.actif ? boost.texteActif : 'Désactivé') : texteValeur(boost)}
+            {boost.type === 'toggle' ? (boost.actif ? abregerAffichage(boost.texteActif) : 'Désactivé') : texteValeur(boost)}
           </span>
         ) : boost.type === 'toggle' ? (
           <ToggleBoost boost={boost} disabled={enCours} onChange={changer} />
