@@ -7,7 +7,7 @@ const db = require('../config/db');
 
 const BOT_UA = /Discordbot|Twitterbot|facebookexternalhit|WhatsApp|LinkedInBot|Slackbot|TelegramBot|vkShare|iframely/i;
 
-router.get('/:lienPartage', async (req, res) => {
+router.get('/:lienPartage{/:version}', async (req, res) => {
   const ua = req.headers['user-agent'] || '';
   const { lienPartage } = req.params;
 
@@ -25,12 +25,14 @@ router.get('/:lienPartage', async (req, res) => {
 
     if (!perso) return res.status(404).send('Introuvable');
 
-    // `?v=...` (posé par le bouton "Copier le lien de partage") est répercuté ici
+    // :version (posé par le bouton "Copier le lien de partage") est répercuté ici
     // pour que l'URL vue par le crawler (og:url) et l'image (og:image) restent
     // cohérentes avec le lien réellement partagé — Discord met en cache l'aperçu
-    // par URL exacte, donc un paramètre qui change à chaque copie force un
-    // aperçu neuf à chaque partage plutôt que de réutiliser un ancien indéfiniment.
-    const suffixe    = req.query.v ? `?v=${encodeURIComponent(req.query.v)}` : '';
+    // par URL exacte, donc un segment qui change à chaque copie force un aperçu
+    // neuf à chaque partage plutôt que de réutiliser un ancien indéfiniment.
+    // Un paramètre ?v=... ne suffisait pas (Discord semble l'ignorer pour décider
+    // si une URL a déjà été vue) — un segment de chemin change l'URL complète.
+    const suffixe    = req.params.version ? `/${encodeURIComponent(req.params.version)}` : '';
     const ogImageUrl = `https://dedalofus.fr/api/og-image/${lienPartage}${suffixe}`;
     const pageUrl    = `https://dedalofus.fr/partage/${lienPartage}${suffixe}`;
     const titre      = `${perso.nom} — Dédalofus`;

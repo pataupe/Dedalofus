@@ -34,7 +34,11 @@ function App() {
           <Route path="/inscription" element={<InscriptionPage />} />
           <Route path="/personnage" element={<PersonnagePage />} />
           <Route path="/personnage/:id" element={<PersonnageDetailPage />} />
-          <Route path="/partage/:lienPartage" element={<PartagePage />} />
+          {/* :version optionnel — posé par le bouton "Copier le lien de partage" pour
+              forcer un aperçu Discord neuf (voir PersonnageDetailPage.jsx). Un
+              paramètre ?v=... était ignoré par le cache d'aperçu de Discord ; un
+              segment de chemin, lui, change forcément l'URL vue par le robot. */}
+          <Route path="/partage/:lienPartage/:version?" element={<PartagePage />} />
           <Route path="/mentions-legales" element={<MentionsLegalesPage />} />
           <Route path="/politique-de-confidentialite" element={<PolitiqueConfidentialitePage />} />
           <Route path="/conditions-generales-utilisation" element={<CGUPage />} />

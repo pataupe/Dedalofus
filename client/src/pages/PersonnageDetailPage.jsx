@@ -85,9 +85,12 @@ function PersonnageDetailPage() {
   function copierLienPartage() {
     // Discord (et les autres bots d'aperçu) mettent l'embed en cache indéfiniment
     // pour une URL donnée, sans jamais revérifier son contenu ensuite — un
-    // paramètre qui change à chaque copie force un aperçu neuf à chaque partage,
-    // même si le stuff a déjà été partagé avec ce lien par le passé.
-    const url = `${window.location.origin}/partage/${personnage.lienPartage}?v=${Date.now()}`;
+    // segment qui change à chaque copie force un aperçu neuf à chaque partage,
+    // même si le stuff a déjà été partagé avec ce lien par le passé. Un simple
+    // paramètre ?v=... ne suffisait pas : Discord semble l'ignorer pour décider
+    // si une URL a déjà été vue — un segment de chemin, lui, change forcément
+    // l'URL complète (voir App.jsx et server/routes/partageOg.js).
+    const url = `${window.location.origin}/partage/${personnage.lienPartage}/${Date.now()}`;
     navigator.clipboard.writeText(url).then(
       () => {
         setLienCopie(true);

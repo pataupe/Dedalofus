@@ -114,7 +114,10 @@ function creerGrille(items, cols, images) {
   };
 }
 
-router.get('/:lienPartage', async (req, res) => {
+// :version (optionnel) sert uniquement à faire varier l'URL vue par les robots
+// d'aperçu (voir partageOg.js) — jamais utilisé ici, l'image est toujours
+// générée à partir du seul lienPartage.
+router.get('/:lienPartage{/:version}', async (req, res) => {
   if (!satori || !Resvg) return res.status(503).send('Service indisponible');
 
   const { lienPartage } = req.params;
