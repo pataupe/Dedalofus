@@ -6,6 +6,28 @@ const { calculerEffetsBreloques } = require('../logic/effetsBreloques');
 
 const NOM_MAX = 100;
 
+// Lien de partage court : alphabet à 62 caractères (chiffres + lettres maj/min),
+// bien plus dense que l'hexadécimal (16) — 8 caractères donnent ~218 000
+// milliards de combinaisons, largement de quoi éviter qu'un lien soit deviné
+// par hasard sur un site de cette taille, pour une URL bien plus courte que
+// l'ancien format (32 caractères hexadécimaux). Les personnages déjà créés
+// gardent leur ancien lien : rien ne les régénère, la colonne accepte les deux.
+const ALPHABET_LIEN_PARTAGE = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+const LONGUEUR_LIEN_PARTAGE = 8;
+// Rejette les octets au-delà du dernier multiple de 62 (248) pour un tirage
+// uniforme : sans ça, certains caractères de l'alphabet auraient une chance
+// légèrement plus élevée d'être tirés que d'autres (biais de modulo).
+const OCTET_MAX_VALIDE = 256 - (256 % ALPHABET_LIEN_PARTAGE.length);
+
+function genererLienPartage() {
+  let code = '';
+  while (code.length < LONGUEUR_LIEN_PARTAGE) {
+    const octet = crypto.randomBytes(1)[0];
+    if (octet < OCTET_MAX_VALIDE) code += ALPHABET_LIEN_PARTAGE[octet % ALPHABET_LIEN_PARTAGE.length];
+  }
+  return code;
+}
+
 function lignesVides(equipementId, nombre) {
   return Array.from({ length: nombre }, (_, i) => [equipementId, i + 1, null]);
 }
@@ -26,11 +48,22 @@ async function creerPersonnage(req, res) {
     [req.utilisateur.id, nom]
   );
 
-  const lienPartage = crypto.randomBytes(16).toString('hex');
-  const [equipement] = await pool.query(
-    'INSERT INTO Equipement (personnage_id, lien_partage) VALUES (?, ?)',
-    [resultat.insertId, lienPartage]
-  );
+  // Nouvelle tentative avec un lien différent en cas de collision (improbable
+  // avec ~218 000 milliards de combinaisons, mais la contrainte UNIQUE la
+  // détecterait de toute façon — autant la gérer proprement plutôt que de
+  // renvoyer une 500 au joueur).
+  let equipement;
+  for (let tentative = 1; ; tentative++) {
+    try {
+      [equipement] = await pool.query(
+        'INSERT INTO Equipement (personnage_id, lien_partage) VALUES (?, ?)',
+        [resultat.insertId, genererLienPartage()]
+      );
+      break;
+    } catch (err) {
+      if (err.code !== 'ER_DUP_ENTRY' || tentative >= 5) throw err;
+    }
+  }
 
   await pool.query('INSERT INTO EquipementCube (equipement_id, emplacement, cube_id) VALUES ?', [
     lignesVides(equipement.insertId, 9),
