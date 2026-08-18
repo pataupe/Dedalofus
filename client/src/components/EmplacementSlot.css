@@ -99,18 +99,15 @@ a.emplacement-slot--vide:hover {
    déclencher le clic — un 2e tap est alors nécessaire pour ouvrir la modale.
    Cassait uniquement la fiche perso privée (seule page qui affiche la
    croix — la page de partage en lecture seule n'a pas ce problème, elle n'a
-   pas de croix à révéler). */
+   pas de croix à révéler). En excluant carrément la règle pour ces appareils
+   (plutôt que de rendre la croix visible en permanence, essayé puis rejeté —
+   ça affichait une croix sur chaque case équipée pour tout le monde sur
+   tactile, changement bien trop visible pour corriger un bug d'un seul
+   navigateur), le tap n'a plus aucun survol à "simuler" : la croix reste
+   invisible sur tactile, exactement comme avant ce correctif, mais le premier
+   tap ouvre directement la modale au lieu d'être absorbé par le faux survol. */
 @media (hover: hover) {
   .emplacement-slot-conteneur:hover .emplacement-slot__croix {
-    opacity: 1;
-  }
-}
-
-/* Sur tactile, pas de geste de survol pour "prévisualiser" la croix avant de
-   la toucher : autant l'afficher en permanence (plus lisible, et évite toute
-   dépendance à :hover qui causerait le même bug sur les appareils concernés). */
-@media (hover: none) {
-  .emplacement-slot__croix {
     opacity: 1;
   }
 }
