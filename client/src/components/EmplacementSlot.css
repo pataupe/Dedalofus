@@ -87,9 +87,32 @@ a.emplacement-slot--vide:hover {
   transition: opacity 0.15s ease;
 }
 
-.emplacement-slot-conteneur:hover .emplacement-slot__croix,
+/* Révélée au clavier (focus) quel que soit l'appareil — accessibilité,
+   sans rapport avec le survol souris/tactile ci-dessous. */
 .emplacement-slot-conteneur:focus-within .emplacement-slot__croix {
   opacity: 1;
+}
+
+/* :hover réservé aux appareils qui savent vraiment survoler (souris) : sur
+   iOS Safari, une case dont un descendant change d'apparence au :hover force
+   le premier tap à "simuler" ce survol (ici, révéler la croix) au lieu de
+   déclencher le clic — un 2e tap est alors nécessaire pour ouvrir la modale.
+   Cassait uniquement la fiche perso privée (seule page qui affiche la
+   croix — la page de partage en lecture seule n'a pas ce problème, elle n'a
+   pas de croix à révéler). */
+@media (hover: hover) {
+  .emplacement-slot-conteneur:hover .emplacement-slot__croix {
+    opacity: 1;
+  }
+}
+
+/* Sur tactile, pas de geste de survol pour "prévisualiser" la croix avant de
+   la toucher : autant l'afficher en permanence (plus lisible, et évite toute
+   dépendance à :hover qui causerait le même bug sur les appareils concernés). */
+@media (hover: none) {
+  .emplacement-slot__croix {
+    opacity: 1;
+  }
 }
 
 .emplacement-slot__croix:hover {
