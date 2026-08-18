@@ -1,5 +1,11 @@
 import './SortCard.css';
 
+// "10 à 10" -> "10" : certains sorts (ex: Escarre face) ont des dégâts fixes,
+// sans fourchette (min === max) — inutile de répéter la même valeur 2 fois.
+function formatPlage(min, max) {
+  return min === max ? `${min}` : `${min} à ${max}`;
+}
+
 // Construit la liste des lignes de dégâts/soin à afficher :
 // - `calculs` (tableau, vient de calculerDegats côté serveur, onglet Sorts de la
 //   fiche perso) : une ligne par élément/ligne concerné, déjà personnalisée pour
@@ -90,7 +96,7 @@ function SortCard({ sort, calculs }) {
                     <div className="carte-sort__degats-bloc">
                       {aDesDegats ? (
                         <span className="carte-sort__degats-valeur">
-                          {ligne.degatsMin} à {ligne.degatsMax}
+                          {formatPlage(ligne.degatsMin, ligne.degatsMax)}
                         </span>
                       ) : (
                         <span className="carte-sort__degats-valeur carte-sort__degats-valeur--vide">—</span>
@@ -102,7 +108,7 @@ function SortCard({ sort, calculs }) {
                     {aDesDegatsCritiques && (
                       <div className="carte-sort__degats-bloc carte-sort__degats-bloc--critique">
                         <span className="carte-sort__degats-valeur">
-                          {ligne.degatsCritiqueMin} à {ligne.degatsCritiqueMax}
+                          {formatPlage(ligne.degatsCritiqueMin, ligne.degatsCritiqueMax)}
                         </span>
                         <span className="carte-sort__degats-libelle">Critique</span>
                       </div>
