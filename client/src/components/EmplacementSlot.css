@@ -126,14 +126,3 @@ a.emplacement-slot--vide:hover {
     border-radius: 12px;
   }
 }
-
-/* Croix retirée sur mobile : trop petite pour être fiable au doigt (18px),
-   et le bouton "Déséquiper" de la modale de détail reste disponible comme
-   alternative — pas de perte de fonctionnalité. Renforce aussi la correction
-   du bug iOS Safari ci-dessus (l'élément n'existe plus du tout visuellement,
-   donc plus aucun survol à simuler quel que soit l'appareil concerné). */
-@media (max-width: 599px) {
-  .emplacement-slot__croix {
-    display: none;
-  }
-}
