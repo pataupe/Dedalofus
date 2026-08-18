@@ -83,7 +83,11 @@ function PersonnageDetailPage() {
   }
 
   function copierLienPartage() {
-    const url = `${window.location.origin}/partage/${personnage.lienPartage}`;
+    // Discord (et les autres bots d'aperçu) mettent l'embed en cache indéfiniment
+    // pour une URL donnée, sans jamais revérifier son contenu ensuite — un
+    // paramètre qui change à chaque copie force un aperçu neuf à chaque partage,
+    // même si le stuff a déjà été partagé avec ce lien par le passé.
+    const url = `${window.location.origin}/partage/${personnage.lienPartage}?v=${Date.now()}`;
     navigator.clipboard.writeText(url).then(
       () => {
         setLienCopie(true);

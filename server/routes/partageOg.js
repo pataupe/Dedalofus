@@ -25,8 +25,14 @@ router.get('/:lienPartage', async (req, res) => {
 
     if (!perso) return res.status(404).send('Introuvable');
 
-    const ogImageUrl = `https://dedalofus.fr/api/og-image/${lienPartage}`;
-    const pageUrl    = `https://dedalofus.fr/partage/${lienPartage}`;
+    // `?v=...` (posé par le bouton "Copier le lien de partage") est répercuté ici
+    // pour que l'URL vue par le crawler (og:url) et l'image (og:image) restent
+    // cohérentes avec le lien réellement partagé — Discord met en cache l'aperçu
+    // par URL exacte, donc un paramètre qui change à chaque copie force un
+    // aperçu neuf à chaque partage plutôt que de réutiliser un ancien indéfiniment.
+    const suffixe    = req.query.v ? `?v=${encodeURIComponent(req.query.v)}` : '';
+    const ogImageUrl = `https://dedalofus.fr/api/og-image/${lienPartage}${suffixe}`;
+    const pageUrl    = `https://dedalofus.fr/partage/${lienPartage}${suffixe}`;
     const titre      = `${perso.nom} — Dédalofus`;
     const desc       = `Voir le stuff de ${perso.nom} sur Dédalofus, le simulateur d'équipement pour le Dédale de Dofus Touch.`;
 
