@@ -111,8 +111,31 @@ CREATE TABLE Sort (
   -- sujet pour un calculateur de dégâts, masqués du site mais conservés en base.
   visible TINYINT(1) NOT NULL DEFAULT 1,
   image_url VARCHAR(255) NULL,
+  -- Sorts de soin (Mot Soignant/Curatif/Revitalisant) : dégâts_min/max/critique
+  -- réutilisés pour stocker les valeurs de PV rendus (même formule ax+b, sans
+  -- Puissance, bonus = stat SOIN au lieu de Dommages) — voir calcul.js.
+  est_soin TINYINT(1) NOT NULL DEFAULT 0,
   INDEX idx_sort_element (element),
   INDEX idx_sort_rang_evolution (rang_evolution)
+) ENGINE=InnoDB;
+
+-- Lignes de dégâts supplémentaires, indépendantes de la ligne principale du
+-- Sort (ex: Bluff/Tourbillon Embrasé qui tapent dans 2 éléments à la fois avec
+-- des valeurs différentes par élément, Pile ou Face/Foène/Pelle Aveuglante qui
+-- ont une 2e ligne de dégâts avec ses propres valeurs). `element` NULL = hérite
+-- de l'élément de la ligne principale du Sort. degats_min/max peuvent être NULL
+-- si la ligne n'existe qu'au critique (ex: Pile ou Face).
+CREATE TABLE SortDegatsSup (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  sort_id INT NOT NULL,
+  ordre INT NOT NULL DEFAULT 1,
+  element VARCHAR(50) NULL,
+  degats_min INT NULL,
+  degats_max INT NULL,
+  degats_critique_min INT NULL,
+  degats_critique_max INT NULL,
+  FOREIGN KEY (sort_id) REFERENCES Sort(id) ON DELETE CASCADE,
+  INDEX idx_sortdegatssup_sort (sort_id)
 ) ENGINE=InnoDB;
 
 -- ============================================

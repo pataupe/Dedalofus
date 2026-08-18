@@ -1,23 +1,64 @@
 import './SortCard.css';
 
-// `calcul` (optionnel) vient de calculerDegats côté serveur : quand fourni, ses
-// valeurs remplacent celles de base pour l'affichage des dégâts/% critique
-// (utilisé par l'onglet "Sorts" de la fiche perso). PA/Portée/Lancers ne
-// changent jamais, ils ne dépendent pas du personnage. Sans `calcul` (page
-// /sorts publique), comportement inchangé : dégâts et % critique de base.
-function SortCard({ sort, calcul }) {
-  const element = calcul?.element ?? sort.element;
-  const degatsMin = calcul?.degatsMin ?? sort.degats_min;
-  const degatsMax = calcul?.degatsMax ?? sort.degats_max;
-  const degatsCritiqueMin = calcul?.degatsCritiqueMin ?? sort.degats_critique_min;
-  const degatsCritiqueMax = calcul?.degatsCritiqueMax ?? sort.degats_critique_max;
-  // % CC de base (toujours celui du sort) et % CC total (sort + stat du
-  // personnage) affichés séparément quand `calcul` est fourni (onglet Sorts).
-  const chanceCritiqueBase = sort.chance_critique;
-  const chanceCritiqueTotal = calcul?.chanceCritiqueTotal;
+// Construit la liste des lignes de dégâts/soin à afficher :
+// - `calculs` (tableau, vient de calculerDegats côté serveur, onglet Sorts de la
+//   fiche perso) : une ligne par élément/ligne concerné, déjà personnalisée pour
+//   le personnage — Bluff/Tourbillon Embrasé (plusieurs éléments à la fois) ou
+//   Pile ou Face/Foène/Pelle Aveuglante (2e ligne indépendante) produisent
+//   plusieurs entrées, affichées empilées sur UNE seule carte.
+// - sans `calculs` (page /sorts publique) : la ligne principale du sort lui-même
+//   + ses `lignes_supplementaires` (mêmes sorts multi-lignes, valeurs de base
+//   non calculées).
+function construireLignes(sort, calculs) {
+  if (calculs && calculs.length > 0) {
+    return calculs.map((c) => ({
+      element: c.element,
+      estSoin: c.estSoin,
+      degatsMin: c.degatsMin,
+      degatsMax: c.degatsMax,
+      degatsCritiqueMin: c.degatsCritiqueMin,
+      degatsCritiqueMax: c.degatsCritiqueMax,
+    }));
+  }
 
-  const aDesDegats = degatsMin != null && degatsMax != null;
-  const aDesDegatsCritiques = degatsCritiqueMin != null && degatsCritiqueMax != null;
+  const lignes = [];
+  if (sort.degats_min != null || sort.degats_critique_min != null) {
+    lignes.push({
+      element: sort.element,
+      estSoin: sort.est_soin,
+      degatsMin: sort.degats_min,
+      degatsMax: sort.degats_max,
+      degatsCritiqueMin: sort.degats_critique_min,
+      degatsCritiqueMax: sort.degats_critique_max,
+    });
+  }
+  for (const supp of sort.lignes_supplementaires || []) {
+    if (supp.degats_min == null && supp.degats_critique_min == null) continue;
+    lignes.push({
+      element: supp.element ?? sort.element,
+      estSoin: sort.est_soin,
+      degatsMin: supp.degats_min,
+      degatsMax: supp.degats_max,
+      degatsCritiqueMin: supp.degats_critique_min,
+      degatsCritiqueMax: supp.degats_critique_max,
+    });
+  }
+  return lignes;
+}
+
+// `calculs` (optionnel, tableau) vient de calculerDegats côté serveur : quand
+// fourni, ses valeurs remplacent celles de base pour l'affichage des dégâts/%
+// critique (utilisé par l'onglet "Sorts" de la fiche perso). PA/Portée/Lancers
+// ne changent jamais, ils ne dépendent pas du personnage. Sans `calculs` (page
+// /sorts publique), comportement inchangé : dégâts et % critique de base.
+function SortCard({ sort, calculs }) {
+  const lignes = construireLignes(sort, calculs);
+  // % CC de base (toujours celui du sort) et % CC total (sort + stat du
+  // personnage) affichés séparément quand `calculs` est fourni (onglet Sorts) —
+  // identique sur toutes les lignes d'un même sort, on prend la 1ère.
+  const chanceCritiqueBase = sort.chance_critique;
+  const chanceCritiqueTotal = calculs?.[0]?.chanceCritiqueTotal;
+
   const lancerLigne = sort.portee_diagonale_ligne?.includes('Ligne');
   const lancerDiagonale = sort.portee_diagonale_ligne?.includes('Diagonale');
 
@@ -36,24 +77,39 @@ function SortCard({ sort, calcul }) {
         </div>
 
         <div className="carte-sort__contenu">
-          {(aDesDegats || aDesDegatsCritiques) && (
-            <div className="carte-sort__degats">
-              {aDesDegats && (
-                <div className="carte-sort__degats-bloc">
-                  <span className="carte-sort__degats-valeur">
-                    {degatsMin} à {degatsMax}
-                  </span>
-                  <span className="carte-sort__degats-libelle">Dégâts ({element})</span>
-                </div>
-              )}
-              {aDesDegatsCritiques && (
-                <div className="carte-sort__degats-bloc carte-sort__degats-bloc--critique">
-                  <span className="carte-sort__degats-valeur">
-                    {degatsCritiqueMin} à {degatsCritiqueMax}
-                  </span>
-                  <span className="carte-sort__degats-libelle">Critique</span>
-                </div>
-              )}
+          {lignes.length > 0 && (
+            <div className="carte-sort__degats-groupe">
+              {lignes.map((ligne, i) => {
+                const aDesDegats = ligne.degatsMin != null && ligne.degatsMax != null;
+                const aDesDegatsCritiques = ligne.degatsCritiqueMin != null && ligne.degatsCritiqueMax != null;
+                if (!aDesDegats && !aDesDegatsCritiques) return null;
+                const libelle = ligne.estSoin ? 'Soin' : 'Dégâts';
+
+                return (
+                  <div className="carte-sort__degats" key={i}>
+                    <div className="carte-sort__degats-bloc">
+                      {aDesDegats ? (
+                        <span className="carte-sort__degats-valeur">
+                          {ligne.degatsMin} à {ligne.degatsMax}
+                        </span>
+                      ) : (
+                        <span className="carte-sort__degats-valeur carte-sort__degats-valeur--vide">—</span>
+                      )}
+                      <span className="carte-sort__degats-libelle">
+                        {libelle} ({ligne.element})
+                      </span>
+                    </div>
+                    {aDesDegatsCritiques && (
+                      <div className="carte-sort__degats-bloc carte-sort__degats-bloc--critique">
+                        <span className="carte-sort__degats-valeur">
+                          {ligne.degatsCritiqueMin} à {ligne.degatsCritiqueMax}
+                        </span>
+                        <span className="carte-sort__degats-libelle">Critique</span>
+                      </div>
+                    )}
+                  </div>
+                );
+              })}
             </div>
           )}
 

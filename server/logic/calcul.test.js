@@ -351,6 +351,120 @@ describe('calculerDegats', () => {
   });
 });
 
+describe('calculerDegats — sorts de soin (estSoin)', () => {
+  it('un sort de soin ignore la Puissance et utilise la stat Soin (pas Dommages)', () => {
+    const stats = calculerStatsPersonnage([cube({ INTELLIGENCE: 100, PUISSANCE: 500, DOMMAGES: 999, SOIN: 7 })]);
+    const resultats = calculerDegats(stats, [
+      { id: 1, degatsMin: 20, degatsMax: 20, element: 'Feu', estSoin: true },
+    ]);
+    // 100 Intel = double, Puissance/Dommages ignorés, +7 Soin
+    expect(resultats[0]).toEqual({ sortId: 1, element: 'Feu', estSoin: true, degatsMin: 47, degatsMax: 47 });
+  });
+
+  it('"Meilleur élément" pour un soin se base sur la caractéristique brute, pas les dégâts', () => {
+    // Force 300 > Intelligence 200 : sans Puissance/DO_x, Terre doit gagner (alors que
+    // pour un sort de dégâts, DO_FEU aurait pu faire pencher la balance vers Feu).
+    const stats = calculerStatsPersonnage([cube({ FORCE: 300, INTELLIGENCE: 200, DO_FEU: 500 })]);
+    const resultats = calculerDegats(stats, [
+      { id: 1, degatsMin: 10, degatsMax: 10, element: 'Meilleur élément', estSoin: true },
+    ]);
+    expect(resultats[0].element).toBe('Terre');
+  });
+
+  it('un multiplicateur de breloque (dommages) ne s\'applique jamais à un sort de soin', () => {
+    const stats = calculerStatsPersonnage([]);
+    const resultats = calculerDegats(
+      stats,
+      [{ id: 1, degatsMin: 20, degatsMax: 20, element: 'Eau', estSoin: true }],
+      { multiplicateursBreloques: [{ type: 'finaux', valeur: 2 }] }
+    );
+    expect(resultats[0].degatsMin).toBe(20);
+  });
+
+  it('estSoin absent du résultat pour un sort de dégâts classique (rétrocompatible)', () => {
+    const stats = calculerStatsPersonnage([]);
+    const resultats = calculerDegats(stats, [{ id: 1, degatsMin: 20, degatsMax: 20, element: 'Feu' }]);
+    expect(resultats[0].estSoin).toBeUndefined();
+  });
+});
+
+describe('calculerDegats — lignes supplémentaires (Bluff, Pile ou Face, Tourbillon Embrasé...)', () => {
+  it('une ligne supplémentaire sans élément propre hérite de l\'élément du sort', () => {
+    const stats = calculerStatsPersonnage([]);
+    const resultats = calculerDegats(stats, [
+      {
+        id: 1,
+        degatsMin: 20,
+        degatsMax: 20,
+        element: 'Meilleur élément',
+        lignesSupplementaires: [{ degatsMin: 8, degatsMax: 10 }],
+      },
+    ]);
+    // Meilleur élément par défaut sans aucune stat équipée : premier élément (Feu)
+    expect(resultats).toHaveLength(2);
+    expect(resultats[0]).toEqual({ sortId: 1, element: 'Feu', degatsMin: 20, degatsMax: 20 });
+    expect(resultats[1]).toEqual({ sortId: 1, element: 'Feu', degatsMin: 8, degatsMax: 10 });
+  });
+
+  it('une ligne supplémentaire avec son propre élément fixe (Tourbillon Embrasé)', () => {
+    const stats = calculerStatsPersonnage([cube({ INTELLIGENCE: 100, AGILITE: 200 })]);
+    const resultats = calculerDegats(stats, [
+      {
+        id: 1,
+        degatsMin: 20,
+        degatsMax: 20,
+        element: 'Feu',
+        lignesSupplementaires: [{ element: 'Air', degatsMin: 10, degatsMax: 10 }],
+      },
+    ]);
+    expect(resultats).toHaveLength(2);
+    expect(resultats[0]).toEqual({ sortId: 1, element: 'Feu', degatsMin: 40, degatsMax: 40 });
+    expect(resultats[1]).toEqual({ sortId: 1, element: 'Air', degatsMin: 30, degatsMax: 30 });
+  });
+
+  it('une ligne uniquement au critique (Pile ou Face) omet degatsMin/Max, garde degatsCritiqueMin/Max', () => {
+    const stats = calculerStatsPersonnage([]);
+    const resultats = calculerDegats(stats, [
+      {
+        id: 1,
+        degatsMin: 19,
+        degatsMax: 22,
+        degatsCritiqueMin: 23,
+        degatsCritiqueMax: 26,
+        element: 'Air',
+        lignesSupplementaires: [{ degatsCritiqueMin: 9, degatsCritiqueMax: 11 }],
+      },
+    ]);
+    expect(resultats).toHaveLength(2);
+    expect(resultats[1]).toEqual({ sortId: 1, element: 'Air', degatsCritiqueMin: 9, degatsCritiqueMax: 11 });
+    expect(resultats[1].degatsMin).toBeUndefined();
+  });
+
+  it('un sort à 2 éléments à la fois (Bluff) sans lignes supplémentaires produit toujours 2 résultats', () => {
+    const stats = calculerStatsPersonnage([cube({ AGILITE: 100, CHANCE: 200 })]);
+    const resultats = calculerDegats(stats, [
+      { id: 1, degatsMin: 25, degatsMax: 29, element: ['Air', 'Eau'] },
+    ]);
+    expect(resultats).toHaveLength(2);
+    expect(resultats.find((r) => r.element === 'Air').degatsMin).toBe(50);
+    expect(resultats.find((r) => r.element === 'Eau').degatsMin).toBe(75);
+  });
+
+  it('une ligne supplémentaire vide (aucune valeur) est ignorée', () => {
+    const stats = calculerStatsPersonnage([]);
+    const resultats = calculerDegats(stats, [
+      { id: 1, degatsMin: 20, degatsMax: 20, element: 'Feu', lignesSupplementaires: [{ element: 'Air' }] },
+    ]);
+    expect(resultats).toHaveLength(1);
+  });
+
+  it('sans lignesSupplementaires (rétrocompatible), comportement inchangé', () => {
+    const stats = calculerStatsPersonnage([]);
+    const resultats = calculerDegats(stats, [{ id: 1, degatsMin: 19, degatsMax: 23, element: 'Feu' }]);
+    expect(resultats).toEqual([{ sortId: 1, element: 'Feu', degatsMin: 19, degatsMax: 23 }]);
+  });
+});
+
 describe('calculerStatsPersonnage — effets de breloques (onglet Boosts)', () => {
   it('les bonus plats de breloques s\'ajoutent comme le Parcho (ex: PA)', () => {
     const stats = calculerStatsPersonnage([], {}, { statsPlates: { PA: 3 }, pdvPourcent: 0 });

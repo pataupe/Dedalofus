@@ -65,6 +65,16 @@
   min-width: 0;
 }
 
+/* Empile plusieurs lignes de dégâts/soin sur une même carte (ex: Bluff qui tape
+   dans 2 éléments à la fois, Tourbillon Embrasé à 4 lignes, Pile ou Face/Foène/
+   Pelle Aveuglante avec une 2e ligne indépendante) — une seule ligne pour la
+   grande majorité des sorts, donc visuellement identique à avant dans ce cas. */
+.carte-sort__degats-groupe {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
 /* Ligne des dégâts mise en avant (façon DofusBook) : un bloc par valeur,
    séparateur vertical entre les deux quand les deux existent. */
 .carte-sort__degats {
@@ -97,6 +107,14 @@
 
 .carte-sort__degats-bloc--critique .carte-sort__degats-valeur {
   color: var(--couleur-feu);
+}
+
+/* Ligne qui n'existe qu'au critique (ex: 2e ligne de Pile ou Face) : le côté
+   normal reste vide plutôt que masqué, pour garder les 2 colonnes alignées
+   avec les autres lignes de la carte. */
+.carte-sort__degats-valeur--vide {
+  color: var(--panneau-texte-attenue);
+  font-weight: 600;
 }
 
 .carte-sort__degats-libelle {

@@ -268,12 +268,28 @@ function calculerDegatsPourElement(statsPersonnage, degatsBase, element) {
   return degatsBase * multiplicateur + bonus;
 }
 
+// Même formule que les dégâts, mais pour les sorts de soin (Mot Soignant/Curatif/
+// Revitalisant) : la Puissance ne compte pas (contrairement aux dégâts), et le "b"
+// de la formule est la stat Soin plutôt que Dommages/DO_<ELEMENT>.
+function calculerStatEfficaceSoin(statsPersonnage, element) {
+  return statsPersonnage[STAT_PAR_ELEMENT[element]] || 0;
+}
+
+function calculerBonusSoin(statsPersonnage) {
+  return statsPersonnage.SOIN || 0;
+}
+
+function calculerSoinPourElement(statsPersonnage, soinBase, element) {
+  const stat = calculerStatEfficaceSoin(statsPersonnage, element);
+  const multiplicateur = 1 + 0.01 * stat;
+  return soinBase * multiplicateur + calculerBonusSoin(statsPersonnage);
+}
+
 // Pour les sorts "meilleur élément" (Chaos/Lumière/Assaut Magique...) : détermine
 // l'élément de frappe qui donnerait le plus de dégâts, en se basant sur la moyenne
-// min/max du sort (le classement des éléments ne dépend pas du dégât de base choisi,
-// seul le bonus de dommages direct par élément peut faire varier le classement).
-function choisirMeilleurElement(statsPersonnage, sort) {
-  const degatsBaseMoyen = (sort.degatsMin + sort.degatsMax) / 2;
+// min/max de la ligne (le classement des éléments ne dépend pas du dégât de base
+// choisi, seul le bonus de dommages direct par élément peut faire varier le classement).
+function choisirMeilleurElement(statsPersonnage, degatsBaseMoyen) {
   let meilleurElement = ELEMENTS_DE_FRAPPE[0];
   let meilleurDegats = -Infinity;
 
@@ -288,47 +304,116 @@ function choisirMeilleurElement(statsPersonnage, sort) {
   return meilleurElement;
 }
 
-// Résout la ou les éléments de frappe réels d'un sort :
-// - `sort.element` = un des 4 éléments de frappe → ce seul élément
-// - `sort.element` = 'Meilleur élément' → l'élément le plus avantageux pour ce perso
-// - `sort.element` = tableau de 2 éléments (sort qui tape dans 2 éléments à la fois,
-//   ex: certains sorts Chaos) → les deux éléments, un calcul distinct pour chacun
+// Équivalent pour un sort de soin "meilleur élément" (Mot Revitalisant) : classe
+// uniquement sur la caractéristique brute (pas de Puissance, pas de bonus par
+// élément — la stat Soin est la même quel que soit l'élément choisi, elle ne
+// peut donc jamais départager le classement).
+function choisirMeilleurElementSoin(statsPersonnage) {
+  let meilleurElement = ELEMENTS_DE_FRAPPE[0];
+  let meilleureStat = -Infinity;
+
+  for (const element of ELEMENTS_DE_FRAPPE) {
+    const stat = statsPersonnage[STAT_PAR_ELEMENT[element]] || 0;
+    if (stat > meilleureStat) {
+      meilleureStat = stat;
+      meilleurElement = element;
+    }
+  }
+
+  return meilleurElement;
+}
+
+// Résout la ou les éléments de frappe réels d'une ligne de dégâts/soin d'un sort
+// (`ligne.element`, ou hérité de `sort.element` si absent) :
+// - un des 4 éléments de frappe → ce seul élément
+// - 'Meilleur élément' → l'élément le plus avantageux pour ce perso (formule dégâts
+//   ou soin selon `sort.estSoin`)
+// - tableau de 2 éléments (sort qui tape dans 2 éléments à la fois, ex: Bluff) →
+//   les deux éléments, un calcul distinct pour chacun
 // - autre cas (pas d'élément, sort sans dégâts...) → tableau vide
-function resoudreElements(statsPersonnage, sort) {
-  if (Array.isArray(sort.element)) {
-    return sort.element.filter((el) => ELEMENTS_DE_FRAPPE.includes(el));
+function resoudreElements(statsPersonnage, sort, ligne) {
+  const element = ligne.element ?? sort.element;
+
+  if (Array.isArray(element)) {
+    return element.filter((el) => ELEMENTS_DE_FRAPPE.includes(el));
   }
-  if (sort.element === 'Meilleur élément') {
-    return [choisirMeilleurElement(statsPersonnage, sort)];
+  if (element === 'Meilleur élément') {
+    if (sort.estSoin) return [choisirMeilleurElementSoin(statsPersonnage)];
+    const degatsBaseMoyen = ligne.degatsMin != null
+      ? (ligne.degatsMin + ligne.degatsMax) / 2
+      : (ligne.degatsCritiqueMin + ligne.degatsCritiqueMax) / 2;
+    return [choisirMeilleurElement(statsPersonnage, degatsBaseMoyen)];
   }
-  if (ELEMENTS_DE_FRAPPE.includes(sort.element)) {
-    return [sort.element];
+  if (ELEMENTS_DE_FRAPPE.includes(element)) {
+    return [element];
   }
   return [];
 }
 
+// Construit la liste des lignes "brutes" d'un sort : la ligne principale (colonnes
+// du Sort lui-même) si elle porte une valeur, puis chaque ligne supplémentaire
+// (SortDegatsSup, ex: Bluff/Tourbillon Embrasé/Pile ou Face/Foène/Pelle Aveuglante)
+// qui en porte une. Une ligne sans aucune valeur (ni dégâts, ni critique) est omise.
+function construireLignes(sort) {
+  const lignes = [];
+
+  if (sort.degatsMin != null || sort.degatsCritiqueMin != null) {
+    lignes.push({
+      element: sort.element,
+      degatsMin: sort.degatsMin,
+      degatsMax: sort.degatsMax,
+      degatsCritiqueMin: sort.degatsCritiqueMin,
+      degatsCritiqueMax: sort.degatsCritiqueMax,
+    });
+  }
+
+  for (const supp of sort.lignesSupplementaires || []) {
+    if (supp.degatsMin == null && supp.degatsCritiqueMin == null) continue;
+    lignes.push({
+      element: supp.element ?? sort.element,
+      degatsMin: supp.degatsMin,
+      degatsMax: supp.degatsMax,
+      degatsCritiqueMin: supp.degatsCritiqueMin,
+      degatsCritiqueMax: supp.degatsCritiqueMax,
+    });
+  }
+
+  return lignes;
+}
+
 /**
- * Étape 2 : calcule les dégâts de chaque sort équipé à partir des stats du personnage.
+ * Étape 2 : calcule les dégâts (ou le soin, pour les sorts `estSoin`) de chaque
+ * sort équipé à partir des stats du personnage.
  *
  * @param {Object} statsPersonnage Résultat de `calculerStatsPersonnage`.
  * @param {Array<{ id: number|string, degatsMin: number|null, degatsMax: number|null,
  *   element: string|string[]|null, degatsCritiqueMin?: number|null,
- *   degatsCritiqueMax?: number|null, chanceCritique?: number|null } | null>} sortsEquipes
+ *   degatsCritiqueMax?: number|null, chanceCritique?: number|null, estSoin?: boolean,
+ *   lignesSupplementaires?: Array<{ element?: string|null, degatsMin?: number|null,
+ *   degatsMax?: number|null, degatsCritiqueMin?: number|null, degatsCritiqueMax?: number|null }>
+ *   } | null>} sortsEquipes
  *   `degatsCritiqueMin/Max` et `chanceCritique` sont optionnels : absents, ils ne
  *   produisent simplement pas les clés correspondantes dans le résultat.
+ *   `lignesSupplementaires` (optionnel) : lignes de dégâts indépendantes de la ligne
+ *   principale (ex: 2e ligne de Pile ou Face/Foène/Pelle Aveuglante, lignes 2 à 4 de
+ *   Tourbillon Embrasé) — `element` absent hérite de `sort.element`, `degatsMin/Max`
+ *   peuvent être absents si la ligne n'existe qu'au critique (Pile ou Face).
  * @param {Object} [options]
  * @param {Array<{type: string, valeur: number}>} [options.multiplicateursBreloques] Résultat
  *   de `calculerEffetsBreloques(...).multiplicateurs` (effetsBreloques.js) — multiplicateurs
  *   de dégâts des breloques actuellement actives, combinés via `combinerMultiplicateurs`
- *   selon `modeAttaque` puis appliqués en facteur final sur chaque dégât (normal ET critique).
+ *   selon `modeAttaque` puis appliqués en facteur final sur chaque dégât (normal ET
+ *   critique). Jamais appliqués aux sorts de soin (`estSoin`).
  * @param {'distance'|'melee'} [options.modeAttaque] Une attaque est toujours soit distance
  *   soit mêlée, jamais les deux (choix du joueur, onglet Sorts) — détermine quels
  *   multiplicateurs "finaux distance"/"finaux mêlée" s'appliquent. Par défaut 'distance'.
- * @returns {Array<{ sortId: number|string, element: string, degatsMin: number,
- *   degatsMax: number, degatsCritiqueMin?: number, degatsCritiqueMax?: number,
- *   chanceCritiqueTotal?: number }>} Un élément du tableau par sort ET par élément de
- *   frappe concerné (2 entrées pour un sort qui tape dans 2 éléments à la fois). Les
- *   sorts sans dégâts (degatsMin/Max absents) ou sans élément de frappe sont omis.
+ * @returns {Array<{ sortId: number|string, element: string, degatsMin?: number,
+ *   degatsMax?: number, degatsCritiqueMin?: number, degatsCritiqueMax?: number,
+ *   chanceCritiqueTotal?: number, estSoin?: true }>} Une entrée par ligne ET par élément
+ *   de frappe concerné (2 entrées pour une ligne qui tape dans 2 éléments à la fois,
+ *   comme Bluff ; 4 entrées pour un sort à 4 lignes indépendantes, comme Tourbillon
+ *   Embrasé). `degatsMin/Max` absents si la ligne n'a de valeur qu'au critique (Pile ou
+ *   Face). Les lignes/sorts sans aucune valeur ou sans élément de frappe sont omis.
  *   Les dégâts sont arrondis à l'entier le plus proche (jamais affichés en décimal).
  *   `chanceCritiqueTotal` = % critique de base du sort + stat `%_COUP_CRITIQUE` du
  *   personnage (jamais arrondi, c'est déjà un entier des deux côtés).
@@ -339,31 +424,40 @@ function calculerDegats(statsPersonnage, sortsEquipes, options = {}) {
   const resultats = [];
 
   for (const sort of sortsEquipes || []) {
-    if (!sort || sort.degatsMin == null || sort.degatsMax == null) continue;
+    if (!sort) continue;
 
-    const elements = resoudreElements(statsPersonnage, sort);
-    for (const element of elements) {
-      const resultat = {
-        sortId: sort.id,
-        element,
-        degatsMin: Math.round(calculerDegatsPourElement(statsPersonnage, sort.degatsMin, element) * multiplicateurFinal),
-        degatsMax: Math.round(calculerDegatsPourElement(statsPersonnage, sort.degatsMax, element) * multiplicateurFinal),
-      };
+    // Les multiplicateurs de breloques (dommages finaux) sont une mécanique de
+    // dégâts : ne s'appliquent jamais aux sorts de soin.
+    const facteur = sort.estSoin ? 1 : multiplicateurFinal;
+    const calculerValeurPour = sort.estSoin ? calculerSoinPourElement : calculerDegatsPourElement;
 
-      if (sort.degatsCritiqueMin != null && sort.degatsCritiqueMax != null) {
-        resultat.degatsCritiqueMin = Math.round(
-          calculerDegatsPourElement(statsPersonnage, sort.degatsCritiqueMin, element) * multiplicateurFinal
-        );
-        resultat.degatsCritiqueMax = Math.round(
-          calculerDegatsPourElement(statsPersonnage, sort.degatsCritiqueMax, element) * multiplicateurFinal
-        );
+    for (const ligne of construireLignes(sort)) {
+      const elements = resoudreElements(statsPersonnage, sort, ligne);
+
+      for (const element of elements) {
+        const resultat = { sortId: sort.id, element };
+        if (sort.estSoin) resultat.estSoin = true;
+
+        if (ligne.degatsMin != null && ligne.degatsMax != null) {
+          resultat.degatsMin = Math.round(calculerValeurPour(statsPersonnage, ligne.degatsMin, element) * facteur);
+          resultat.degatsMax = Math.round(calculerValeurPour(statsPersonnage, ligne.degatsMax, element) * facteur);
+        }
+
+        if (ligne.degatsCritiqueMin != null && ligne.degatsCritiqueMax != null) {
+          resultat.degatsCritiqueMin = Math.round(
+            calculerValeurPour(statsPersonnage, ligne.degatsCritiqueMin, element) * facteur
+          );
+          resultat.degatsCritiqueMax = Math.round(
+            calculerValeurPour(statsPersonnage, ligne.degatsCritiqueMax, element) * facteur
+          );
+        }
+
+        if (sort.chanceCritique != null) {
+          resultat.chanceCritiqueTotal = sort.chanceCritique + (statsPersonnage['%_COUP_CRITIQUE'] || 0);
+        }
+
+        resultats.push(resultat);
       }
-
-      if (sort.chanceCritique != null) {
-        resultat.chanceCritiqueTotal = sort.chanceCritique + (statsPersonnage['%_COUP_CRITIQUE'] || 0);
-      }
-
-      resultats.push(resultat);
     }
   }
 

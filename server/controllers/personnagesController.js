@@ -140,6 +140,36 @@ async function construireFichePersonnage(personnage) {
     .filter((c) => c.id)
     .map((c) => ({ element: c.element, stats: statsParCube[c.id] || [] }));
 
+  // Lignes de dégâts supplémentaires (SortDegatsSup) des sorts équipés — Bluff/
+  // Tourbillon Embrasé (2 à 4 éléments à la fois), Pile ou Face/Foène/Pelle
+  // Aveuglante (2e ligne indépendante). Batch-fetch comme StatCube, groupé par sort.
+  const idsSortsEquipes = sorts.filter((s) => s.id).map((s) => s.id);
+  let lignesSupParSort = {};
+  if (idsSortsEquipes.length > 0) {
+    const [lignesSup] = await pool.query(
+      `SELECT sort_id, element, degats_min, degats_max, degats_critique_min, degats_critique_max
+       FROM SortDegatsSup WHERE sort_id IN (${idsSortsEquipes.map(() => '?').join(',')}) ORDER BY ordre`,
+      idsSortsEquipes
+    );
+    for (const ligne of lignesSup) {
+      if (!lignesSupParSort[ligne.sort_id]) lignesSupParSort[ligne.sort_id] = [];
+      lignesSupParSort[ligne.sort_id].push({
+        element: ligne.element,
+        degatsMin: ligne.degats_min,
+        degatsMax: ligne.degats_max,
+        degatsCritiqueMin: ligne.degats_critique_min,
+        degatsCritiqueMax: ligne.degats_critique_max,
+      });
+    }
+  }
+
+  // Un sort peut taper dans 2 éléments à la fois (ex: Bluff, "Air, Eau" en base) :
+  // converti en tableau pour calculerDegats, qui produit alors un résultat distinct
+  // par élément (voir server/logic/calcul.js, resoudreElements).
+  function eclaterElement(element) {
+    return element && element.includes(',') ? element.split(',').map((e) => e.trim()) : element;
+  }
+
   // Effets actuellement actifs des breloques équipées (onglet "Boosts breloques") :
   // bonus de stats plates + pdvPourcent fusionnés dans calculerStatsPersonnage comme
   // le Parcho, multiplicateurs de dégâts réservés à calculerDegats (2 appels plus bas,
@@ -160,10 +190,15 @@ async function construireFichePersonnage(personnage) {
       id: s.id,
       degatsMin: s.degats_min,
       degatsMax: s.degats_max,
-      element: s.element,
+      element: eclaterElement(s.element),
       degatsCritiqueMin: s.degats_critique_min,
       degatsCritiqueMax: s.degats_critique_max,
       chanceCritique: s.chance_critique,
+      estSoin: Boolean(s.est_soin),
+      lignesSupplementaires: (lignesSupParSort[s.id] || []).map((l) => ({
+        ...l,
+        element: eclaterElement(l.element),
+      })),
     }));
   const degats = {
     distance: calculerDegats(statsPersonnage, sortsEquipesPourCalcul, {
@@ -190,7 +225,18 @@ async function construireFichePersonnage(personnage) {
     })),
     sorts: sorts.map(({ emplacement, ...sort }) => ({
       emplacement,
-      sort: sort.id ? sort : null,
+      sort: sort.id
+        ? {
+            ...sort,
+            lignes_supplementaires: (lignesSupParSort[sort.id] || []).map((l) => ({
+              element: l.element,
+              degats_min: l.degatsMin,
+              degats_max: l.degatsMax,
+              degats_critique_min: l.degatsCritiqueMin,
+              degats_critique_max: l.degatsCritiqueMax,
+            })),
+          }
+        : null,
     })),
     breloques: breloques.map(({ emplacement, id, nom, rang, effet, image_url, boost_valeur, ...boostColonnes }) => ({
       emplacement,

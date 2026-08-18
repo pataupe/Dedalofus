@@ -6,8 +6,10 @@ import './OngletSorts.css';
 // (personnage.degats.distance/.melee, produits par calculerDegats côté
 // serveur pour les 2 modes d'attaque à l'avance — pas de rechargement au
 // changement de toggle), contrairement à la page /sorts publique qui affiche
-// les valeurs de base. Un sort qui tape dans 2 éléments à la fois a 2 entrées
-// dans `degats` -> 2 cartes.
+// les valeurs de base. Un sort qui a plusieurs lignes de dégâts (Bluff/
+// Tourbillon Embrasé : plusieurs éléments à la fois, Pile ou Face/Foène/Pelle
+// Aveuglante : 2e ligne indépendante) a plusieurs entrées dans `degats` pour
+// le même sortId -> toutes affichées empilées sur UNE seule carte (SortCard).
 //
 // 2 réglages locaux, non persistés (juste une préférence d'affichage) :
 // - Distance/Mêlée (défaut Distance) : une attaque est toujours l'un des deux,
@@ -52,14 +54,7 @@ function OngletSorts({ personnage }) {
       <div className="onglet-sorts__grille">
         {sortsEquipes.map(({ emplacement, sort }) => {
           const calculs = afficherCalcule ? degatsDuMode.filter((d) => d.sortId === sort.id) : [];
-
-          if (calculs.length === 0) {
-            return <SortCard key={emplacement} sort={sort} />;
-          }
-
-          return calculs.map((calcul) => (
-            <SortCard key={`${emplacement}-${calcul.element}`} sort={sort} calcul={calcul} />
-          ));
+          return <SortCard key={emplacement} sort={sort} calculs={calculs} />;
         })}
       </div>
     </div>

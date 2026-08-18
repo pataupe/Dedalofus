@@ -47,7 +47,30 @@ async function listerSorts(req, res) {
     [...params, limite, offset]
   );
 
-  res.json(sorts);
+  // Lignes de dégâts supplémentaires (SortDegatsSup) — Bluff/Tourbillon Embrasé
+  // (plusieurs éléments à la fois), Pile ou Face/Foène/Pelle Aveuglante (2e ligne
+  // indépendante). Même pattern de batch-fetch que StatCube pour les cubes.
+  const ids = sorts.map((s) => s.id);
+  let lignesSupParSort = {};
+  if (ids.length > 0) {
+    const [lignesSup] = await pool.query(
+      `SELECT sort_id, element, degats_min, degats_max, degats_critique_min, degats_critique_max
+       FROM SortDegatsSup WHERE sort_id IN (${ids.map(() => '?').join(',')}) ORDER BY ordre`,
+      ids
+    );
+    for (const ligne of lignesSup) {
+      if (!lignesSupParSort[ligne.sort_id]) lignesSupParSort[ligne.sort_id] = [];
+      lignesSupParSort[ligne.sort_id].push({
+        element: ligne.element,
+        degats_min: ligne.degats_min,
+        degats_max: ligne.degats_max,
+        degats_critique_min: ligne.degats_critique_min,
+        degats_critique_max: ligne.degats_critique_max,
+      });
+    }
+  }
+
+  res.json(sorts.map((s) => ({ ...s, lignes_supplementaires: lignesSupParSort[s.id] || [] })));
 }
 
 module.exports = { listerSorts };
