@@ -84,6 +84,11 @@ function Header() {
           {/* Regroupe Cubes/Breloques/Sorts (+ Breuvages à venir) derrière un seul
               déclencheur : laisse de la place dans le header pour du contenu futur
               (guides, news, tutos) sans multiplier les boutons de premier niveau. */}
+          {session && (
+            <Link to="/personnage" className="entete__lien entete__lien--compte" onClick={fermerMenu}>
+              Mes stuffs
+            </Link>
+          )}
           <div className="entete__items-selecteur" ref={selecteurRef}>
             <button
               type="button"
@@ -154,11 +159,6 @@ function Header() {
             )}
           </div>
 
-          {session && (
-            <Link to="/personnage" className="entete__lien entete__lien--compte" onClick={fermerMenu}>
-              Mes stuffs
-            </Link>
-          )}
         </div>
         {session ? (
           <div className="entete__compte">
