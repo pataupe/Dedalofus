@@ -126,8 +126,7 @@
         "id": 5,
         "imageUrl": "/images/cubes/5.webp"
       }
-    ],
-    "imageComposite": "/images/ensembles/ensemble-de-cubes-air.webp"
+    ]
   },
   {
     "cle": "ensemble-de-cubes-terre",
@@ -256,8 +255,7 @@
         "id": 155,
         "imageUrl": "/images/cubes/155.webp"
       }
-    ],
-    "imageComposite": "/images/ensembles/ensemble-de-cubes-terre.webp"
+    ]
   },
   {
     "cle": "ensemble-de-cubes-eau",
@@ -386,8 +384,7 @@
         "id": 230,
         "imageUrl": "/images/cubes/230.webp"
       }
-    ],
-    "imageComposite": "/images/ensembles/ensemble-de-cubes-eau.webp"
+    ]
   },
   {
     "cle": "ensemble-de-cubes-feu",
@@ -516,8 +513,7 @@
         "id": 80,
         "imageUrl": "/images/cubes/80.webp"
       }
-    ],
-    "imageComposite": "/images/ensembles/ensemble-de-cubes-feu.webp"
+    ]
   },
   {
     "cle": "ensemble-de-cubes-lumiere",
@@ -655,8 +651,7 @@
         "id": 380,
         "imageUrl": "/images/cubes/380.webp"
       }
-    ],
-    "imageComposite": "/images/ensembles/ensemble-de-cubes-lumiere.webp"
+    ]
   },
   {
     "cle": "de-l-altruiste",
@@ -911,6 +906,7 @@
             "SOIN": 5
           },
           "multiplicateurs": [],
+          "indicatifs": [],
           "notes": []
         }
       },
@@ -922,6 +918,7 @@
             "SOIN": 10
           },
           "multiplicateurs": [],
+          "indicatifs": [],
           "notes": []
         }
       },
@@ -933,6 +930,7 @@
             "SOIN": 20
           },
           "multiplicateurs": [],
+          "indicatifs": [],
           "notes": []
         }
       },
@@ -944,6 +942,7 @@
             "SOIN": 30
           },
           "multiplicateurs": [],
+          "indicatifs": [],
           "notes": []
         }
       },
@@ -955,6 +954,7 @@
             "SOIN": 40
           },
           "multiplicateurs": [],
+          "indicatifs": [],
           "notes": []
         }
       },
@@ -966,6 +966,7 @@
             "SOIN": 50
           },
           "multiplicateurs": [],
+          "indicatifs": [],
           "notes": []
         }
       },
@@ -977,6 +978,7 @@
             "SOIN": 60
           },
           "multiplicateurs": [],
+          "indicatifs": [],
           "notes": []
         }
       },
@@ -988,6 +990,7 @@
             "SOIN": 70
           },
           "multiplicateurs": [],
+          "indicatifs": [],
           "notes": []
         }
       }
@@ -1003,8 +1006,7 @@
         "id": 97,
         "imageUrl": "/images/sorts/97.webp"
       }
-    ],
-    "imageComposite": "/images/ensembles/de-l-altruiste.webp"
+    ]
   },
   {
     "cle": "de-l-artificer",
@@ -1342,6 +1344,7 @@
               "valeur": 1.02
             }
           ],
+          "indicatifs": [],
           "notes": []
         }
       },
@@ -1358,6 +1361,7 @@
               "valeur": 1.04
             }
           ],
+          "indicatifs": [],
           "notes": []
         }
       },
@@ -1374,6 +1378,7 @@
               "valeur": 1.06
             }
           ],
+          "indicatifs": [],
           "notes": []
         }
       },
@@ -1390,6 +1395,7 @@
               "valeur": 1.08
             }
           ],
+          "indicatifs": [],
           "notes": []
         }
       },
@@ -1406,6 +1412,7 @@
               "valeur": 1.1
             }
           ],
+          "indicatifs": [],
           "notes": []
         }
       }
@@ -1421,8 +1428,7 @@
         "id": 112,
         "imageUrl": "/images/sorts/112.webp"
       }
-    ],
-    "imageComposite": "/images/ensembles/de-l-artificer.webp"
+    ]
   },
   {
     "cle": "du-bousculeur",
@@ -1863,6 +1869,7 @@
             "DO_POU": 5
           },
           "multiplicateurs": [],
+          "indicatifs": [],
           "notes": []
         }
       },
@@ -1874,6 +1881,7 @@
             "DO_POU": 10
           },
           "multiplicateurs": [],
+          "indicatifs": [],
           "notes": []
         }
       },
@@ -1885,6 +1893,7 @@
             "DO_POU": 15
           },
           "multiplicateurs": [],
+          "indicatifs": [],
           "notes": []
         }
       },
@@ -1896,6 +1905,7 @@
             "DO_POU": 20
           },
           "multiplicateurs": [],
+          "indicatifs": [],
           "notes": []
         }
       },
@@ -1907,6 +1917,7 @@
             "DO_POU": 25
           },
           "multiplicateurs": [],
+          "indicatifs": [],
           "notes": []
         }
       },
@@ -1918,6 +1929,7 @@
             "DO_POU": 30
           },
           "multiplicateurs": [],
+          "indicatifs": [],
           "notes": []
         }
       },
@@ -1929,6 +1941,7 @@
             "DO_POU": 35
           },
           "multiplicateurs": [],
+          "indicatifs": [],
           "notes": []
         }
       }
@@ -1944,8 +1957,7 @@
         "id": 88,
         "imageUrl": "/images/sorts/88.webp"
       }
-    ],
-    "imageComposite": "/images/ensembles/du-bousculeur.webp"
+    ]
   },
   {
     "cle": "du-calculateur",
@@ -2226,6 +2238,7 @@
         "delta": {
           "statsPlates": {},
           "multiplicateurs": [],
+          "indicatifs": [],
           "notes": [
             "Aucun bonus"
           ]
@@ -2236,12 +2249,12 @@
         "texte": "+25 Sagesse, + 5 Fuite",
         "delta": {
           "statsPlates": {
-            "SAGESSE": 25
+            "SAGESSE": 25,
+            "FUITE": 5
           },
           "multiplicateurs": [],
-          "notes": [
-            "+ 5 Fuite"
-          ]
+          "indicatifs": [],
+          "notes": []
         }
       },
       {
@@ -2249,12 +2262,12 @@
         "texte": "+50 Sagesse, + 10 Fuite",
         "delta": {
           "statsPlates": {
-            "SAGESSE": 50
+            "SAGESSE": 50,
+            "FUITE": 10
           },
           "multiplicateurs": [],
-          "notes": [
-            "+ 10 Fuite"
-          ]
+          "indicatifs": [],
+          "notes": []
         }
       },
       {
@@ -2262,12 +2275,12 @@
         "texte": "+75 Sagesse, + 20 Fuite",
         "delta": {
           "statsPlates": {
-            "SAGESSE": 75
+            "SAGESSE": 75,
+            "FUITE": 20
           },
           "multiplicateurs": [],
-          "notes": [
-            "+ 20 Fuite"
-          ]
+          "indicatifs": [],
+          "notes": []
         }
       },
       {
@@ -2275,12 +2288,12 @@
         "texte": "+100 Sagesse, + 30 Fuite",
         "delta": {
           "statsPlates": {
-            "SAGESSE": 100
+            "SAGESSE": 100,
+            "FUITE": 30
           },
           "multiplicateurs": [],
-          "notes": [
-            "+ 30 Fuite"
-          ]
+          "indicatifs": [],
+          "notes": []
         }
       },
       {
@@ -2288,12 +2301,12 @@
         "texte": "+125 Sagesse, + 40 Fuite",
         "delta": {
           "statsPlates": {
-            "SAGESSE": 125
+            "SAGESSE": 125,
+            "FUITE": 40
           },
           "multiplicateurs": [],
-          "notes": [
-            "+ 40 Fuite"
-          ]
+          "indicatifs": [],
+          "notes": []
         }
       },
       {
@@ -2301,12 +2314,12 @@
         "texte": "+150 Sagesse, + 50 Fuite",
         "delta": {
           "statsPlates": {
-            "SAGESSE": 150
+            "SAGESSE": 150,
+            "FUITE": 50
           },
           "multiplicateurs": [],
-          "notes": [
-            "+ 50 Fuite"
-          ]
+          "indicatifs": [],
+          "notes": []
         }
       }
     ],
@@ -2321,8 +2334,7 @@
         "id": 593,
         "imageUrl": "/images/sorts/593.webp"
       }
-    ],
-    "imageComposite": "/images/ensembles/du-calculateur.webp"
+    ]
   },
   {
     "cle": "du-chanceux",
@@ -2705,6 +2717,7 @@
         "delta": {
           "statsPlates": {},
           "multiplicateurs": [],
+          "indicatifs": [],
           "notes": [
             "Aucun bonus"
           ]
@@ -2715,12 +2728,12 @@
         "texte": "+2% CC, + 10 Dommages Critiques",
         "delta": {
           "statsPlates": {
-            "%_COUP_CRITIQUE": 2
+            "%_COUP_CRITIQUE": 2,
+            "DO_CRIT": 10
           },
           "multiplicateurs": [],
-          "notes": [
-            "+ 10 Dommages Critiques"
-          ]
+          "indicatifs": [],
+          "notes": []
         }
       },
       {
@@ -2728,12 +2741,12 @@
         "texte": "+4% CC, + 15Dommages Critiques",
         "delta": {
           "statsPlates": {
-            "%_COUP_CRITIQUE": 4
+            "%_COUP_CRITIQUE": 4,
+            "DO_CRIT": 15
           },
           "multiplicateurs": [],
-          "notes": [
-            "+ 15Dommages Critiques"
-          ]
+          "indicatifs": [],
+          "notes": []
         }
       },
       {
@@ -2741,12 +2754,12 @@
         "texte": "+6% CC, + 20 Dommages Critiques",
         "delta": {
           "statsPlates": {
-            "%_COUP_CRITIQUE": 6
+            "%_COUP_CRITIQUE": 6,
+            "DO_CRIT": 20
           },
           "multiplicateurs": [],
-          "notes": [
-            "+ 20 Dommages Critiques"
-          ]
+          "indicatifs": [],
+          "notes": []
         }
       },
       {
@@ -2754,12 +2767,12 @@
         "texte": "+8% CC, + 25 Dommages Critiques",
         "delta": {
           "statsPlates": {
-            "%_COUP_CRITIQUE": 8
+            "%_COUP_CRITIQUE": 8,
+            "DO_CRIT": 25
           },
           "multiplicateurs": [],
-          "notes": [
-            "+ 25 Dommages Critiques"
-          ]
+          "indicatifs": [],
+          "notes": []
         }
       },
       {
@@ -2767,12 +2780,12 @@
         "texte": "+10% CC, + 30 Dommages Critiques",
         "delta": {
           "statsPlates": {
-            "%_COUP_CRITIQUE": 10
+            "%_COUP_CRITIQUE": 10,
+            "DO_CRIT": 30
           },
           "multiplicateurs": [],
-          "notes": [
-            "+ 30 Dommages Critiques"
-          ]
+          "indicatifs": [],
+          "notes": []
         }
       }
     ],
@@ -2787,8 +2800,7 @@
         "id": 57,
         "imageUrl": "/images/breloques/57.webp"
       }
-    ],
-    "imageComposite": "/images/ensembles/du-chanceux.webp"
+    ]
   },
   {
     "cle": "de-l-entraveur",
@@ -3044,6 +3056,7 @@
             "RETRAIT_PM_BRELOQUE": 5
           },
           "multiplicateurs": [],
+          "indicatifs": [],
           "notes": []
         }
       },
@@ -3056,6 +3069,7 @@
             "RETRAIT_PM_BRELOQUE": 10
           },
           "multiplicateurs": [],
+          "indicatifs": [],
           "notes": []
         }
       },
@@ -3068,6 +3082,7 @@
             "RETRAIT_PM_BRELOQUE": 15
           },
           "multiplicateurs": [],
+          "indicatifs": [],
           "notes": []
         }
       },
@@ -3080,6 +3095,7 @@
             "RETRAIT_PM_BRELOQUE": 20
           },
           "multiplicateurs": [],
+          "indicatifs": [],
           "notes": []
         }
       },
@@ -3092,6 +3108,7 @@
             "RETRAIT_PM_BRELOQUE": 25
           },
           "multiplicateurs": [],
+          "indicatifs": [],
           "notes": []
         }
       }
@@ -3107,8 +3124,7 @@
         "id": 69,
         "imageUrl": "/images/breloques/69.webp"
       }
-    ],
-    "imageComposite": "/images/ensembles/de-l-entraveur.webp"
+    ]
   },
   {
     "cle": "du-fourbe",
@@ -3384,6 +3400,7 @@
         "delta": {
           "statsPlates": {},
           "multiplicateurs": [],
+          "indicatifs": [],
           "notes": [
             "Aucun bonus"
           ]
@@ -3397,6 +3414,7 @@
             "PUISSANCE_PIEGE": 25
           },
           "multiplicateurs": [],
+          "indicatifs": [],
           "notes": []
         }
       },
@@ -3409,6 +3427,7 @@
             "DO_PIEGE": 5
           },
           "multiplicateurs": [],
+          "indicatifs": [],
           "notes": []
         }
       },
@@ -3422,6 +3441,7 @@
             "PO": 1
           },
           "multiplicateurs": [],
+          "indicatifs": [],
           "notes": []
         }
       },
@@ -3435,6 +3455,7 @@
             "PO": 1
           },
           "multiplicateurs": [],
+          "indicatifs": [],
           "notes": []
         }
       },
@@ -3448,6 +3469,7 @@
             "PO": 2
           },
           "multiplicateurs": [],
+          "indicatifs": [],
           "notes": []
         }
       },
@@ -3461,6 +3483,7 @@
             "PO": 2
           },
           "multiplicateurs": [],
+          "indicatifs": [],
           "notes": []
         }
       },
@@ -3474,6 +3497,7 @@
             "PO": 2
           },
           "multiplicateurs": [],
+          "indicatifs": [],
           "notes": []
         }
       },
@@ -3487,6 +3511,7 @@
             "PO": 2
           },
           "multiplicateurs": [],
+          "indicatifs": [],
           "notes": []
         }
       }
@@ -3502,8 +3527,7 @@
         "id": 533,
         "imageUrl": "/images/sorts/533.webp"
       }
-    ],
-    "imageComposite": "/images/ensembles/du-fourbe.webp"
+    ]
   },
   {
     "cle": "de-l-invocateur",
@@ -3680,6 +3704,7 @@
             "VITALITE": 80
           },
           "multiplicateurs": [],
+          "indicatifs": [],
           "notes": []
         }
       },
@@ -3691,6 +3716,7 @@
             "VITALITE": 140
           },
           "multiplicateurs": [],
+          "indicatifs": [],
           "notes": []
         }
       },
@@ -3702,6 +3728,7 @@
             "VITALITE": 180
           },
           "multiplicateurs": [],
+          "indicatifs": [],
           "notes": []
         }
       },
@@ -3713,6 +3740,7 @@
             "VITALITE": 240
           },
           "multiplicateurs": [],
+          "indicatifs": [],
           "notes": []
         }
       },
@@ -3724,6 +3752,7 @@
             "VITALITE": 300
           },
           "multiplicateurs": [],
+          "indicatifs": [],
           "notes": []
         }
       }
@@ -3739,8 +3768,7 @@
         "id": 100,
         "imageUrl": "/images/sorts/100.webp"
       }
-    ],
-    "imageComposite": "/images/ensembles/de-l-invocateur.webp"
+    ]
   },
   {
     "cle": "des-portes-de-la-mort",
@@ -3993,6 +4021,7 @@
         "delta": {
           "statsPlates": {},
           "multiplicateurs": [],
+          "indicatifs": [],
           "notes": [
             "Aucun bonus"
           ]
@@ -4010,6 +4039,7 @@
             "RES_NEUTRE": 10
           },
           "multiplicateurs": [],
+          "indicatifs": [],
           "notes": []
         }
       },
@@ -4027,6 +4057,7 @@
             "RES_CRIT": 10
           },
           "multiplicateurs": [],
+          "indicatifs": [],
           "notes": []
         }
       },
@@ -4044,6 +4075,7 @@
             "RES_CRIT": 20
           },
           "multiplicateurs": [],
+          "indicatifs": [],
           "notes": []
         }
       },
@@ -4061,6 +4093,7 @@
             "RES_CRIT": 30
           },
           "multiplicateurs": [],
+          "indicatifs": [],
           "notes": []
         }
       },
@@ -4078,6 +4111,7 @@
             "RES_CRIT": 40
           },
           "multiplicateurs": [],
+          "indicatifs": [],
           "notes": []
         }
       }
@@ -4093,8 +4127,7 @@
         "id": 21,
         "imageUrl": "/images/breloques/21.webp"
       }
-    ],
-    "imageComposite": "/images/ensembles/des-portes-de-la-mort.webp"
+    ]
   },
   {
     "cle": "du-pugiliste",
@@ -4477,6 +4510,7 @@
         "delta": {
           "statsPlates": {},
           "multiplicateurs": [],
+          "indicatifs": [],
           "notes": [
             "Aucun bonus"
           ]
@@ -4491,6 +4525,7 @@
             "TACLE": 10
           },
           "multiplicateurs": [],
+          "indicatifs": [],
           "notes": []
         }
       },
@@ -4503,6 +4538,7 @@
             "TACLE": 20
           },
           "multiplicateurs": [],
+          "indicatifs": [],
           "notes": []
         }
       },
@@ -4515,6 +4551,7 @@
             "TACLE": 30
           },
           "multiplicateurs": [],
+          "indicatifs": [],
           "notes": []
         }
       },
@@ -4527,6 +4564,7 @@
             "TACLE": 40
           },
           "multiplicateurs": [],
+          "indicatifs": [],
           "notes": []
         }
       },
@@ -4539,6 +4577,7 @@
             "TACLE": 50
           },
           "multiplicateurs": [],
+          "indicatifs": [],
           "notes": []
         }
       },
@@ -4551,6 +4590,7 @@
             "TACLE": 60
           },
           "multiplicateurs": [],
+          "indicatifs": [],
           "notes": []
         }
       },
@@ -4563,6 +4603,7 @@
             "TACLE": 70
           },
           "multiplicateurs": [],
+          "indicatifs": [],
           "notes": []
         }
       },
@@ -4575,6 +4616,7 @@
             "TACLE": 80
           },
           "multiplicateurs": [],
+          "indicatifs": [],
           "notes": []
         }
       },
@@ -4587,6 +4629,7 @@
             "TACLE": 90
           },
           "multiplicateurs": [],
+          "indicatifs": [],
           "notes": []
         }
       },
@@ -4599,6 +4642,7 @@
             "TACLE": 100
           },
           "multiplicateurs": [],
+          "indicatifs": [],
           "notes": []
         }
       },
@@ -4611,6 +4655,7 @@
             "TACLE": 110
           },
           "multiplicateurs": [],
+          "indicatifs": [],
           "notes": []
         }
       }
@@ -4626,8 +4671,7 @@
         "id": 123,
         "imageUrl": "/images/breloques/123.webp"
       }
-    ],
-    "imageComposite": "/images/ensembles/du-pugiliste.webp"
+    ]
   },
   {
     "cle": "du-phossile",
@@ -4668,6 +4712,7 @@
             "DO_POU": 25
           },
           "multiplicateurs": [],
+          "indicatifs": [],
           "notes": []
         }
       },
@@ -4681,6 +4726,7 @@
             "PA": 1
           },
           "multiplicateurs": [],
+          "indicatifs": [],
           "notes": []
         }
       }
@@ -4696,8 +4742,7 @@
         "id": 624,
         "imageUrl": "/images/sorts/624.webp"
       }
-    ],
-    "imageComposite": "/images/ensembles/du-phossile.webp"
+    ]
   },
   {
     "cle": "du-craqdoa",
@@ -4741,6 +4786,7 @@
             "%_RES_NEUTRE": 5
           },
           "multiplicateurs": [],
+          "indicatifs": [],
           "notes": []
         }
       },
@@ -4757,6 +4803,7 @@
             "PA": 1
           },
           "multiplicateurs": [],
+          "indicatifs": [],
           "notes": []
         }
       }
@@ -4772,8 +4819,7 @@
         "id": 628,
         "imageUrl": "/images/sorts/628.webp"
       }
-    ],
-    "imageComposite": "/images/ensembles/du-craqdoa.webp"
+    ]
   },
   {
     "cle": "de-corruption",
@@ -4818,6 +4864,7 @@
               "valeur": 1.05
             }
           ],
+          "indicatifs": [],
           "notes": []
         }
       },
@@ -4835,6 +4882,7 @@
               "valeur": 1.1
             }
           ],
+          "indicatifs": [],
           "notes": []
         }
       }
@@ -4850,8 +4898,7 @@
         "id": 621,
         "imageUrl": "/images/sorts/621.webp"
       }
-    ],
-    "imageComposite": "/images/ensembles/de-corruption.webp"
+    ]
   },
   {
     "cle": "de-toxoliath",
@@ -4896,6 +4943,7 @@
               "valeur": 1.1
             }
           ],
+          "indicatifs": [],
           "notes": []
         }
       },
@@ -4913,6 +4961,7 @@
               "valeur": 1.2
             }
           ],
+          "indicatifs": [],
           "notes": []
         }
       }
@@ -4928,8 +4977,7 @@
         "id": 632,
         "imageUrl": "/images/sorts/632.webp"
       }
-    ],
-    "imageComposite": "/images/ensembles/de-toxoliath.webp"
+    ]
   },
   {
     "cle": "de-servitude",
@@ -4969,9 +5017,13 @@
             "VITALITE": 200
           },
           "multiplicateurs": [],
-          "notes": [
-            "+5% de résistances distances"
-          ]
+          "indicatifs": [
+            {
+              "type": "resistances_distance",
+              "valeur": 5
+            }
+          ],
+          "notes": []
         }
       },
       {
@@ -4983,9 +5035,13 @@
             "PA": 1
           },
           "multiplicateurs": [],
-          "notes": [
-            "+10% de résistances distances"
-          ]
+          "indicatifs": [
+            {
+              "type": "resistances_distance",
+              "valeur": 10
+            }
+          ],
+          "notes": []
         }
       }
     ],
@@ -5000,8 +5056,7 @@
         "id": 623,
         "imageUrl": "/images/sorts/623.webp"
       }
-    ],
-    "imageComposite": "/images/ensembles/de-servitude.webp"
+    ]
   },
   {
     "cle": "de-misere",
@@ -5042,6 +5097,7 @@
             "FUITE": 25
           },
           "multiplicateurs": [],
+          "indicatifs": [],
           "notes": []
         }
       },
@@ -5055,6 +5111,7 @@
             "PA": 1
           },
           "multiplicateurs": [],
+          "indicatifs": [],
           "notes": []
         }
       }
@@ -5070,8 +5127,7 @@
         "id": 625,
         "imageUrl": "/images/sorts/625.webp"
       }
-    ],
-    "imageComposite": "/images/ensembles/de-misere.webp"
+    ]
   },
   {
     "cle": "du-katragon",
@@ -5112,6 +5168,7 @@
             "INVOCATION": 1
           },
           "multiplicateurs": [],
+          "indicatifs": [],
           "notes": []
         }
       },
@@ -5125,6 +5182,7 @@
             "PA": 1
           },
           "multiplicateurs": [],
+          "indicatifs": [],
           "notes": []
         }
       }
@@ -5140,8 +5198,7 @@
         "id": 627,
         "imageUrl": "/images/sorts/627.webp"
       }
-    ],
-    "imageComposite": "/images/ensembles/du-katragon.webp"
+    ]
   },
   {
     "cle": "de-guerre",
@@ -5181,9 +5238,13 @@
             "VITALITE": 200
           },
           "multiplicateurs": [],
-          "notes": [
-            "+10% de résistances mêlées"
-          ]
+          "indicatifs": [
+            {
+              "type": "resistances_melee",
+              "valeur": 10
+            }
+          ],
+          "notes": []
         }
       },
       {
@@ -5195,9 +5256,13 @@
             "PA": 1
           },
           "multiplicateurs": [],
-          "notes": [
-            "+20% de résistances mêlées"
-          ]
+          "indicatifs": [
+            {
+              "type": "resistances_melee",
+              "valeur": 20
+            }
+          ],
+          "notes": []
         }
       }
     ],
@@ -5212,8 +5277,7 @@
         "id": 630,
         "imageUrl": "/images/sorts/630.webp"
       }
-    ],
-    "imageComposite": "/images/ensembles/de-guerre.webp"
+    ]
   },
   {
     "cle": "de-kabahal",
@@ -5254,6 +5318,7 @@
             "INVOCATION": 1
           },
           "multiplicateurs": [],
+          "indicatifs": [],
           "notes": []
         }
       },
@@ -5267,6 +5332,7 @@
             "PA": 1
           },
           "multiplicateurs": [],
+          "indicatifs": [],
           "notes": []
         }
       }
@@ -5282,8 +5348,7 @@
         "id": 622,
         "imageUrl": "/images/sorts/622.webp"
       }
-    ],
-    "imageComposite": "/images/ensembles/de-kabahal.webp"
+    ]
   },
   {
     "cle": "du-ch-tyx",
@@ -5324,6 +5389,7 @@
             "DO_POU": 25
           },
           "multiplicateurs": [],
+          "indicatifs": [],
           "notes": []
         }
       },
@@ -5337,6 +5403,7 @@
             "PA": 1
           },
           "multiplicateurs": [],
+          "indicatifs": [],
           "notes": []
         }
       }
@@ -5352,8 +5419,7 @@
         "id": 631,
         "imageUrl": "/images/sorts/631.webp"
       }
-    ],
-    "imageComposite": "/images/ensembles/du-ch-tyx.webp"
+    ]
   },
   {
     "cle": "du-hululord",
@@ -5394,6 +5460,7 @@
             "DO_CRIT": 20
           },
           "multiplicateurs": [],
+          "indicatifs": [],
           "notes": []
         }
       },
@@ -5407,6 +5474,7 @@
             "PA": 1
           },
           "multiplicateurs": [],
+          "indicatifs": [],
           "notes": []
         }
       }
@@ -5422,8 +5490,7 @@
         "id": 626,
         "imageUrl": "/images/sorts/626.webp"
       }
-    ],
-    "imageComposite": "/images/ensembles/du-hululord.webp"
+    ]
   },
   {
     "cle": "de-la-silhouette-d-ombre",
@@ -5464,6 +5531,7 @@
             "DO_CRIT": 20
           },
           "multiplicateurs": [],
+          "indicatifs": [],
           "notes": []
         }
       },
@@ -5477,6 +5545,7 @@
             "PA": 1
           },
           "multiplicateurs": [],
+          "indicatifs": [],
           "notes": []
         }
       }
@@ -5492,8 +5561,7 @@
         "id": 633,
         "imageUrl": "/images/sorts/633.webp"
       }
-    ],
-    "imageComposite": "/images/ensembles/de-la-silhouette-d-ombre.webp"
+    ]
   },
   {
     "cle": "de-la-grande-pecheresse-ambra",
@@ -5534,6 +5602,7 @@
             "FUITE": 30
           },
           "multiplicateurs": [],
+          "indicatifs": [],
           "notes": []
         }
       },
@@ -5547,6 +5616,7 @@
             "PA": 1
           },
           "multiplicateurs": [],
+          "indicatifs": [],
           "notes": []
         }
       }
@@ -5562,8 +5632,7 @@
         "id": 629,
         "imageUrl": "/images/sorts/629.webp"
       }
-    ],
-    "imageComposite": "/images/ensembles/de-la-grande-pecheresse-ambra.webp"
+    ]
   },
   {
     "cle": "du-kong-de-monte-cristaux",
@@ -5608,6 +5677,7 @@
               "valeur": 1.1
             }
           ],
+          "indicatifs": [],
           "notes": []
         }
       },
@@ -5625,6 +5695,7 @@
               "valeur": 1.2
             }
           ],
+          "indicatifs": [],
           "notes": []
         }
       }
@@ -5640,7 +5711,6 @@
         "id": 634,
         "imageUrl": "/images/sorts/634.webp"
       }
-    ],
-    "imageComposite": "/images/ensembles/du-kong-de-monte-cristaux.webp"
+    ]
   }
 ]

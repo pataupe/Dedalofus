@@ -43,3 +43,12 @@ export const ICONES_MULTIPLICATEURS = {
   finaux_melee: { libelle: 'Dégâts Mêlée', icone: '⚔️', couleur: 'var(--couleur-terre)' },
   indirects: { libelle: 'Dégâts Indirects', icone: '☠️', couleur: 'var(--couleur-chaos)' },
 };
+
+// "% résistances distance/mêlée" (data/sorts-degats-indirects.md : volontairement
+// indicatif, aucun impact sur le calcul de stats/dégâts) — affiché avec sa propre
+// icône comme les autres lignes pour rester visuellement cohérent, sans pour autant
+// être une vraie stat ou un multiplicateur.
+export const ICONES_INDICATIFS = {
+  resistances_distance: { libelle: 'Rés. Distance', icone: '🛡️', couleur: 'var(--couleur-air)' },
+  resistances_melee: { libelle: 'Rés. Mêlée', icone: '🛡️', couleur: 'var(--couleur-terre)' },
+};

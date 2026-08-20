@@ -1,4 +1,4 @@
-import { ICONES_ENSEMBLES, ICONES_MULTIPLICATEURS } from '../constants/iconesEnsembles';
+import { ICONES_ENSEMBLES, ICONES_MULTIPLICATEURS, ICONES_INDICATIFS } from '../constants/iconesEnsembles';
 import './BonusPalier.css';
 
 // Une ligne par stat (jamais regroupées, ex: "Retrait PA/PM" devient 2 lignes
@@ -20,15 +20,18 @@ function LigneBonus({ icone, couleur, libelle, valeur }) {
 }
 
 // Rend le detail d'un palier à partir du delta structuré (pas du texte brut) : une
-// ligne par clé de statsPlates (déjà séparées), une ligne par multiplicateur, puis les
-// notes textuelles (ex: "5% de résistances distances", "Aucun bonus" — indicatif ou
-// non reconnu, jamais silencieusement perdu).
+// ligne par clé de statsPlates (déjà séparées), une ligne par multiplicateur, une ligne
+// par "indicatif" (ex: % résistances distance/mêlée — affiché avec icône comme les
+// autres, mais sans aucun impact sur le calcul, cf. sorts-degats-indirects.md), puis les
+// notes textuelles vraiment non reconnues ("Aucun bonus"...) — rien n'est
+// silencieusement perdu.
 function BonusPalier({ delta }) {
   const statsEntries = Object.entries(delta?.statsPlates || {});
   const multiplicateurs = delta?.multiplicateurs || [];
+  const indicatifs = delta?.indicatifs || [];
   const notes = delta?.notes || [];
 
-  if (statsEntries.length === 0 && multiplicateurs.length === 0 && notes.length === 0) {
+  if (statsEntries.length === 0 && multiplicateurs.length === 0 && indicatifs.length === 0 && notes.length === 0) {
     return <p className="bonus-palier__note">Aucun bonus</p>;
   }
 
@@ -46,6 +49,11 @@ function BonusPalier({ delta }) {
         return (
           <LigneBonus key={`m-${i}`} icone={config.icone} couleur={config.couleur} libelle={config.libelle} valeur={`${pourcent}%`} />
         );
+      })}
+      {indicatifs.map((ind, i) => {
+        const config = ICONES_INDICATIFS[ind.type];
+        if (!config) return null;
+        return <LigneBonus key={`i-${i}`} icone={config.icone} couleur={config.couleur} libelle={config.libelle} valeur={`${ind.valeur}%`} />;
       })}
       {notes.map((note, i) => (
         <li key={`n-${i}`} className="bonus-palier__note">

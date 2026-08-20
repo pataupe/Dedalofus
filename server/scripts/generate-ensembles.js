@@ -87,28 +87,32 @@ const CLES_RESISTANCES_FIXES = ['RES_TERRE', 'RES_EAU', 'RES_FEU', 'RES_AIR', 'R
 const CLES_RESISTANCES_POURCENT = ['%_RES_TERRE', '%_RES_EAU', '%_RES_FEU', '%_RES_AIR', '%_RES_NEUTRE'];
 
 // Découpe un texte de bonus ("+300 Sagesse, +50 Dommages de Poussées, +1PA") en deltas
-// structurés { statsPlates, multiplicateurs, notes }. "% résistances distance/mêlée"
-// reste volontairement sans delta stats/multiplicateurs (indicatif seulement, cf.
-// sorts-degats-indirects.md) mais son texte brut est conservé dans `notes`, comme tout
-// segment non reconnu ("Aucun bonus"...) — rien n'est silencieusement perdu, l'affichage
-// (EnsembleDetail.jsx) doit pouvoir montrer 100% du contenu d'un palier, pas seulement
-// ce qui a été reconnu comme une vraie stat de calcul.
+// structurés { statsPlates, multiplicateurs, indicatifs, notes }. "% résistances
+// distance/mêlée" va dans `indicatifs` (affiché avec sa propre icône, mais SANS impact
+// calcul — cf. sorts-degats-indirects.md, volontaire) ; tout segment vraiment non
+// reconnu ("Aucun bonus"...) va dans `notes` (texte brut) — rien n'est silencieusement
+// perdu, l'affichage doit pouvoir montrer 100% du contenu d'un palier.
 function parserBonusTexte(texte) {
   const statsPlates = {};
   const multiplicateurs = [];
+  const indicatifs = [];
   const notes = [];
 
   const segments = (texte || '').split(',').map((s) => s.trim()).filter(Boolean);
 
   for (const segment of segments) {
-    const match = segment.match(/^([+-]?\d+(?:[.,]\d+)?)\s*%?\s*(.*)$/);
+    // Le "+" est parfois suivi d'une espace dans le .md source ("+ 5 Fuite" au lieu de
+    // "+5 Fuite", incohérent d'une ligne à l'autre) — signe et chiffres capturés
+    // séparément pour tolérer les deux, sinon le segment entier ratait cette regex et
+    // finissait en note brute (avec son "+" et sans icône) au lieu d'être reconnu.
+    const match = segment.match(/^([+-]?)\s*(\d+(?:[.,]\d+)?)\s*%?\s*(.*)$/);
     if (!match) {
       notes.push(segment);
       continue;
     }
 
-    const valeur = parseFloat(match[1].replace(',', '.'));
-    const reste = normaliserTexte(match[2]);
+    const valeur = (match[1] === '-' ? -1 : 1) * parseFloat(match[2].replace(',', '.'));
+    const reste = normaliserTexte(match[3]);
     if (!reste) {
       notes.push(segment);
       continue;
@@ -127,8 +131,12 @@ function parserBonusTexte(texte) {
       for (const cle of CLES_RESISTANCES_POURCENT) statsPlates[cle] = (statsPlates[cle] || 0) + valeur;
       continue;
     }
-    if (reste.includes('resistances distance') || reste.includes('resistances melee')) {
-      notes.push(segment); // indicatif seulement (aucun delta), texte conservé pour l'affichage
+    if (reste.includes('resistances distance')) {
+      indicatifs.push({ type: 'resistances_distance', valeur });
+      continue;
+    }
+    if (reste.includes('resistances melee')) {
+      indicatifs.push({ type: 'resistances_melee', valeur });
       continue;
     }
     if (reste.includes('dommages distance') || reste.includes('degats distance')) {
@@ -149,7 +157,7 @@ function parserBonusTexte(texte) {
     else notes.push(segment); // segment non reconnu ("Aucun bonus"...), conservé en note
   }
 
-  return { statsPlates, multiplicateurs, notes };
+  return { statsPlates, multiplicateurs, indicatifs, notes };
 }
 
 // ============================================
