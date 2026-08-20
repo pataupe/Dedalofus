@@ -16,7 +16,6 @@ import PersonnageDetailPage from './pages/PersonnageDetailPage';
 import PartagePage from './pages/PartagePage';
 import MentionsLegalesPage from './pages/MentionsLegalesPage';
 import PolitiqueConfidentialitePage from './pages/PolitiqueConfidentialitePage';
-import CGUPage from './pages/CGUPage';
 
 function App() {
   return (
@@ -43,7 +42,6 @@ function App() {
           <Route path="/partage/:lienPartage/:version?" element={<PartagePage />} />
           <Route path="/mentions-legales" element={<MentionsLegalesPage />} />
           <Route path="/politique-de-confidentialite" element={<PolitiqueConfidentialitePage />} />
-          <Route path="/conditions-generales-utilisation" element={<CGUPage />} />
         </Routes>
       </main>
       <Footer />

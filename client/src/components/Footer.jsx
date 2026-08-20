@@ -25,7 +25,7 @@ function Footer() {
           <p className="pied-de-page__titre-colonne">Légal</p>
           <Link to="/mentions-legales">Mentions légales</Link>
           <Link to="/politique-de-confidentialite">Politique de confidentialité</Link>
-          <Link to="/conditions-generales-utilisation">CGU</Link>
+          
         </div>
       </div>
 
@@ -33,6 +33,9 @@ function Footer() {
         <p className="pied-de-page__disclaimer">
           Site non affilié à Ankama Games. Dofus Touch et les éléments de jeu mentionnés sont des marques et
           contenus appartenant à Ankama Games.
+        </p>
+         <p className="pied-de-page__disclaimer">
+          Plusieurs données proviennent du site <Link to='https://papycha.fr'>papycha.fr</Link>.
         </p>
         <div className="pied-de-page__credits">
           <p className="pied-de-page__mention">© {new Date().getFullYear()} Dédalofus</p>

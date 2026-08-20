@@ -65,6 +65,10 @@
   color: var(--texte-attenue);
 }
 
+.pied-de-page__disclaimer a {
+  color:var(--or)
+}
+
 .pied-de-page__credits {
   display: flex;
   justify-content: space-between;
