@@ -69,6 +69,10 @@
   color:var(--or)
 }
 
+.pied-de-page__disclaimer a:hover {
+  text-decoration: underline;
+}
+
 .pied-de-page__credits {
   display: flex;
   justify-content: space-between;
