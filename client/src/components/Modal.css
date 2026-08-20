@@ -28,16 +28,33 @@
 
 .modale__fermer {
   position: absolute;
-  top: -12px;
-  right: -12px;
+  top: -14px;
+  right: -14px;
   width: 32px;
   height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
   border-radius: 50%;
-  border: 1px solid var(--bordure);
-  background: var(--bg-carte);
+  border: 1px solid var(--bordure-or-forte);
+  background: var(--bg-surface);
   color: var(--texte);
-  font-size: 20px;
-  line-height: 1;
   cursor: pointer;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.45);
+  transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease, transform 0.15s ease;
   z-index: 1;
+}
+
+.modale__fermer svg {
+  width: 15px;
+  height: 15px;
+}
+
+.modale__fermer:hover,
+.modale__fermer:focus-visible {
+  background: var(--primaire);
+  border-color: var(--primaire);
+  color: var(--primaire-texte);
+  transform: rotate(90deg);
 }

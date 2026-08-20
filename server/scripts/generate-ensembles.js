@@ -87,22 +87,32 @@ const CLES_RESISTANCES_FIXES = ['RES_TERRE', 'RES_EAU', 'RES_FEU', 'RES_AIR', 'R
 const CLES_RESISTANCES_POURCENT = ['%_RES_TERRE', '%_RES_EAU', '%_RES_FEU', '%_RES_AIR', '%_RES_NEUTRE'];
 
 // Découpe un texte de bonus ("+300 Sagesse, +50 Dommages de Poussées, +1PA") en deltas
-// structurés { statsPlates, multiplicateurs }. "% résistances distance/mêlée" reste
-// volontairement sans delta (indicatif seulement, cf. sorts-degats-indirects.md) — le
-// texte brut, lui, est toujours conservé ailleurs pour l'affichage catalogue.
+// structurés { statsPlates, multiplicateurs, notes }. "% résistances distance/mêlée"
+// reste volontairement sans delta stats/multiplicateurs (indicatif seulement, cf.
+// sorts-degats-indirects.md) mais son texte brut est conservé dans `notes`, comme tout
+// segment non reconnu ("Aucun bonus"...) — rien n'est silencieusement perdu, l'affichage
+// (EnsembleDetail.jsx) doit pouvoir montrer 100% du contenu d'un palier, pas seulement
+// ce qui a été reconnu comme une vraie stat de calcul.
 function parserBonusTexte(texte) {
   const statsPlates = {};
   const multiplicateurs = [];
+  const notes = [];
 
   const segments = (texte || '').split(',').map((s) => s.trim()).filter(Boolean);
 
   for (const segment of segments) {
     const match = segment.match(/^([+-]?\d+(?:[.,]\d+)?)\s*%?\s*(.*)$/);
-    if (!match) continue;
+    if (!match) {
+      notes.push(segment);
+      continue;
+    }
 
     const valeur = parseFloat(match[1].replace(',', '.'));
     const reste = normaliserTexte(match[2]);
-    if (!reste) continue;
+    if (!reste) {
+      notes.push(segment);
+      continue;
+    }
 
     if (reste.includes('retrait pa/pm')) {
       statsPlates.RETRAIT_PA_BRELOQUE = (statsPlates.RETRAIT_PA_BRELOQUE || 0) + valeur;
@@ -118,7 +128,8 @@ function parserBonusTexte(texte) {
       continue;
     }
     if (reste.includes('resistances distance') || reste.includes('resistances melee')) {
-      continue; // indicatif seulement, aucun delta
+      notes.push(segment); // indicatif seulement (aucun delta), texte conservé pour l'affichage
+      continue;
     }
     if (reste.includes('dommages distance') || reste.includes('degats distance')) {
       multiplicateurs.push({ type: 'finaux_distance', valeur: 1 + valeur / 100 });
@@ -135,10 +146,10 @@ function parserBonusTexte(texte) {
 
     const cle = LIBELLE_VERS_CLE[reste];
     if (cle) statsPlates[cle] = (statsPlates[cle] || 0) + valeur;
-    // sinon : segment non reconnu ("Aucun bonus"...), ignoré pour le delta.
+    else notes.push(segment); // segment non reconnu ("Aucun bonus"...), conservé en note
   }
 
-  return { statsPlates, multiplicateurs };
+  return { statsPlates, multiplicateurs, notes };
 }
 
 // ============================================
@@ -503,6 +514,19 @@ function noterUsage(usage, nom, cle) {
   usage.get(nom).push(cle);
 }
 
+// Coquille de copier-coller dans le .md source : la breloque de l'Ensemble du
+// Phossile y est écrite "(Protection du Craqdoa)" — identique à celle de l'Ensemble
+// du Craqdoa, détecté par le rapport de doublons ci-dessous. Confirmé faux et corrigé
+// grâce aux images de breloques de boss fournies ensuite : le fichier fourni pour le
+// Phossile est nommé "phor-proximite.png", qui correspond à la breloque réellement
+// non-utilisée "Proximité étouffante du Phossile" (thématiquement cohérente avec la
+// description du Phossile — un glyphe qui retire des PM — contrairement à "Protection
+// du Craqdoa", qui pose un bouclier). Le .md source n'est pas modifié, seul le résultat
+// de ce générateur l'est.
+const CORRECTIONS_BOSS_BRELOQUE = {
+  'du-phossile': 'Proximité étouffante du Phossile',
+};
+
 function construireEnsemblesBoss(bruts, index, rapport, rapportImages) {
   const usage = new Map(); // nom de pièce résolu -> [cle ensemble...]
 
@@ -512,7 +536,8 @@ function construireEnsemblesBoss(bruts, index, rapport, rapportImages) {
     const pieces = [];
 
     if (brut.breloqueBoss) {
-      const piece = resoudrePiece('breloque', brut.breloqueBoss.nom, index, rapport);
+      const nomBreloque = CORRECTIONS_BOSS_BRELOQUE[cle] || brut.breloqueBoss.nom;
+      const piece = resoudrePiece('breloque', nomBreloque, index, rapport);
       if (piece) {
         pieces.push(piece);
         noterUsage(usage, piece.nom, cle);

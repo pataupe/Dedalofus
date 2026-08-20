@@ -30,7 +30,6 @@ const BREUVAGES_VIDES = [1, 2, 3];
 // Une fonction d'équipement par type + la clé correspondante dans la réponse de
 // GET /api/personnages/:id (cubes[].cube, sorts[].sort, breloques[].breloque).
 const EQUIPER_PAR_TYPE = { cube: equiperCube, sort: equiperSort, breloque: equiperBreloque };
-const CLE_LISTE_PAR_TYPE = { cube: 'cubes', sort: 'sorts', breloque: 'breloques' };
 const CHEMIN_PAR_TYPE = { cube: 'cubes', sort: 'sorts', breloque: 'breloques' };
 
 function PersonnageDetailPage() {
@@ -105,11 +104,12 @@ function PersonnageDetailPage() {
     setErreurAction(null);
     try {
       await EQUIPER_PAR_TYPE[type](session.token, id, emplacement, null);
-      const cle = CLE_LISTE_PAR_TYPE[type];
-      setPersonnage((p) => ({
-        ...p,
-        [cle]: p[cle].map((item) => (item.emplacement === emplacement ? { ...item, [type]: null } : item)),
-      }));
+      // Refetch complet plutôt qu'un patch local de l'emplacement seul : les stats/
+      // panoplies/ensembles actifs/dégâts dépendent de l'équipement dans son ensemble
+      // (ex: déséquiper une pièce d'un ensemble peut faire retomber son palier) et ne
+      // se recalculent que côté serveur — même principe que Parcho/Boosts breloques
+      // (onParchoSauvegarde/onSauvegarde), qui rafraîchissent déjà toute la fiche.
+      await rafraichir();
       setModale(null);
     } catch {
       setErreurAction('Impossible de déséquiper cet item.');

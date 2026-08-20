@@ -910,7 +910,8 @@
           "statsPlates": {
             "SOIN": 5
           },
-          "multiplicateurs": []
+          "multiplicateurs": [],
+          "notes": []
         }
       },
       {
@@ -920,7 +921,8 @@
           "statsPlates": {
             "SOIN": 10
           },
-          "multiplicateurs": []
+          "multiplicateurs": [],
+          "notes": []
         }
       },
       {
@@ -930,7 +932,8 @@
           "statsPlates": {
             "SOIN": 20
           },
-          "multiplicateurs": []
+          "multiplicateurs": [],
+          "notes": []
         }
       },
       {
@@ -940,7 +943,8 @@
           "statsPlates": {
             "SOIN": 30
           },
-          "multiplicateurs": []
+          "multiplicateurs": [],
+          "notes": []
         }
       },
       {
@@ -950,7 +954,8 @@
           "statsPlates": {
             "SOIN": 40
           },
-          "multiplicateurs": []
+          "multiplicateurs": [],
+          "notes": []
         }
       },
       {
@@ -960,7 +965,8 @@
           "statsPlates": {
             "SOIN": 50
           },
-          "multiplicateurs": []
+          "multiplicateurs": [],
+          "notes": []
         }
       },
       {
@@ -970,7 +976,8 @@
           "statsPlates": {
             "SOIN": 60
           },
-          "multiplicateurs": []
+          "multiplicateurs": [],
+          "notes": []
         }
       },
       {
@@ -980,7 +987,8 @@
           "statsPlates": {
             "SOIN": 70
           },
-          "multiplicateurs": []
+          "multiplicateurs": [],
+          "notes": []
         }
       }
     ],
@@ -1333,7 +1341,8 @@
               "type": "indirects",
               "valeur": 1.02
             }
-          ]
+          ],
+          "notes": []
         }
       },
       {
@@ -1348,7 +1357,8 @@
               "type": "indirects",
               "valeur": 1.04
             }
-          ]
+          ],
+          "notes": []
         }
       },
       {
@@ -1363,7 +1373,8 @@
               "type": "indirects",
               "valeur": 1.06
             }
-          ]
+          ],
+          "notes": []
         }
       },
       {
@@ -1378,7 +1389,8 @@
               "type": "indirects",
               "valeur": 1.08
             }
-          ]
+          ],
+          "notes": []
         }
       },
       {
@@ -1393,7 +1405,8 @@
               "type": "indirects",
               "valeur": 1.1
             }
-          ]
+          ],
+          "notes": []
         }
       }
     ],
@@ -1849,7 +1862,8 @@
           "statsPlates": {
             "DO_POU": 5
           },
-          "multiplicateurs": []
+          "multiplicateurs": [],
+          "notes": []
         }
       },
       {
@@ -1859,7 +1873,8 @@
           "statsPlates": {
             "DO_POU": 10
           },
-          "multiplicateurs": []
+          "multiplicateurs": [],
+          "notes": []
         }
       },
       {
@@ -1869,7 +1884,8 @@
           "statsPlates": {
             "DO_POU": 15
           },
-          "multiplicateurs": []
+          "multiplicateurs": [],
+          "notes": []
         }
       },
       {
@@ -1879,7 +1895,8 @@
           "statsPlates": {
             "DO_POU": 20
           },
-          "multiplicateurs": []
+          "multiplicateurs": [],
+          "notes": []
         }
       },
       {
@@ -1889,7 +1906,8 @@
           "statsPlates": {
             "DO_POU": 25
           },
-          "multiplicateurs": []
+          "multiplicateurs": [],
+          "notes": []
         }
       },
       {
@@ -1899,7 +1917,8 @@
           "statsPlates": {
             "DO_POU": 30
           },
-          "multiplicateurs": []
+          "multiplicateurs": [],
+          "notes": []
         }
       },
       {
@@ -1909,7 +1928,8 @@
           "statsPlates": {
             "DO_POU": 35
           },
-          "multiplicateurs": []
+          "multiplicateurs": [],
+          "notes": []
         }
       }
     ],
@@ -2205,7 +2225,10 @@
         "texte": "Aucun bonus",
         "delta": {
           "statsPlates": {},
-          "multiplicateurs": []
+          "multiplicateurs": [],
+          "notes": [
+            "Aucun bonus"
+          ]
         }
       },
       {
@@ -2215,7 +2238,10 @@
           "statsPlates": {
             "SAGESSE": 25
           },
-          "multiplicateurs": []
+          "multiplicateurs": [],
+          "notes": [
+            "+ 5 Fuite"
+          ]
         }
       },
       {
@@ -2225,7 +2251,10 @@
           "statsPlates": {
             "SAGESSE": 50
           },
-          "multiplicateurs": []
+          "multiplicateurs": [],
+          "notes": [
+            "+ 10 Fuite"
+          ]
         }
       },
       {
@@ -2235,7 +2264,10 @@
           "statsPlates": {
             "SAGESSE": 75
           },
-          "multiplicateurs": []
+          "multiplicateurs": [],
+          "notes": [
+            "+ 20 Fuite"
+          ]
         }
       },
       {
@@ -2245,7 +2277,10 @@
           "statsPlates": {
             "SAGESSE": 100
           },
-          "multiplicateurs": []
+          "multiplicateurs": [],
+          "notes": [
+            "+ 30 Fuite"
+          ]
         }
       },
       {
@@ -2255,7 +2290,10 @@
           "statsPlates": {
             "SAGESSE": 125
           },
-          "multiplicateurs": []
+          "multiplicateurs": [],
+          "notes": [
+            "+ 40 Fuite"
+          ]
         }
       },
       {
@@ -2265,7 +2303,10 @@
           "statsPlates": {
             "SAGESSE": 150
           },
-          "multiplicateurs": []
+          "multiplicateurs": [],
+          "notes": [
+            "+ 50 Fuite"
+          ]
         }
       }
     ],
@@ -2663,7 +2704,10 @@
         "texte": "Aucun bonus",
         "delta": {
           "statsPlates": {},
-          "multiplicateurs": []
+          "multiplicateurs": [],
+          "notes": [
+            "Aucun bonus"
+          ]
         }
       },
       {
@@ -2673,7 +2717,10 @@
           "statsPlates": {
             "%_COUP_CRITIQUE": 2
           },
-          "multiplicateurs": []
+          "multiplicateurs": [],
+          "notes": [
+            "+ 10 Dommages Critiques"
+          ]
         }
       },
       {
@@ -2683,7 +2730,10 @@
           "statsPlates": {
             "%_COUP_CRITIQUE": 4
           },
-          "multiplicateurs": []
+          "multiplicateurs": [],
+          "notes": [
+            "+ 15Dommages Critiques"
+          ]
         }
       },
       {
@@ -2693,7 +2743,10 @@
           "statsPlates": {
             "%_COUP_CRITIQUE": 6
           },
-          "multiplicateurs": []
+          "multiplicateurs": [],
+          "notes": [
+            "+ 20 Dommages Critiques"
+          ]
         }
       },
       {
@@ -2703,7 +2756,10 @@
           "statsPlates": {
             "%_COUP_CRITIQUE": 8
           },
-          "multiplicateurs": []
+          "multiplicateurs": [],
+          "notes": [
+            "+ 25 Dommages Critiques"
+          ]
         }
       },
       {
@@ -2713,7 +2769,10 @@
           "statsPlates": {
             "%_COUP_CRITIQUE": 10
           },
-          "multiplicateurs": []
+          "multiplicateurs": [],
+          "notes": [
+            "+ 30 Dommages Critiques"
+          ]
         }
       }
     ],
@@ -2984,7 +3043,8 @@
             "RETRAIT_PA_BRELOQUE": 5,
             "RETRAIT_PM_BRELOQUE": 5
           },
-          "multiplicateurs": []
+          "multiplicateurs": [],
+          "notes": []
         }
       },
       {
@@ -2995,7 +3055,8 @@
             "RETRAIT_PA_BRELOQUE": 10,
             "RETRAIT_PM_BRELOQUE": 10
           },
-          "multiplicateurs": []
+          "multiplicateurs": [],
+          "notes": []
         }
       },
       {
@@ -3006,7 +3067,8 @@
             "RETRAIT_PA_BRELOQUE": 15,
             "RETRAIT_PM_BRELOQUE": 15
           },
-          "multiplicateurs": []
+          "multiplicateurs": [],
+          "notes": []
         }
       },
       {
@@ -3017,7 +3079,8 @@
             "RETRAIT_PA_BRELOQUE": 20,
             "RETRAIT_PM_BRELOQUE": 20
           },
-          "multiplicateurs": []
+          "multiplicateurs": [],
+          "notes": []
         }
       },
       {
@@ -3028,7 +3091,8 @@
             "RETRAIT_PA_BRELOQUE": 25,
             "RETRAIT_PM_BRELOQUE": 25
           },
-          "multiplicateurs": []
+          "multiplicateurs": [],
+          "notes": []
         }
       }
     ],
@@ -3319,7 +3383,10 @@
         "texte": "Aucun bonus",
         "delta": {
           "statsPlates": {},
-          "multiplicateurs": []
+          "multiplicateurs": [],
+          "notes": [
+            "Aucun bonus"
+          ]
         }
       },
       {
@@ -3329,7 +3396,8 @@
           "statsPlates": {
             "PUISSANCE_PIEGE": 25
           },
-          "multiplicateurs": []
+          "multiplicateurs": [],
+          "notes": []
         }
       },
       {
@@ -3340,7 +3408,8 @@
             "PUISSANCE_PIEGE": 50,
             "DO_PIEGE": 5
           },
-          "multiplicateurs": []
+          "multiplicateurs": [],
+          "notes": []
         }
       },
       {
@@ -3352,7 +3421,8 @@
             "DO_PIEGE": 10,
             "PO": 1
           },
-          "multiplicateurs": []
+          "multiplicateurs": [],
+          "notes": []
         }
       },
       {
@@ -3364,7 +3434,8 @@
             "DO_PIEGE": 15,
             "PO": 1
           },
-          "multiplicateurs": []
+          "multiplicateurs": [],
+          "notes": []
         }
       },
       {
@@ -3376,7 +3447,8 @@
             "DO_PIEGE": 20,
             "PO": 2
           },
-          "multiplicateurs": []
+          "multiplicateurs": [],
+          "notes": []
         }
       },
       {
@@ -3388,7 +3460,8 @@
             "DO_PIEGE": 25,
             "PO": 2
           },
-          "multiplicateurs": []
+          "multiplicateurs": [],
+          "notes": []
         }
       },
       {
@@ -3400,7 +3473,8 @@
             "DO_PIEGE": 30,
             "PO": 2
           },
-          "multiplicateurs": []
+          "multiplicateurs": [],
+          "notes": []
         }
       },
       {
@@ -3412,7 +3486,8 @@
             "DO_PIEGE": 35,
             "PO": 2
           },
-          "multiplicateurs": []
+          "multiplicateurs": [],
+          "notes": []
         }
       }
     ],
@@ -3604,7 +3679,8 @@
           "statsPlates": {
             "VITALITE": 80
           },
-          "multiplicateurs": []
+          "multiplicateurs": [],
+          "notes": []
         }
       },
       {
@@ -3614,7 +3690,8 @@
           "statsPlates": {
             "VITALITE": 140
           },
-          "multiplicateurs": []
+          "multiplicateurs": [],
+          "notes": []
         }
       },
       {
@@ -3624,7 +3701,8 @@
           "statsPlates": {
             "VITALITE": 180
           },
-          "multiplicateurs": []
+          "multiplicateurs": [],
+          "notes": []
         }
       },
       {
@@ -3634,7 +3712,8 @@
           "statsPlates": {
             "VITALITE": 240
           },
-          "multiplicateurs": []
+          "multiplicateurs": [],
+          "notes": []
         }
       },
       {
@@ -3644,7 +3723,8 @@
           "statsPlates": {
             "VITALITE": 300
           },
-          "multiplicateurs": []
+          "multiplicateurs": [],
+          "notes": []
         }
       }
     ],
@@ -3912,7 +3992,10 @@
         "texte": "Aucun bonus",
         "delta": {
           "statsPlates": {},
-          "multiplicateurs": []
+          "multiplicateurs": [],
+          "notes": [
+            "Aucun bonus"
+          ]
         }
       },
       {
@@ -3926,7 +4009,8 @@
             "RES_AIR": 10,
             "RES_NEUTRE": 10
           },
-          "multiplicateurs": []
+          "multiplicateurs": [],
+          "notes": []
         }
       },
       {
@@ -3942,7 +4026,8 @@
             "RES_POU": 20,
             "RES_CRIT": 10
           },
-          "multiplicateurs": []
+          "multiplicateurs": [],
+          "notes": []
         }
       },
       {
@@ -3958,7 +4043,8 @@
             "RES_POU": 30,
             "RES_CRIT": 20
           },
-          "multiplicateurs": []
+          "multiplicateurs": [],
+          "notes": []
         }
       },
       {
@@ -3974,7 +4060,8 @@
             "RES_POU": 50,
             "RES_CRIT": 30
           },
-          "multiplicateurs": []
+          "multiplicateurs": [],
+          "notes": []
         }
       },
       {
@@ -3990,7 +4077,8 @@
             "RES_POU": 60,
             "RES_CRIT": 40
           },
-          "multiplicateurs": []
+          "multiplicateurs": [],
+          "notes": []
         }
       }
     ],
@@ -4388,7 +4476,10 @@
         "texte": "Aucun bonus",
         "delta": {
           "statsPlates": {},
-          "multiplicateurs": []
+          "multiplicateurs": [],
+          "notes": [
+            "Aucun bonus"
+          ]
         }
       },
       {
@@ -4399,7 +4490,8 @@
             "VITALITE": 50,
             "TACLE": 10
           },
-          "multiplicateurs": []
+          "multiplicateurs": [],
+          "notes": []
         }
       },
       {
@@ -4410,7 +4502,8 @@
             "VITALITE": 100,
             "TACLE": 20
           },
-          "multiplicateurs": []
+          "multiplicateurs": [],
+          "notes": []
         }
       },
       {
@@ -4421,7 +4514,8 @@
             "VITALITE": 150,
             "TACLE": 30
           },
-          "multiplicateurs": []
+          "multiplicateurs": [],
+          "notes": []
         }
       },
       {
@@ -4432,7 +4526,8 @@
             "VITALITE": 200,
             "TACLE": 40
           },
-          "multiplicateurs": []
+          "multiplicateurs": [],
+          "notes": []
         }
       },
       {
@@ -4443,7 +4538,8 @@
             "VITALITE": 250,
             "TACLE": 50
           },
-          "multiplicateurs": []
+          "multiplicateurs": [],
+          "notes": []
         }
       },
       {
@@ -4454,7 +4550,8 @@
             "VITALITE": 300,
             "TACLE": 60
           },
-          "multiplicateurs": []
+          "multiplicateurs": [],
+          "notes": []
         }
       },
       {
@@ -4465,7 +4562,8 @@
             "VITALITE": 350,
             "TACLE": 70
           },
-          "multiplicateurs": []
+          "multiplicateurs": [],
+          "notes": []
         }
       },
       {
@@ -4476,7 +4574,8 @@
             "VITALITE": 400,
             "TACLE": 80
           },
-          "multiplicateurs": []
+          "multiplicateurs": [],
+          "notes": []
         }
       },
       {
@@ -4487,7 +4586,8 @@
             "VITALITE": 450,
             "TACLE": 90
           },
-          "multiplicateurs": []
+          "multiplicateurs": [],
+          "notes": []
         }
       },
       {
@@ -4498,7 +4598,8 @@
             "VITALITE": 500,
             "TACLE": 100
           },
-          "multiplicateurs": []
+          "multiplicateurs": [],
+          "notes": []
         }
       },
       {
@@ -4509,7 +4610,8 @@
             "VITALITE": 550,
             "TACLE": 110
           },
-          "multiplicateurs": []
+          "multiplicateurs": [],
+          "notes": []
         }
       }
     ],
@@ -4534,12 +4636,12 @@
     "pieces": [
       {
         "type": "breloque",
-        "nom": "Protection du Craqdoa",
+        "nom": "Proximité étouffante du Phossile",
         "variantes": [
           {
-            "id": 162,
+            "id": 163,
             "rang": "Unique",
-            "image_url": null
+            "image_url": "/images/breloques/163.webp"
           }
         ]
       },
@@ -4565,7 +4667,8 @@
             "SAGESSE": 150,
             "DO_POU": 25
           },
-          "multiplicateurs": []
+          "multiplicateurs": [],
+          "notes": []
         }
       },
       {
@@ -4577,11 +4680,24 @@
             "DO_POU": 50,
             "PA": 1
           },
-          "multiplicateurs": []
+          "multiplicateurs": [],
+          "notes": []
         }
       }
     ],
-    "imageItems": null
+    "imageItems": [
+      {
+        "type": "breloque",
+        "id": 163,
+        "imageUrl": "/images/breloques/163.webp"
+      },
+      {
+        "type": "sort",
+        "id": 624,
+        "imageUrl": "/images/sorts/624.webp"
+      }
+    ],
+    "imageComposite": "/images/ensembles/du-phossile.webp"
   },
   {
     "cle": "du-craqdoa",
@@ -4595,7 +4711,7 @@
           {
             "id": 162,
             "rang": "Unique",
-            "image_url": null
+            "image_url": "/images/breloques/162.webp"
           }
         ]
       },
@@ -4624,7 +4740,8 @@
             "%_RES_AIR": 5,
             "%_RES_NEUTRE": 5
           },
-          "multiplicateurs": []
+          "multiplicateurs": [],
+          "notes": []
         }
       },
       {
@@ -4639,11 +4756,24 @@
             "%_RES_NEUTRE": 10,
             "PA": 1
           },
-          "multiplicateurs": []
+          "multiplicateurs": [],
+          "notes": []
         }
       }
     ],
-    "imageItems": null
+    "imageItems": [
+      {
+        "type": "breloque",
+        "id": 162,
+        "imageUrl": "/images/breloques/162.webp"
+      },
+      {
+        "type": "sort",
+        "id": 628,
+        "imageUrl": "/images/sorts/628.webp"
+      }
+    ],
+    "imageComposite": "/images/ensembles/du-craqdoa.webp"
   },
   {
     "cle": "de-corruption",
@@ -4657,7 +4787,7 @@
           {
             "id": 164,
             "rang": "Unique",
-            "image_url": null
+            "image_url": "/images/breloques/164.webp"
           }
         ]
       },
@@ -4687,7 +4817,8 @@
               "type": "finaux_distance",
               "valeur": 1.05
             }
-          ]
+          ],
+          "notes": []
         }
       },
       {
@@ -4703,11 +4834,24 @@
               "type": "finaux_distance",
               "valeur": 1.1
             }
-          ]
+          ],
+          "notes": []
         }
       }
     ],
-    "imageItems": null
+    "imageItems": [
+      {
+        "type": "breloque",
+        "id": 164,
+        "imageUrl": "/images/breloques/164.webp"
+      },
+      {
+        "type": "sort",
+        "id": 621,
+        "imageUrl": "/images/sorts/621.webp"
+      }
+    ],
+    "imageComposite": "/images/ensembles/de-corruption.webp"
   },
   {
     "cle": "de-toxoliath",
@@ -4721,7 +4865,7 @@
           {
             "id": 161,
             "rang": "Unique",
-            "image_url": null
+            "image_url": "/images/breloques/161.webp"
           }
         ]
       },
@@ -4751,7 +4895,8 @@
               "type": "indirects",
               "valeur": 1.1
             }
-          ]
+          ],
+          "notes": []
         }
       },
       {
@@ -4767,11 +4912,24 @@
               "type": "indirects",
               "valeur": 1.2
             }
-          ]
+          ],
+          "notes": []
         }
       }
     ],
-    "imageItems": null
+    "imageItems": [
+      {
+        "type": "breloque",
+        "id": 161,
+        "imageUrl": "/images/breloques/161.webp"
+      },
+      {
+        "type": "sort",
+        "id": 632,
+        "imageUrl": "/images/sorts/632.webp"
+      }
+    ],
+    "imageComposite": "/images/ensembles/de-toxoliath.webp"
   },
   {
     "cle": "de-servitude",
@@ -4785,7 +4943,7 @@
           {
             "id": 159,
             "rang": "Unique",
-            "image_url": null
+            "image_url": "/images/breloques/159.webp"
           }
         ]
       },
@@ -4810,7 +4968,10 @@
           "statsPlates": {
             "VITALITE": 200
           },
-          "multiplicateurs": []
+          "multiplicateurs": [],
+          "notes": [
+            "+5% de résistances distances"
+          ]
         }
       },
       {
@@ -4821,11 +4982,26 @@
             "VITALITE": 400,
             "PA": 1
           },
-          "multiplicateurs": []
+          "multiplicateurs": [],
+          "notes": [
+            "+10% de résistances distances"
+          ]
         }
       }
     ],
-    "imageItems": null
+    "imageItems": [
+      {
+        "type": "breloque",
+        "id": 159,
+        "imageUrl": "/images/breloques/159.webp"
+      },
+      {
+        "type": "sort",
+        "id": 623,
+        "imageUrl": "/images/sorts/623.webp"
+      }
+    ],
+    "imageComposite": "/images/ensembles/de-servitude.webp"
   },
   {
     "cle": "de-misere",
@@ -4839,7 +5015,7 @@
           {
             "id": 156,
             "rang": "Unique",
-            "image_url": null
+            "image_url": "/images/breloques/156.webp"
           }
         ]
       },
@@ -4865,7 +5041,8 @@
             "PUISSANCE": 100,
             "FUITE": 25
           },
-          "multiplicateurs": []
+          "multiplicateurs": [],
+          "notes": []
         }
       },
       {
@@ -4877,11 +5054,24 @@
             "FUITE": 50,
             "PA": 1
           },
-          "multiplicateurs": []
+          "multiplicateurs": [],
+          "notes": []
         }
       }
     ],
-    "imageItems": null
+    "imageItems": [
+      {
+        "type": "breloque",
+        "id": 156,
+        "imageUrl": "/images/breloques/156.webp"
+      },
+      {
+        "type": "sort",
+        "id": 625,
+        "imageUrl": "/images/sorts/625.webp"
+      }
+    ],
+    "imageComposite": "/images/ensembles/de-misere.webp"
   },
   {
     "cle": "du-katragon",
@@ -4895,7 +5085,7 @@
           {
             "id": 158,
             "rang": "Unique",
-            "image_url": null
+            "image_url": "/images/breloques/158.webp"
           }
         ]
       },
@@ -4921,7 +5111,8 @@
             "PUISSANCE": 100,
             "INVOCATION": 1
           },
-          "multiplicateurs": []
+          "multiplicateurs": [],
+          "notes": []
         }
       },
       {
@@ -4933,11 +5124,24 @@
             "INVOCATION": 2,
             "PA": 1
           },
-          "multiplicateurs": []
+          "multiplicateurs": [],
+          "notes": []
         }
       }
     ],
-    "imageItems": null
+    "imageItems": [
+      {
+        "type": "breloque",
+        "id": 158,
+        "imageUrl": "/images/breloques/158.webp"
+      },
+      {
+        "type": "sort",
+        "id": 627,
+        "imageUrl": "/images/sorts/627.webp"
+      }
+    ],
+    "imageComposite": "/images/ensembles/du-katragon.webp"
   },
   {
     "cle": "de-guerre",
@@ -4951,7 +5155,7 @@
           {
             "id": 118,
             "rang": "Unique",
-            "image_url": null
+            "image_url": "/images/breloques/118.webp"
           }
         ]
       },
@@ -4976,7 +5180,10 @@
           "statsPlates": {
             "VITALITE": 200
           },
-          "multiplicateurs": []
+          "multiplicateurs": [],
+          "notes": [
+            "+10% de résistances mêlées"
+          ]
         }
       },
       {
@@ -4987,11 +5194,26 @@
             "VITALITE": 400,
             "PA": 1
           },
-          "multiplicateurs": []
+          "multiplicateurs": [],
+          "notes": [
+            "+20% de résistances mêlées"
+          ]
         }
       }
     ],
-    "imageItems": null
+    "imageItems": [
+      {
+        "type": "breloque",
+        "id": 118,
+        "imageUrl": "/images/breloques/118.webp"
+      },
+      {
+        "type": "sort",
+        "id": 630,
+        "imageUrl": "/images/sorts/630.webp"
+      }
+    ],
+    "imageComposite": "/images/ensembles/de-guerre.webp"
   },
   {
     "cle": "de-kabahal",
@@ -5005,7 +5227,7 @@
           {
             "id": 165,
             "rang": "Unique",
-            "image_url": null
+            "image_url": "/images/breloques/165.webp"
           }
         ]
       },
@@ -5031,7 +5253,8 @@
             "VITALITE": 100,
             "INVOCATION": 1
           },
-          "multiplicateurs": []
+          "multiplicateurs": [],
+          "notes": []
         }
       },
       {
@@ -5043,11 +5266,24 @@
             "INVOCATION": 2,
             "PA": 1
           },
-          "multiplicateurs": []
+          "multiplicateurs": [],
+          "notes": []
         }
       }
     ],
-    "imageItems": null
+    "imageItems": [
+      {
+        "type": "breloque",
+        "id": 165,
+        "imageUrl": "/images/breloques/165.webp"
+      },
+      {
+        "type": "sort",
+        "id": 622,
+        "imageUrl": "/images/sorts/622.webp"
+      }
+    ],
+    "imageComposite": "/images/ensembles/de-kabahal.webp"
   },
   {
     "cle": "du-ch-tyx",
@@ -5061,7 +5297,7 @@
           {
             "id": 166,
             "rang": "Unique",
-            "image_url": null
+            "image_url": "/images/breloques/166.webp"
           }
         ]
       },
@@ -5087,7 +5323,8 @@
             "SAGESSE": 150,
             "DO_POU": 25
           },
-          "multiplicateurs": []
+          "multiplicateurs": [],
+          "notes": []
         }
       },
       {
@@ -5099,11 +5336,24 @@
             "DO_POU": 50,
             "PA": 1
           },
-          "multiplicateurs": []
+          "multiplicateurs": [],
+          "notes": []
         }
       }
     ],
-    "imageItems": null
+    "imageItems": [
+      {
+        "type": "breloque",
+        "id": 166,
+        "imageUrl": "/images/breloques/166.webp"
+      },
+      {
+        "type": "sort",
+        "id": 631,
+        "imageUrl": "/images/sorts/631.webp"
+      }
+    ],
+    "imageComposite": "/images/ensembles/du-ch-tyx.webp"
   },
   {
     "cle": "du-hululord",
@@ -5117,7 +5367,7 @@
           {
             "id": 157,
             "rang": "Unique",
-            "image_url": null
+            "image_url": "/images/breloques/157.webp"
           }
         ]
       },
@@ -5143,7 +5393,8 @@
             "SAGESSE": 150,
             "DO_CRIT": 20
           },
-          "multiplicateurs": []
+          "multiplicateurs": [],
+          "notes": []
         }
       },
       {
@@ -5155,11 +5406,24 @@
             "DO_CRIT": 40,
             "PA": 1
           },
-          "multiplicateurs": []
+          "multiplicateurs": [],
+          "notes": []
         }
       }
     ],
-    "imageItems": null
+    "imageItems": [
+      {
+        "type": "breloque",
+        "id": 157,
+        "imageUrl": "/images/breloques/157.webp"
+      },
+      {
+        "type": "sort",
+        "id": 626,
+        "imageUrl": "/images/sorts/626.webp"
+      }
+    ],
+    "imageComposite": "/images/ensembles/du-hululord.webp"
   },
   {
     "cle": "de-la-silhouette-d-ombre",
@@ -5173,7 +5437,7 @@
           {
             "id": 160,
             "rang": "Unique",
-            "image_url": null
+            "image_url": "/images/breloques/160.webp"
           }
         ]
       },
@@ -5199,7 +5463,8 @@
             "VITALITE": 200,
             "DO_CRIT": 20
           },
-          "multiplicateurs": []
+          "multiplicateurs": [],
+          "notes": []
         }
       },
       {
@@ -5211,11 +5476,24 @@
             "DO_CRIT": 40,
             "PA": 1
           },
-          "multiplicateurs": []
+          "multiplicateurs": [],
+          "notes": []
         }
       }
     ],
-    "imageItems": null
+    "imageItems": [
+      {
+        "type": "breloque",
+        "id": 160,
+        "imageUrl": "/images/breloques/160.webp"
+      },
+      {
+        "type": "sort",
+        "id": 633,
+        "imageUrl": "/images/sorts/633.webp"
+      }
+    ],
+    "imageComposite": "/images/ensembles/de-la-silhouette-d-ombre.webp"
   },
   {
     "cle": "de-la-grande-pecheresse-ambra",
@@ -5229,7 +5507,7 @@
           {
             "id": 155,
             "rang": "Unique",
-            "image_url": null
+            "image_url": "/images/breloques/155.webp"
           }
         ]
       },
@@ -5255,7 +5533,8 @@
             "VITALITE": 200,
             "FUITE": 30
           },
-          "multiplicateurs": []
+          "multiplicateurs": [],
+          "notes": []
         }
       },
       {
@@ -5267,11 +5546,24 @@
             "FUITE": 60,
             "PA": 1
           },
-          "multiplicateurs": []
+          "multiplicateurs": [],
+          "notes": []
         }
       }
     ],
-    "imageItems": null
+    "imageItems": [
+      {
+        "type": "breloque",
+        "id": 155,
+        "imageUrl": "/images/breloques/155.webp"
+      },
+      {
+        "type": "sort",
+        "id": 629,
+        "imageUrl": "/images/sorts/629.webp"
+      }
+    ],
+    "imageComposite": "/images/ensembles/de-la-grande-pecheresse-ambra.webp"
   },
   {
     "cle": "du-kong-de-monte-cristaux",
@@ -5285,7 +5577,7 @@
           {
             "id": 117,
             "rang": "Unique",
-            "image_url": null
+            "image_url": "/images/breloques/117.webp"
           }
         ]
       },
@@ -5315,7 +5607,8 @@
               "type": "finaux_melee",
               "valeur": 1.1
             }
-          ]
+          ],
+          "notes": []
         }
       },
       {
@@ -5331,10 +5624,23 @@
               "type": "finaux_melee",
               "valeur": 1.2
             }
-          ]
+          ],
+          "notes": []
         }
       }
     ],
-    "imageItems": null
+    "imageItems": [
+      {
+        "type": "breloque",
+        "id": 117,
+        "imageUrl": "/images/breloques/117.webp"
+      },
+      {
+        "type": "sort",
+        "id": 634,
+        "imageUrl": "/images/sorts/634.webp"
+      }
+    ],
+    "imageComposite": "/images/ensembles/du-kong-de-monte-cristaux.webp"
   }
 ]

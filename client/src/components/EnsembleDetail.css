@@ -1,3 +1,19 @@
+/* Fond + couleur explicites (même convention que .detail-monstre/.carte-cube) :
+   sans ça, la modale (transparente par elle-même, Modal.css) affiche ce contenu
+   sans aucun fond propre — invisible sur mobile, et surtout héritait de la couleur
+   de texte de son parent DOM réel (Modal.jsx n'utilise pas de portail), qui varie
+   selon d'où la modale est ouverte : depuis la page catalogue (fond sombre du site,
+   texte clair, ça passait "par hasard") ou depuis une card d'item (fond clair type
+   "panneau", texte sombre) — d'où le texte illisible signalé uniquement dans ce
+   2e cas. Fixé une bonne fois pour toutes ici plutôt que de compter sur l'héritage. */
+.detail-ensemble {
+  background: var(--panneau-fond);
+  color: var(--panneau-texte);
+  border: 1px solid var(--bordure-or-forte);
+  border-radius: 10px;
+  padding: 16px;
+}
+
 .detail-ensemble__nom {
   margin: 0 0 14px;
   font-size: 20px;
@@ -54,10 +70,65 @@
   letter-spacing: 0.03em;
 }
 
-.detail-ensemble__palier-texte {
+/* Une ligne par stat (jamais regroupées), même convention visuelle que
+   .stats-personnage__ligne (StatsPersonnage.css) : icône ronde colorée, valeur
+   alignée à droite sur une largeur fixe (l'icône ne bouge pas selon le nombre de
+   chiffres), libellé atténué. */
+.detail-ensemble__stat-liste {
+  list-style: none;
   margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.detail-ensemble__stat-ligne {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  min-width: 0;
+}
+
+.detail-ensemble__stat-valeur {
+  flex: 0 0 auto;
+  width: 34px;
+  font-weight: 700;
   font-size: 14px;
-  line-height: 1.4;
+  color: var(--panneau-texte);
+  text-align: right;
+}
+
+.detail-ensemble__stat-icone {
+  flex: 0 0 auto;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  line-height: 1;
+  opacity: 0.85;
+}
+
+.detail-ensemble__stat-libelle {
+  flex: 1 1 auto;
+  font-size: 13px;
+  color: var(--panneau-texte-attenue);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Texte indicatif (résistances distance/mêlée...) ou non reconnu ("Aucun bonus") :
+   pas de stat calculée, donc pas d'icône — même taille/couleur que le libellé
+   pour rester discret à côté des vraies lignes de stat. */
+.detail-ensemble__note {
+  margin: 0;
+  font-size: 13px;
+  font-style: italic;
+  color: var(--panneau-texte-attenue);
 }
 
 .detail-ensemble__pieces {
