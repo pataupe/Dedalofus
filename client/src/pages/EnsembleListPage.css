@@ -1,0 +1,50 @@
+.page-ensembles {
+  padding: 20px 16px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.page-ensembles__intro {
+  margin: 4px 0 20px;
+  color: var(--texte-attenue);
+  font-size: 14px;
+  max-width: 700px;
+}
+
+.page-ensembles__section {
+  margin-bottom: 28px;
+}
+
+.page-ensembles__section h2 {
+  font-size: 19px;
+  margin: 0 0 14px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--bordure-or);
+}
+
+.page-ensembles__grille {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 14px;
+}
+
+@media (min-width: 600px) {
+  .page-ensembles {
+    padding: 24px;
+  }
+
+  .page-ensembles__grille {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 18px;
+  }
+}
+
+/* 3 colonnes fixes en vrai desktop, même convention que .page-monstres__grille
+   (MonstreListPage.css) — pas de auto-fill qui donnerait un nombre de colonnes
+   variable selon la largeur d'écran. */
+@media (min-width: 900px) {
+  .page-ensembles__grille {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+}

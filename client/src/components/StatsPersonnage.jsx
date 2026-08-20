@@ -46,6 +46,8 @@ const BLOCS = [
       { cle: 'DOMMAGES_AIR_TOTAL', libelle: 'Do Air', icone: '🍃', couleur: 'var(--couleur-air)' },
       { cle: 'DO_CRIT', libelle: 'Do Crit.', icone: '🎯', couleur: 'var(--couleur-feu)' },
       { cle: 'DO_POU', libelle: 'Do Pou.', icone: '➡️', couleur: 'var(--texte-attenue)' },
+      { cle: 'DO_PIEGE', libelle: 'Do Piège', icone: '🪤', couleur: 'var(--couleur-terre)' },
+      { cle: 'PUISSANCE_PIEGE', libelle: 'Puiss. Piège', icone: '🪤', couleur: 'var(--couleur-lumiere)' },
     ],
   },
   {

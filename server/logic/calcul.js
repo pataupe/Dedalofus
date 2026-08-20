@@ -163,15 +163,21 @@ function calculerBonusPanoplies(cubesEquipes) {
  *   `{ statsPlates, pdvPourcent }`. `statsPlates` fusionné comme le Parcho ; `pdvPourcent`
  *   (breloque de l'Hémophile) appliqué en multiplicateur sur `VITALITE_TOTALE`, après coup
  *   (ce n'est pas une stat brute qu'on additionne).
+ * @param {Object} [bonusEnsembles] Résultat de `calculerBonusEnsembles` (ensembles.js) :
+ *   `{ statsPlates }`. Bonus des ensembles classiques/boss actuellement actifs (nombre de
+ *   pièces équipées >= seuil d'un palier), fusionné comme Parcho/breloques — les ensembles
+ *   de cubes restent gérés par `calculerBonusPanoplies` ci-dessus, inchangé.
  * @returns {Object} Stats brutes sommées par clé (cubes + bonus de panoplie + Parcho +
- *   bonus de breloques inclus), plus les stats dérivées : `INITIATIVE_TOTALE`, `VITALITE_TOTALE`,
- *   `PA_TOTAL`, `PM_TOTAL`, `INVOCATION_TOTALE`, `TACLE_TOTAL`, `FUITE_TOTALE`,
- *   `RETRAIT_PA_TOTAL`, `RETRAIT_PM_TOTAL`, `ESQUIVE_PA_TOTALE`, `ESQUIVE_PM_TOTALE`,
- *   `DOMMAGES_FEU_TOTAL`, `DOMMAGES_TERRE_TOTAL`, `DOMMAGES_EAU_TOTAL`, `DOMMAGES_AIR_TOTAL`.
+ *   bonus de breloques + bonus d'ensembles inclus), plus les stats dérivées :
+ *   `INITIATIVE_TOTALE`, `VITALITE_TOTALE`, `PA_TOTAL`, `PM_TOTAL`, `INVOCATION_TOTALE`,
+ *   `TACLE_TOTAL`, `FUITE_TOTALE`, `RETRAIT_PA_TOTAL`, `RETRAIT_PM_TOTAL`,
+ *   `ESQUIVE_PA_TOTALE`, `ESQUIVE_PM_TOTALE`, `DOMMAGES_FEU_TOTAL`, `DOMMAGES_TERRE_TOTAL`,
+ *   `DOMMAGES_EAU_TOTAL`, `DOMMAGES_AIR_TOTAL`.
  */
-function calculerStatsPersonnage(cubesEquipes, bonusParcho = {}, effetsBreloques = {}) {
+function calculerStatsPersonnage(cubesEquipes, bonusParcho = {}, effetsBreloques = {}, bonusEnsembles = {}) {
   const stats = {};
   const { statsPlates: bonusBreloques = {}, pdvPourcent = 0 } = effetsBreloques;
+  const { statsPlates: bonusEnsemblesPlates = {} } = bonusEnsembles;
 
   for (const cube of cubesEquipes || []) {
     if (!cube || !cube.stats) continue;
@@ -201,6 +207,13 @@ function calculerStatsPersonnage(cubesEquipes, bonusParcho = {}, effetsBreloques
     stats[cle] = (stats[cle] || 0) + (valeur || 0);
   }
 
+  // Bonus des ensembles classiques/boss actuellement actifs (ensembles.js) : même
+  // traitement, cible les mêmes clés génériques (VITALITE, PA, PUISSANCE_PIEGE,
+  // RETRAIT_PA_BRELOQUE...) donc aucune formule de dérivation à dupliquer.
+  for (const [cle, valeur] of Object.entries(bonusEnsemblesPlates)) {
+    stats[cle] = (stats[cle] || 0) + (valeur || 0);
+  }
+
   // Initiative = somme des 4 caractéristiques offensives + bonus Initiative éventuel
   // (cubes Lumière). Ne rentre jamais dans le calcul de dégâts, affichage seulement.
   stats.INITIATIVE_TOTALE =
@@ -215,9 +228,10 @@ function calculerStatsPersonnage(cubesEquipes, bonusParcho = {}, effetsBreloques
   stats.PM_TOTAL = BASES_PERSONNAGE.PM + (stats.PM || 0);
   stats.INVOCATION_TOTALE = BASES_PERSONNAGE.INVOCATION + (stats.INVOCATION || 0);
 
-  // Tacle = 1 par tranche de 10 Agilité (troncature). Fuite = 1 par tranche de 10
-  // Chance (troncature) + bonus Fuite direct des cubes.
-  stats.TACLE_TOTAL = Math.floor((stats.AGILITE || 0) / 10);
+  // Tacle = 1 par tranche de 10 Agilité (troncature) + bonus Tacle direct (aucune
+  // stat cube équivalente ; ajouté pour les ensembles, ex: Ensemble du Pugiliste).
+  // Fuite = 1 par tranche de 10 Chance (troncature) + bonus Fuite direct des cubes.
+  stats.TACLE_TOTAL = Math.floor((stats.AGILITE || 0) / 10) + (stats.TACLE || 0);
   stats.FUITE_TOTALE = Math.floor((stats.CHANCE || 0) / 10) + (stats.FUITE || 0);
 
   // Retrait PA/PM et Esquive PA/PM partent toutes du même palier : 1 par tranche de 10
@@ -243,28 +257,35 @@ function calculerStatsPersonnage(cubesEquipes, bonusParcho = {}, effetsBreloques
 }
 
 // "1 stat" pour un élément donné = la caractéristique liée à cet élément + la Puissance
-// (1 Puissance = 1 stat dans tous les éléments).
-function calculerStatEfficace(statsPersonnage, element) {
+// (1 Puissance = 1 stat dans tous les éléments). `estPiege` (5 sorts pièges, cf.
+// data/sorts-degats-indirects.md) ajoute aussi PUISSANCE_PIEGE, qui "fonctionne
+// pareil que la Puissance mais uniquement pour les pièges" (bonus d'ensembles,
+// ex: Ensemble du Fourbe) — 0 par défaut, aucun effet pour un sort normal.
+function calculerStatEfficace(statsPersonnage, element, estPiege = false) {
   const statElement = statsPersonnage[STAT_PAR_ELEMENT[element]] || 0;
   const puissance = statsPersonnage.PUISSANCE || 0;
-  return statElement + puissance;
+  const puissancePiege = estPiege ? (statsPersonnage.PUISSANCE_PIEGE || 0) : 0;
+  return statElement + puissance + puissancePiege;
 }
 
 // Le "b" de la formule ax + b : Dommages globaux (tous éléments) + dommages directs
-// propres à l'élément (ex: DO_FEU).
-function calculerBonusDommages(statsPersonnage, element) {
+// propres à l'élément (ex: DO_FEU). `estPiege` ajoute aussi DO_PIEGE (même principe
+// que PUISSANCE_PIEGE ci-dessus, "fonctionne pareil que les Dommages mais
+// uniquement pour les pièges").
+function calculerBonusDommages(statsPersonnage, element, estPiege = false) {
   const dommagesGlobaux = statsPersonnage.DOMMAGES || 0;
   const dommagesDirects = statsPersonnage[DOMMAGES_DIRECTS_PAR_ELEMENT[element]] || 0;
-  return dommagesGlobaux + dommagesDirects;
+  const dommagesPiege = estPiege ? (statsPersonnage.DO_PIEGE || 0) : 0;
+  return dommagesGlobaux + dommagesDirects + dommagesPiege;
 }
 
 // Dégâts d'un coup de base `degatsBase` dans un élément donné : ax + b, où
 // a = 1 + 0.01 * stat efficace, b = bonus de dommages. Retourne une valeur décimale
 // non arrondie (l'arrondi final se fait à l'affichage, jamais pendant le calcul).
-function calculerDegatsPourElement(statsPersonnage, degatsBase, element) {
-  const stat = calculerStatEfficace(statsPersonnage, element);
+function calculerDegatsPourElement(statsPersonnage, degatsBase, element, estPiege = false) {
+  const stat = calculerStatEfficace(statsPersonnage, element, estPiege);
   const multiplicateur = 1 + 0.01 * stat;
-  const bonus = calculerBonusDommages(statsPersonnage, element);
+  const bonus = calculerBonusDommages(statsPersonnage, element, estPiege);
   return degatsBase * multiplicateur + bonus;
 }
 
@@ -389,21 +410,29 @@ function construireLignes(sort) {
  * @param {Array<{ id: number|string, degatsMin: number|null, degatsMax: number|null,
  *   element: string|string[]|null, degatsCritiqueMin?: number|null,
  *   degatsCritiqueMax?: number|null, chanceCritique?: number|null, estSoin?: boolean,
+ *   estIndirect?: boolean, estPiege?: boolean,
  *   lignesSupplementaires?: Array<{ element?: string|null, degatsMin?: number|null,
  *   degatsMax?: number|null, degatsCritiqueMin?: number|null, degatsCritiqueMax?: number|null }>
  *   } | null>} sortsEquipes
  *   `degatsCritiqueMin/Max` et `chanceCritique` sont optionnels : absents, ils ne
- *   produisent simplement pas les clés correspondantes dans le résultat.
+ *   produisent simplement pas les clés correspondantes dans le résultat. `estIndirect`/
+ *   `estPiege` (data/sorts-degats-indirects.md) : `estPiege` ajoute PUISSANCE_PIEGE/
+ *   DO_PIEGE au calcul (cf. `calculerStatEfficace`/`calculerBonusDommages`) ;
+ *   `estIndirect` (les mêmes 5 sorts pièges + 11 autres) active les multiplicateurs
+ *   de type `'indirects'` (bonus d'ensemble "% de dommages indirects").
  *   `lignesSupplementaires` (optionnel) : lignes de dégâts indépendantes de la ligne
  *   principale (ex: 2e ligne de Pile ou Face/Foène/Pelle Aveuglante, lignes 2 à 4 de
  *   Tourbillon Embrasé) — `element` absent hérite de `sort.element`, `degatsMin/Max`
  *   peuvent être absents si la ligne n'existe qu'au critique (Pile ou Face).
  * @param {Object} [options]
  * @param {Array<{type: string, valeur: number}>} [options.multiplicateursBreloques] Résultat
- *   de `calculerEffetsBreloques(...).multiplicateurs` (effetsBreloques.js) — multiplicateurs
- *   de dégâts des breloques actuellement actives, combinés via `combinerMultiplicateurs`
- *   selon `modeAttaque` puis appliqués en facteur final sur chaque dégât (normal ET
- *   critique). Jamais appliqués aux sorts de soin (`estSoin`).
+ *   de `calculerEffetsBreloques(...).multiplicateurs` (effetsBreloques.js) concaténé avec
+ *   `calculerBonusEnsembles(...).multiplicateurs` (ensembles.js) — multiplicateurs de
+ *   dégâts actuellement actifs. Les types `'finaux'`/`'finaux_distance'`/`'finaux_melee'`
+ *   s'appliquent à tous les sorts (selon `modeAttaque`) ; le type `'indirects'` (bonus
+ *   d'ensemble "% de dommages indirects") ne s'applique qu'aux sorts `estIndirect`. Les
+ *   deux facteurs se multiplient entre eux pour un sort à la fois concerné par les deux.
+ *   Jamais appliqués aux sorts de soin (`estSoin`).
  * @param {'distance'|'melee'} [options.modeAttaque] Une attaque est toujours soit distance
  *   soit mêlée, jamais les deux (choix du joueur, onglet Sorts) — détermine quels
  *   multiplicateurs "finaux distance"/"finaux mêlée" s'appliquent. Par défaut 'distance'.
@@ -420,16 +449,25 @@ function construireLignes(sort) {
  */
 function calculerDegats(statsPersonnage, sortsEquipes, options = {}) {
   const { multiplicateursBreloques = [], modeAttaque = 'distance' } = options;
-  const multiplicateurFinal = combinerMultiplicateurs(multiplicateursBreloques, modeAttaque);
+  // Séparés en 2 groupes plutôt qu'un seul facteur global : "généraux" s'appliquent à
+  // tous les sorts (comme avant), "indirects" (bonus d'ensemble "% de dommages
+  // indirects") seulement aux sorts `estIndirect` — cf. section 2 du plan ensembles.
+  const multiplicateursGeneraux = multiplicateursBreloques.filter((m) => m.type !== 'indirects');
+  const multiplicateursIndirects = multiplicateursBreloques.filter((m) => m.type === 'indirects');
+  const facteurGeneral = combinerMultiplicateurs(multiplicateursGeneraux, modeAttaque);
+  const facteurIndirect = combinerMultiplicateurs(multiplicateursIndirects, modeAttaque);
   const resultats = [];
 
   for (const sort of sortsEquipes || []) {
     if (!sort) continue;
 
-    // Les multiplicateurs de breloques (dommages finaux) sont une mécanique de
-    // dégâts : ne s'appliquent jamais aux sorts de soin.
-    const facteur = sort.estSoin ? 1 : multiplicateurFinal;
-    const calculerValeurPour = sort.estSoin ? calculerSoinPourElement : calculerDegatsPourElement;
+    // Les multiplicateurs (dommages finaux/indirects) sont une mécanique de dégâts :
+    // ne s'appliquent jamais aux sorts de soin.
+    const facteur = sort.estSoin ? 1 : facteurGeneral * (sort.estIndirect ? facteurIndirect : 1);
+    const estPiege = Boolean(sort.estPiege);
+    const calculerValeurPour = sort.estSoin
+      ? (stats, base, element) => calculerSoinPourElement(stats, base, element)
+      : (stats, base, element) => calculerDegatsPourElement(stats, base, element, estPiege);
 
     for (const ligne of construireLignes(sort)) {
       const elements = resoudreElements(statsPersonnage, sort, ligne);
@@ -464,4 +502,4 @@ function calculerDegats(statsPersonnage, sortsEquipes, options = {}) {
   return resultats;
 }
 
-module.exports = { calculerStatsPersonnage, calculerDegats, calculerPanopliesActives };
+module.exports = { calculerStatsPersonnage, calculerDegats, calculerPanopliesActives, PANOPLIES };

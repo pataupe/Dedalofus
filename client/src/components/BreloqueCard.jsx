@@ -1,3 +1,5 @@
+import { trouverEnsemblesPiece } from '../utils/ensembles';
+import EnsembleLien from './EnsembleLien';
 import './BreloqueCard.css';
 
 function BreloqueCard({ breloque }) {
@@ -16,6 +18,7 @@ function BreloqueCard({ breloque }) {
         </div>
         <p className="carte-breloque__effet">{breloque.effet}</p>
       </div>
+      <EnsembleLien ensembles={trouverEnsemblesPiece('breloque', breloque.nom)} />
     </div>
   );
 }

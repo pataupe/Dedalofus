@@ -248,6 +248,25 @@
    l'autre (même hauteur/bordure que .entete__items-declencheur, coupé en 2) —
    le texte navigue directement, la flèche ouvre un menu de raccourcis vers
    chaque profondeur, sans devoir repasser par les filtres de la page. */
+/* Même poids visuel neutre que "Liste des monstres" (pas le traitement doré de
+   "Mes stuffs", ce n'est pas un lien vers le compte du joueur). */
+.entete__ensembles-lien {
+  display: flex;
+  align-items: center;
+  padding: 7px 14px;
+  border-radius: 8px;
+  background: var(--bg);
+  border: 1px solid var(--bordure);
+  color: var(--texte);
+  font-size: 14px;
+  font-weight: 600;
+  transition: border-color 0.15s ease;
+}
+
+.entete__ensembles-lien:hover {
+  border-color: var(--bordure-or-forte);
+}
+
 .entete__monstres {
   position: relative;
   display: flex;
@@ -352,7 +371,8 @@
 
   /* Le menu déroulant passe en statique (pousse le contenu au lieu de flotter
      par-dessus) : plus adapté à la nav empilée en pleine largeur du mobile. */
-  .entete__items-declencheur {
+  .entete__items-declencheur,
+  .entete__ensembles-lien {
     width: 100%;
     justify-content: center;
   }

@@ -1,0 +1,5340 @@
+[
+  {
+    "cle": "ensemble-de-cubes-air",
+    "nom": "Ensemble de Cubes Air",
+    "type": "cube",
+    "pieces": [],
+    "bonusSpecial": null,
+    "paliers": [
+      {
+        "items": 2,
+        "texte": "+50 Vitalité, +50 Agilité, +10 Dommages Air",
+        "delta": {
+          "statsPlates": {
+            "VITALITE": 50,
+            "AGILITE": 50,
+            "DO_AIR": 10
+          },
+          "multiplicateurs": []
+        }
+      },
+      {
+        "items": 3,
+        "texte": "+100 Vitalité, +100 Agilité, +20 Dommages Air",
+        "delta": {
+          "statsPlates": {
+            "VITALITE": 100,
+            "AGILITE": 100,
+            "DO_AIR": 20
+          },
+          "multiplicateurs": []
+        }
+      },
+      {
+        "items": 4,
+        "texte": "+150 Vitalité, +150 Agilité, +25 Puissance, +5 Dommages, +30 Dommages Air",
+        "delta": {
+          "statsPlates": {
+            "VITALITE": 150,
+            "AGILITE": 150,
+            "DO_AIR": 30,
+            "PUISSANCE": 25,
+            "DOMMAGES": 5
+          },
+          "multiplicateurs": []
+        }
+      },
+      {
+        "items": 5,
+        "texte": "+200 Vitalité, +150 Agilité, +50 Puissance, +10 Dommages, +30 Dommages Air",
+        "delta": {
+          "statsPlates": {
+            "VITALITE": 200,
+            "AGILITE": 150,
+            "DO_AIR": 30,
+            "PUISSANCE": 50,
+            "DOMMAGES": 10
+          },
+          "multiplicateurs": []
+        }
+      },
+      {
+        "items": 6,
+        "texte": "+250 Vitalité, +150 Agilité, +75 Puissance, +15 Dommages, +30 Dommages Air",
+        "delta": {
+          "statsPlates": {
+            "VITALITE": 250,
+            "AGILITE": 150,
+            "DO_AIR": 30,
+            "PUISSANCE": 75,
+            "DOMMAGES": 15
+          },
+          "multiplicateurs": []
+        }
+      },
+      {
+        "items": 7,
+        "texte": "+300 Vitalité, +150 Agilité, +100 Puissance, +20 Dommages, +30 Dommages Air",
+        "delta": {
+          "statsPlates": {
+            "VITALITE": 300,
+            "AGILITE": 150,
+            "DO_AIR": 30,
+            "PUISSANCE": 100,
+            "DOMMAGES": 20
+          },
+          "multiplicateurs": []
+        }
+      },
+      {
+        "items": 8,
+        "texte": "+350 Vitalité, +150 Agilité, +125 Puissance, +25 Dommages, +30 Dommages Air",
+        "delta": {
+          "statsPlates": {
+            "VITALITE": 350,
+            "AGILITE": 150,
+            "DO_AIR": 30,
+            "PUISSANCE": 125,
+            "DOMMAGES": 25
+          },
+          "multiplicateurs": []
+        }
+      },
+      {
+        "items": 9,
+        "texte": "+400 Vitalité, +150 Agilité, +150 Puissance, +30 Dommages, +30 Dommages Air",
+        "delta": {
+          "statsPlates": {
+            "VITALITE": 400,
+            "AGILITE": 150,
+            "DO_AIR": 30,
+            "PUISSANCE": 150,
+            "DOMMAGES": 30
+          },
+          "multiplicateurs": []
+        }
+      }
+    ],
+    "imageItems": [
+      {
+        "type": "cube",
+        "id": 1,
+        "imageUrl": "/images/cubes/1.webp"
+      },
+      {
+        "type": "cube",
+        "id": 5,
+        "imageUrl": "/images/cubes/5.webp"
+      }
+    ],
+    "imageComposite": "/images/ensembles/ensemble-de-cubes-air.webp"
+  },
+  {
+    "cle": "ensemble-de-cubes-terre",
+    "nom": "Ensemble de Cubes Terre",
+    "type": "cube",
+    "pieces": [],
+    "bonusSpecial": null,
+    "paliers": [
+      {
+        "items": 2,
+        "texte": "+50 Vitalité, +50 Force, +10 Dommages Terre",
+        "delta": {
+          "statsPlates": {
+            "VITALITE": 50,
+            "FORCE": 50,
+            "DO_TERRE": 10
+          },
+          "multiplicateurs": []
+        }
+      },
+      {
+        "items": 3,
+        "texte": "+100 Vitalité, +100 Force, +20 Dommages Terre",
+        "delta": {
+          "statsPlates": {
+            "VITALITE": 100,
+            "FORCE": 100,
+            "DO_TERRE": 20
+          },
+          "multiplicateurs": []
+        }
+      },
+      {
+        "items": 4,
+        "texte": "+150 Vitalité, +150 Force, +25 Puissance, +5 Dommages, +30 Dommages Terre",
+        "delta": {
+          "statsPlates": {
+            "VITALITE": 150,
+            "FORCE": 150,
+            "DO_TERRE": 30,
+            "PUISSANCE": 25,
+            "DOMMAGES": 5
+          },
+          "multiplicateurs": []
+        }
+      },
+      {
+        "items": 5,
+        "texte": "+200 Vitalité, +150 Force, +50 Puissance, +10 Dommages, +30 Dommages Terre",
+        "delta": {
+          "statsPlates": {
+            "VITALITE": 200,
+            "FORCE": 150,
+            "DO_TERRE": 30,
+            "PUISSANCE": 50,
+            "DOMMAGES": 10
+          },
+          "multiplicateurs": []
+        }
+      },
+      {
+        "items": 6,
+        "texte": "+250 Vitalité, +150 Force, +75 Puissance, +15 Dommages, +30 Dommages Terre",
+        "delta": {
+          "statsPlates": {
+            "VITALITE": 250,
+            "FORCE": 150,
+            "DO_TERRE": 30,
+            "PUISSANCE": 75,
+            "DOMMAGES": 15
+          },
+          "multiplicateurs": []
+        }
+      },
+      {
+        "items": 7,
+        "texte": "+300 Vitalité, +150 Force, +100 Puissance, +20 Dommages, +30 Dommages Terre",
+        "delta": {
+          "statsPlates": {
+            "VITALITE": 300,
+            "FORCE": 150,
+            "DO_TERRE": 30,
+            "PUISSANCE": 100,
+            "DOMMAGES": 20
+          },
+          "multiplicateurs": []
+        }
+      },
+      {
+        "items": 8,
+        "texte": "+350 Vitalité, +150 Force, +125 Puissance, +25 Dommages, +30 Dommages Terre",
+        "delta": {
+          "statsPlates": {
+            "VITALITE": 350,
+            "FORCE": 150,
+            "DO_TERRE": 30,
+            "PUISSANCE": 125,
+            "DOMMAGES": 25
+          },
+          "multiplicateurs": []
+        }
+      },
+      {
+        "items": 9,
+        "texte": "+400 Vitalité, +150 Force, +150 Puissance, +30 Dommages, +30 Dommages Terre",
+        "delta": {
+          "statsPlates": {
+            "VITALITE": 400,
+            "FORCE": 150,
+            "DO_TERRE": 30,
+            "PUISSANCE": 150,
+            "DOMMAGES": 30
+          },
+          "multiplicateurs": []
+        }
+      }
+    ],
+    "imageItems": [
+      {
+        "type": "cube",
+        "id": 151,
+        "imageUrl": "/images/cubes/151.webp"
+      },
+      {
+        "type": "cube",
+        "id": 155,
+        "imageUrl": "/images/cubes/155.webp"
+      }
+    ],
+    "imageComposite": "/images/ensembles/ensemble-de-cubes-terre.webp"
+  },
+  {
+    "cle": "ensemble-de-cubes-eau",
+    "nom": "Ensemble de Cubes Eau",
+    "type": "cube",
+    "pieces": [],
+    "bonusSpecial": null,
+    "paliers": [
+      {
+        "items": 2,
+        "texte": "+50 Vitalité, +50 Chance, +10 Dommages Eau",
+        "delta": {
+          "statsPlates": {
+            "VITALITE": 50,
+            "CHANCE": 50,
+            "DO_EAU": 10
+          },
+          "multiplicateurs": []
+        }
+      },
+      {
+        "items": 3,
+        "texte": "+100 Vitalité, +100 Chance, +20 Dommages Eau",
+        "delta": {
+          "statsPlates": {
+            "VITALITE": 100,
+            "CHANCE": 100,
+            "DO_EAU": 20
+          },
+          "multiplicateurs": []
+        }
+      },
+      {
+        "items": 4,
+        "texte": "+150 Vitalité, +150 Chance, +25 Puissance, +5 Dommages, +30 Dommages Eau",
+        "delta": {
+          "statsPlates": {
+            "VITALITE": 150,
+            "CHANCE": 150,
+            "DO_EAU": 30,
+            "PUISSANCE": 25,
+            "DOMMAGES": 5
+          },
+          "multiplicateurs": []
+        }
+      },
+      {
+        "items": 5,
+        "texte": "+200 Vitalité, +150 Chance, +50 Puissance, +10 Dommages, +30 Dommages Eau",
+        "delta": {
+          "statsPlates": {
+            "VITALITE": 200,
+            "CHANCE": 150,
+            "DO_EAU": 30,
+            "PUISSANCE": 50,
+            "DOMMAGES": 10
+          },
+          "multiplicateurs": []
+        }
+      },
+      {
+        "items": 6,
+        "texte": "+250 Vitalité, +150 Chance, +75 Puissance, +15 Dommages, +30 Dommages Eau",
+        "delta": {
+          "statsPlates": {
+            "VITALITE": 250,
+            "CHANCE": 150,
+            "DO_EAU": 30,
+            "PUISSANCE": 75,
+            "DOMMAGES": 15
+          },
+          "multiplicateurs": []
+        }
+      },
+      {
+        "items": 7,
+        "texte": "+300 Vitalité, +150 Chance, +100 Puissance, +20 Dommages, +30 Dommages Eau",
+        "delta": {
+          "statsPlates": {
+            "VITALITE": 300,
+            "CHANCE": 150,
+            "DO_EAU": 30,
+            "PUISSANCE": 100,
+            "DOMMAGES": 20
+          },
+          "multiplicateurs": []
+        }
+      },
+      {
+        "items": 8,
+        "texte": "+350 Vitalité, +150 Chance, +125 Puissance, +25 Dommages, +30 Dommages Eau",
+        "delta": {
+          "statsPlates": {
+            "VITALITE": 350,
+            "CHANCE": 150,
+            "DO_EAU": 30,
+            "PUISSANCE": 125,
+            "DOMMAGES": 25
+          },
+          "multiplicateurs": []
+        }
+      },
+      {
+        "items": 9,
+        "texte": "+400 Vitalité, +150 Chance, +150 Puissance, +30 Dommages, +30 Dommages Eau",
+        "delta": {
+          "statsPlates": {
+            "VITALITE": 400,
+            "CHANCE": 150,
+            "DO_EAU": 30,
+            "PUISSANCE": 150,
+            "DOMMAGES": 30
+          },
+          "multiplicateurs": []
+        }
+      }
+    ],
+    "imageItems": [
+      {
+        "type": "cube",
+        "id": 226,
+        "imageUrl": "/images/cubes/226.webp"
+      },
+      {
+        "type": "cube",
+        "id": 230,
+        "imageUrl": "/images/cubes/230.webp"
+      }
+    ],
+    "imageComposite": "/images/ensembles/ensemble-de-cubes-eau.webp"
+  },
+  {
+    "cle": "ensemble-de-cubes-feu",
+    "nom": "Ensemble de Cubes Feu",
+    "type": "cube",
+    "pieces": [],
+    "bonusSpecial": null,
+    "paliers": [
+      {
+        "items": 2,
+        "texte": "+50 Vitalité, +50 Intelligence, +10 Dommages Feu",
+        "delta": {
+          "statsPlates": {
+            "VITALITE": 50,
+            "INTELLIGENCE": 50,
+            "DO_FEU": 10
+          },
+          "multiplicateurs": []
+        }
+      },
+      {
+        "items": 3,
+        "texte": "+100 Vitalité, +100 Intelligence, +20 Dommages Feu",
+        "delta": {
+          "statsPlates": {
+            "VITALITE": 100,
+            "INTELLIGENCE": 100,
+            "DO_FEU": 20
+          },
+          "multiplicateurs": []
+        }
+      },
+      {
+        "items": 4,
+        "texte": "+150 Vitalité, +150 Intelligence, +25 Puissance, +5 Dommages, +30 Dommages Feu",
+        "delta": {
+          "statsPlates": {
+            "VITALITE": 150,
+            "INTELLIGENCE": 150,
+            "DO_FEU": 30,
+            "PUISSANCE": 25,
+            "DOMMAGES": 5
+          },
+          "multiplicateurs": []
+        }
+      },
+      {
+        "items": 5,
+        "texte": "+200 Vitalité, +150 Intelligence, +50 Puissance, +10 Dommages, +30 Dommages Feu",
+        "delta": {
+          "statsPlates": {
+            "VITALITE": 200,
+            "INTELLIGENCE": 150,
+            "DO_FEU": 30,
+            "PUISSANCE": 50,
+            "DOMMAGES": 10
+          },
+          "multiplicateurs": []
+        }
+      },
+      {
+        "items": 6,
+        "texte": "+250 Vitalité, +150 Intelligence, +75 Puissance, +15 Dommages, +30 Dommages Feu",
+        "delta": {
+          "statsPlates": {
+            "VITALITE": 250,
+            "INTELLIGENCE": 150,
+            "DO_FEU": 30,
+            "PUISSANCE": 75,
+            "DOMMAGES": 15
+          },
+          "multiplicateurs": []
+        }
+      },
+      {
+        "items": 7,
+        "texte": "+300 Vitalité, +150 Intelligence, +100 Puissance, +20 Dommages, +30 Dommages Feu",
+        "delta": {
+          "statsPlates": {
+            "VITALITE": 300,
+            "INTELLIGENCE": 150,
+            "DO_FEU": 30,
+            "PUISSANCE": 100,
+            "DOMMAGES": 20
+          },
+          "multiplicateurs": []
+        }
+      },
+      {
+        "items": 8,
+        "texte": "+350 Vitalité, +150 Intelligence, +125 Puissance, +25 Dommages, +30 Dommages Feu",
+        "delta": {
+          "statsPlates": {
+            "VITALITE": 350,
+            "INTELLIGENCE": 150,
+            "DO_FEU": 30,
+            "PUISSANCE": 125,
+            "DOMMAGES": 25
+          },
+          "multiplicateurs": []
+        }
+      },
+      {
+        "items": 9,
+        "texte": "+400 Vitalité, +150 Intelligence, +150 Puissance, +30 Dommages, +30 Dommages Feu",
+        "delta": {
+          "statsPlates": {
+            "VITALITE": 400,
+            "INTELLIGENCE": 150,
+            "DO_FEU": 30,
+            "PUISSANCE": 150,
+            "DOMMAGES": 30
+          },
+          "multiplicateurs": []
+        }
+      }
+    ],
+    "imageItems": [
+      {
+        "type": "cube",
+        "id": 76,
+        "imageUrl": "/images/cubes/76.webp"
+      },
+      {
+        "type": "cube",
+        "id": 80,
+        "imageUrl": "/images/cubes/80.webp"
+      }
+    ],
+    "imageComposite": "/images/ensembles/ensemble-de-cubes-feu.webp"
+  },
+  {
+    "cle": "ensemble-de-cubes-lumiere",
+    "nom": "Ensemble de Cubes Lumière",
+    "type": "cube",
+    "pieces": [],
+    "bonusSpecial": null,
+    "paliers": [
+      {
+        "items": 2,
+        "texte": "+1 PM, +50 Vitalité, +5 Dommages Critiques, +5 Soin",
+        "delta": {
+          "statsPlates": {
+            "PM": 1,
+            "VITALITE": 50,
+            "SOIN": 5,
+            "DO_CRIT": 5
+          },
+          "multiplicateurs": []
+        }
+      },
+      {
+        "items": 3,
+        "texte": "+1 PM, +1 PA, +75 Vitalité, +10 Dommages Critiques, +10 Soin",
+        "delta": {
+          "statsPlates": {
+            "PM": 1,
+            "PA": 1,
+            "VITALITE": 75,
+            "SOIN": 10,
+            "DO_CRIT": 10
+          },
+          "multiplicateurs": []
+        }
+      },
+      {
+        "items": 4,
+        "texte": "+1 PM, +1 PA, +1 PO, +100 Vitalité, +15 Dommages Critiques, +15 Soin",
+        "delta": {
+          "statsPlates": {
+            "PM": 1,
+            "PA": 1,
+            "PO": 1,
+            "VITALITE": 100,
+            "SOIN": 15,
+            "DO_CRIT": 15
+          },
+          "multiplicateurs": []
+        }
+      },
+      {
+        "items": 5,
+        "texte": "+1 PM, +1 PA, +1 PO, +150 Vitalité, +20 Dommages Critiques, +20 Soin",
+        "delta": {
+          "statsPlates": {
+            "PM": 1,
+            "PA": 1,
+            "PO": 1,
+            "VITALITE": 150,
+            "SOIN": 20,
+            "DO_CRIT": 20
+          },
+          "multiplicateurs": []
+        }
+      },
+      {
+        "items": 6,
+        "texte": "+2 PM, +1 PA, +1 PO, +175 Vitalité, +25 Dommages Critiques, +25 Soin",
+        "delta": {
+          "statsPlates": {
+            "PM": 2,
+            "PA": 1,
+            "PO": 1,
+            "VITALITE": 175,
+            "SOIN": 25,
+            "DO_CRIT": 25
+          },
+          "multiplicateurs": []
+        }
+      },
+      {
+        "items": 7,
+        "texte": "+2 PM, +2 PA, +1 PO, +200 Vitalité, +30 Dommages Critiques, +30 Soin",
+        "delta": {
+          "statsPlates": {
+            "PM": 2,
+            "PA": 2,
+            "PO": 1,
+            "VITALITE": 200,
+            "SOIN": 30,
+            "DO_CRIT": 30
+          },
+          "multiplicateurs": []
+        }
+      },
+      {
+        "items": 8,
+        "texte": "+2 PM, +2 PA, +2 PO, +225 Vitalité, +35 Dommages Critiques, +35 Soin",
+        "delta": {
+          "statsPlates": {
+            "PM": 2,
+            "PA": 2,
+            "PO": 2,
+            "VITALITE": 225,
+            "SOIN": 35,
+            "DO_CRIT": 35
+          },
+          "multiplicateurs": []
+        }
+      },
+      {
+        "items": 9,
+        "texte": "+2 PM, +2 PA, +2 PO, +250 Vitalité, +40 Dommages Critiques, +40 Soin",
+        "delta": {
+          "statsPlates": {
+            "PM": 2,
+            "PA": 2,
+            "PO": 2,
+            "VITALITE": 250,
+            "SOIN": 40,
+            "DO_CRIT": 40
+          },
+          "multiplicateurs": []
+        }
+      }
+    ],
+    "imageItems": [
+      {
+        "type": "cube",
+        "id": 376,
+        "imageUrl": "/images/cubes/376.webp"
+      },
+      {
+        "type": "cube",
+        "id": 380,
+        "imageUrl": "/images/cubes/380.webp"
+      }
+    ],
+    "imageComposite": "/images/ensembles/ensemble-de-cubes-lumiere.webp"
+  },
+  {
+    "cle": "de-l-altruiste",
+    "nom": "Ensemble de l’Altruiste",
+    "type": "classique",
+    "pieces": [
+      {
+        "type": "sort",
+        "nom": "Mot Curatif - Eau",
+        "variantes": [
+          {
+            "id": 72,
+            "rang": "Novice",
+            "image_url": "/images/sorts/72.webp"
+          },
+          {
+            "id": 187,
+            "rang": "Expert",
+            "image_url": "/images/sorts/72.webp"
+          },
+          {
+            "id": 302,
+            "rang": "Maître α",
+            "image_url": "/images/sorts/72.webp"
+          },
+          {
+            "id": 417,
+            "rang": "Maître ẞ",
+            "image_url": "/images/sorts/72.webp"
+          }
+        ]
+      },
+      {
+        "type": "sort",
+        "nom": "Mot Curatif - Feu",
+        "variantes": [
+          {
+            "id": 71,
+            "rang": "Novice",
+            "image_url": "/images/sorts/71.webp"
+          },
+          {
+            "id": 186,
+            "rang": "Expert",
+            "image_url": "/images/sorts/71.webp"
+          },
+          {
+            "id": 301,
+            "rang": "Maître α",
+            "image_url": "/images/sorts/71.webp"
+          },
+          {
+            "id": 416,
+            "rang": "Maître ẞ",
+            "image_url": "/images/sorts/71.webp"
+          }
+        ]
+      },
+      {
+        "type": "sort",
+        "nom": "Mot Revitalisant",
+        "variantes": [
+          {
+            "id": 97,
+            "rang": "Novice",
+            "image_url": "/images/sorts/97.webp"
+          },
+          {
+            "id": 212,
+            "rang": "Expert",
+            "image_url": "/images/sorts/97.webp"
+          },
+          {
+            "id": 327,
+            "rang": "Maître α",
+            "image_url": "/images/sorts/97.webp"
+          },
+          {
+            "id": 442,
+            "rang": "Maître ẞ",
+            "image_url": "/images/sorts/97.webp"
+          }
+        ]
+      },
+      {
+        "type": "sort",
+        "nom": "Mot Soignant - Terre",
+        "variantes": [
+          {
+            "id": 59,
+            "rang": "Novice",
+            "image_url": "/images/sorts/59.webp"
+          },
+          {
+            "id": 174,
+            "rang": "Expert",
+            "image_url": "/images/sorts/59.webp"
+          },
+          {
+            "id": 289,
+            "rang": "Maître α",
+            "image_url": "/images/sorts/59.webp"
+          },
+          {
+            "id": 404,
+            "rang": "Maître ẞ",
+            "image_url": "/images/sorts/59.webp"
+          }
+        ]
+      },
+      {
+        "type": "sort",
+        "nom": "Mot Soignant - Air",
+        "variantes": [
+          {
+            "id": 58,
+            "rang": "Novice",
+            "image_url": "/images/sorts/58.webp"
+          },
+          {
+            "id": 173,
+            "rang": "Expert",
+            "image_url": "/images/sorts/58.webp"
+          },
+          {
+            "id": 288,
+            "rang": "Maître α",
+            "image_url": "/images/sorts/58.webp"
+          },
+          {
+            "id": 403,
+            "rang": "Maître ẞ",
+            "image_url": "/images/sorts/58.webp"
+          }
+        ]
+      },
+      {
+        "type": "breloque",
+        "nom": "Breloque du Clerc obscur",
+        "variantes": [
+          {
+            "id": 65,
+            "rang": "Novice",
+            "image_url": "/images/breloques/65.webp"
+          },
+          {
+            "id": 66,
+            "rang": "Expert",
+            "image_url": "/images/breloques/66.webp"
+          },
+          {
+            "id": 67,
+            "rang": "Maître α",
+            "image_url": "/images/breloques/67.webp"
+          },
+          {
+            "id": 68,
+            "rang": "Maître ẞ",
+            "image_url": "/images/breloques/68.webp"
+          }
+        ]
+      },
+      {
+        "type": "breloque",
+        "nom": "Breloque d'empathie croissante",
+        "variantes": [
+          {
+            "id": 81,
+            "rang": "Novice",
+            "image_url": "/images/breloques/81.webp"
+          },
+          {
+            "id": 82,
+            "rang": "Expert",
+            "image_url": "/images/breloques/82.webp"
+          },
+          {
+            "id": 83,
+            "rang": "Maître α",
+            "image_url": "/images/breloques/83.webp"
+          },
+          {
+            "id": 84,
+            "rang": "Maître ẞ",
+            "image_url": "/images/breloques/84.webp"
+          }
+        ]
+      },
+      {
+        "type": "breloque",
+        "nom": "Breloque du Guérisseur tenace",
+        "variantes": [
+          {
+            "id": 89,
+            "rang": "Novice",
+            "image_url": "/images/breloques/89.webp"
+          },
+          {
+            "id": 90,
+            "rang": "Expert",
+            "image_url": "/images/breloques/90.webp"
+          },
+          {
+            "id": 91,
+            "rang": "Maître α",
+            "image_url": "/images/breloques/91.webp"
+          },
+          {
+            "id": 92,
+            "rang": "Maître ẞ",
+            "image_url": "/images/breloques/92.webp"
+          }
+        ]
+      },
+      {
+        "type": "breloque",
+        "nom": "Breloque de l'Acupuncteur",
+        "variantes": [
+          {
+            "id": 127,
+            "rang": "Expert",
+            "image_url": "/images/breloques/127.webp"
+          },
+          {
+            "id": 128,
+            "rang": "Maître α",
+            "image_url": "/images/breloques/128.webp"
+          },
+          {
+            "id": 129,
+            "rang": "Maître ẞ",
+            "image_url": "/images/breloques/129.webp"
+          },
+          {
+            "id": 130,
+            "rang": "Novice",
+            "image_url": "/images/breloques/130.webp"
+          }
+        ]
+      }
+    ],
+    "bonusSpecial": {
+      "seuil": 3,
+      "texte": "Soin en croix (1 case) autour du porteur à chaque début de tour"
+    },
+    "paliers": [
+      {
+        "items": 1,
+        "texte": "+5 soins",
+        "delta": {
+          "statsPlates": {
+            "SOIN": 5
+          },
+          "multiplicateurs": []
+        }
+      },
+      {
+        "items": 2,
+        "texte": "+10 soins",
+        "delta": {
+          "statsPlates": {
+            "SOIN": 10
+          },
+          "multiplicateurs": []
+        }
+      },
+      {
+        "items": 3,
+        "texte": "+20 soins",
+        "delta": {
+          "statsPlates": {
+            "SOIN": 20
+          },
+          "multiplicateurs": []
+        }
+      },
+      {
+        "items": 4,
+        "texte": "+30 soins",
+        "delta": {
+          "statsPlates": {
+            "SOIN": 30
+          },
+          "multiplicateurs": []
+        }
+      },
+      {
+        "items": 5,
+        "texte": "+40 soins",
+        "delta": {
+          "statsPlates": {
+            "SOIN": 40
+          },
+          "multiplicateurs": []
+        }
+      },
+      {
+        "items": 6,
+        "texte": "+50 soins",
+        "delta": {
+          "statsPlates": {
+            "SOIN": 50
+          },
+          "multiplicateurs": []
+        }
+      },
+      {
+        "items": 7,
+        "texte": "+60 soins",
+        "delta": {
+          "statsPlates": {
+            "SOIN": 60
+          },
+          "multiplicateurs": []
+        }
+      },
+      {
+        "items": 8,
+        "texte": "+70 soins",
+        "delta": {
+          "statsPlates": {
+            "SOIN": 70
+          },
+          "multiplicateurs": []
+        }
+      }
+    ],
+    "imageItems": [
+      {
+        "type": "sort",
+        "id": 71,
+        "imageUrl": "/images/sorts/71.webp"
+      },
+      {
+        "type": "sort",
+        "id": 97,
+        "imageUrl": "/images/sorts/97.webp"
+      }
+    ],
+    "imageComposite": "/images/ensembles/de-l-altruiste.webp"
+  },
+  {
+    "cle": "de-l-artificer",
+    "nom": "Ensemble de l’Artificer",
+    "type": "classique",
+    "pieces": [
+      {
+        "type": "sort",
+        "nom": "Bombe à eau",
+        "variantes": [
+          {
+            "id": 113,
+            "rang": "Novice",
+            "image_url": "/images/sorts/113.webp"
+          },
+          {
+            "id": 228,
+            "rang": "Expert",
+            "image_url": "/images/sorts/113.webp"
+          },
+          {
+            "id": 343,
+            "rang": "Maître α",
+            "image_url": "/images/sorts/113.webp"
+          },
+          {
+            "id": 458,
+            "rang": "Maître ẞ",
+            "image_url": "/images/sorts/113.webp"
+          }
+        ]
+      },
+      {
+        "type": "sort",
+        "nom": "Explobombe",
+        "variantes": [
+          {
+            "id": 112,
+            "rang": "Novice",
+            "image_url": "/images/sorts/112.webp"
+          },
+          {
+            "id": 227,
+            "rang": "Expert",
+            "image_url": "/images/sorts/112.webp"
+          },
+          {
+            "id": 342,
+            "rang": "Maître α",
+            "image_url": "/images/sorts/112.webp"
+          },
+          {
+            "id": 457,
+            "rang": "Maître ẞ",
+            "image_url": "/images/sorts/112.webp"
+          }
+        ]
+      },
+      {
+        "type": "sort",
+        "nom": "Sismobombe - Terre",
+        "variantes": [
+          {
+            "id": 597,
+            "rang": "Novice",
+            "image_url": "/images/sorts/597.webp"
+          },
+          {
+            "id": 598,
+            "rang": "Expert",
+            "image_url": "/images/sorts/598.webp"
+          },
+          {
+            "id": 599,
+            "rang": "Maître α",
+            "image_url": "/images/sorts/599.webp"
+          },
+          {
+            "id": 600,
+            "rang": "Maître ẞ",
+            "image_url": "/images/sorts/600.webp"
+          }
+        ]
+      },
+      {
+        "type": "sort",
+        "nom": "Tornabombe - Air",
+        "variantes": [
+          {
+            "id": 609,
+            "rang": "Novice",
+            "image_url": "/images/sorts/609.webp"
+          },
+          {
+            "id": 610,
+            "rang": "Expert",
+            "image_url": "/images/sorts/610.webp"
+          },
+          {
+            "id": 611,
+            "rang": "Maître α",
+            "image_url": "/images/sorts/611.webp"
+          },
+          {
+            "id": 612,
+            "rang": "Maître ẞ",
+            "image_url": "/images/sorts/612.webp"
+          }
+        ]
+      },
+      {
+        "type": "sort",
+        "nom": "Échange",
+        "variantes": [
+          {
+            "id": 114,
+            "rang": "Novice",
+            "image_url": "/images/sorts/114.webp"
+          },
+          {
+            "id": 229,
+            "rang": "Expert",
+            "image_url": "/images/sorts/114.webp"
+          },
+          {
+            "id": 344,
+            "rang": "Maître α",
+            "image_url": "/images/sorts/114.webp"
+          },
+          {
+            "id": 459,
+            "rang": "Maître ẞ",
+            "image_url": "/images/sorts/114.webp"
+          }
+        ]
+      },
+      {
+        "type": "sort",
+        "nom": "Détonateur",
+        "variantes": [
+          {
+            "id": 481,
+            "rang": "Novice",
+            "image_url": "/images/sorts/481.webp"
+          },
+          {
+            "id": 482,
+            "rang": "Expert",
+            "image_url": "/images/sorts/482.webp"
+          },
+          {
+            "id": 483,
+            "rang": "Maître α",
+            "image_url": "/images/sorts/483.webp"
+          },
+          {
+            "id": 484,
+            "rang": "Maître ẞ",
+            "image_url": "/images/sorts/484.webp"
+          }
+        ]
+      },
+      {
+        "type": "sort",
+        "nom": "Flèche de Concentration - Eau",
+        "variantes": [
+          {
+            "id": 501,
+            "rang": "Novice",
+            "image_url": "/images/sorts/501.webp"
+          },
+          {
+            "id": 502,
+            "rang": "Expert",
+            "image_url": "/images/sorts/502.webp"
+          },
+          {
+            "id": 503,
+            "rang": "Maître α",
+            "image_url": "/images/sorts/503.webp"
+          },
+          {
+            "id": 504,
+            "rang": "Maître ẞ",
+            "image_url": "/images/sorts/504.webp"
+          }
+        ]
+      },
+      {
+        "type": "sort",
+        "nom": "Flèche de Concentration - Feu",
+        "variantes": [
+          {
+            "id": 505,
+            "rang": "Novice",
+            "image_url": "/images/sorts/505.webp"
+          },
+          {
+            "id": 506,
+            "rang": "Expert",
+            "image_url": "/images/sorts/506.webp"
+          },
+          {
+            "id": 507,
+            "rang": "Maître α",
+            "image_url": "/images/sorts/507.webp"
+          },
+          {
+            "id": 508,
+            "rang": "Maître ẞ",
+            "image_url": "/images/sorts/508.webp"
+          }
+        ]
+      },
+      {
+        "type": "sort",
+        "nom": "Kaboom",
+        "variantes": [
+          {
+            "id": 525,
+            "rang": "Novice",
+            "image_url": "/images/sorts/525.webp"
+          },
+          {
+            "id": 526,
+            "rang": "Expert",
+            "image_url": "/images/sorts/526.webp"
+          },
+          {
+            "id": 527,
+            "rang": "Maître α",
+            "image_url": "/images/sorts/527.webp"
+          },
+          {
+            "id": 528,
+            "rang": "Maître ẞ",
+            "image_url": "/images/sorts/528.webp"
+          }
+        ]
+      },
+      {
+        "type": "breloque",
+        "nom": "Breloque du Bombeur fasciné",
+        "variantes": [
+          {
+            "id": 143,
+            "rang": "Expert",
+            "image_url": "/images/breloques/143.webp"
+          },
+          {
+            "id": 144,
+            "rang": "Maître α",
+            "image_url": "/images/breloques/144.webp"
+          },
+          {
+            "id": 145,
+            "rang": "Maître ẞ",
+            "image_url": "/images/breloques/145.webp"
+          },
+          {
+            "id": 146,
+            "rang": "Novice",
+            "image_url": "/images/breloques/146.webp"
+          }
+        ]
+      },
+      {
+        "type": "breloque",
+        "nom": "Breloque d'Explosivité croissante",
+        "variantes": [
+          {
+            "id": 119,
+            "rang": "Expert",
+            "image_url": "/images/breloques/119.webp"
+          },
+          {
+            "id": 120,
+            "rang": "Maître α",
+            "image_url": "/images/breloques/120.webp"
+          },
+          {
+            "id": 121,
+            "rang": "Maître ẞ",
+            "image_url": "/images/breloques/121.webp"
+          },
+          {
+            "id": 122,
+            "rang": "Novice",
+            "image_url": "/images/breloques/122.webp"
+          }
+        ]
+      },
+      {
+        "type": "breloque",
+        "nom": "Breloque de l'Artificier instable",
+        "variantes": [
+          {
+            "id": 135,
+            "rang": "Expert",
+            "image_url": "/images/breloques/135.webp"
+          },
+          {
+            "id": 136,
+            "rang": "Maître α",
+            "image_url": "/images/breloques/136.webp"
+          },
+          {
+            "id": 137,
+            "rang": "Maître ẞ",
+            "image_url": "/images/breloques/137.webp"
+          },
+          {
+            "id": 138,
+            "rang": "Novice",
+            "image_url": "/images/breloques/138.webp"
+          }
+        ]
+      }
+    ],
+    "bonusSpecial": {
+      "seuil": 3,
+      "texte": "Applique l’état Kaboom (Infini)"
+    },
+    "paliers": [
+      {
+        "items": 1,
+        "texte": "+2% de dommages indirects, +30 points de vie",
+        "delta": {
+          "statsPlates": {
+            "VITALITE": 30
+          },
+          "multiplicateurs": [
+            {
+              "type": "indirects",
+              "valeur": 1.02
+            }
+          ]
+        }
+      },
+      {
+        "items": 2,
+        "texte": "+4% de dommages indirects, +60 points de vie",
+        "delta": {
+          "statsPlates": {
+            "VITALITE": 60
+          },
+          "multiplicateurs": [
+            {
+              "type": "indirects",
+              "valeur": 1.04
+            }
+          ]
+        }
+      },
+      {
+        "items": 3,
+        "texte": "+6% de dommages indirects, +90 points de vie",
+        "delta": {
+          "statsPlates": {
+            "VITALITE": 90
+          },
+          "multiplicateurs": [
+            {
+              "type": "indirects",
+              "valeur": 1.06
+            }
+          ]
+        }
+      },
+      {
+        "items": 4,
+        "texte": "+8% de dommages indirects, +120 points de vie",
+        "delta": {
+          "statsPlates": {
+            "VITALITE": 120
+          },
+          "multiplicateurs": [
+            {
+              "type": "indirects",
+              "valeur": 1.08
+            }
+          ]
+        }
+      },
+      {
+        "items": 5,
+        "texte": "+10% de dommages indirects, +150 points de vie",
+        "delta": {
+          "statsPlates": {
+            "VITALITE": 150
+          },
+          "multiplicateurs": [
+            {
+              "type": "indirects",
+              "valeur": 1.1
+            }
+          ]
+        }
+      }
+    ],
+    "imageItems": [
+      {
+        "type": "breloque",
+        "id": 143,
+        "imageUrl": "/images/breloques/143.webp"
+      },
+      {
+        "type": "sort",
+        "id": 112,
+        "imageUrl": "/images/sorts/112.webp"
+      }
+    ],
+    "imageComposite": "/images/ensembles/de-l-artificer.webp"
+  },
+  {
+    "cle": "du-bousculeur",
+    "nom": "Ensemble du Bousculeur",
+    "type": "classique",
+    "pieces": [
+      {
+        "type": "sort",
+        "nom": "Félintion - Terre",
+        "variantes": [
+          {
+            "id": 51,
+            "rang": "Novice",
+            "image_url": "/images/sorts/51.webp"
+          },
+          {
+            "id": 166,
+            "rang": "Expert",
+            "image_url": "/images/sorts/51.webp"
+          },
+          {
+            "id": 281,
+            "rang": "Maître α",
+            "image_url": "/images/sorts/51.webp"
+          },
+          {
+            "id": 396,
+            "rang": "Maître ẞ",
+            "image_url": "/images/sorts/51.webp"
+          }
+        ]
+      },
+      {
+        "type": "sort",
+        "nom": "Félintion - Eau",
+        "variantes": [
+          {
+            "id": 50,
+            "rang": "Novice",
+            "image_url": "/images/sorts/50.webp"
+          },
+          {
+            "id": 165,
+            "rang": "Expert",
+            "image_url": "/images/sorts/50.webp"
+          },
+          {
+            "id": 280,
+            "rang": "Maître α",
+            "image_url": "/images/sorts/50.webp"
+          },
+          {
+            "id": 395,
+            "rang": "Maître ẞ",
+            "image_url": "/images/sorts/50.webp"
+          }
+        ]
+      },
+      {
+        "type": "sort",
+        "nom": "Boliche - Feu",
+        "variantes": [
+          {
+            "id": 52,
+            "rang": "Novice",
+            "image_url": "/images/sorts/52.webp"
+          },
+          {
+            "id": 167,
+            "rang": "Expert",
+            "image_url": "/images/sorts/52.webp"
+          },
+          {
+            "id": 282,
+            "rang": "Maître α",
+            "image_url": "/images/sorts/52.webp"
+          },
+          {
+            "id": 397,
+            "rang": "Maître ẞ",
+            "image_url": "/images/sorts/52.webp"
+          }
+        ]
+      },
+      {
+        "type": "sort",
+        "nom": "Boliche - Air",
+        "variantes": [
+          {
+            "id": 53,
+            "rang": "Novice",
+            "image_url": "/images/sorts/53.webp"
+          },
+          {
+            "id": 168,
+            "rang": "Expert",
+            "image_url": "/images/sorts/53.webp"
+          },
+          {
+            "id": 283,
+            "rang": "Maître α",
+            "image_url": "/images/sorts/53.webp"
+          },
+          {
+            "id": 398,
+            "rang": "Maître ẞ",
+            "image_url": "/images/sorts/53.webp"
+          }
+        ]
+      },
+      {
+        "type": "sort",
+        "nom": "Foène",
+        "variantes": [
+          {
+            "id": 62,
+            "rang": "Novice",
+            "image_url": "/images/sorts/62.webp"
+          },
+          {
+            "id": 177,
+            "rang": "Expert",
+            "image_url": "/images/sorts/62.webp"
+          },
+          {
+            "id": 292,
+            "rang": "Maître α",
+            "image_url": "/images/sorts/62.webp"
+          },
+          {
+            "id": 407,
+            "rang": "Maître ẞ",
+            "image_url": "/images/sorts/62.webp"
+          }
+        ]
+      },
+      {
+        "type": "sort",
+        "nom": "Griffe Joueuse - Eau",
+        "variantes": [
+          {
+            "id": 91,
+            "rang": "Novice",
+            "image_url": "/images/sorts/91.webp"
+          },
+          {
+            "id": 206,
+            "rang": "Expert",
+            "image_url": "/images/sorts/91.webp"
+          },
+          {
+            "id": 321,
+            "rang": "Maître α",
+            "image_url": "/images/sorts/91.webp"
+          },
+          {
+            "id": 436,
+            "rang": "Maître ẞ",
+            "image_url": "/images/sorts/91.webp"
+          }
+        ],
+        "note": "Maître β uniquement"
+      },
+      {
+        "type": "sort",
+        "nom": "Griffe Joueuse - Air",
+        "variantes": [
+          {
+            "id": 92,
+            "rang": "Novice",
+            "image_url": "/images/sorts/92.webp"
+          },
+          {
+            "id": 207,
+            "rang": "Expert",
+            "image_url": "/images/sorts/92.webp"
+          },
+          {
+            "id": 322,
+            "rang": "Maître α",
+            "image_url": "/images/sorts/92.webp"
+          },
+          {
+            "id": 437,
+            "rang": "Maître ẞ",
+            "image_url": "/images/sorts/92.webp"
+          }
+        ],
+        "note": "Maître β uniquement"
+      },
+      {
+        "type": "sort",
+        "nom": "Schnaps - Eau",
+        "variantes": [
+          {
+            "id": 54,
+            "rang": "Novice",
+            "image_url": "/images/sorts/54.webp"
+          },
+          {
+            "id": 169,
+            "rang": "Expert",
+            "image_url": "/images/sorts/54.webp"
+          },
+          {
+            "id": 284,
+            "rang": "Maître α",
+            "image_url": "/images/sorts/54.webp"
+          },
+          {
+            "id": 399,
+            "rang": "Maître ẞ",
+            "image_url": "/images/sorts/54.webp"
+          }
+        ],
+        "note": "Maître β uniquement"
+      },
+      {
+        "type": "sort",
+        "nom": "Schnaps - Feu",
+        "variantes": [
+          {
+            "id": 55,
+            "rang": "Novice",
+            "image_url": "/images/sorts/55.webp"
+          },
+          {
+            "id": 170,
+            "rang": "Expert",
+            "image_url": "/images/sorts/55.webp"
+          },
+          {
+            "id": 285,
+            "rang": "Maître α",
+            "image_url": "/images/sorts/55.webp"
+          },
+          {
+            "id": 400,
+            "rang": "Maître ẞ",
+            "image_url": "/images/sorts/55.webp"
+          }
+        ],
+        "note": "Maître β uniquement"
+      },
+      {
+        "type": "sort",
+        "nom": "Ressac - Eau",
+        "variantes": [
+          {
+            "id": 88,
+            "rang": "Novice",
+            "image_url": "/images/sorts/88.webp"
+          },
+          {
+            "id": 203,
+            "rang": "Expert",
+            "image_url": "/images/sorts/88.webp"
+          },
+          {
+            "id": 318,
+            "rang": "Maître α",
+            "image_url": "/images/sorts/88.webp"
+          },
+          {
+            "id": 433,
+            "rang": "Maître ẞ",
+            "image_url": "/images/sorts/88.webp"
+          }
+        ]
+      },
+      {
+        "type": "sort",
+        "nom": "Ressac - Feu",
+        "variantes": [
+          {
+            "id": 87,
+            "rang": "Novice",
+            "image_url": "/images/sorts/87.webp"
+          },
+          {
+            "id": 202,
+            "rang": "Expert",
+            "image_url": "/images/sorts/87.webp"
+          },
+          {
+            "id": 317,
+            "rang": "Maître α",
+            "image_url": "/images/sorts/87.webp"
+          },
+          {
+            "id": 432,
+            "rang": "Maître ẞ",
+            "image_url": "/images/sorts/87.webp"
+          }
+        ]
+      },
+      {
+        "type": "sort",
+        "nom": "Souffle impétueux",
+        "variantes": [
+          {
+            "id": 601,
+            "rang": "Novice",
+            "image_url": "/images/sorts/601.webp"
+          },
+          {
+            "id": 602,
+            "rang": "Expert",
+            "image_url": "/images/sorts/602.webp"
+          },
+          {
+            "id": 603,
+            "rang": "Maître α",
+            "image_url": "/images/sorts/603.webp"
+          },
+          {
+            "id": 604,
+            "rang": "Maître ẞ",
+            "image_url": "/images/sorts/604.webp"
+          }
+        ]
+      },
+      {
+        "type": "sort",
+        "nom": "Flèche de Concentration - Eau",
+        "variantes": [
+          {
+            "id": 501,
+            "rang": "Novice",
+            "image_url": "/images/sorts/501.webp"
+          },
+          {
+            "id": 502,
+            "rang": "Expert",
+            "image_url": "/images/sorts/502.webp"
+          },
+          {
+            "id": 503,
+            "rang": "Maître α",
+            "image_url": "/images/sorts/503.webp"
+          },
+          {
+            "id": 504,
+            "rang": "Maître ẞ",
+            "image_url": "/images/sorts/504.webp"
+          }
+        ]
+      },
+      {
+        "type": "sort",
+        "nom": "Flèche de Concentration - Feu",
+        "variantes": [
+          {
+            "id": 505,
+            "rang": "Novice",
+            "image_url": "/images/sorts/505.webp"
+          },
+          {
+            "id": 506,
+            "rang": "Expert",
+            "image_url": "/images/sorts/506.webp"
+          },
+          {
+            "id": 507,
+            "rang": "Maître α",
+            "image_url": "/images/sorts/507.webp"
+          },
+          {
+            "id": 508,
+            "rang": "Maître ẞ",
+            "image_url": "/images/sorts/508.webp"
+          }
+        ]
+      },
+      {
+        "type": "sort",
+        "nom": "Typhon - Eau",
+        "variantes": [
+          {
+            "id": 617,
+            "rang": "Novice",
+            "image_url": "/images/sorts/617.webp"
+          },
+          {
+            "id": 618,
+            "rang": "Expert",
+            "image_url": "/images/sorts/618.webp"
+          },
+          {
+            "id": 619,
+            "rang": "Maître α",
+            "image_url": "/images/sorts/619.webp"
+          },
+          {
+            "id": 620,
+            "rang": "Maître ẞ",
+            "image_url": "/images/sorts/620.webp"
+          }
+        ]
+      },
+      {
+        "type": "sort",
+        "nom": "Typhon - Air",
+        "variantes": [
+          {
+            "id": 613,
+            "rang": "Novice",
+            "image_url": "/images/sorts/613.webp"
+          },
+          {
+            "id": 614,
+            "rang": "Expert",
+            "image_url": "/images/sorts/614.webp"
+          },
+          {
+            "id": 615,
+            "rang": "Maître α",
+            "image_url": "/images/sorts/615.webp"
+          },
+          {
+            "id": 616,
+            "rang": "Maître ẞ",
+            "image_url": "/images/sorts/616.webp"
+          }
+        ]
+      }
+    ],
+    "bonusSpecial": {
+      "seuil": 3,
+      "texte": "+1 aux effets de poussées et attirances"
+    },
+    "paliers": [
+      {
+        "items": 1,
+        "texte": "+5 do pou",
+        "delta": {
+          "statsPlates": {
+            "DO_POU": 5
+          },
+          "multiplicateurs": []
+        }
+      },
+      {
+        "items": 2,
+        "texte": "+10 do pou",
+        "delta": {
+          "statsPlates": {
+            "DO_POU": 10
+          },
+          "multiplicateurs": []
+        }
+      },
+      {
+        "items": 3,
+        "texte": "+15 do pou",
+        "delta": {
+          "statsPlates": {
+            "DO_POU": 15
+          },
+          "multiplicateurs": []
+        }
+      },
+      {
+        "items": 4,
+        "texte": "+20 do pou",
+        "delta": {
+          "statsPlates": {
+            "DO_POU": 20
+          },
+          "multiplicateurs": []
+        }
+      },
+      {
+        "items": 5,
+        "texte": "+25 do pou",
+        "delta": {
+          "statsPlates": {
+            "DO_POU": 25
+          },
+          "multiplicateurs": []
+        }
+      },
+      {
+        "items": 6,
+        "texte": "+30 do pou",
+        "delta": {
+          "statsPlates": {
+            "DO_POU": 30
+          },
+          "multiplicateurs": []
+        }
+      },
+      {
+        "items": 7,
+        "texte": "+35 do pou",
+        "delta": {
+          "statsPlates": {
+            "DO_POU": 35
+          },
+          "multiplicateurs": []
+        }
+      }
+    ],
+    "imageItems": [
+      {
+        "type": "sort",
+        "id": 53,
+        "imageUrl": "/images/sorts/53.webp"
+      },
+      {
+        "type": "sort",
+        "id": 88,
+        "imageUrl": "/images/sorts/88.webp"
+      }
+    ],
+    "imageComposite": "/images/ensembles/du-bousculeur.webp"
+  },
+  {
+    "cle": "du-calculateur",
+    "nom": "Ensemble du Calculateur",
+    "type": "classique",
+    "pieces": [
+      {
+        "type": "sort",
+        "nom": "Sablier du Xélor - Terre",
+        "variantes": [
+          {
+            "id": 66,
+            "rang": "Novice",
+            "image_url": "/images/sorts/66.webp"
+          },
+          {
+            "id": 181,
+            "rang": "Expert",
+            "image_url": "/images/sorts/66.webp"
+          },
+          {
+            "id": 296,
+            "rang": "Maître α",
+            "image_url": "/images/sorts/66.webp"
+          },
+          {
+            "id": 411,
+            "rang": "Maître ẞ",
+            "image_url": "/images/sorts/66.webp"
+          }
+        ]
+      },
+      {
+        "type": "sort",
+        "nom": "Sablier du Xélor - Eau",
+        "variantes": [
+          {
+            "id": 65,
+            "rang": "Novice",
+            "image_url": "/images/sorts/65.webp"
+          },
+          {
+            "id": 180,
+            "rang": "Expert",
+            "image_url": "/images/sorts/65.webp"
+          },
+          {
+            "id": 295,
+            "rang": "Maître α",
+            "image_url": "/images/sorts/65.webp"
+          },
+          {
+            "id": 410,
+            "rang": "Maître ẞ",
+            "image_url": "/images/sorts/65.webp"
+          }
+        ]
+      },
+      {
+        "type": "sort",
+        "nom": "Poigne de Xélor - Feu",
+        "variantes": [
+          {
+            "id": 569,
+            "rang": "Novice",
+            "image_url": "/images/sorts/569.webp"
+          },
+          {
+            "id": 570,
+            "rang": "Expert",
+            "image_url": "/images/sorts/570.webp"
+          },
+          {
+            "id": 571,
+            "rang": "Maître α",
+            "image_url": "/images/sorts/571.webp"
+          },
+          {
+            "id": 572,
+            "rang": "Maître ẞ",
+            "image_url": "/images/sorts/572.webp"
+          }
+        ]
+      },
+      {
+        "type": "sort",
+        "nom": "Poigne de Xélor - Air",
+        "variantes": [
+          {
+            "id": 565,
+            "rang": "Novice",
+            "image_url": "/images/sorts/565.webp"
+          },
+          {
+            "id": 566,
+            "rang": "Expert",
+            "image_url": "/images/sorts/566.webp"
+          },
+          {
+            "id": 567,
+            "rang": "Maître α",
+            "image_url": "/images/sorts/567.webp"
+          },
+          {
+            "id": 568,
+            "rang": "Maître ẞ",
+            "image_url": "/images/sorts/568.webp"
+          }
+        ]
+      },
+      {
+        "type": "sort",
+        "nom": "Souvenir",
+        "variantes": [
+          {
+            "id": 605,
+            "rang": "Novice",
+            "image_url": "/images/sorts/605.webp"
+          },
+          {
+            "id": 606,
+            "rang": "Expert",
+            "image_url": "/images/sorts/606.webp"
+          },
+          {
+            "id": 607,
+            "rang": "Maître α",
+            "image_url": "/images/sorts/607.webp"
+          },
+          {
+            "id": 608,
+            "rang": "Maître ẞ",
+            "image_url": "/images/sorts/608.webp"
+          }
+        ]
+      },
+      {
+        "type": "sort",
+        "nom": "Resquille - Terre",
+        "variantes": [
+          {
+            "id": 581,
+            "rang": "Novice",
+            "image_url": "/images/sorts/581.webp"
+          },
+          {
+            "id": 582,
+            "rang": "Expert",
+            "image_url": "/images/sorts/582.webp"
+          },
+          {
+            "id": 583,
+            "rang": "Maître α",
+            "image_url": "/images/sorts/583.webp"
+          },
+          {
+            "id": 584,
+            "rang": "Maître ẞ",
+            "image_url": "/images/sorts/584.webp"
+          }
+        ]
+      },
+      {
+        "type": "sort",
+        "nom": "Resquille - Feu",
+        "variantes": [
+          {
+            "id": 577,
+            "rang": "Novice",
+            "image_url": "/images/sorts/577.webp"
+          },
+          {
+            "id": 578,
+            "rang": "Expert",
+            "image_url": "/images/sorts/578.webp"
+          },
+          {
+            "id": 579,
+            "rang": "Maître α",
+            "image_url": "/images/sorts/579.webp"
+          },
+          {
+            "id": 580,
+            "rang": "Maître ẞ",
+            "image_url": "/images/sorts/580.webp"
+          }
+        ]
+      },
+      {
+        "type": "sort",
+        "nom": "Secousse Temporelle",
+        "variantes": [
+          {
+            "id": 593,
+            "rang": "Novice",
+            "image_url": "/images/sorts/593.webp"
+          },
+          {
+            "id": 594,
+            "rang": "Expert",
+            "image_url": "/images/sorts/594.webp"
+          },
+          {
+            "id": 595,
+            "rang": "Maître α",
+            "image_url": "/images/sorts/595.webp"
+          },
+          {
+            "id": 596,
+            "rang": "Maître ẞ",
+            "image_url": "/images/sorts/596.webp"
+          }
+        ]
+      },
+      {
+        "type": "sort",
+        "nom": "Épée Céleste - Eau",
+        "variantes": [
+          {
+            "id": 485,
+            "rang": "Novice",
+            "image_url": "/images/sorts/485.webp"
+          },
+          {
+            "id": 486,
+            "rang": "Expert",
+            "image_url": "/images/sorts/486.webp"
+          },
+          {
+            "id": 487,
+            "rang": "Maître α",
+            "image_url": "/images/sorts/487.webp"
+          },
+          {
+            "id": 488,
+            "rang": "Maître ẞ",
+            "image_url": "/images/sorts/488.webp"
+          }
+        ],
+        "note": "Maître β uniquement"
+      },
+      {
+        "type": "sort",
+        "nom": "Épée Céleste - Feu",
+        "variantes": [
+          {
+            "id": 489,
+            "rang": "Novice",
+            "image_url": "/images/sorts/489.webp"
+          },
+          {
+            "id": 490,
+            "rang": "Expert",
+            "image_url": "/images/sorts/490.webp"
+          },
+          {
+            "id": 491,
+            "rang": "Maître α",
+            "image_url": "/images/sorts/491.webp"
+          },
+          {
+            "id": 492,
+            "rang": "Maître ẞ",
+            "image_url": "/images/sorts/492.webp"
+          }
+        ],
+        "note": "Maître β uniquement"
+      }
+    ],
+    "bonusSpecial": {
+      "seuil": 3,
+      "texte": "A chaque téléfrag effectué, applique un bonus +1PA"
+    },
+    "paliers": [
+      {
+        "items": 1,
+        "texte": "Aucun bonus",
+        "delta": {
+          "statsPlates": {},
+          "multiplicateurs": []
+        }
+      },
+      {
+        "items": 2,
+        "texte": "+25 Sagesse, + 5 Fuite",
+        "delta": {
+          "statsPlates": {
+            "SAGESSE": 25
+          },
+          "multiplicateurs": []
+        }
+      },
+      {
+        "items": 3,
+        "texte": "+50 Sagesse, + 10 Fuite",
+        "delta": {
+          "statsPlates": {
+            "SAGESSE": 50
+          },
+          "multiplicateurs": []
+        }
+      },
+      {
+        "items": 4,
+        "texte": "+75 Sagesse, + 20 Fuite",
+        "delta": {
+          "statsPlates": {
+            "SAGESSE": 75
+          },
+          "multiplicateurs": []
+        }
+      },
+      {
+        "items": 5,
+        "texte": "+100 Sagesse, + 30 Fuite",
+        "delta": {
+          "statsPlates": {
+            "SAGESSE": 100
+          },
+          "multiplicateurs": []
+        }
+      },
+      {
+        "items": 6,
+        "texte": "+125 Sagesse, + 40 Fuite",
+        "delta": {
+          "statsPlates": {
+            "SAGESSE": 125
+          },
+          "multiplicateurs": []
+        }
+      },
+      {
+        "items": 7,
+        "texte": "+150 Sagesse, + 50 Fuite",
+        "delta": {
+          "statsPlates": {
+            "SAGESSE": 150
+          },
+          "multiplicateurs": []
+        }
+      }
+    ],
+    "imageItems": [
+      {
+        "type": "sort",
+        "id": 65,
+        "imageUrl": "/images/sorts/65.webp"
+      },
+      {
+        "type": "sort",
+        "id": 593,
+        "imageUrl": "/images/sorts/593.webp"
+      }
+    ],
+    "imageComposite": "/images/ensembles/du-calculateur.webp"
+  },
+  {
+    "cle": "du-chanceux",
+    "nom": "Ensemble du Chanceux",
+    "type": "classique",
+    "pieces": [
+      {
+        "type": "sort",
+        "nom": "Pile ou Face - Terre",
+        "variantes": [
+          {
+            "id": 561,
+            "rang": "Novice",
+            "image_url": "/images/sorts/561.webp"
+          },
+          {
+            "id": 562,
+            "rang": "Expert",
+            "image_url": "/images/sorts/562.webp"
+          },
+          {
+            "id": 563,
+            "rang": "Maître α",
+            "image_url": "/images/sorts/563.webp"
+          },
+          {
+            "id": 564,
+            "rang": "Maître ẞ",
+            "image_url": "/images/sorts/564.webp"
+          }
+        ]
+      },
+      {
+        "type": "sort",
+        "nom": "Pile ou Face - Air",
+        "variantes": [
+          {
+            "id": 557,
+            "rang": "Novice",
+            "image_url": "/images/sorts/557.webp"
+          },
+          {
+            "id": 558,
+            "rang": "Expert",
+            "image_url": "/images/sorts/558.webp"
+          },
+          {
+            "id": 559,
+            "rang": "Maître α",
+            "image_url": "/images/sorts/559.webp"
+          },
+          {
+            "id": 560,
+            "rang": "Maître ẞ",
+            "image_url": "/images/sorts/560.webp"
+          }
+        ]
+      },
+      {
+        "type": "sort",
+        "nom": "Ronce - Terre",
+        "variantes": [
+          {
+            "id": 589,
+            "rang": "Novice",
+            "image_url": "/images/sorts/589.webp"
+          },
+          {
+            "id": 590,
+            "rang": "Expert",
+            "image_url": "/images/sorts/590.webp"
+          },
+          {
+            "id": 591,
+            "rang": "Maître α",
+            "image_url": "/images/sorts/591.webp"
+          },
+          {
+            "id": 592,
+            "rang": "Maître ẞ",
+            "image_url": "/images/sorts/592.webp"
+          }
+        ]
+      },
+      {
+        "type": "sort",
+        "nom": "Ronce - Eau",
+        "variantes": [
+          {
+            "id": 585,
+            "rang": "Novice",
+            "image_url": "/images/sorts/585.webp"
+          },
+          {
+            "id": 586,
+            "rang": "Expert",
+            "image_url": "/images/sorts/586.webp"
+          },
+          {
+            "id": 587,
+            "rang": "Maître α",
+            "image_url": "/images/sorts/587.webp"
+          },
+          {
+            "id": 588,
+            "rang": "Maître ẞ",
+            "image_url": "/images/sorts/588.webp"
+          }
+        ]
+      },
+      {
+        "type": "sort",
+        "nom": "Nausée - Eau",
+        "variantes": [
+          {
+            "id": 541,
+            "rang": "Novice",
+            "image_url": "/images/sorts/541.webp"
+          },
+          {
+            "id": 542,
+            "rang": "Expert",
+            "image_url": "/images/sorts/542.webp"
+          },
+          {
+            "id": 543,
+            "rang": "Maître α",
+            "image_url": "/images/sorts/543.webp"
+          },
+          {
+            "id": 544,
+            "rang": "Maître ẞ",
+            "image_url": "/images/sorts/544.webp"
+          }
+        ]
+      },
+      {
+        "type": "sort",
+        "nom": "Nausée - Air",
+        "variantes": [
+          {
+            "id": 537,
+            "rang": "Novice",
+            "image_url": "/images/sorts/537.webp"
+          },
+          {
+            "id": 538,
+            "rang": "Expert",
+            "image_url": "/images/sorts/538.webp"
+          },
+          {
+            "id": 539,
+            "rang": "Maître α",
+            "image_url": "/images/sorts/539.webp"
+          },
+          {
+            "id": 540,
+            "rang": "Maître ẞ",
+            "image_url": "/images/sorts/540.webp"
+          }
+        ]
+      },
+      {
+        "type": "sort",
+        "nom": "Acharnement méthodique - Feu",
+        "variantes": [
+          {
+            "id": 465,
+            "rang": "Novice",
+            "image_url": "/images/sorts/465.webp"
+          },
+          {
+            "id": 466,
+            "rang": "Expert",
+            "image_url": "/images/sorts/466.webp"
+          },
+          {
+            "id": 467,
+            "rang": "Maître α",
+            "image_url": "/images/sorts/467.webp"
+          },
+          {
+            "id": 468,
+            "rang": "Maître ẞ",
+            "image_url": "/images/sorts/468.webp"
+          }
+        ]
+      },
+      {
+        "type": "sort",
+        "nom": "Acharnement méthodique - Air",
+        "variantes": [
+          {
+            "id": 461,
+            "rang": "Novice",
+            "image_url": "/images/sorts/461.webp"
+          },
+          {
+            "id": 462,
+            "rang": "Expert",
+            "image_url": "/images/sorts/462.webp"
+          },
+          {
+            "id": 463,
+            "rang": "Maître α",
+            "image_url": "/images/sorts/463.webp"
+          },
+          {
+            "id": 464,
+            "rang": "Maître ẞ",
+            "image_url": "/images/sorts/464.webp"
+          }
+        ]
+      },
+      {
+        "type": "sort",
+        "nom": "Croque-mitaine - Terre",
+        "variantes": [
+          {
+            "id": 477,
+            "rang": "Novice",
+            "image_url": "/images/sorts/477.webp"
+          },
+          {
+            "id": 478,
+            "rang": "Expert",
+            "image_url": "/images/sorts/478.webp"
+          },
+          {
+            "id": 479,
+            "rang": "Maître α",
+            "image_url": "/images/sorts/479.webp"
+          },
+          {
+            "id": 480,
+            "rang": "Maître ẞ",
+            "image_url": "/images/sorts/480.webp"
+          }
+        ]
+      },
+      {
+        "type": "sort",
+        "nom": "Croque-mitaine - Air",
+        "variantes": [
+          {
+            "id": 473,
+            "rang": "Novice",
+            "image_url": "/images/sorts/473.webp"
+          },
+          {
+            "id": 474,
+            "rang": "Expert",
+            "image_url": "/images/sorts/474.webp"
+          },
+          {
+            "id": 475,
+            "rang": "Maître α",
+            "image_url": "/images/sorts/475.webp"
+          },
+          {
+            "id": 476,
+            "rang": "Maître ẞ",
+            "image_url": "/images/sorts/476.webp"
+          }
+        ]
+      },
+      {
+        "type": "breloque",
+        "nom": "Breloque du Stratège d'avant-garde",
+        "variantes": [
+          {
+            "id": 57,
+            "rang": "Novice",
+            "image_url": "/images/breloques/57.webp"
+          },
+          {
+            "id": 58,
+            "rang": "Expert",
+            "image_url": "/images/breloques/58.webp"
+          },
+          {
+            "id": 59,
+            "rang": "Maître α",
+            "image_url": "/images/breloques/59.webp"
+          },
+          {
+            "id": 60,
+            "rang": "Maître ẞ",
+            "image_url": "/images/breloques/60.webp"
+          }
+        ]
+      },
+      {
+        "type": "breloque",
+        "nom": "Breloque de Tension croissante",
+        "variantes": [
+          {
+            "id": 61,
+            "rang": "Novice",
+            "image_url": "/images/breloques/61.webp"
+          },
+          {
+            "id": 62,
+            "rang": "Expert",
+            "image_url": "/images/breloques/62.webp"
+          },
+          {
+            "id": 63,
+            "rang": "Maître α",
+            "image_url": "/images/breloques/63.webp"
+          },
+          {
+            "id": 64,
+            "rang": "Maître ẞ",
+            "image_url": "/images/breloques/64.webp"
+          }
+        ]
+      },
+      {
+        "type": "breloque",
+        "nom": "Breloque de l'Acupuncteur",
+        "variantes": [
+          {
+            "id": 127,
+            "rang": "Expert",
+            "image_url": "/images/breloques/127.webp"
+          },
+          {
+            "id": 128,
+            "rang": "Maître α",
+            "image_url": "/images/breloques/128.webp"
+          },
+          {
+            "id": 129,
+            "rang": "Maître ẞ",
+            "image_url": "/images/breloques/129.webp"
+          },
+          {
+            "id": 130,
+            "rang": "Novice",
+            "image_url": "/images/breloques/130.webp"
+          }
+        ]
+      },
+      {
+        "type": "breloque",
+        "nom": "Breloque du Forcené",
+        "variantes": [
+          {
+            "id": 151,
+            "rang": "Expert",
+            "image_url": "/images/breloques/151.webp"
+          },
+          {
+            "id": 152,
+            "rang": "Maître α",
+            "image_url": "/images/breloques/152.webp"
+          },
+          {
+            "id": 153,
+            "rang": "Maître ẞ",
+            "image_url": "/images/breloques/153.webp"
+          },
+          {
+            "id": 154,
+            "rang": "Novice",
+            "image_url": "/images/breloques/154.webp"
+          }
+        ]
+      }
+    ],
+    "bonusSpecial": {
+      "seuil": 4,
+      "texte": "A chaque coup critique effectué, applique un bonus aléatoire (PM, PA, puissance, résistances…), pour 1 tour"
+    },
+    "paliers": [
+      {
+        "items": 1,
+        "texte": "Aucun bonus",
+        "delta": {
+          "statsPlates": {},
+          "multiplicateurs": []
+        }
+      },
+      {
+        "items": 2,
+        "texte": "+2% CC, + 10 Dommages Critiques",
+        "delta": {
+          "statsPlates": {
+            "%_COUP_CRITIQUE": 2
+          },
+          "multiplicateurs": []
+        }
+      },
+      {
+        "items": 3,
+        "texte": "+4% CC, + 15Dommages Critiques",
+        "delta": {
+          "statsPlates": {
+            "%_COUP_CRITIQUE": 4
+          },
+          "multiplicateurs": []
+        }
+      },
+      {
+        "items": 4,
+        "texte": "+6% CC, + 20 Dommages Critiques",
+        "delta": {
+          "statsPlates": {
+            "%_COUP_CRITIQUE": 6
+          },
+          "multiplicateurs": []
+        }
+      },
+      {
+        "items": 5,
+        "texte": "+8% CC, + 25 Dommages Critiques",
+        "delta": {
+          "statsPlates": {
+            "%_COUP_CRITIQUE": 8
+          },
+          "multiplicateurs": []
+        }
+      },
+      {
+        "items": 6,
+        "texte": "+10% CC, + 30 Dommages Critiques",
+        "delta": {
+          "statsPlates": {
+            "%_COUP_CRITIQUE": 10
+          },
+          "multiplicateurs": []
+        }
+      }
+    ],
+    "imageItems": [
+      {
+        "type": "sort",
+        "id": 557,
+        "imageUrl": "/images/sorts/557.webp"
+      },
+      {
+        "type": "breloque",
+        "id": 57,
+        "imageUrl": "/images/breloques/57.webp"
+      }
+    ],
+    "imageComposite": "/images/ensembles/du-chanceux.webp"
+  },
+  {
+    "cle": "de-l-entraveur",
+    "nom": "Ensemble de l’Entraveur",
+    "type": "classique",
+    "pieces": [
+      {
+        "type": "sort",
+        "nom": "Glyphe d'Entrave - Feu",
+        "variantes": [
+          {
+            "id": 90,
+            "rang": "Novice",
+            "image_url": "/images/sorts/90.webp"
+          },
+          {
+            "id": 205,
+            "rang": "Expert",
+            "image_url": "/images/sorts/90.webp"
+          },
+          {
+            "id": 320,
+            "rang": "Maître α",
+            "image_url": "/images/sorts/90.webp"
+          },
+          {
+            "id": 435,
+            "rang": "Maître ẞ",
+            "image_url": "/images/sorts/90.webp"
+          }
+        ]
+      },
+      {
+        "type": "sort",
+        "nom": "Glyphe d'Entrave - Air",
+        "variantes": [
+          {
+            "id": 89,
+            "rang": "Novice",
+            "image_url": "/images/sorts/89.webp"
+          },
+          {
+            "id": 204,
+            "rang": "Expert",
+            "image_url": "/images/sorts/89.webp"
+          },
+          {
+            "id": 319,
+            "rang": "Maître α",
+            "image_url": "/images/sorts/89.webp"
+          },
+          {
+            "id": 434,
+            "rang": "Maître ẞ",
+            "image_url": "/images/sorts/89.webp"
+          }
+        ]
+      },
+      {
+        "type": "sort",
+        "nom": "Ronces Agressives - Terre",
+        "variantes": [
+          {
+            "id": 69,
+            "rang": "Novice",
+            "image_url": "/images/sorts/69.webp"
+          },
+          {
+            "id": 184,
+            "rang": "Expert",
+            "image_url": "/images/sorts/69.webp"
+          },
+          {
+            "id": 299,
+            "rang": "Maître α",
+            "image_url": "/images/sorts/69.webp"
+          },
+          {
+            "id": 414,
+            "rang": "Maître ẞ",
+            "image_url": "/images/sorts/69.webp"
+          }
+        ]
+      },
+      {
+        "type": "sort",
+        "nom": "Ronces Agressives - Feu",
+        "variantes": [
+          {
+            "id": 70,
+            "rang": "Novice",
+            "image_url": "/images/sorts/70.webp"
+          },
+          {
+            "id": 185,
+            "rang": "Expert",
+            "image_url": "/images/sorts/70.webp"
+          },
+          {
+            "id": 300,
+            "rang": "Maître α",
+            "image_url": "/images/sorts/70.webp"
+          },
+          {
+            "id": 415,
+            "rang": "Maître ẞ",
+            "image_url": "/images/sorts/70.webp"
+          }
+        ]
+      },
+      {
+        "type": "sort",
+        "nom": "Sismobombe - Terre",
+        "variantes": [
+          {
+            "id": 597,
+            "rang": "Novice",
+            "image_url": "/images/sorts/597.webp"
+          },
+          {
+            "id": 598,
+            "rang": "Expert",
+            "image_url": "/images/sorts/598.webp"
+          },
+          {
+            "id": 599,
+            "rang": "Maître α",
+            "image_url": "/images/sorts/599.webp"
+          },
+          {
+            "id": 600,
+            "rang": "Maître ẞ",
+            "image_url": "/images/sorts/600.webp"
+          }
+        ]
+      },
+      {
+        "type": "sort",
+        "nom": "Tornabombe - Air",
+        "variantes": [
+          {
+            "id": 609,
+            "rang": "Novice",
+            "image_url": "/images/sorts/609.webp"
+          },
+          {
+            "id": 610,
+            "rang": "Expert",
+            "image_url": "/images/sorts/610.webp"
+          },
+          {
+            "id": 611,
+            "rang": "Maître α",
+            "image_url": "/images/sorts/611.webp"
+          },
+          {
+            "id": 612,
+            "rang": "Maître ẞ",
+            "image_url": "/images/sorts/612.webp"
+          }
+        ]
+      },
+      {
+        "type": "sort",
+        "nom": "Piège d'immobilisation",
+        "variantes": [
+          {
+            "id": 553,
+            "rang": "Novice",
+            "image_url": "/images/sorts/553.webp"
+          },
+          {
+            "id": 554,
+            "rang": "Expert",
+            "image_url": "/images/sorts/554.webp"
+          },
+          {
+            "id": 555,
+            "rang": "Maître α",
+            "image_url": "/images/sorts/555.webp"
+          },
+          {
+            "id": 556,
+            "rang": "Maître ẞ",
+            "image_url": "/images/sorts/556.webp"
+          }
+        ]
+      },
+      {
+        "type": "sort",
+        "nom": "Poison Paralysant",
+        "variantes": [
+          {
+            "id": 573,
+            "rang": "Novice",
+            "image_url": "/images/sorts/573.webp"
+          },
+          {
+            "id": 574,
+            "rang": "Expert",
+            "image_url": "/images/sorts/574.webp"
+          },
+          {
+            "id": 575,
+            "rang": "Maître α",
+            "image_url": "/images/sorts/575.webp"
+          },
+          {
+            "id": 576,
+            "rang": "Maître ẞ",
+            "image_url": "/images/sorts/576.webp"
+          }
+        ]
+      },
+      {
+        "type": "breloque",
+        "nom": "Breloque de l'Embourbeur embourbé",
+        "variantes": [
+          {
+            "id": 69,
+            "rang": "Novice",
+            "image_url": "/images/breloques/69.webp"
+          },
+          {
+            "id": 70,
+            "rang": "Expert",
+            "image_url": "/images/breloques/70.webp"
+          },
+          {
+            "id": 71,
+            "rang": "Maître α",
+            "image_url": "/images/breloques/71.webp"
+          },
+          {
+            "id": 72,
+            "rang": "Maître ẞ",
+            "image_url": "/images/breloques/72.webp"
+          }
+        ]
+      }
+    ],
+    "bonusSpecial": {
+      "seuil": 3,
+      "texte": "+1 PA lors d’un retrait ou vol de PM réussi (1 fois par cible et par tour)"
+    },
+    "paliers": [
+      {
+        "items": 1,
+        "texte": "+5 retrait PA/PM",
+        "delta": {
+          "statsPlates": {
+            "RETRAIT_PA_BRELOQUE": 5,
+            "RETRAIT_PM_BRELOQUE": 5
+          },
+          "multiplicateurs": []
+        }
+      },
+      {
+        "items": 2,
+        "texte": "+10 retrait PA/PM",
+        "delta": {
+          "statsPlates": {
+            "RETRAIT_PA_BRELOQUE": 10,
+            "RETRAIT_PM_BRELOQUE": 10
+          },
+          "multiplicateurs": []
+        }
+      },
+      {
+        "items": 3,
+        "texte": "+15 retrait PA/PM",
+        "delta": {
+          "statsPlates": {
+            "RETRAIT_PA_BRELOQUE": 15,
+            "RETRAIT_PM_BRELOQUE": 15
+          },
+          "multiplicateurs": []
+        }
+      },
+      {
+        "items": 4,
+        "texte": "+20 retrait PA/PM",
+        "delta": {
+          "statsPlates": {
+            "RETRAIT_PA_BRELOQUE": 20,
+            "RETRAIT_PM_BRELOQUE": 20
+          },
+          "multiplicateurs": []
+        }
+      },
+      {
+        "items": 5,
+        "texte": "+25 retrait PA/PM",
+        "delta": {
+          "statsPlates": {
+            "RETRAIT_PA_BRELOQUE": 25,
+            "RETRAIT_PM_BRELOQUE": 25
+          },
+          "multiplicateurs": []
+        }
+      }
+    ],
+    "imageItems": [
+      {
+        "type": "sort",
+        "id": 89,
+        "imageUrl": "/images/sorts/89.webp"
+      },
+      {
+        "type": "breloque",
+        "id": 69,
+        "imageUrl": "/images/breloques/69.webp"
+      }
+    ],
+    "imageComposite": "/images/ensembles/de-l-entraveur.webp"
+  },
+  {
+    "cle": "du-fourbe",
+    "nom": "Ensemble du Fourbe",
+    "type": "classique",
+    "pieces": [
+      {
+        "type": "sort",
+        "nom": "Machination",
+        "variantes": [
+          {
+            "id": 533,
+            "rang": "Novice",
+            "image_url": "/images/sorts/533.webp"
+          },
+          {
+            "id": 534,
+            "rang": "Expert",
+            "image_url": "/images/sorts/534.webp"
+          },
+          {
+            "id": 535,
+            "rang": "Maître α",
+            "image_url": "/images/sorts/535.webp"
+          },
+          {
+            "id": 536,
+            "rang": "Maître ẞ",
+            "image_url": "/images/sorts/536.webp"
+          }
+        ]
+      },
+      {
+        "type": "sort",
+        "nom": "Piège d'entaille - Feu",
+        "variantes": [
+          {
+            "id": 106,
+            "rang": "Novice",
+            "image_url": "/images/sorts/106.webp"
+          },
+          {
+            "id": 221,
+            "rang": "Expert",
+            "image_url": "/images/sorts/106.webp"
+          },
+          {
+            "id": 336,
+            "rang": "Maître α",
+            "image_url": "/images/sorts/106.webp"
+          },
+          {
+            "id": 451,
+            "rang": "Maître ẞ",
+            "image_url": "/images/sorts/106.webp"
+          }
+        ]
+      },
+      {
+        "type": "sort",
+        "nom": "Piège d'entaille - Air",
+        "variantes": [
+          {
+            "id": 105,
+            "rang": "Novice",
+            "image_url": "/images/sorts/105.webp"
+          },
+          {
+            "id": 220,
+            "rang": "Expert",
+            "image_url": "/images/sorts/105.webp"
+          },
+          {
+            "id": 335,
+            "rang": "Maître α",
+            "image_url": "/images/sorts/105.webp"
+          },
+          {
+            "id": 450,
+            "rang": "Maître ẞ",
+            "image_url": "/images/sorts/105.webp"
+          }
+        ]
+      },
+      {
+        "type": "sort",
+        "nom": "Piège de Masse - Terre",
+        "variantes": [
+          {
+            "id": 104,
+            "rang": "Novice",
+            "image_url": "/images/sorts/104.webp"
+          },
+          {
+            "id": 219,
+            "rang": "Expert",
+            "image_url": "/images/sorts/104.webp"
+          },
+          {
+            "id": 334,
+            "rang": "Maître α",
+            "image_url": "/images/sorts/104.webp"
+          },
+          {
+            "id": 449,
+            "rang": "Maître ẞ",
+            "image_url": "/images/sorts/104.webp"
+          }
+        ]
+      },
+      {
+        "type": "sort",
+        "nom": "Piège de Masse - Eau",
+        "variantes": [
+          {
+            "id": 103,
+            "rang": "Novice",
+            "image_url": "/images/sorts/103.webp"
+          },
+          {
+            "id": 218,
+            "rang": "Expert",
+            "image_url": "/images/sorts/103.webp"
+          },
+          {
+            "id": 333,
+            "rang": "Maître α",
+            "image_url": "/images/sorts/103.webp"
+          },
+          {
+            "id": 448,
+            "rang": "Maître ẞ",
+            "image_url": "/images/sorts/103.webp"
+          }
+        ]
+      },
+      {
+        "type": "sort",
+        "nom": "Piège empoisonné - Terre",
+        "variantes": [
+          {
+            "id": 86,
+            "rang": "Novice",
+            "image_url": "/images/sorts/86.webp"
+          },
+          {
+            "id": 201,
+            "rang": "Expert",
+            "image_url": "/images/sorts/86.webp"
+          },
+          {
+            "id": 316,
+            "rang": "Maître α",
+            "image_url": "/images/sorts/86.webp"
+          },
+          {
+            "id": 431,
+            "rang": "Maître ẞ",
+            "image_url": "/images/sorts/86.webp"
+          }
+        ]
+      },
+      {
+        "type": "sort",
+        "nom": "Piège empoisonné - Eau",
+        "variantes": [
+          {
+            "id": 85,
+            "rang": "Novice",
+            "image_url": "/images/sorts/85.webp"
+          },
+          {
+            "id": 200,
+            "rang": "Expert",
+            "image_url": "/images/sorts/85.webp"
+          },
+          {
+            "id": 315,
+            "rang": "Maître α",
+            "image_url": "/images/sorts/85.webp"
+          },
+          {
+            "id": 430,
+            "rang": "Maître ẞ",
+            "image_url": "/images/sorts/85.webp"
+          }
+        ]
+      },
+      {
+        "type": "sort",
+        "nom": "Piège sournois - Terre",
+        "variantes": [
+          {
+            "id": 75,
+            "rang": "Novice",
+            "image_url": "/images/sorts/75.webp"
+          },
+          {
+            "id": 190,
+            "rang": "Expert",
+            "image_url": "/images/sorts/75.webp"
+          },
+          {
+            "id": 305,
+            "rang": "Maître α",
+            "image_url": "/images/sorts/75.webp"
+          },
+          {
+            "id": 420,
+            "rang": "Maître ẞ",
+            "image_url": "/images/sorts/75.webp"
+          }
+        ]
+      },
+      {
+        "type": "sort",
+        "nom": "Piège sournois - Feu",
+        "variantes": [
+          {
+            "id": 76,
+            "rang": "Novice",
+            "image_url": "/images/sorts/76.webp"
+          },
+          {
+            "id": 191,
+            "rang": "Expert",
+            "image_url": "/images/sorts/76.webp"
+          },
+          {
+            "id": 306,
+            "rang": "Maître α",
+            "image_url": "/images/sorts/76.webp"
+          },
+          {
+            "id": 421,
+            "rang": "Maître ẞ",
+            "image_url": "/images/sorts/76.webp"
+          }
+        ]
+      },
+      {
+        "type": "sort",
+        "nom": "Piège d'immobilisation",
+        "variantes": [
+          {
+            "id": 553,
+            "rang": "Novice",
+            "image_url": "/images/sorts/553.webp"
+          },
+          {
+            "id": 554,
+            "rang": "Expert",
+            "image_url": "/images/sorts/554.webp"
+          },
+          {
+            "id": 555,
+            "rang": "Maître α",
+            "image_url": "/images/sorts/555.webp"
+          },
+          {
+            "id": 556,
+            "rang": "Maître ẞ",
+            "image_url": "/images/sorts/556.webp"
+          }
+        ]
+      }
+    ],
+    "bonusSpecial": null,
+    "paliers": [
+      {
+        "items": 1,
+        "texte": "Aucun bonus",
+        "delta": {
+          "statsPlates": {},
+          "multiplicateurs": []
+        }
+      },
+      {
+        "items": 2,
+        "texte": "+25 puissance pièges",
+        "delta": {
+          "statsPlates": {
+            "PUISSANCE_PIEGE": 25
+          },
+          "multiplicateurs": []
+        }
+      },
+      {
+        "items": 3,
+        "texte": "+50 puissance pièges, +5 do pièges",
+        "delta": {
+          "statsPlates": {
+            "PUISSANCE_PIEGE": 50,
+            "DO_PIEGE": 5
+          },
+          "multiplicateurs": []
+        }
+      },
+      {
+        "items": 4,
+        "texte": "+75 puissance pièges, +10 do pièges, +1 PO",
+        "delta": {
+          "statsPlates": {
+            "PUISSANCE_PIEGE": 75,
+            "DO_PIEGE": 10,
+            "PO": 1
+          },
+          "multiplicateurs": []
+        }
+      },
+      {
+        "items": 5,
+        "texte": "+100 puissance pièges, +15 do pièges, +1 PO",
+        "delta": {
+          "statsPlates": {
+            "PUISSANCE_PIEGE": 100,
+            "DO_PIEGE": 15,
+            "PO": 1
+          },
+          "multiplicateurs": []
+        }
+      },
+      {
+        "items": 6,
+        "texte": "+125 puissance pièges, +20 do pièges, +2 PO",
+        "delta": {
+          "statsPlates": {
+            "PUISSANCE_PIEGE": 125,
+            "DO_PIEGE": 20,
+            "PO": 2
+          },
+          "multiplicateurs": []
+        }
+      },
+      {
+        "items": 7,
+        "texte": "+150 puissance pièges, +25 do pièges, +2 PO",
+        "delta": {
+          "statsPlates": {
+            "PUISSANCE_PIEGE": 150,
+            "DO_PIEGE": 25,
+            "PO": 2
+          },
+          "multiplicateurs": []
+        }
+      },
+      {
+        "items": 8,
+        "texte": "+175 puissance pièges, +30 do pièges, +2 PO",
+        "delta": {
+          "statsPlates": {
+            "PUISSANCE_PIEGE": 175,
+            "DO_PIEGE": 30,
+            "PO": 2
+          },
+          "multiplicateurs": []
+        }
+      },
+      {
+        "items": 9,
+        "texte": "+200 puissance pièges, +35 do pièges, +2 PO",
+        "delta": {
+          "statsPlates": {
+            "PUISSANCE_PIEGE": 200,
+            "DO_PIEGE": 35,
+            "PO": 2
+          },
+          "multiplicateurs": []
+        }
+      }
+    ],
+    "imageItems": [
+      {
+        "type": "sort",
+        "id": 75,
+        "imageUrl": "/images/sorts/75.webp"
+      },
+      {
+        "type": "sort",
+        "id": 533,
+        "imageUrl": "/images/sorts/533.webp"
+      }
+    ],
+    "imageComposite": "/images/ensembles/du-fourbe.webp"
+  },
+  {
+    "cle": "de-l-invocateur",
+    "nom": "Ensemble de l’Invocateur",
+    "type": "classique",
+    "pieces": [
+      {
+        "type": "sort",
+        "nom": "Invocation de Stalak",
+        "variantes": [
+          {
+            "id": 95,
+            "rang": "Novice",
+            "image_url": "/images/sorts/95.webp"
+          },
+          {
+            "id": 210,
+            "rang": "Expert",
+            "image_url": "/images/sorts/95.webp"
+          },
+          {
+            "id": 325,
+            "rang": "Maître α",
+            "image_url": "/images/sorts/95.webp"
+          },
+          {
+            "id": 440,
+            "rang": "Maître ẞ",
+            "image_url": "/images/sorts/95.webp"
+          }
+        ]
+      },
+      {
+        "type": "sort",
+        "nom": "Invocation d'Empaillé",
+        "variantes": [
+          {
+            "id": 102,
+            "rang": "Novice",
+            "image_url": "/images/sorts/102.webp"
+          },
+          {
+            "id": 217,
+            "rang": "Expert",
+            "image_url": "/images/sorts/102.webp"
+          },
+          {
+            "id": 332,
+            "rang": "Maître α",
+            "image_url": "/images/sorts/102.webp"
+          },
+          {
+            "id": 447,
+            "rang": "Maître ẞ",
+            "image_url": "/images/sorts/102.webp"
+          }
+        ]
+      },
+      {
+        "type": "sort",
+        "nom": "Invocation du Mulou",
+        "variantes": [
+          {
+            "id": 100,
+            "rang": "Novice",
+            "image_url": "/images/sorts/100.webp"
+          },
+          {
+            "id": 215,
+            "rang": "Expert",
+            "image_url": "/images/sorts/100.webp"
+          },
+          {
+            "id": 330,
+            "rang": "Maître α",
+            "image_url": "/images/sorts/100.webp"
+          },
+          {
+            "id": 445,
+            "rang": "Maître ẞ",
+            "image_url": "/images/sorts/100.webp"
+          }
+        ]
+      },
+      {
+        "type": "sort",
+        "nom": "Invocation de Yukisamara",
+        "variantes": [
+          {
+            "id": 101,
+            "rang": "Novice",
+            "image_url": "/images/sorts/101.webp"
+          },
+          {
+            "id": 216,
+            "rang": "Expert",
+            "image_url": "/images/sorts/101.webp"
+          },
+          {
+            "id": 331,
+            "rang": "Maître α",
+            "image_url": "/images/sorts/101.webp"
+          },
+          {
+            "id": 446,
+            "rang": "Maître ẞ",
+            "image_url": "/images/sorts/101.webp"
+          }
+        ]
+      },
+      {
+        "type": "sort",
+        "nom": "Invocation de Blérom",
+        "variantes": [
+          {
+            "id": 521,
+            "rang": "Novice",
+            "image_url": "/images/sorts/521.webp"
+          },
+          {
+            "id": 522,
+            "rang": "Expert",
+            "image_url": "/images/sorts/522.webp"
+          },
+          {
+            "id": 523,
+            "rang": "Maître α",
+            "image_url": "/images/sorts/523.webp"
+          },
+          {
+            "id": 524,
+            "rang": "Maître ẞ",
+            "image_url": "/images/sorts/524.webp"
+          }
+        ]
+      },
+      {
+        "type": "sort",
+        "nom": "Invocation de Bitouf Aérien",
+        "variantes": [
+          {
+            "id": 517,
+            "rang": "Novice",
+            "image_url": "/images/sorts/517.webp"
+          },
+          {
+            "id": 518,
+            "rang": "Expert",
+            "image_url": "/images/sorts/518.webp"
+          },
+          {
+            "id": 519,
+            "rang": "Maître α",
+            "image_url": "/images/sorts/519.webp"
+          },
+          {
+            "id": 520,
+            "rang": "Maître ẞ",
+            "image_url": "/images/sorts/520.webp"
+          }
+        ]
+      }
+    ],
+    "bonusSpecial": {
+      "seuil": 3,
+      "texte": "Contrôler ses invocations"
+    },
+    "paliers": [
+      {
+        "items": 1,
+        "texte": "+80 points de vie",
+        "delta": {
+          "statsPlates": {
+            "VITALITE": 80
+          },
+          "multiplicateurs": []
+        }
+      },
+      {
+        "items": 2,
+        "texte": "+140 points de vie",
+        "delta": {
+          "statsPlates": {
+            "VITALITE": 140
+          },
+          "multiplicateurs": []
+        }
+      },
+      {
+        "items": 3,
+        "texte": "+180 points de vie",
+        "delta": {
+          "statsPlates": {
+            "VITALITE": 180
+          },
+          "multiplicateurs": []
+        }
+      },
+      {
+        "items": 4,
+        "texte": "+240 points de vie",
+        "delta": {
+          "statsPlates": {
+            "VITALITE": 240
+          },
+          "multiplicateurs": []
+        }
+      },
+      {
+        "items": 5,
+        "texte": "+300 points de vie",
+        "delta": {
+          "statsPlates": {
+            "VITALITE": 300
+          },
+          "multiplicateurs": []
+        }
+      }
+    ],
+    "imageItems": [
+      {
+        "type": "sort",
+        "id": 102,
+        "imageUrl": "/images/sorts/102.webp"
+      },
+      {
+        "type": "sort",
+        "id": 100,
+        "imageUrl": "/images/sorts/100.webp"
+      }
+    ],
+    "imageComposite": "/images/ensembles/de-l-invocateur.webp"
+  },
+  {
+    "cle": "des-portes-de-la-mort",
+    "nom": "Ensemble des Portes de la Mort",
+    "type": "classique",
+    "pieces": [
+      {
+        "type": "breloque",
+        "nom": "Breloque du Bouclier d'urgence",
+        "variantes": [
+          {
+            "id": 17,
+            "rang": "Novice",
+            "image_url": "/images/breloques/17.webp"
+          },
+          {
+            "id": 18,
+            "rang": "Expert",
+            "image_url": "/images/breloques/18.webp"
+          },
+          {
+            "id": 19,
+            "rang": "Maître α",
+            "image_url": "/images/breloques/19.webp"
+          },
+          {
+            "id": 20,
+            "rang": "Maître ẞ",
+            "image_url": "/images/breloques/20.webp"
+          }
+        ]
+      },
+      {
+        "type": "breloque",
+        "nom": "Breloque du Dernier repli",
+        "variantes": [
+          {
+            "id": 45,
+            "rang": "Novice",
+            "image_url": "/images/breloques/45.webp"
+          },
+          {
+            "id": 46,
+            "rang": "Expert",
+            "image_url": "/images/breloques/46.webp"
+          },
+          {
+            "id": 47,
+            "rang": "Maître α",
+            "image_url": "/images/breloques/47.webp"
+          },
+          {
+            "id": 48,
+            "rang": "Maître ẞ",
+            "image_url": "/images/breloques/48.webp"
+          }
+        ]
+      },
+      {
+        "type": "breloque",
+        "nom": "Breloque du Flagellant",
+        "variantes": [
+          {
+            "id": 147,
+            "rang": "Expert",
+            "image_url": "/images/breloques/147.webp"
+          },
+          {
+            "id": 148,
+            "rang": "Maître α",
+            "image_url": "/images/breloques/148.webp"
+          },
+          {
+            "id": 149,
+            "rang": "Maître ẞ",
+            "image_url": "/images/breloques/149.webp"
+          },
+          {
+            "id": 150,
+            "rang": "Novice",
+            "image_url": "/images/breloques/150.webp"
+          }
+        ]
+      },
+      {
+        "type": "breloque",
+        "nom": "Breloque du Revenant",
+        "variantes": [
+          {
+            "id": 113,
+            "rang": "Novice",
+            "image_url": "/images/breloques/113.webp"
+          },
+          {
+            "id": 114,
+            "rang": "Expert",
+            "image_url": "/images/breloques/114.webp"
+          },
+          {
+            "id": 115,
+            "rang": "Maître α",
+            "image_url": "/images/breloques/115.webp"
+          },
+          {
+            "id": 116,
+            "rang": "Maître ẞ",
+            "image_url": "/images/breloques/116.webp"
+          }
+        ]
+      },
+      {
+        "type": "breloque",
+        "nom": "Breloque de Sursaut de puissance",
+        "variantes": [
+          {
+            "id": 21,
+            "rang": "Novice",
+            "image_url": "/images/breloques/21.webp"
+          },
+          {
+            "id": 22,
+            "rang": "Expert",
+            "image_url": "/images/breloques/22.webp"
+          },
+          {
+            "id": 23,
+            "rang": "Maître α",
+            "image_url": "/images/breloques/23.webp"
+          },
+          {
+            "id": 24,
+            "rang": "Maître ẞ",
+            "image_url": "/images/breloques/24.webp"
+          }
+        ]
+      },
+      {
+        "type": "breloque",
+        "nom": "Breloque de la Tournée d'adieux",
+        "variantes": [
+          {
+            "id": 109,
+            "rang": "Novice",
+            "image_url": "/images/breloques/109.webp"
+          },
+          {
+            "id": 110,
+            "rang": "Expert",
+            "image_url": "/images/breloques/110.webp"
+          },
+          {
+            "id": 111,
+            "rang": "Maître α",
+            "image_url": "/images/breloques/111.webp"
+          },
+          {
+            "id": 112,
+            "rang": "Maître ẞ",
+            "image_url": "/images/breloques/112.webp"
+          }
+        ]
+      },
+      {
+        "type": "breloque",
+        "nom": "Breloque du Martyr",
+        "variantes": [
+          {
+            "id": 25,
+            "rang": "Novice",
+            "image_url": "/images/breloques/25.webp"
+          },
+          {
+            "id": 26,
+            "rang": "Expert",
+            "image_url": "/images/breloques/26.webp"
+          },
+          {
+            "id": 27,
+            "rang": "Maître α",
+            "image_url": "/images/breloques/27.webp"
+          },
+          {
+            "id": 28,
+            "rang": "Maître ẞ",
+            "image_url": "/images/breloques/28.webp"
+          }
+        ]
+      },
+      {
+        "type": "breloque",
+        "nom": "Breloque de Dernier Souffle",
+        "variantes": [
+          {
+            "id": 29,
+            "rang": "Novice",
+            "image_url": "/images/breloques/29.webp"
+          },
+          {
+            "id": 30,
+            "rang": "Expert",
+            "image_url": "/images/breloques/30.webp"
+          },
+          {
+            "id": 31,
+            "rang": "Maître α",
+            "image_url": "/images/breloques/31.webp"
+          },
+          {
+            "id": 32,
+            "rang": "Maître ẞ",
+            "image_url": "/images/breloques/32.webp"
+          }
+        ]
+      },
+      {
+        "type": "breloque",
+        "nom": "Breloque de l'Homéopathe",
+        "variantes": [
+          {
+            "id": 139,
+            "rang": "Expert",
+            "image_url": "/images/breloques/139.webp"
+          },
+          {
+            "id": 140,
+            "rang": "Maître α",
+            "image_url": "/images/breloques/140.webp"
+          },
+          {
+            "id": 141,
+            "rang": "Maître ẞ",
+            "image_url": "/images/breloques/141.webp"
+          },
+          {
+            "id": 142,
+            "rang": "Novice",
+            "image_url": "/images/breloques/142.webp"
+          }
+        ]
+      }
+    ],
+    "bonusSpecial": {
+      "seuil": 3,
+      "texte": "Au premier dégât subi ou soin reçu dans le tour, applique les effets suivants : -400 PV et +400 bouclier (1 fois par tour)"
+    },
+    "paliers": [
+      {
+        "items": 1,
+        "texte": "Aucun bonus",
+        "delta": {
+          "statsPlates": {},
+          "multiplicateurs": []
+        }
+      },
+      {
+        "items": 2,
+        "texte": "+10 résistances fixes",
+        "delta": {
+          "statsPlates": {
+            "RES_TERRE": 10,
+            "RES_EAU": 10,
+            "RES_FEU": 10,
+            "RES_AIR": 10,
+            "RES_NEUTRE": 10
+          },
+          "multiplicateurs": []
+        }
+      },
+      {
+        "items": 3,
+        "texte": "+20 résistances fixes, +20 res do pou, +10 res crit",
+        "delta": {
+          "statsPlates": {
+            "RES_TERRE": 20,
+            "RES_EAU": 20,
+            "RES_FEU": 20,
+            "RES_AIR": 20,
+            "RES_NEUTRE": 20,
+            "RES_POU": 20,
+            "RES_CRIT": 10
+          },
+          "multiplicateurs": []
+        }
+      },
+      {
+        "items": 4,
+        "texte": "+30 résistances fixes, +30 res do pou, +20 res crit",
+        "delta": {
+          "statsPlates": {
+            "RES_TERRE": 30,
+            "RES_EAU": 30,
+            "RES_FEU": 30,
+            "RES_AIR": 30,
+            "RES_NEUTRE": 30,
+            "RES_POU": 30,
+            "RES_CRIT": 20
+          },
+          "multiplicateurs": []
+        }
+      },
+      {
+        "items": 5,
+        "texte": "+50 résistances fixes, +50 res do pou, +30 res crit",
+        "delta": {
+          "statsPlates": {
+            "RES_TERRE": 50,
+            "RES_EAU": 50,
+            "RES_FEU": 50,
+            "RES_AIR": 50,
+            "RES_NEUTRE": 50,
+            "RES_POU": 50,
+            "RES_CRIT": 30
+          },
+          "multiplicateurs": []
+        }
+      },
+      {
+        "items": 6,
+        "texte": "+60 résistances fixes, +60 res do pou, +40 res crit",
+        "delta": {
+          "statsPlates": {
+            "RES_TERRE": 60,
+            "RES_EAU": 60,
+            "RES_FEU": 60,
+            "RES_AIR": 60,
+            "RES_NEUTRE": 60,
+            "RES_POU": 60,
+            "RES_CRIT": 40
+          },
+          "multiplicateurs": []
+        }
+      }
+    ],
+    "imageItems": [
+      {
+        "type": "breloque",
+        "id": 147,
+        "imageUrl": "/images/breloques/147.webp"
+      },
+      {
+        "type": "breloque",
+        "id": 21,
+        "imageUrl": "/images/breloques/21.webp"
+      }
+    ],
+    "imageComposite": "/images/ensembles/des-portes-de-la-mort.webp"
+  },
+  {
+    "cle": "du-pugiliste",
+    "nom": "Ensemble du Pugiliste",
+    "type": "classique",
+    "pieces": [
+      {
+        "type": "sort",
+        "nom": "Boliche - Feu",
+        "variantes": [
+          {
+            "id": 52,
+            "rang": "Novice",
+            "image_url": "/images/sorts/52.webp"
+          },
+          {
+            "id": 167,
+            "rang": "Expert",
+            "image_url": "/images/sorts/52.webp"
+          },
+          {
+            "id": 282,
+            "rang": "Maître α",
+            "image_url": "/images/sorts/52.webp"
+          },
+          {
+            "id": 397,
+            "rang": "Maître ẞ",
+            "image_url": "/images/sorts/52.webp"
+          }
+        ]
+      },
+      {
+        "type": "sort",
+        "nom": "Boliche - Air",
+        "variantes": [
+          {
+            "id": 53,
+            "rang": "Novice",
+            "image_url": "/images/sorts/53.webp"
+          },
+          {
+            "id": 168,
+            "rang": "Expert",
+            "image_url": "/images/sorts/53.webp"
+          },
+          {
+            "id": 283,
+            "rang": "Maître α",
+            "image_url": "/images/sorts/53.webp"
+          },
+          {
+            "id": 398,
+            "rang": "Maître ẞ",
+            "image_url": "/images/sorts/53.webp"
+          }
+        ]
+      },
+      {
+        "type": "sort",
+        "nom": "Cabriole - Terre",
+        "variantes": [
+          {
+            "id": 94,
+            "rang": "Novice",
+            "image_url": "/images/sorts/94.webp"
+          },
+          {
+            "id": 209,
+            "rang": "Expert",
+            "image_url": "/images/sorts/94.webp"
+          },
+          {
+            "id": 324,
+            "rang": "Maître α",
+            "image_url": "/images/sorts/94.webp"
+          },
+          {
+            "id": 439,
+            "rang": "Maître ẞ",
+            "image_url": "/images/sorts/94.webp"
+          }
+        ]
+      },
+      {
+        "type": "sort",
+        "nom": "Cabriole - Eau",
+        "variantes": [
+          {
+            "id": 93,
+            "rang": "Novice",
+            "image_url": "/images/sorts/93.webp"
+          },
+          {
+            "id": 208,
+            "rang": "Expert",
+            "image_url": "/images/sorts/93.webp"
+          },
+          {
+            "id": 323,
+            "rang": "Maître α",
+            "image_url": "/images/sorts/93.webp"
+          },
+          {
+            "id": 438,
+            "rang": "Maître ẞ",
+            "image_url": "/images/sorts/93.webp"
+          }
+        ]
+      },
+      {
+        "type": "sort",
+        "nom": "Épée du Destin - Feu",
+        "variantes": [
+          {
+            "id": 60,
+            "rang": "Novice",
+            "image_url": "/images/sorts/60.webp"
+          },
+          {
+            "id": 175,
+            "rang": "Expert",
+            "image_url": "/images/sorts/60.webp"
+          },
+          {
+            "id": 290,
+            "rang": "Maître α",
+            "image_url": "/images/sorts/60.webp"
+          },
+          {
+            "id": 405,
+            "rang": "Maître ẞ",
+            "image_url": "/images/sorts/60.webp"
+          }
+        ]
+      },
+      {
+        "type": "sort",
+        "nom": "Épée du Destin - Air",
+        "variantes": [
+          {
+            "id": 61,
+            "rang": "Novice",
+            "image_url": "/images/sorts/61.webp"
+          },
+          {
+            "id": 176,
+            "rang": "Expert",
+            "image_url": "/images/sorts/61.webp"
+          },
+          {
+            "id": 291,
+            "rang": "Maître α",
+            "image_url": "/images/sorts/61.webp"
+          },
+          {
+            "id": 406,
+            "rang": "Maître ẞ",
+            "image_url": "/images/sorts/61.webp"
+          }
+        ]
+      },
+      {
+        "type": "sort",
+        "nom": "Épicentre - Terre",
+        "variantes": [
+          {
+            "id": 497,
+            "rang": "Novice",
+            "image_url": "/images/sorts/497.webp"
+          },
+          {
+            "id": 498,
+            "rang": "Expert",
+            "image_url": "/images/sorts/498.webp"
+          },
+          {
+            "id": 499,
+            "rang": "Maître α",
+            "image_url": "/images/sorts/499.webp"
+          },
+          {
+            "id": 500,
+            "rang": "Maître ẞ",
+            "image_url": "/images/sorts/500.webp"
+          }
+        ]
+      },
+      {
+        "type": "sort",
+        "nom": "Épicentre - Eau",
+        "variantes": [
+          {
+            "id": 493,
+            "rang": "Novice",
+            "image_url": "/images/sorts/493.webp"
+          },
+          {
+            "id": 494,
+            "rang": "Expert",
+            "image_url": "/images/sorts/494.webp"
+          },
+          {
+            "id": 495,
+            "rang": "Maître α",
+            "image_url": "/images/sorts/495.webp"
+          },
+          {
+            "id": 496,
+            "rang": "Maître ẞ",
+            "image_url": "/images/sorts/496.webp"
+          }
+        ]
+      },
+      {
+        "type": "sort",
+        "nom": "Martel",
+        "variantes": [
+          {
+            "id": 115,
+            "rang": "Novice",
+            "image_url": "/images/sorts/115.webp"
+          },
+          {
+            "id": 230,
+            "rang": "Expert",
+            "image_url": "/images/sorts/115.webp"
+          },
+          {
+            "id": 345,
+            "rang": "Maître α",
+            "image_url": "/images/sorts/115.webp"
+          },
+          {
+            "id": 460,
+            "rang": "Maître ẞ",
+            "image_url": "/images/sorts/115.webp"
+          }
+        ]
+      },
+      {
+        "type": "sort",
+        "nom": "Appétit",
+        "variantes": [
+          {
+            "id": 469,
+            "rang": "Novice",
+            "image_url": "/images/sorts/469.webp"
+          },
+          {
+            "id": 470,
+            "rang": "Expert",
+            "image_url": "/images/sorts/470.webp"
+          },
+          {
+            "id": 471,
+            "rang": "Maître α",
+            "image_url": "/images/sorts/471.webp"
+          },
+          {
+            "id": 472,
+            "rang": "Maître ẞ",
+            "image_url": "/images/sorts/472.webp"
+          }
+        ]
+      },
+      {
+        "type": "breloque",
+        "nom": "Breloque de Carapace adaptative",
+        "variantes": [
+          {
+            "id": 123,
+            "rang": "Expert",
+            "image_url": "/images/breloques/123.webp"
+          },
+          {
+            "id": 124,
+            "rang": "Maître α",
+            "image_url": "/images/breloques/124.webp"
+          },
+          {
+            "id": 125,
+            "rang": "Maître ẞ",
+            "image_url": "/images/breloques/125.webp"
+          },
+          {
+            "id": 126,
+            "rang": "Novice",
+            "image_url": "/images/breloques/126.webp"
+          }
+        ]
+      },
+      {
+        "type": "breloque",
+        "nom": "Breloque du Randonneur ballonné",
+        "variantes": [
+          {
+            "id": 73,
+            "rang": "Novice",
+            "image_url": "/images/breloques/73.webp"
+          },
+          {
+            "id": 74,
+            "rang": "Expert",
+            "image_url": "/images/breloques/74.webp"
+          },
+          {
+            "id": 75,
+            "rang": "Maître α",
+            "image_url": "/images/breloques/75.webp"
+          },
+          {
+            "id": 76,
+            "rang": "Maître ẞ",
+            "image_url": "/images/breloques/76.webp"
+          }
+        ]
+      },
+      {
+        "type": "breloque",
+        "nom": "Breloque du Rixeur Instable",
+        "variantes": [
+          {
+            "id": 1,
+            "rang": "Novice",
+            "image_url": "/images/breloques/1.webp"
+          },
+          {
+            "id": 2,
+            "rang": "Expert",
+            "image_url": "/images/breloques/2.webp"
+          },
+          {
+            "id": 3,
+            "rang": "Maître α",
+            "image_url": "/images/breloques/3.webp"
+          },
+          {
+            "id": 4,
+            "rang": "Maître ẞ",
+            "image_url": "/images/breloques/4.webp"
+          }
+        ]
+      },
+      {
+        "type": "breloque",
+        "nom": "Breloque du Combattant belliqueux",
+        "variantes": [
+          {
+            "id": 9,
+            "rang": "Novice",
+            "image_url": "/images/breloques/9.webp"
+          },
+          {
+            "id": 10,
+            "rang": "Expert",
+            "image_url": "/images/breloques/10.webp"
+          },
+          {
+            "id": 11,
+            "rang": "Maître α",
+            "image_url": "/images/breloques/11.webp"
+          },
+          {
+            "id": 12,
+            "rang": "Maître ẞ",
+            "image_url": "/images/breloques/12.webp"
+          }
+        ]
+      }
+    ],
+    "bonusSpecial": {
+      "seuil": 3,
+      "texte": "Renvoie des dégâts subis"
+    },
+    "paliers": [
+      {
+        "items": 1,
+        "texte": "Aucun bonus",
+        "delta": {
+          "statsPlates": {},
+          "multiplicateurs": []
+        }
+      },
+      {
+        "items": 2,
+        "texte": "+50 PV, +10 tacle",
+        "delta": {
+          "statsPlates": {
+            "VITALITE": 50,
+            "TACLE": 10
+          },
+          "multiplicateurs": []
+        }
+      },
+      {
+        "items": 3,
+        "texte": "+100 PV, +20 tacle",
+        "delta": {
+          "statsPlates": {
+            "VITALITE": 100,
+            "TACLE": 20
+          },
+          "multiplicateurs": []
+        }
+      },
+      {
+        "items": 4,
+        "texte": "+150 PV, +30 tacle",
+        "delta": {
+          "statsPlates": {
+            "VITALITE": 150,
+            "TACLE": 30
+          },
+          "multiplicateurs": []
+        }
+      },
+      {
+        "items": 5,
+        "texte": "+200 PV, +40 tacle",
+        "delta": {
+          "statsPlates": {
+            "VITALITE": 200,
+            "TACLE": 40
+          },
+          "multiplicateurs": []
+        }
+      },
+      {
+        "items": 6,
+        "texte": "+250 PV, +50 tacle",
+        "delta": {
+          "statsPlates": {
+            "VITALITE": 250,
+            "TACLE": 50
+          },
+          "multiplicateurs": []
+        }
+      },
+      {
+        "items": 7,
+        "texte": "+300 PV, +60 tacle",
+        "delta": {
+          "statsPlates": {
+            "VITALITE": 300,
+            "TACLE": 60
+          },
+          "multiplicateurs": []
+        }
+      },
+      {
+        "items": 8,
+        "texte": "+350 PV, +70 tacle",
+        "delta": {
+          "statsPlates": {
+            "VITALITE": 350,
+            "TACLE": 70
+          },
+          "multiplicateurs": []
+        }
+      },
+      {
+        "items": 9,
+        "texte": "+400 PV, +80 tacle",
+        "delta": {
+          "statsPlates": {
+            "VITALITE": 400,
+            "TACLE": 80
+          },
+          "multiplicateurs": []
+        }
+      },
+      {
+        "items": 10,
+        "texte": "+450 PV, +90 tacle",
+        "delta": {
+          "statsPlates": {
+            "VITALITE": 450,
+            "TACLE": 90
+          },
+          "multiplicateurs": []
+        }
+      },
+      {
+        "items": 11,
+        "texte": "+500 PV, +100 tacle",
+        "delta": {
+          "statsPlates": {
+            "VITALITE": 500,
+            "TACLE": 100
+          },
+          "multiplicateurs": []
+        }
+      },
+      {
+        "items": 12,
+        "texte": "+550 PV, +110 tacle",
+        "delta": {
+          "statsPlates": {
+            "VITALITE": 550,
+            "TACLE": 110
+          },
+          "multiplicateurs": []
+        }
+      }
+    ],
+    "imageItems": [
+      {
+        "type": "sort",
+        "id": 94,
+        "imageUrl": "/images/sorts/94.webp"
+      },
+      {
+        "type": "breloque",
+        "id": 123,
+        "imageUrl": "/images/breloques/123.webp"
+      }
+    ],
+    "imageComposite": "/images/ensembles/du-pugiliste.webp"
+  },
+  {
+    "cle": "du-phossile",
+    "nom": "Ensemble du Phossile",
+    "type": "boss",
+    "pieces": [
+      {
+        "type": "breloque",
+        "nom": "Protection du Craqdoa",
+        "variantes": [
+          {
+            "id": 162,
+            "rang": "Unique",
+            "image_url": null
+          }
+        ]
+      },
+      {
+        "type": "sort",
+        "nom": "Étreinte forcée",
+        "variantes": [
+          {
+            "id": 624,
+            "rang": "Unique",
+            "image_url": "/images/sorts/624.webp"
+          }
+        ]
+      }
+    ],
+    "bonusSpecial": null,
+    "paliers": [
+      {
+        "items": 1,
+        "texte": "+150 Sagesse, +25 Dommages de Poussées",
+        "delta": {
+          "statsPlates": {
+            "SAGESSE": 150,
+            "DO_POU": 25
+          },
+          "multiplicateurs": []
+        }
+      },
+      {
+        "items": 2,
+        "texte": "+300 Sagesse, +50 Dommages de Poussées, +1PA",
+        "delta": {
+          "statsPlates": {
+            "SAGESSE": 300,
+            "DO_POU": 50,
+            "PA": 1
+          },
+          "multiplicateurs": []
+        }
+      }
+    ],
+    "imageItems": null
+  },
+  {
+    "cle": "du-craqdoa",
+    "nom": "Ensemble du Craqdoa",
+    "type": "boss",
+    "pieces": [
+      {
+        "type": "breloque",
+        "nom": "Protection du Craqdoa",
+        "variantes": [
+          {
+            "id": 162,
+            "rang": "Unique",
+            "image_url": null
+          }
+        ]
+      },
+      {
+        "type": "sort",
+        "nom": "Peau de pierre",
+        "variantes": [
+          {
+            "id": 628,
+            "rang": "Unique",
+            "image_url": "/images/sorts/628.webp"
+          }
+        ]
+      }
+    ],
+    "bonusSpecial": null,
+    "paliers": [
+      {
+        "items": 1,
+        "texte": "+5% de résistances dans tous les éléments",
+        "delta": {
+          "statsPlates": {
+            "%_RES_TERRE": 5,
+            "%_RES_EAU": 5,
+            "%_RES_FEU": 5,
+            "%_RES_AIR": 5,
+            "%_RES_NEUTRE": 5
+          },
+          "multiplicateurs": []
+        }
+      },
+      {
+        "items": 2,
+        "texte": "+10% de résistances dans tous les éléments, +1PA",
+        "delta": {
+          "statsPlates": {
+            "%_RES_TERRE": 10,
+            "%_RES_EAU": 10,
+            "%_RES_FEU": 10,
+            "%_RES_AIR": 10,
+            "%_RES_NEUTRE": 10,
+            "PA": 1
+          },
+          "multiplicateurs": []
+        }
+      }
+    ],
+    "imageItems": null
+  },
+  {
+    "cle": "de-corruption",
+    "nom": "Ensemble de Corruption",
+    "type": "boss",
+    "pieces": [
+      {
+        "type": "breloque",
+        "nom": "Puanteur de Corruption",
+        "variantes": [
+          {
+            "id": 164,
+            "rang": "Unique",
+            "image_url": null
+          }
+        ]
+      },
+      {
+        "type": "sort",
+        "nom": "Amnésie progressive",
+        "variantes": [
+          {
+            "id": 621,
+            "rang": "Unique",
+            "image_url": "/images/sorts/621.webp"
+          }
+        ]
+      }
+    ],
+    "bonusSpecial": null,
+    "paliers": [
+      {
+        "items": 1,
+        "texte": "+200 Points de vie, +5% de dommages distances",
+        "delta": {
+          "statsPlates": {
+            "VITALITE": 200
+          },
+          "multiplicateurs": [
+            {
+              "type": "finaux_distance",
+              "valeur": 1.05
+            }
+          ]
+        }
+      },
+      {
+        "items": 2,
+        "texte": "+400 Points de vie, +10% de dommages distances, +1PA",
+        "delta": {
+          "statsPlates": {
+            "VITALITE": 400,
+            "PA": 1
+          },
+          "multiplicateurs": [
+            {
+              "type": "finaux_distance",
+              "valeur": 1.1
+            }
+          ]
+        }
+      }
+    ],
+    "imageItems": null
+  },
+  {
+    "cle": "de-toxoliath",
+    "nom": "Ensemble de Toxoliath",
+    "type": "boss",
+    "pieces": [
+      {
+        "type": "breloque",
+        "nom": "Pestilence du Toxoliath",
+        "variantes": [
+          {
+            "id": 161,
+            "rang": "Unique",
+            "image_url": null
+          }
+        ]
+      },
+      {
+        "type": "sort",
+        "nom": "Toxines",
+        "variantes": [
+          {
+            "id": 632,
+            "rang": "Unique",
+            "image_url": "/images/sorts/632.webp"
+          }
+        ]
+      }
+    ],
+    "bonusSpecial": null,
+    "paliers": [
+      {
+        "items": 1,
+        "texte": "+100 Puissance, +10% de dégâts indirects",
+        "delta": {
+          "statsPlates": {
+            "PUISSANCE": 100
+          },
+          "multiplicateurs": [
+            {
+              "type": "indirects",
+              "valeur": 1.1
+            }
+          ]
+        }
+      },
+      {
+        "items": 2,
+        "texte": "+200 Puissance, +20% de dégâts indirects, +1PA",
+        "delta": {
+          "statsPlates": {
+            "PUISSANCE": 200,
+            "PA": 1
+          },
+          "multiplicateurs": [
+            {
+              "type": "indirects",
+              "valeur": 1.2
+            }
+          ]
+        }
+      }
+    ],
+    "imageItems": null
+  },
+  {
+    "cle": "de-servitude",
+    "nom": "Ensemble de Servitude",
+    "type": "boss",
+    "pieces": [
+      {
+        "type": "breloque",
+        "nom": "Emprise de Servitude",
+        "variantes": [
+          {
+            "id": 159,
+            "rang": "Unique",
+            "image_url": null
+          }
+        ]
+      },
+      {
+        "type": "sort",
+        "nom": "Dîme étouffante",
+        "variantes": [
+          {
+            "id": 623,
+            "rang": "Unique",
+            "image_url": "/images/sorts/623.webp"
+          }
+        ]
+      }
+    ],
+    "bonusSpecial": null,
+    "paliers": [
+      {
+        "items": 1,
+        "texte": "+200 Points de vie, +5% de résistances distances",
+        "delta": {
+          "statsPlates": {
+            "VITALITE": 200
+          },
+          "multiplicateurs": []
+        }
+      },
+      {
+        "items": 2,
+        "texte": "+400 Points de vie, +10% de résistances distances, +1PA",
+        "delta": {
+          "statsPlates": {
+            "VITALITE": 400,
+            "PA": 1
+          },
+          "multiplicateurs": []
+        }
+      }
+    ],
+    "imageItems": null
+  },
+  {
+    "cle": "de-misere",
+    "nom": "Ensemble de Misère",
+    "type": "boss",
+    "pieces": [
+      {
+        "type": "breloque",
+        "nom": "Collecte de Misère",
+        "variantes": [
+          {
+            "id": 156,
+            "rang": "Unique",
+            "image_url": null
+          }
+        ]
+      },
+      {
+        "type": "sort",
+        "nom": "Funérailles Aériennes",
+        "variantes": [
+          {
+            "id": 625,
+            "rang": "Unique",
+            "image_url": "/images/sorts/625.webp"
+          }
+        ]
+      }
+    ],
+    "bonusSpecial": null,
+    "paliers": [
+      {
+        "items": 1,
+        "texte": "+100 Puissance, +25 Fuite",
+        "delta": {
+          "statsPlates": {
+            "PUISSANCE": 100,
+            "FUITE": 25
+          },
+          "multiplicateurs": []
+        }
+      },
+      {
+        "items": 2,
+        "texte": "+200 Puissance, +50 Fuite, +1PA",
+        "delta": {
+          "statsPlates": {
+            "PUISSANCE": 200,
+            "FUITE": 50,
+            "PA": 1
+          },
+          "multiplicateurs": []
+        }
+      }
+    ],
+    "imageItems": null
+  },
+  {
+    "cle": "du-katragon",
+    "nom": "Ensemble du Katragon",
+    "type": "boss",
+    "pieces": [
+      {
+        "type": "breloque",
+        "nom": "Embrasement du Katragon",
+        "variantes": [
+          {
+            "id": 158,
+            "rang": "Unique",
+            "image_url": null
+          }
+        ]
+      },
+      {
+        "type": "sort",
+        "nom": "Invocation de Pyrover domestique",
+        "variantes": [
+          {
+            "id": 627,
+            "rang": "Unique",
+            "image_url": "/images/sorts/627.webp"
+          }
+        ]
+      }
+    ],
+    "bonusSpecial": null,
+    "paliers": [
+      {
+        "items": 1,
+        "texte": "+100 Puissance, +1 Invocation",
+        "delta": {
+          "statsPlates": {
+            "PUISSANCE": 100,
+            "INVOCATION": 1
+          },
+          "multiplicateurs": []
+        }
+      },
+      {
+        "items": 2,
+        "texte": "+200 Puissance, +2 Invocation, +1PA",
+        "delta": {
+          "statsPlates": {
+            "PUISSANCE": 200,
+            "INVOCATION": 2,
+            "PA": 1
+          },
+          "multiplicateurs": []
+        }
+      }
+    ],
+    "imageItems": null
+  },
+  {
+    "cle": "de-guerre",
+    "nom": "Ensemble de Guerre",
+    "type": "boss",
+    "pieces": [
+      {
+        "type": "breloque",
+        "nom": "Arsenal de Guerre",
+        "variantes": [
+          {
+            "id": 118,
+            "rang": "Unique",
+            "image_url": null
+          }
+        ]
+      },
+      {
+        "type": "sort",
+        "nom": "Sacrifice nécessaire",
+        "variantes": [
+          {
+            "id": 630,
+            "rang": "Unique",
+            "image_url": "/images/sorts/630.webp"
+          }
+        ]
+      }
+    ],
+    "bonusSpecial": null,
+    "paliers": [
+      {
+        "items": 1,
+        "texte": "+200 Points de vie, +10% de résistances mêlées",
+        "delta": {
+          "statsPlates": {
+            "VITALITE": 200
+          },
+          "multiplicateurs": []
+        }
+      },
+      {
+        "items": 2,
+        "texte": "+400 Points de vie, +20% de résistances mêlées, +1PA",
+        "delta": {
+          "statsPlates": {
+            "VITALITE": 400,
+            "PA": 1
+          },
+          "multiplicateurs": []
+        }
+      }
+    ],
+    "imageItems": null
+  },
+  {
+    "cle": "de-kabahal",
+    "nom": "Ensemble de Kabahal",
+    "type": "boss",
+    "pieces": [
+      {
+        "type": "breloque",
+        "nom": "Putréfaction de Kabahal",
+        "variantes": [
+          {
+            "id": 165,
+            "rang": "Unique",
+            "image_url": null
+          }
+        ]
+      },
+      {
+        "type": "sort",
+        "nom": "Coup de main d'outre-tombe",
+        "variantes": [
+          {
+            "id": 622,
+            "rang": "Unique",
+            "image_url": "/images/sorts/622.webp"
+          }
+        ]
+      }
+    ],
+    "bonusSpecial": null,
+    "paliers": [
+      {
+        "items": 1,
+        "texte": "+100 Points de vie, +1 Invocation",
+        "delta": {
+          "statsPlates": {
+            "VITALITE": 100,
+            "INVOCATION": 1
+          },
+          "multiplicateurs": []
+        }
+      },
+      {
+        "items": 2,
+        "texte": "+200 Points de vie, +2 Invocations, +1PA",
+        "delta": {
+          "statsPlates": {
+            "VITALITE": 200,
+            "INVOCATION": 2,
+            "PA": 1
+          },
+          "multiplicateurs": []
+        }
+      }
+    ],
+    "imageItems": null
+  },
+  {
+    "cle": "du-ch-tyx",
+    "nom": "Ensemble du Ch’Tyx",
+    "type": "boss",
+    "pieces": [
+      {
+        "type": "breloque",
+        "nom": "Siphon du Ch'Tyx",
+        "variantes": [
+          {
+            "id": 166,
+            "rang": "Unique",
+            "image_url": null
+          }
+        ]
+      },
+      {
+        "type": "sort",
+        "nom": "Sh'hzx",
+        "variantes": [
+          {
+            "id": 631,
+            "rang": "Unique",
+            "image_url": "/images/sorts/631.webp"
+          }
+        ]
+      }
+    ],
+    "bonusSpecial": null,
+    "paliers": [
+      {
+        "items": 1,
+        "texte": "+150 Sagesse, +25 Dommages de Poussées",
+        "delta": {
+          "statsPlates": {
+            "SAGESSE": 150,
+            "DO_POU": 25
+          },
+          "multiplicateurs": []
+        }
+      },
+      {
+        "items": 2,
+        "texte": "+300 Sagesse, +50 Dommages de Poussées, +1PA",
+        "delta": {
+          "statsPlates": {
+            "SAGESSE": 300,
+            "DO_POU": 50,
+            "PA": 1
+          },
+          "multiplicateurs": []
+        }
+      }
+    ],
+    "imageItems": null
+  },
+  {
+    "cle": "du-hululord",
+    "nom": "Ensemble du Hululord",
+    "type": "boss",
+    "pieces": [
+      {
+        "type": "breloque",
+        "nom": "Couvée du Hululord",
+        "variantes": [
+          {
+            "id": 157,
+            "rang": "Unique",
+            "image_url": null
+          }
+        ]
+      },
+      {
+        "type": "sort",
+        "nom": "Hulularvaire",
+        "variantes": [
+          {
+            "id": 626,
+            "rang": "Unique",
+            "image_url": "/images/sorts/626.webp"
+          }
+        ]
+      }
+    ],
+    "bonusSpecial": null,
+    "paliers": [
+      {
+        "items": 1,
+        "texte": "+150 Sagesse, +20 Dommages critiques",
+        "delta": {
+          "statsPlates": {
+            "SAGESSE": 150,
+            "DO_CRIT": 20
+          },
+          "multiplicateurs": []
+        }
+      },
+      {
+        "items": 2,
+        "texte": "+300 Sagesse, +40 Dommages critiques, +1PA",
+        "delta": {
+          "statsPlates": {
+            "SAGESSE": 300,
+            "DO_CRIT": 40,
+            "PA": 1
+          },
+          "multiplicateurs": []
+        }
+      }
+    ],
+    "imageItems": null
+  },
+  {
+    "cle": "de-la-silhouette-d-ombre",
+    "nom": "Ensemble de la Silhouette d’Ombre",
+    "type": "boss",
+    "pieces": [
+      {
+        "type": "breloque",
+        "nom": "Noirceur latente de la Silhouette d'Ombre",
+        "variantes": [
+          {
+            "id": 160,
+            "rang": "Unique",
+            "image_url": null
+          }
+        ]
+      },
+      {
+        "type": "sort",
+        "nom": "Mon ami imaginaire",
+        "variantes": [
+          {
+            "id": 633,
+            "rang": "Unique",
+            "image_url": "/images/sorts/633.webp"
+          }
+        ]
+      }
+    ],
+    "bonusSpecial": null,
+    "paliers": [
+      {
+        "items": 1,
+        "texte": "+200 Points de vie, +20 Dommages critiques",
+        "delta": {
+          "statsPlates": {
+            "VITALITE": 200,
+            "DO_CRIT": 20
+          },
+          "multiplicateurs": []
+        }
+      },
+      {
+        "items": 2,
+        "texte": "+400 Points de vie, +40 Dommages critiques, +1PA",
+        "delta": {
+          "statsPlates": {
+            "VITALITE": 400,
+            "DO_CRIT": 40,
+            "PA": 1
+          },
+          "multiplicateurs": []
+        }
+      }
+    ],
+    "imageItems": null
+  },
+  {
+    "cle": "de-la-grande-pecheresse-ambra",
+    "nom": "Ensemble de la Grande Pécheresse (Ambra)",
+    "type": "boss",
+    "pieces": [
+      {
+        "type": "breloque",
+        "nom": "Charme troublant d'Ambra",
+        "variantes": [
+          {
+            "id": 155,
+            "rang": "Unique",
+            "image_url": null
+          }
+        ]
+      },
+      {
+        "type": "sort",
+        "nom": "Rendez-vous secret",
+        "variantes": [
+          {
+            "id": 629,
+            "rang": "Unique",
+            "image_url": "/images/sorts/629.webp"
+          }
+        ]
+      }
+    ],
+    "bonusSpecial": null,
+    "paliers": [
+      {
+        "items": 1,
+        "texte": "+200 Points de vie, +30 Fuite",
+        "delta": {
+          "statsPlates": {
+            "VITALITE": 200,
+            "FUITE": 30
+          },
+          "multiplicateurs": []
+        }
+      },
+      {
+        "items": 2,
+        "texte": "+400 Points de vie, +60 Fuite, +1PA",
+        "delta": {
+          "statsPlates": {
+            "VITALITE": 400,
+            "FUITE": 60,
+            "PA": 1
+          },
+          "multiplicateurs": []
+        }
+      }
+    ],
+    "imageItems": null
+  },
+  {
+    "cle": "du-kong-de-monte-cristaux",
+    "nom": "Ensemble du Kong de Monte-Cristaux",
+    "type": "boss",
+    "pieces": [
+      {
+        "type": "breloque",
+        "nom": "Agilité du Kong",
+        "variantes": [
+          {
+            "id": 117,
+            "rang": "Unique",
+            "image_url": null
+          }
+        ]
+      },
+      {
+        "type": "sort",
+        "nom": "Kong Smash",
+        "variantes": [
+          {
+            "id": 634,
+            "rang": "Unique",
+            "image_url": "/images/sorts/634.webp"
+          }
+        ]
+      }
+    ],
+    "bonusSpecial": null,
+    "paliers": [
+      {
+        "items": 1,
+        "texte": "+25 Dommages de poussées, +10% de dégâts mêlées",
+        "delta": {
+          "statsPlates": {
+            "DO_POU": 25
+          },
+          "multiplicateurs": [
+            {
+              "type": "finaux_melee",
+              "valeur": 1.1
+            }
+          ]
+        }
+      },
+      {
+        "items": 2,
+        "texte": "+50 Dommages de poussées, +20% de dégâts mêlées, +1PA",
+        "delta": {
+          "statsPlates": {
+            "DO_POU": 50,
+            "PA": 1
+          },
+          "multiplicateurs": [
+            {
+              "type": "finaux_melee",
+              "valeur": 1.2
+            }
+          ]
+        }
+      }
+    ],
+    "imageItems": null
+  }
+]

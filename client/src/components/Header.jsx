@@ -120,6 +120,10 @@ function Header() {
             )}
           </div>
 
+          <Link to="/ensembles" className="entete__ensembles-lien" onClick={fermerMenu}>
+            Liste des ensembles
+          </Link>
+
           {/* Bouton composé : la zone principale mène directement à la liste
               complète (le geste le plus courant), la petite flèche ouvre un
               menu pour sauter droit sur une profondeur précise sans repasser

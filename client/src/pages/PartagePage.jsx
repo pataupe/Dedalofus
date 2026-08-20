@@ -7,6 +7,7 @@ import { couleurRangMaitrise } from '../constants/rangsMaitrise';
 import EmplacementSlot from '../components/EmplacementSlot';
 import StatsPersonnage from '../components/StatsPersonnage';
 import PanopliesPersonnage from '../components/PanopliesPersonnage';
+import EnsemblesPersonnage from '../components/EnsemblesPersonnage';
 import OngletSorts from '../components/OngletSorts';
 import OngletBoosts from '../components/OngletBoosts';
 import Modal from '../components/Modal';
@@ -133,6 +134,7 @@ function PartagePage() {
 
           <StatsPersonnage stats={personnage.stats} parcho={personnage.parcho} lectureSeule />
           <PanopliesPersonnage panoplies={personnage.panoplies} />
+          <EnsemblesPersonnage ensembles={personnage.ensemblesActifs} />
         </>
       )}
 

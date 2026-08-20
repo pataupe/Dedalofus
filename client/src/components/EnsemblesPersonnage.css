@@ -1,0 +1,59 @@
+.ensembles-personnage {
+  width: 100%;
+  max-width: 700px;
+  margin-top: 12px;
+  background: var(--bg-surface);
+  border: 1px solid var(--bordure-or);
+  border-radius: 8px;
+  padding: 12px 16px;
+}
+
+.ensembles-personnage__label {
+  margin: 0 0 8px;
+  font-size: 13px;
+  color: var(--texte-attenue);
+}
+
+.ensembles-personnage__liste {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.ensembles-personnage__ligne {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 4px 10px;
+  width: 100%;
+  text-align: left;
+  background: var(--bg);
+  border: 1px solid var(--bordure);
+  border-radius: 6px;
+  padding: 8px 12px;
+}
+
+.ensembles-personnage__ligne:hover {
+  border-color: var(--or);
+}
+
+.ensembles-personnage__nom {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--texte);
+}
+
+.ensembles-personnage__bonus {
+  font-size: 13px;
+  color: var(--texte-attenue);
+}
+
+.ensembles-personnage__bonus-special {
+  flex-basis: 100%;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--couleur-lumiere);
+}

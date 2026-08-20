@@ -1,3 +1,5 @@
+import { trouverEnsemblesPiece } from '../utils/ensembles';
+import EnsembleLien from './EnsembleLien';
 import './SortCard.css';
 
 // "10 à 10" -> "10" : certains sorts (ex: Escarre face) ont des dégâts fixes,
@@ -183,6 +185,7 @@ function SortCard({ sort, calculs }) {
           {sort.description && <p className="carte-sort__description">{sort.description}</p>}
         </div>
       </div>
+      <EnsembleLien ensembles={trouverEnsemblesPiece('sort', sort.nom)} />
     </div>
   );
 }

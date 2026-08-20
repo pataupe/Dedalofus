@@ -115,6 +115,13 @@ CREATE TABLE Sort (
   -- réutilisés pour stocker les valeurs de PV rendus (même formule ax+b, sans
   -- Puissance, bonus = stat SOIN au lieu de Dommages) — voir calcul.js.
   est_soin TINYINT(1) NOT NULL DEFAULT 0,
+  -- Sorts à "dégâts indirects" (poisons, pièges, glyphes, bombes...) : profitent
+  -- du bonus d'ensemble "% de dommages indirects" (data/sorts-degats-indirects.md).
+  -- est_piege est un sous-ensemble de est_indirect (5 sorts sur les 16) : profite
+  -- en plus de PUISSANCE_PIEGE/DO_PIEGE, qui fonctionnent comme PUISSANCE/DOMMAGES
+  -- mais uniquement pour ces 5 sorts — voir calcul.js.
+  est_indirect TINYINT(1) NOT NULL DEFAULT 0,
+  est_piege TINYINT(1) NOT NULL DEFAULT 0,
   INDEX idx_sort_element (element),
   INDEX idx_sort_rang_evolution (rang_evolution)
 ) ENGINE=InnoDB;

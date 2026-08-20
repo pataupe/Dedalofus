@@ -501,3 +501,103 @@ describe('calculerStatsPersonnage — effets de breloques (onglet Boosts)', () =
     expect(stats.VITALITE_TOTALE).toBe(1050 + 100 + 50);
   });
 });
+
+describe('calculerStatsPersonnage — bonus d\'ensembles classiques/boss (4e argument)', () => {
+  it('les bonus plats d\'ensembles s\'ajoutent comme Parcho/breloques (ex: PV, Tacle)', () => {
+    const stats = calculerStatsPersonnage([], {}, {}, { statsPlates: { VITALITE: 100, TACLE: 20 } });
+    expect(stats.VITALITE_TOTALE).toBe(1050 + 100);
+    expect(stats.TACLE_TOTAL).toBe(20);
+  });
+
+  it('PUISSANCE_PIEGE/DO_PIEGE s\'accumulent comme des stats plates normales', () => {
+    const stats = calculerStatsPersonnage([], {}, {}, { statsPlates: { PUISSANCE_PIEGE: 50, DO_PIEGE: 10 } });
+    expect(stats.PUISSANCE_PIEGE).toBe(50);
+    expect(stats.DO_PIEGE).toBe(10);
+  });
+
+  it('sans 4e argument (rétrocompatible), comportement inchangé', () => {
+    const stats = calculerStatsPersonnage([cube({ VITALITE: 100 })]);
+    expect(stats.VITALITE_TOTALE).toBe(1050 + 100);
+  });
+});
+
+describe('TACLE_TOTAL — bonus plat en plus du palier Agilité', () => {
+  it('Tacle = palier Agilité (1 par tranche de 10) + bonus plat direct', () => {
+    const stats = calculerStatsPersonnage([cube({ AGILITE: 35, TACLE: 20 })]);
+    expect(stats.TACLE_TOTAL).toBe(3 + 20);
+  });
+
+  it('sans bonus Tacle, comportement inchangé (palier Agilité seul)', () => {
+    const stats = calculerStatsPersonnage([cube({ AGILITE: 35 })]);
+    expect(stats.TACLE_TOTAL).toBe(3);
+  });
+});
+
+describe('calculerDegats — sorts pièges (PUISSANCE_PIEGE/DO_PIEGE)', () => {
+  it('PUISSANCE_PIEGE/DO_PIEGE augmentent les dégâts d\'un sort estPiege', () => {
+    const stats = calculerStatsPersonnage([], {}, {}, { statsPlates: { PUISSANCE_PIEGE: 100, DO_PIEGE: 5 } });
+    const resultats = calculerDegats(stats, [
+      { id: 1, degatsMin: 20, degatsMax: 20, element: 'Terre', estPiege: true },
+    ]);
+    // 100 PUISSANCE_PIEGE = double les dégâts (comme 100 stat/Puissance), +5 DO_PIEGE
+    expect(resultats[0].degatsMin).toBe(20 * 2 + 5);
+  });
+
+  it('PUISSANCE_PIEGE/DO_PIEGE n\'affectent pas un sort normal (estPiege absent)', () => {
+    const stats = calculerStatsPersonnage([], {}, {}, { statsPlates: { PUISSANCE_PIEGE: 100, DO_PIEGE: 5 } });
+    const resultats = calculerDegats(stats, [{ id: 1, degatsMin: 20, degatsMax: 20, element: 'Terre' }]);
+    expect(resultats[0].degatsMin).toBe(20);
+  });
+
+  it('PUISSANCE_PIEGE s\'ajoute à la Puissance normale (les deux comptent pour un sort piège)', () => {
+    const stats = calculerStatsPersonnage([cube({ PUISSANCE: 50 })], {}, {}, { statsPlates: { PUISSANCE_PIEGE: 50 } });
+    const resultats = calculerDegats(stats, [
+      { id: 1, degatsMin: 20, degatsMax: 20, element: 'Terre', estPiege: true },
+    ]);
+    // 50 + 50 = 100 stat = double les dégâts
+    expect(resultats[0].degatsMin).toBe(40);
+  });
+});
+
+describe('calculerDegats — multiplicateur "indirects" (% de dommages indirects)', () => {
+  it('un multiplicateur "indirects" s\'applique à un sort estIndirect', () => {
+    const stats = calculerStatsPersonnage([]);
+    const resultats = calculerDegats(
+      stats,
+      [{ id: 1, degatsMin: 20, degatsMax: 20, element: 'Feu', estIndirect: true }],
+      { multiplicateursBreloques: [{ type: 'indirects', valeur: 1.2 }] }
+    );
+    expect(resultats[0].degatsMin).toBe(24);
+  });
+
+  it('un multiplicateur "indirects" ne s\'applique pas à un sort non-indirect', () => {
+    const stats = calculerStatsPersonnage([]);
+    const resultats = calculerDegats(
+      stats,
+      [{ id: 1, degatsMin: 20, degatsMax: 20, element: 'Feu' }],
+      { multiplicateursBreloques: [{ type: 'indirects', valeur: 1.2 }] }
+    );
+    expect(resultats[0].degatsMin).toBe(20);
+  });
+
+  it('les multiplicateurs "indirects" et "finaux" se multiplient entre eux pour un sort indirect', () => {
+    const stats = calculerStatsPersonnage([]);
+    const resultats = calculerDegats(
+      stats,
+      [{ id: 1, degatsMin: 20, degatsMax: 20, element: 'Feu', estIndirect: true }],
+      { multiplicateursBreloques: [{ type: 'indirects', valeur: 1.1 }, { type: 'finaux', valeur: 1.5 }] }
+    );
+    // 20 * 1.5 (finaux) * 1.1 (indirects) = 33
+    expect(resultats[0].degatsMin).toBe(33);
+  });
+
+  it('un sort de soin n\'est jamais affecté par le multiplicateur "indirects"', () => {
+    const stats = calculerStatsPersonnage([]);
+    const resultats = calculerDegats(
+      stats,
+      [{ id: 1, degatsMin: 20, degatsMax: 20, element: 'Feu', estSoin: true, estIndirect: true }],
+      { multiplicateursBreloques: [{ type: 'indirects', valeur: 2 }] }
+    );
+    expect(resultats[0].degatsMin).toBe(20);
+  });
+});

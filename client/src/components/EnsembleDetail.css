@@ -1,0 +1,126 @@
+.detail-ensemble__nom {
+  margin: 0 0 14px;
+  font-size: 20px;
+}
+
+.detail-ensemble__sous-titre {
+  margin: 20px 0 10px;
+  font-size: 16px;
+  color: var(--or);
+}
+
+/* Même convention que les blocs "Mécanique"/"Conseils" de MonstreDetail.css :
+   bordure de couleur à gauche + fond légèrement teinté. */
+.detail-ensemble__bonus-special {
+  margin: 0 0 16px;
+  padding: 10px 12px;
+  border-left: 3px solid var(--couleur-lumiere);
+  background: rgba(232, 197, 71, 0.12);
+  border-radius: 0 6px 6px 0;
+}
+
+.detail-ensemble__bonus-special strong {
+  display: block;
+  margin-bottom: 4px;
+  font-size: 13px;
+  color: var(--couleur-lumiere);
+}
+
+.detail-ensemble__bonus-special p {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.45;
+}
+
+.detail-ensemble__paliers {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 8px;
+}
+
+.detail-ensemble__palier {
+  background: var(--bg-surface);
+  border: 1px solid var(--bordure-or);
+  border-radius: 6px;
+  padding: 8px 12px;
+}
+
+.detail-ensemble__palier-titre {
+  margin: 0 0 2px;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--accent);
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.detail-ensemble__palier-texte {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+.detail-ensemble__pieces {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 8px;
+}
+
+.detail-ensemble__piece {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--bg-surface);
+  border: 2px solid var(--bordure-piece, var(--bordure));
+  border-radius: 6px;
+  padding: 6px 10px;
+}
+
+.detail-ensemble__piece-image {
+  flex: 0 0 auto;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.detail-ensemble__piece-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.detail-ensemble__piece-placeholder {
+  width: 32px;
+  height: 32px;
+  background: var(--panneau-fond-sombre);
+  border-radius: 4px;
+}
+
+.detail-ensemble__piece-texte {
+  min-width: 0;
+}
+
+.detail-ensemble__piece-nom {
+  margin: 0;
+  font-size: 13px;
+  font-weight: 600;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.detail-ensemble__piece-rang {
+  margin: 0;
+  font-size: 11px;
+  color: var(--texte-attenue);
+}
+
+@media (min-width: 600px) {
+  .detail-ensemble__paliers,
+  .detail-ensemble__pieces {
+    grid-template-columns: 1fr 1fr;
+  }
+}

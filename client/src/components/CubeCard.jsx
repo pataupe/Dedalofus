@@ -1,4 +1,6 @@
 import { couleurElement } from '../constants/elements';
+import { trouverEnsemblesCube } from '../utils/ensembles';
+import EnsembleLien from './EnsembleLien';
 import './CubeCard.css';
 
 // Le libellé des stats en % commence déjà par "%" (ex: "% Résistance Feu") :
@@ -37,6 +39,7 @@ function CubeCard({ cube }) {
           ))}
         </ul>
       </div>
+      <EnsembleLien ensembles={trouverEnsemblesCube(cube.element)} />
     </div>
   );
 }

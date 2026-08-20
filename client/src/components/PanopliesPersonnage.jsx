@@ -111,7 +111,7 @@ function PanopliesPersonnage({ panoplies }) {
 
   return (
     <div className="panoplies-personnage">
-      <p className="panoplies-personnage__label">Bonus de panoplie :</p>
+      <p className="panoplies-personnage__label">Bonus d'ensemble :</p>
 
       <div className="panoplies-personnage__selecteur">
         {menuDisponible ? (

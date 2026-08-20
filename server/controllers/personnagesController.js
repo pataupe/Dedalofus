@@ -3,6 +3,10 @@ const pool = require('../config/db');
 const { calculerStatsPersonnage, calculerPanopliesActives, calculerDegats } = require('../logic/calcul');
 const { construireBoost, valeurBoostParDefaut, clamperValeurBoost } = require('../logic/boosts');
 const { calculerEffetsBreloques } = require('../logic/effetsBreloques');
+const { calculerEnsemblesActifs, calculerBonusEnsembles } = require('../logic/ensembles');
+// Généré par server/scripts/generate-ensembles.js (à partir de data/Liste-des-ensembles.md
+// + PANOPLIES pour les ensembles de cubes) — statique, comme les autres imports de ce fichier.
+const ensemblesData = require('../data/ensembles.json');
 
 const NOM_MAX = 100;
 
@@ -214,13 +218,11 @@ async function construireFichePersonnage(personnage) {
   }));
   const effetsBreloques = calculerEffetsBreloques(breloquesEquipeesPourCalcul);
 
-  const statsPersonnage = calculerStatsPersonnage(cubesEquipesPourCalcul, parcho, effetsBreloques);
-  const panoplies = calculerPanopliesActives(cubesEquipesPourCalcul);
-
   const sortsEquipesPourCalcul = sorts
     .filter((s) => s.id)
     .map((s) => ({
       id: s.id,
+      nom: s.nom,
       degatsMin: s.degats_min,
       degatsMax: s.degats_max,
       element: eclaterElement(s.element),
@@ -228,18 +230,31 @@ async function construireFichePersonnage(personnage) {
       degatsCritiqueMax: s.degats_critique_max,
       chanceCritique: s.chance_critique,
       estSoin: Boolean(s.est_soin),
+      estIndirect: Boolean(s.est_indirect),
+      estPiege: Boolean(s.est_piege),
       lignesSupplementaires: (lignesSupParSort[s.id] || []).map((l) => ({
         ...l,
         element: eclaterElement(l.element),
       })),
     }));
+
+  // Ensembles classiques/boss actuellement actifs (>= 1 pièce reconnue équipée parmi
+  // les sorts/breloques ci-dessus) — les ensembles de cubes restent gérés par
+  // calculerPanopliesActives ci-dessous, mécanisme séparé et inchangé.
+  const ensemblesActifs = calculerEnsemblesActifs(sortsEquipesPourCalcul, breloquesEquipeesPourCalcul, ensemblesData);
+  const bonusEnsembles = calculerBonusEnsembles(ensemblesActifs);
+
+  const statsPersonnage = calculerStatsPersonnage(cubesEquipesPourCalcul, parcho, effetsBreloques, bonusEnsembles);
+  const panoplies = calculerPanopliesActives(cubesEquipesPourCalcul);
+
+  const multiplicateursBreloques = [...effetsBreloques.multiplicateurs, ...bonusEnsembles.multiplicateurs];
   const degats = {
     distance: calculerDegats(statsPersonnage, sortsEquipesPourCalcul, {
-      multiplicateursBreloques: effetsBreloques.multiplicateurs,
+      multiplicateursBreloques,
       modeAttaque: 'distance',
     }),
     melee: calculerDegats(statsPersonnage, sortsEquipesPourCalcul, {
-      multiplicateursBreloques: effetsBreloques.multiplicateurs,
+      multiplicateursBreloques,
       modeAttaque: 'melee',
     }),
   };
@@ -250,6 +265,7 @@ async function construireFichePersonnage(personnage) {
     lienPartage: eq.lien_partage,
     stats: statsPersonnage,
     panoplies,
+    ensemblesActifs,
     parcho,
     degats,
     cubes: cubes.map(({ emplacement, id, nom, element, rang, numero, image_url }) => ({
