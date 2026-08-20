@@ -23,20 +23,28 @@
   gap: 6px;
 }
 
-.ensembles-personnage__ligne {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: baseline;
-  gap: 4px 10px;
-  width: 100%;
-  text-align: left;
+.ensembles-personnage__item {
   background: var(--bg);
   border: 1px solid var(--bordure);
   border-radius: 6px;
   padding: 8px 12px;
 }
 
-.ensembles-personnage__ligne:hover {
+.ensembles-personnage__ligne {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 4px 10px;
+  width: 100%;
+  margin: 0 0 6px;
+  padding: 0;
+  border: none;
+  background: none;
+  text-align: left;
+  color: inherit;
+}
+
+.ensembles-personnage__item:hover {
   border-color: var(--or);
 }
 
@@ -44,11 +52,6 @@
   font-size: 14px;
   font-weight: 700;
   color: var(--texte);
-}
-
-.ensembles-personnage__bonus {
-  font-size: 13px;
-  color: var(--texte-attenue);
 }
 
 .ensembles-personnage__bonus-special {

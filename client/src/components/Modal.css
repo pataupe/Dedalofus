@@ -24,25 +24,52 @@
   max-height: 85vh;
   overflow-y: auto;
   overflow-x: hidden;
+  /* Scrollbar fine et discrète plutôt que la barre grise épaisse par défaut du
+     système — Firefox (scrollbar-width/-color) et Chrome/Safari/Edge (::-webkit-*). */
+  scrollbar-width: thin;
+  scrollbar-color: var(--bordure-or) transparent;
 }
 
+.modale__corps::-webkit-scrollbar {
+  width: 6px;
+}
+
+.modale__corps::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.modale__corps::-webkit-scrollbar-thumb {
+  background: var(--bordure-or);
+  border-radius: 10px;
+}
+
+.modale__corps::-webkit-scrollbar-thumb:hover {
+  background: var(--or);
+}
+
+/* Pastille "verre dépoli" en incrustation (pas flottante hors du cadre, pas de
+   bordure/ombre épaisse) : couleur fixe volontairement indépendante du contenu de
+   la modale (qui peut être clair ou sombre selon l'écran), donc toujours lisible.
+   Coins arrondis (pas un cercle) pour rester cohérent avec le reste du site
+   (aucun autre bouton du site n'est circulaire). */
 .modale__fermer {
   position: absolute;
-  top: -14px;
-  right: -14px;
-  width: 32px;
-  height: 32px;
+  top: 10px;
+  right: 10px;
+  width: 30px;
+  height: 30px;
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 0;
-  border-radius: 50%;
-  border: 1px solid var(--bordure-or-forte);
-  background: var(--bg-surface);
-  color: var(--texte);
+  border: none;
+  border-radius: 8px;
+  background: rgba(21, 19, 15, 0.55);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  color: #f4eede;
   cursor: pointer;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.45);
-  transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease, transform 0.15s ease;
+  transition: background-color 0.15s ease, color 0.15s ease;
   z-index: 1;
 }
 
@@ -54,7 +81,5 @@
 .modale__fermer:hover,
 .modale__fermer:focus-visible {
   background: var(--primaire);
-  border-color: var(--primaire);
   color: var(--primaire-texte);
-  transform: rotate(90deg);
 }

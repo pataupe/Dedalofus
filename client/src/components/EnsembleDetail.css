@@ -1,11 +1,12 @@
-/* Fond + couleur explicites (même convention que .detail-monstre/.carte-cube) :
-   sans ça, la modale (transparente par elle-même, Modal.css) affiche ce contenu
-   sans aucun fond propre — invisible sur mobile, et surtout héritait de la couleur
-   de texte de son parent DOM réel (Modal.jsx n'utilise pas de portail), qui varie
-   selon d'où la modale est ouverte : depuis la page catalogue (fond sombre du site,
-   texte clair, ça passait "par hasard") ou depuis une card d'item (fond clair type
-   "panneau", texte sombre) — d'où le texte illisible signalé uniquement dans ce
-   2e cas. Fixé une bonne fois pour toutes ici plutôt que de compter sur l'héritage. */
+/* Tout ce composant reste dans la famille de tons clairs "panneau"
+   (--panneau-fond/--panneau-fond-sombre/--panneau-texte/--panneau-texte-attenue),
+   jamais mélangé avec les tokens du thème sombre (--bg-surface/--texte/--texte-
+   atténué/--accent/--or) : ce mélange est exactement ce qui causait du texte
+   sombre illisible sur fond sombre + de l'or illisible sur fond clair (contrastes
+   réels ~1.5:1, très en dessous du minimum WCAG AA 4.5:1) avant ce correctif —
+   chaque paire a été recalculée : --panneau-texte sur --panneau-fond-sombre
+   ≈ 8:1, --primaire sur --panneau-fond(-sombre) ≈ 5.7-6.5:1, très au-dessus du
+   minimum. Ne jamais réintroduire --bg-surface/--accent/--or/--texte-attenue ici. */
 .detail-ensemble {
   background: var(--panneau-fond);
   color: var(--panneau-texte);
@@ -22,16 +23,19 @@
 .detail-ensemble__sous-titre {
   margin: 20px 0 10px;
   font-size: 16px;
-  color: var(--or);
+  font-weight: 700;
+  color: var(--primaire);
 }
 
-/* Même convention que les blocs "Mécanique"/"Conseils" de MonstreDetail.css :
-   bordure de couleur à gauche + fond légèrement teinté. */
+/* Même convention que les blocs "Mécanique"/"Conseils" de MonstreDetail.css
+   (bordure de couleur à gauche + fond légèrement teinté), mais en version
+   "panneau" : le fond de base est déjà clair, donc la teinte reste très légère
+   et le texte du titre utilise --primaire (pas --couleur-lumiere, illisible ici). */
 .detail-ensemble__bonus-special {
   margin: 0 0 16px;
   padding: 10px 12px;
-  border-left: 3px solid var(--couleur-lumiere);
-  background: rgba(232, 197, 71, 0.12);
+  border-left: 3px solid var(--primaire);
+  background: rgba(90, 61, 107, 0.1);
   border-radius: 0 6px 6px 0;
 }
 
@@ -39,7 +43,7 @@
   display: block;
   margin-bottom: 4px;
   font-size: 13px;
-  color: var(--couleur-lumiere);
+  color: var(--primaire);
 }
 
 .detail-ensemble__bonus-special p {
@@ -55,81 +59,24 @@
 }
 
 .detail-ensemble__palier {
-  background: var(--bg-surface);
+  background: var(--panneau-fond-sombre);
   border: 1px solid var(--bordure-or);
   border-radius: 6px;
   padding: 8px 12px;
 }
 
 .detail-ensemble__palier-titre {
-  margin: 0 0 2px;
+  margin: 0 0 4px;
   font-size: 12px;
   font-weight: 700;
-  color: var(--accent);
+  color: var(--primaire);
   text-transform: uppercase;
   letter-spacing: 0.03em;
 }
 
-/* Une ligne par stat (jamais regroupées), même convention visuelle que
-   .stats-personnage__ligne (StatsPersonnage.css) : icône ronde colorée, valeur
-   alignée à droite sur une largeur fixe (l'icône ne bouge pas selon le nombre de
-   chiffres), libellé atténué. */
-.detail-ensemble__stat-liste {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-}
-
-.detail-ensemble__stat-ligne {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  min-width: 0;
-}
-
-.detail-ensemble__stat-valeur {
-  flex: 0 0 auto;
-  width: 34px;
-  font-weight: 700;
-  font-size: 14px;
-  color: var(--panneau-texte);
-  text-align: right;
-}
-
-.detail-ensemble__stat-icone {
-  flex: 0 0 auto;
-  width: 20px;
-  height: 20px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 11px;
-  line-height: 1;
-  opacity: 0.85;
-}
-
-.detail-ensemble__stat-libelle {
-  flex: 1 1 auto;
-  font-size: 13px;
-  color: var(--panneau-texte-attenue);
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-/* Texte indicatif (résistances distance/mêlée...) ou non reconnu ("Aucun bonus") :
-   pas de stat calculée, donc pas d'icône — même taille/couleur que le libellé
-   pour rester discret à côté des vraies lignes de stat. */
-.detail-ensemble__note {
-  margin: 0;
-  font-size: 13px;
-  font-style: italic;
-  color: var(--panneau-texte-attenue);
-}
+/* Le rendu des lignes de bonus (icône + valeur + libellé) est dans BonusPalier.jsx/
+   .css (partagé avec EnsemblesPersonnage.jsx) — .detail-ensemble__palier ne fait
+   que fournir le fond/texte "panneau" dans lequel il hérite sa couleur. */
 
 .detail-ensemble__pieces {
   display: grid;
@@ -141,10 +88,11 @@
   display: flex;
   align-items: center;
   gap: 10px;
-  background: var(--bg-surface);
-  border: 2px solid var(--bordure-piece, var(--bordure));
+  background: var(--panneau-fond-sombre);
+  border: 2px solid var(--bordure-piece, var(--bordure-or));
   border-radius: 6px;
   padding: 6px 10px;
+  min-width: 0;
 }
 
 .detail-ensemble__piece-image {
@@ -155,6 +103,8 @@
   align-items: center;
   justify-content: center;
   overflow: hidden;
+  border-radius: 4px;
+  background: var(--panneau-fond);
 }
 
 .detail-ensemble__piece-image img {
@@ -166,7 +116,7 @@
 .detail-ensemble__piece-placeholder {
   width: 32px;
   height: 32px;
-  background: var(--panneau-fond-sombre);
+  background: var(--panneau-fond);
   border-radius: 4px;
 }
 
@@ -186,7 +136,7 @@
 .detail-ensemble__piece-rang {
   margin: 0;
   font-size: 11px;
-  color: var(--texte-attenue);
+  color: var(--panneau-texte-attenue);
 }
 
 @media (min-width: 600px) {

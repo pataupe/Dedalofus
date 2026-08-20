@@ -59,11 +59,14 @@
   font-weight: 700;
 }
 
+/* --primaire (pas --accent, ~4.3:1 seulement à cette taille sur --panneau-fond —
+   sous le seuil WCAG AA 4.5:1 pour du texte de cette taille) : --primaire est plus
+   sombre, ~6.5:1, confortablement conforme. */
 .carte-ensemble__nb-pieces {
   margin: 0 0 4px;
   font-size: 12px;
-  font-weight: 600;
-  color: var(--accent);
+  font-weight: 700;
+  color: var(--primaire);
   text-transform: uppercase;
   letter-spacing: 0.02em;
 }

@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import Modal from './Modal';
 import EnsembleDetail from './EnsembleDetail';
+import BonusPalier from './BonusPalier';
 import { obtenirEnsemble } from '../utils/ensembles';
 import './EnsemblesPersonnage.css';
 
@@ -22,7 +23,7 @@ function EnsemblesPersonnage({ ensembles }) {
       <p className="ensembles-personnage__label">Ensembles actifs :</p>
       <ul className="ensembles-personnage__liste">
         {ensembles.map((ensemble) => (
-          <li key={ensemble.cle}>
+          <li key={ensemble.cle} className="ensembles-personnage__item">
             <button
               type="button"
               className="ensembles-personnage__ligne"
@@ -31,11 +32,11 @@ function EnsemblesPersonnage({ ensembles }) {
               <span className="ensembles-personnage__nom">
                 {ensemble.nom} ({ensemble.nombrePieces})
               </span>
-              {ensemble.bonusTexte && <span className="ensembles-personnage__bonus">{ensemble.bonusTexte}</span>}
               {ensemble.bonusSpecial && (
                 <span className="ensembles-personnage__bonus-special">✨ {ensemble.bonusSpecial.texte}</span>
               )}
             </button>
+            <BonusPalier delta={ensemble.delta} />
           </li>
         ))}
       </ul>
