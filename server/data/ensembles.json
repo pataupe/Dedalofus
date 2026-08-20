@@ -126,7 +126,8 @@
         "id": 5,
         "imageUrl": "/images/cubes/5.webp"
       }
-    ]
+    ],
+    "imageComposite": "/images/ensembles/ensemble-de-cubes-air.webp"
   },
   {
     "cle": "ensemble-de-cubes-terre",
@@ -255,7 +256,8 @@
         "id": 155,
         "imageUrl": "/images/cubes/155.webp"
       }
-    ]
+    ],
+    "imageComposite": "/images/ensembles/ensemble-de-cubes-terre.webp"
   },
   {
     "cle": "ensemble-de-cubes-eau",
@@ -384,7 +386,8 @@
         "id": 230,
         "imageUrl": "/images/cubes/230.webp"
       }
-    ]
+    ],
+    "imageComposite": "/images/ensembles/ensemble-de-cubes-eau.webp"
   },
   {
     "cle": "ensemble-de-cubes-feu",
@@ -513,7 +516,8 @@
         "id": 80,
         "imageUrl": "/images/cubes/80.webp"
       }
-    ]
+    ],
+    "imageComposite": "/images/ensembles/ensemble-de-cubes-feu.webp"
   },
   {
     "cle": "ensemble-de-cubes-lumiere",
@@ -651,7 +655,8 @@
         "id": 380,
         "imageUrl": "/images/cubes/380.webp"
       }
-    ]
+    ],
+    "imageComposite": "/images/ensembles/ensemble-de-cubes-lumiere.webp"
   },
   {
     "cle": "de-l-altruiste",
@@ -1006,7 +1011,8 @@
         "id": 97,
         "imageUrl": "/images/sorts/97.webp"
       }
-    ]
+    ],
+    "imageComposite": "/images/ensembles/de-l-altruiste.webp"
   },
   {
     "cle": "de-l-artificer",
@@ -1428,7 +1434,8 @@
         "id": 112,
         "imageUrl": "/images/sorts/112.webp"
       }
-    ]
+    ],
+    "imageComposite": "/images/ensembles/de-l-artificer.webp"
   },
   {
     "cle": "du-bousculeur",
@@ -1957,7 +1964,8 @@
         "id": 88,
         "imageUrl": "/images/sorts/88.webp"
       }
-    ]
+    ],
+    "imageComposite": "/images/ensembles/du-bousculeur.webp"
   },
   {
     "cle": "du-calculateur",
@@ -2334,7 +2342,8 @@
         "id": 593,
         "imageUrl": "/images/sorts/593.webp"
       }
-    ]
+    ],
+    "imageComposite": "/images/ensembles/du-calculateur.webp"
   },
   {
     "cle": "du-chanceux",
@@ -2800,7 +2809,8 @@
         "id": 57,
         "imageUrl": "/images/breloques/57.webp"
       }
-    ]
+    ],
+    "imageComposite": "/images/ensembles/du-chanceux.webp"
   },
   {
     "cle": "de-l-entraveur",
@@ -3124,7 +3134,8 @@
         "id": 69,
         "imageUrl": "/images/breloques/69.webp"
       }
-    ]
+    ],
+    "imageComposite": "/images/ensembles/de-l-entraveur.webp"
   },
   {
     "cle": "du-fourbe",
@@ -3527,7 +3538,8 @@
         "id": 533,
         "imageUrl": "/images/sorts/533.webp"
       }
-    ]
+    ],
+    "imageComposite": "/images/ensembles/du-fourbe.webp"
   },
   {
     "cle": "de-l-invocateur",
@@ -3768,7 +3780,8 @@
         "id": 100,
         "imageUrl": "/images/sorts/100.webp"
       }
-    ]
+    ],
+    "imageComposite": "/images/ensembles/de-l-invocateur.webp"
   },
   {
     "cle": "des-portes-de-la-mort",
@@ -4127,7 +4140,8 @@
         "id": 21,
         "imageUrl": "/images/breloques/21.webp"
       }
-    ]
+    ],
+    "imageComposite": "/images/ensembles/des-portes-de-la-mort.webp"
   },
   {
     "cle": "du-pugiliste",
@@ -4671,7 +4685,8 @@
         "id": 123,
         "imageUrl": "/images/breloques/123.webp"
       }
-    ]
+    ],
+    "imageComposite": "/images/ensembles/du-pugiliste.webp"
   },
   {
     "cle": "du-phossile",
@@ -4742,7 +4757,8 @@
         "id": 624,
         "imageUrl": "/images/sorts/624.webp"
       }
-    ]
+    ],
+    "imageComposite": "/images/ensembles/du-phossile.webp"
   },
   {
     "cle": "du-craqdoa",
@@ -4819,7 +4835,8 @@
         "id": 628,
         "imageUrl": "/images/sorts/628.webp"
       }
-    ]
+    ],
+    "imageComposite": "/images/ensembles/du-craqdoa.webp"
   },
   {
     "cle": "de-corruption",
@@ -4898,7 +4915,8 @@
         "id": 621,
         "imageUrl": "/images/sorts/621.webp"
       }
-    ]
+    ],
+    "imageComposite": "/images/ensembles/de-corruption.webp"
   },
   {
     "cle": "de-toxoliath",
@@ -4977,7 +4995,8 @@
         "id": 632,
         "imageUrl": "/images/sorts/632.webp"
       }
-    ]
+    ],
+    "imageComposite": "/images/ensembles/de-toxoliath.webp"
   },
   {
     "cle": "de-servitude",
@@ -5056,7 +5075,8 @@
         "id": 623,
         "imageUrl": "/images/sorts/623.webp"
       }
-    ]
+    ],
+    "imageComposite": "/images/ensembles/de-servitude.webp"
   },
   {
     "cle": "de-misere",
@@ -5127,7 +5147,8 @@
         "id": 625,
         "imageUrl": "/images/sorts/625.webp"
       }
-    ]
+    ],
+    "imageComposite": "/images/ensembles/de-misere.webp"
   },
   {
     "cle": "du-katragon",
@@ -5198,7 +5219,8 @@
         "id": 627,
         "imageUrl": "/images/sorts/627.webp"
       }
-    ]
+    ],
+    "imageComposite": "/images/ensembles/du-katragon.webp"
   },
   {
     "cle": "de-guerre",
@@ -5277,7 +5299,8 @@
         "id": 630,
         "imageUrl": "/images/sorts/630.webp"
       }
-    ]
+    ],
+    "imageComposite": "/images/ensembles/de-guerre.webp"
   },
   {
     "cle": "de-kabahal",
@@ -5348,7 +5371,8 @@
         "id": 622,
         "imageUrl": "/images/sorts/622.webp"
       }
-    ]
+    ],
+    "imageComposite": "/images/ensembles/de-kabahal.webp"
   },
   {
     "cle": "du-ch-tyx",
@@ -5419,7 +5443,8 @@
         "id": 631,
         "imageUrl": "/images/sorts/631.webp"
       }
-    ]
+    ],
+    "imageComposite": "/images/ensembles/du-ch-tyx.webp"
   },
   {
     "cle": "du-hululord",
@@ -5490,7 +5515,8 @@
         "id": 626,
         "imageUrl": "/images/sorts/626.webp"
       }
-    ]
+    ],
+    "imageComposite": "/images/ensembles/du-hululord.webp"
   },
   {
     "cle": "de-la-silhouette-d-ombre",
@@ -5561,7 +5587,8 @@
         "id": 633,
         "imageUrl": "/images/sorts/633.webp"
       }
-    ]
+    ],
+    "imageComposite": "/images/ensembles/de-la-silhouette-d-ombre.webp"
   },
   {
     "cle": "de-la-grande-pecheresse-ambra",
@@ -5632,7 +5659,8 @@
         "id": 629,
         "imageUrl": "/images/sorts/629.webp"
       }
-    ]
+    ],
+    "imageComposite": "/images/ensembles/de-la-grande-pecheresse-ambra.webp"
   },
   {
     "cle": "du-kong-de-monte-cristaux",
@@ -5711,6 +5739,7 @@
         "id": 634,
         "imageUrl": "/images/sorts/634.webp"
       }
-    ]
+    ],
+    "imageComposite": "/images/ensembles/du-kong-de-monte-cristaux.webp"
   }
 ]

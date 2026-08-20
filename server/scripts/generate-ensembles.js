@@ -18,6 +18,7 @@ const { PANOPLIES } = require('../logic/calcul');
 const CHEMIN_MD = path.join(__dirname, '..', '..', 'data', 'Liste-des-ensembles.md');
 const CHEMIN_JSON_CLIENT = path.join(__dirname, '..', '..', 'client', 'src', 'data', 'ensembles.json');
 const CHEMIN_JSON_SERVER = path.join(__dirname, '..', 'data', 'ensembles.json');
+const DOSSIER_IMAGES_ENSEMBLES = path.join(__dirname, '..', '..', 'client', 'public', 'images', 'ensembles');
 
 // ============================================
 // Utils texte
@@ -608,6 +609,16 @@ async function main() {
   const ensemblesClassiques = construireEnsemblesClassiques(classiquesBruts, index, rapport, rapportImages);
   const ensemblesBoss = construireEnsemblesBoss(bossBruts, index, rapport, rapportImages);
   const tous = [...ensemblesCubes, ...ensemblesClassiques, ...ensemblesBoss];
+
+  // imageComposite : chemin déterministe (/images/ensembles/<cle>.webp, généré par
+  // generate-ensembles-images.js) — recalculé ici à partir du disque à chaque
+  // exécution, pas repris d'un ancien JSON. Sans ça, relancer ce script pour une
+  // simple raison de texte (ex: correction de parserBonusTexte) écrase silencieusement
+  // les 29 vignettes déjà générées, car ce script ne les connaît sinon pas du tout.
+  for (const ensemble of tous) {
+    const chemin = path.join(DOSSIER_IMAGES_ENSEMBLES, `${ensemble.cle}.webp`);
+    ensemble.imageComposite = fs.existsSync(chemin) ? `/images/ensembles/${ensemble.cle}.webp` : null;
+  }
 
   fs.mkdirSync(path.dirname(CHEMIN_JSON_CLIENT), { recursive: true });
   fs.mkdirSync(path.dirname(CHEMIN_JSON_SERVER), { recursive: true });
