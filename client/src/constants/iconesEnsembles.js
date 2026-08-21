@@ -23,6 +23,9 @@ export const ICONES_ENSEMBLES = {
   RES_POU: { libelle: 'Ré Pou.', icone: '🛡️', couleur: 'var(--texte-attenue)' },
   RETRAIT_PA_BRELOQUE: { libelle: 'Ret. PA', icone: '⬇️', couleur: 'var(--couleur-eau)' },
   RETRAIT_PM_BRELOQUE: { libelle: 'Ret. PM', icone: '⬇️', couleur: 'var(--couleur-air)' },
+  ESQUIVE_PA: { libelle: 'Esq. PA', icone: '🛡️', couleur: 'var(--couleur-eau)' },
+  ESQUIVE_PM: { libelle: 'Esq. PM', icone: '🛡️', couleur: 'var(--couleur-air)' },
+  INITIATIVE: { libelle: 'Initiative', icone: '🪽', couleur: 'var(--couleur-chaos)' },
   RES_NEUTRE: { libelle: 'Ré Neutre', icone: '☯️', couleur: 'var(--texte-attenue)' },
   RES_TERRE: { libelle: 'Ré Terre', icone: '🌾', couleur: 'var(--couleur-terre)' },
   RES_FEU: { libelle: 'Ré Feu', icone: '🔥', couleur: 'var(--couleur-feu)' },
@@ -33,6 +36,21 @@ export const ICONES_ENSEMBLES = {
   '%_RES_FEU': { libelle: '% Ré Feu', icone: '🔥', couleur: 'var(--couleur-feu)' },
   '%_RES_EAU': { libelle: '% Ré Eau', icone: '💧', couleur: 'var(--couleur-eau)' },
   '%_RES_AIR': { libelle: '% Ré Air', icone: '🍃', couleur: 'var(--couleur-air)' },
+  // Caractéristiques et dommages bruts de cube : n'apparaissent que dans les
+  // ensembles de cubes (PANOPLIES, cf. calcul.js — jamais dans les ensembles
+  // classiques/boss, dont le texte source ne les mentionne pas). Libellés/icônes
+  // repris de StatsPersonnage.jsx (FORCE/INTELLIGENCE/CHANCE/AGILITE) et de
+  // PanopliesPersonnage.jsx (DOMMAGES/DO_*, même convention que "Do Air" etc.
+  // affiché ailleurs pour les stats dérivées équivalentes).
+  FORCE: { libelle: 'Force', icone: '🌾', couleur: 'var(--couleur-terre)' },
+  INTELLIGENCE: { libelle: 'Intel.', icone: '🔥', couleur: 'var(--couleur-feu)' },
+  CHANCE: { libelle: 'Chance', icone: '💧', couleur: 'var(--couleur-eau)' },
+  AGILITE: { libelle: 'Agilité', icone: '🍃', couleur: 'var(--couleur-air)' },
+  DOMMAGES: { libelle: 'Dommages', icone: '✨', couleur: 'var(--couleur-lumiere)' },
+  DO_TERRE: { libelle: 'Do Terre', icone: '🌾', couleur: 'var(--couleur-terre)' },
+  DO_FEU: { libelle: 'Do Feu', icone: '🔥', couleur: 'var(--couleur-feu)' },
+  DO_EAU: { libelle: 'Do Eau', icone: '💧', couleur: 'var(--couleur-eau)' },
+  DO_AIR: { libelle: 'Do Air', icone: '🍃', couleur: 'var(--couleur-air)' },
 };
 
 // Multiplicateurs de dégâts (pas des stats plates accumulées) : pas de précédent

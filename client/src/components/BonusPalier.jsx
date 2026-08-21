@@ -38,21 +38,23 @@ function BonusPalier({ delta }) {
   return (
     <ul className="bonus-palier__liste">
       {statsEntries.map(([cle, valeur]) => {
-        const config = ICONES_ENSEMBLES[cle];
-        if (!config) return null;
+        // Repli générique (🔹, libellé = clé brute) si jamais une stat de PANOPLIES/
+        // parserBonusTexte n'a pas encore d'entrée ici — mieux vaut un rendu moche
+        // et visible qu'une ligne qui disparaît sans laisser de trace (bug vécu :
+        // AGILITE/DO_AIR/DOMMAGES manquants faisaient disparaître 3 stats sur 5 des
+        // ensembles de cubes élémentaires, sans aucune erreur ni log).
+        const config = ICONES_ENSEMBLES[cle] || { icone: '🔹', couleur: 'var(--texte-attenue)', libelle: cle };
         return <LigneBonus key={cle} icone={config.icone} couleur={config.couleur} libelle={config.libelle} valeur={valeur} />;
       })}
       {multiplicateurs.map((mult, i) => {
-        const config = ICONES_MULTIPLICATEURS[mult.type];
-        if (!config) return null;
+        const config = ICONES_MULTIPLICATEURS[mult.type] || { icone: '🔹', couleur: 'var(--texte-attenue)', libelle: mult.type };
         const pourcent = Math.round((mult.valeur - 1) * 100);
         return (
           <LigneBonus key={`m-${i}`} icone={config.icone} couleur={config.couleur} libelle={config.libelle} valeur={`${pourcent}%`} />
         );
       })}
       {indicatifs.map((ind, i) => {
-        const config = ICONES_INDICATIFS[ind.type];
-        if (!config) return null;
+        const config = ICONES_INDICATIFS[ind.type] || { icone: '🔹', couleur: 'var(--texte-attenue)', libelle: ind.type };
         return <LigneBonus key={`i-${i}`} icone={config.icone} couleur={config.couleur} libelle={config.libelle} valeur={`${ind.valeur}%`} />;
       })}
       {notes.map((note, i) => (
