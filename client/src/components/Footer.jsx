@@ -35,7 +35,7 @@ function Footer() {
           contenus appartenant à Ankama Games.
         </p>
          <p className="pied-de-page__disclaimer">
-          Plusieurs données proviennent du site <Link to='https://papycha.fr'>papycha.fr</Link>.
+          Plusieurs données proviennent du site <Link to='https://papycha.fr' target="_blank" rel="noopener">papycha.fr</Link>.
         </p>
         <div className="pied-de-page__credits">
           <p className="pied-de-page__mention">© {new Date().getFullYear()} Dédalofus</p>
