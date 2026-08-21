@@ -73,7 +73,7 @@ const G = 10;
 // Léger espace entre la ligne cubes/sorts/breuvages et la ligne des 7 breloques
 // (distinct de G, le gap horizontal entre icônes) — demandé explicitement plus
 // petit qu'un simple `gap` uniforme sur tout le conteneur.
-const GAP_VERTICAL_BRELOQUES = 6;
+const GAP_VERTICAL_BRELOQUES = 25;
 
 function creerSlot(item, images) {
   const img64 = item?.image_url ? (images.get(item.image_url) || null) : null;
