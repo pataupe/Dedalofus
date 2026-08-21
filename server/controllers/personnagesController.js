@@ -78,6 +78,9 @@ async function creerPersonnage(req, res) {
   await pool.query('INSERT INTO EquipementBreloque (equipement_id, emplacement, breloque_id) VALUES ?', [
     lignesVides(equipement.insertId, 7),
   ]);
+  await pool.query('INSERT INTO EquipementBreuvage (equipement_id, emplacement, breuvage_id) VALUES ?', [
+    lignesVides(equipement.insertId, 3),
+  ]);
 
   res.status(201).json({ id: resultat.insertId, nom });
 }
@@ -140,6 +143,16 @@ async function construireFichePersonnage(personnage) {
      FROM EquipementBreloque eb
      JOIN Equipement e ON e.id = eb.equipement_id
      LEFT JOIN Breloque b ON b.id = eb.breloque_id
+     WHERE e.personnage_id = ?
+     ORDER BY eb.emplacement`,
+    [personnage.id]
+  );
+
+  const [breuvages] = await pool.query(
+    `SELECT eb.emplacement, b.id, b.nom, b.rang, b.cle_stat, b.valeur_stat, b.image_url
+     FROM EquipementBreuvage eb
+     JOIN Equipement e ON e.id = eb.equipement_id
+     LEFT JOIN Breuvage b ON b.id = eb.breuvage_id
      WHERE e.personnage_id = ?
      ORDER BY eb.emplacement`,
     [personnage.id]
@@ -244,7 +257,16 @@ async function construireFichePersonnage(personnage) {
   const ensemblesActifs = calculerEnsemblesActifs(sortsEquipesPourCalcul, breloquesEquipeesPourCalcul, ensemblesData);
   const bonusEnsembles = calculerBonusEnsembles(ensemblesActifs);
 
-  const statsPersonnage = calculerStatsPersonnage(cubesEquipesPourCalcul, parcho, effetsBreloques, bonusEnsembles);
+  // Chaque breuvage équipé ne boostant qu'une seule stat fixe (pas de logique
+  // conditionnelle comme les breloques), l'agrégation se fait directement ici plutôt
+  // que dans un module `logic/` dédié — même traitement additif que Parcho ensuite.
+  const bonusBreuvages = {};
+  for (const b of breuvages) {
+    if (!b.id) continue;
+    bonusBreuvages[b.cle_stat] = (bonusBreuvages[b.cle_stat] || 0) + b.valeur_stat;
+  }
+
+  const statsPersonnage = calculerStatsPersonnage(cubesEquipesPourCalcul, parcho, effetsBreloques, bonusEnsembles, bonusBreuvages);
   const panoplies = calculerPanopliesActives(cubesEquipesPourCalcul);
 
   const multiplicateursBreloques = [...effetsBreloques.multiplicateurs, ...bonusEnsembles.multiplicateurs];
@@ -291,6 +313,10 @@ async function construireFichePersonnage(personnage) {
       emplacement,
       breloque: id ? { id, nom, rang, effet, image_url, boost: construireBoost(boostColonnes, boost_valeur) } : null,
     })),
+    breuvages: breuvages.map(({ emplacement, id, nom, rang, cle_stat, valeur_stat, image_url }) => ({
+      emplacement,
+      breuvage: id ? { id, nom, rang, cle_stat, valeur_stat, image_url } : null,
+    })),
   };
 }
 
@@ -335,7 +361,7 @@ async function obtenirPersonnagePartage(req, res) {
   res.json(await construireFichePersonnage(personnage));
 }
 
-const EMPLACEMENTS_MAX = { cubes: 9, sorts: 9, breloques: 7 };
+const EMPLACEMENTS_MAX = { cubes: 9, sorts: 9, breloques: 7, breuvages: 3 };
 
 // PUT /api/personnages/:id/cubes/:emplacement
 // Un même cube (élément + numéro, ex: "Air 4") ne peut être équipé qu'une fois,
@@ -463,10 +489,13 @@ async function trouverEmplacementDoublonParNom(personnageId, table, colonne, ref
   return doublons[0]?.emplacement || null;
 }
 
+// Breuvage n'atteint jamais cette branche en pratique (les 30 lignes ont chacune un
+// nom distinct, ex: "Petit Breuvage Stimulant" != "Breuvage Stimulant") — gardé pour
+// que trouverEmplacementDoublonParNom/equiper(Auto) restent génériques sur les 3 types.
 function messageDoublon(refTable, emplacement) {
-  return refTable === 'Sort'
-    ? `Ce sort est déjà équipé (rang différent inclus) à l'emplacement ${emplacement}.`
-    : `Cette breloque est déjà équipée (rang différent inclus) à l'emplacement ${emplacement}.`;
+  if (refTable === 'Sort') return `Ce sort est déjà équipé (rang différent inclus) à l'emplacement ${emplacement}.`;
+  if (refTable === 'Breuvage') return `Ce breuvage est déjà équipé à l'emplacement ${emplacement}.`;
+  return `Cette breloque est déjà équipée (rang différent inclus) à l'emplacement ${emplacement}.`;
 }
 
 // Valeur initiale de EquipementBreloque.boost_valeur au moment d'équiper une
@@ -532,6 +561,16 @@ async function equiperBreloqueAuto(req, res) {
   });
 }
 
+async function equiperBreuvageAuto(req, res) {
+  await equiperAuto(req, res, {
+    table: 'EquipementBreuvage',
+    colonne: 'breuvage_id',
+    type: 'breuvages',
+    refTable: 'Breuvage',
+    valeur: req.body.breuvageId,
+  });
+}
+
 // PUT /api/personnages/:id/sorts/:emplacement
 async function equiperSort(req, res) {
   await equiper(req, res, {
@@ -551,6 +590,17 @@ async function equiperBreloque(req, res) {
     type: 'breloques',
     refTable: 'Breloque',
     valeur: req.body.breloqueId,
+  });
+}
+
+// PUT /api/personnages/:id/breuvages/:emplacement
+async function equiperBreuvage(req, res) {
+  await equiper(req, res, {
+    table: 'EquipementBreuvage',
+    colonne: 'breuvage_id',
+    type: 'breuvages',
+    refTable: 'Breuvage',
+    valeur: req.body.breuvageId,
   });
 }
 
@@ -664,6 +714,10 @@ async function desequiperTout(req, res) {
     'UPDATE EquipementBreloque eb JOIN Equipement e ON e.id = eb.equipement_id SET eb.breloque_id = NULL, eb.boost_valeur = NULL WHERE e.personnage_id = ?',
     [personnage.id]
   );
+  await pool.query(
+    'UPDATE EquipementBreuvage eb JOIN Equipement e ON e.id = eb.equipement_id SET eb.breuvage_id = NULL WHERE e.personnage_id = ?',
+    [personnage.id]
+  );
   await marquerModifie(personnage.id);
 
   res.json(await construireFichePersonnage(personnage));
@@ -724,9 +778,11 @@ module.exports = {
   equiperCube,
   equiperSort,
   equiperBreloque,
+  equiperBreuvage,
   equiperCubeAuto,
   equiperSortAuto,
   equiperBreloqueAuto,
+  equiperBreuvageAuto,
   sauvegarderParcho,
   sauvegarderBoostBreloque,
   renommerPersonnage,

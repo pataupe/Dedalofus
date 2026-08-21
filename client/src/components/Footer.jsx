@@ -12,6 +12,7 @@ function Footer() {
           <Link to="/cubes">Cubes</Link>
           <Link to="/breloques">Breloques</Link>
           <Link to="/sorts">Sorts</Link>
+          <Link to="/breuvages">Breuvages</Link>
         </div>
 
         <div className="pied-de-page__colonne">

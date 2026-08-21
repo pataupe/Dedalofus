@@ -70,6 +70,10 @@ const BORDURE_PLACEHOLDER = 'rgba(212, 175, 55, 0.6)';
 
 const T = 85;
 const G = 10;
+// Léger espace entre la ligne cubes/sorts/breuvages et la ligne des 7 breloques
+// (distinct de G, le gap horizontal entre icônes) — demandé explicitement plus
+// petit qu'un simple `gap` uniforme sur tout le conteneur.
+const GAP_VERTICAL_BRELOQUES = 6;
 
 function creerSlot(item, images) {
   const img64 = item?.image_url ? (images.get(item.image_url) || null) : null;
@@ -138,7 +142,7 @@ router.get('/:lienPartage{/:version}', async (req, res) => {
     );
     if (!perso) return res.status(404).send('Introuvable');
 
-    const [[cubesRows], [sortsRows], [breloquesRows]] = await Promise.all([
+    const [[cubesRows], [sortsRows], [breloquesRows], [breuvagesRows]] = await Promise.all([
       db.query(`SELECT ec.emplacement, ec.cube_id, c.image_url
         FROM EquipementCube ec JOIN Equipement e ON e.id = ec.equipement_id
         LEFT JOIN \`Cube\` c ON c.id = ec.cube_id
@@ -151,18 +155,22 @@ router.get('/:lienPartage{/:version}', async (req, res) => {
         FROM EquipementBreloque eb JOIN Equipement e ON e.id = eb.equipement_id
         LEFT JOIN Breloque b ON b.id = eb.breloque_id
         WHERE e.lien_partage = ? ORDER BY eb.emplacement`, [lienPartage]),
+      db.query(`SELECT eb.emplacement, eb.breuvage_id, b.image_url
+        FROM EquipementBreuvage eb JOIN Equipement e ON e.id = eb.equipement_id
+        LEFT JOIN Breuvage b ON b.id = eb.breuvage_id
+        WHERE e.lien_partage = ? ORDER BY eb.emplacement`, [lienPartage]),
     ]);
 
-    // bordure = 'transparent' pour les cubes (plus de bordure de rang depuis les vraies
-    // images, cf. EmplacementSlot--sans-bordure) ; sorts/breloques gardent leur bordure
-    // colorée par rang de maîtrise, comme sur la fiche perso.
+    // bordure = 'transparent' pour les cubes et les breuvages (pas de bordure de rang,
+    // les vraies images suffisent — cf. EmplacementSlot--sans-bordure) ; sorts/breloques
+    // gardent leur bordure colorée par rang de maîtrise, comme sur la fiche perso.
     const cubes     = cubesRows.map(r => r.cube_id ? { image_url: r.image_url, bordure: 'transparent' } : null);
     const sorts     = sortsRows.map(r => r.sort_id ? { image_url: r.image_url, bordure: couleurRangMaitrise(r.rang_evolution) } : null);
     const breloques = breloquesRows.map(r => r.breloque_id ? { image_url: r.image_url, bordure: couleurRangMaitrise(r.rang) } : null);
-    const breuvages = [null, null, null];
+    const breuvages = breuvagesRows.map(r => r.breuvage_id ? { image_url: r.image_url, bordure: 'transparent' } : null);
 
     // Chargement des images (webp → png) et de la police en parallèle
-    const toutesUrls = [...cubes, ...sorts, ...breloques]
+    const toutesUrls = [...cubes, ...sorts, ...breloques, ...breuvages]
       .filter(Boolean).map(i => i.image_url);
     const [images, fontData] = await Promise.all([
       chargerImagesPng(toutesUrls),
@@ -198,7 +206,7 @@ router.get('/:lienPartage{/:version}', async (req, res) => {
             props: {
               style: {
                 flex: 1, display: 'flex', flexDirection: 'column',
-                alignItems: 'center', justifyContent: 'center', gap: 14,
+                alignItems: 'center', justifyContent: 'center',
               },
               children: [
                 // Ligne cubes | sorts | breuvages
@@ -213,21 +221,19 @@ router.get('/:lienPartage{/:version}', async (req, res) => {
                         type: 'div',
                         props: {
                           style: { display: 'flex', flexDirection: 'column', gap: G },
-                          children: breuvages.map(() => creerSlot(null, images))
+                          children: breuvages.map(b => creerSlot(b, images))
                         }
                       }
                     ]
                   }
                 },
-                // Breloques 4 + 3
+                // Breloques : les 7 sur une seule ligne (léger gap vertical avec la
+                // ligne du dessus, distinct du gap horizontal G entre les icônes).
                 {
                   type: 'div',
                   props: {
-                    style: { display: 'flex', flexDirection: 'column', gap: G, alignItems: 'center' },
-                    children: [
-                      { type: 'div', props: { style: { display: 'flex', gap: G }, children: breloques.slice(0, 4).map(b => creerSlot(b, images)) } },
-                      { type: 'div', props: { style: { display: 'flex', gap: G }, children: breloques.slice(4).map(b => creerSlot(b, images)) } },
-                    ]
+                    style: { display: 'flex', gap: G, marginTop: GAP_VERTICAL_BRELOQUES },
+                    children: breloques.map(b => creerSlot(b, images))
                   }
                 }
               ]

@@ -6,6 +6,7 @@ import CubeListPage from './pages/CubeListPage';
 import CubeDetailPage from './pages/CubeDetailPage';
 import BreloqueListPage from './pages/BreloqueListPage';
 import SortListPage from './pages/SortListPage';
+import BreuvageListPage from './pages/BreuvageListPage';
 import EnsembleListPage from './pages/EnsembleListPage';
 import MonstreListPage from './pages/MonstreListPage';
 import MonstrePartagePage from './pages/MonstrePartagePage';
@@ -28,6 +29,7 @@ function App() {
           <Route path="/cubes/:id" element={<CubeDetailPage />} />
           <Route path="/breloques" element={<BreloqueListPage />} />
           <Route path="/sorts" element={<SortListPage />} />
+          <Route path="/breuvages" element={<BreuvageListPage />} />
           <Route path="/ensembles" element={<EnsembleListPage />} />
           <Route path="/monstres" element={<MonstreListPage />} />
           <Route path="/monstre/:slug" element={<MonstrePartagePage />} />

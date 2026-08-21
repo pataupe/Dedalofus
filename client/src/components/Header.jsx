@@ -119,7 +119,9 @@ function Header() {
                   </Link>
                 </li>
                 <li>
-                  <span className="entete__items-bientot">Breuvages (bientôt)</span>
+                  <Link to="/breuvages" onClick={fermerMenu}>
+                    Breuvages
+                  </Link>
                 </li>
               </ul>
             )}

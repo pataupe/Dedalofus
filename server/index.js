@@ -5,6 +5,7 @@ const cors = require('cors');
 const cubesRouter = require('./routes/cubes');
 const breloquesRouter = require('./routes/breloques');
 const sortsRouter = require('./routes/sorts');
+const breuvagesRouter = require('./routes/breuvages');
 const authRouter = require('./routes/auth');
 const personnagesRouter = require('./routes/personnages');
 const partageRouter = require('./routes/partage');
@@ -23,6 +24,7 @@ app.get('/api/ping', (req, res) => {
 app.use('/api/cubes', cubesRouter);
 app.use('/api/breloques', breloquesRouter);
 app.use('/api/sorts', sortsRouter);
+app.use('/api/breuvages', breuvagesRouter);
 app.use('/api/auth', authRouter);
 app.use('/api/personnages', personnagesRouter);
 app.use('/api/partage', partageRouter);

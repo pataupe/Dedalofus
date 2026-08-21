@@ -47,6 +47,13 @@ export function equiperBreloque(token, personnageId, emplacement, breloqueId) {
   });
 }
 
+export function equiperBreuvage(token, personnageId, emplacement, breuvageId) {
+  return appelPersonnages(`/${personnageId}/breuvages/${emplacement}`, token, {
+    method: 'PUT',
+    body: JSON.stringify({ breuvageId }),
+  });
+}
+
 // Équipe dans le premier emplacement libre du personnage (pas d'emplacement précis) :
 // utilisé par le bouton "Équiper" des pages liste, pour pouvoir équiper plusieurs
 // items d'affilée sans revenir sur la fiche perso entre chaque clic.
@@ -62,6 +69,13 @@ export function equiperBreloqueAuto(token, personnageId, breloqueId) {
   return appelPersonnages(`/${personnageId}/breloques`, token, {
     method: 'PUT',
     body: JSON.stringify({ breloqueId }),
+  });
+}
+
+export function equiperBreuvageAuto(token, personnageId, breuvageId) {
+  return appelPersonnages(`/${personnageId}/breuvages`, token, {
+    method: 'PUT',
+    body: JSON.stringify({ breuvageId }),
   });
 }
 

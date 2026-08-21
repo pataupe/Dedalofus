@@ -14,9 +14,8 @@ import Modal from '../components/Modal';
 import CubeCard from '../components/CubeCard';
 import SortCard from '../components/SortCard';
 import BreloqueCard from '../components/BreloqueCard';
+import BreuvageCard from '../components/BreuvageCard';
 import './PartagePage.css';
-
-const BREUVAGES_VIDES = [1, 2, 3];
 
 // Page publique (sans compte) affichant un stuff partagé via son lien unique,
 // en lecture seule : même grille + stats + panoplies que PersonnageDetailPage,
@@ -99,8 +98,16 @@ function PartagePage() {
               </div>
 
               <div className="page-partage__breuvages">
-                {BREUVAGES_VIDES.map((n) => (
-                  <EmplacementSlot key={n} vide />
+                {personnage.breuvages.map(({ emplacement, breuvage }) => (
+                  <EmplacementSlot
+                    key={emplacement}
+                    vide={!breuvage}
+                    libelle={breuvage?.nom}
+                    image={breuvage?.image_url}
+                    sansBordure
+                    imagePetite
+                    onClick={breuvage ? () => setModale({ type: 'breuvage', data: breuvage }) : undefined}
+                  />
                 ))}
               </div>
 
@@ -143,6 +150,7 @@ function PartagePage() {
           {modale.type === 'cube' && <CubeCard cube={modale.data} />}
           {modale.type === 'sort' && <SortCard sort={modale.data} />}
           {modale.type === 'breloque' && <BreloqueCard breloque={modale.data} />}
+          {modale.type === 'breuvage' && <BreuvageCard breuvage={modale.data} />}
         </Modal>
       )}
     </div>

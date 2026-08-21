@@ -146,6 +146,24 @@ CREATE TABLE SortDegatsSup (
 ) ENGINE=InnoDB;
 
 -- ============================================
+-- Référentiel : Breuvages
+-- ============================================
+
+-- 10 familles de breuvage (chacune boostant une seule stat), 3 rangs chacune
+-- (Petit/Normal/Grand) : 30 lignes au total, contrairement à Cube/Sort qui ont
+-- une table séparée pour leurs stats (nombre variable) — ici toujours une
+-- seule stat par ligne, pas besoin d'une table à part.
+CREATE TABLE Breuvage (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  nom VARCHAR(100) NOT NULL,
+  rang VARCHAR(20) NOT NULL,       -- 'Petit', 'Normal', 'Grand'
+  cle_stat VARCHAR(50) NOT NULL,   -- ex: INTELLIGENCE, DO_CRIT, TACLE... (mêmes clés que StatCube)
+  valeur_stat INT NOT NULL,
+  image_url VARCHAR(255) NULL,
+  INDEX idx_breuvage_rang (rang)
+) ENGINE=InnoDB;
+
+-- ============================================
 -- Équipement (le "stuff" d'un personnage)
 -- ============================================
 
@@ -199,4 +217,13 @@ CREATE TABLE EquipementSort (
   PRIMARY KEY (equipement_id, emplacement),
   FOREIGN KEY (equipement_id) REFERENCES Equipement(id) ON DELETE CASCADE,
   FOREIGN KEY (sort_id) REFERENCES Sort(id) ON DELETE SET NULL
+) ENGINE=InnoDB;
+
+CREATE TABLE EquipementBreuvage (
+  equipement_id INT NOT NULL,
+  emplacement TINYINT NOT NULL,   -- 1 à 3
+  breuvage_id INT NULL,
+  PRIMARY KEY (equipement_id, emplacement),
+  FOREIGN KEY (equipement_id) REFERENCES Equipement(id) ON DELETE CASCADE,
+  FOREIGN KEY (breuvage_id) REFERENCES Breuvage(id) ON DELETE SET NULL
 ) ENGINE=InnoDB;

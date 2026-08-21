@@ -40,6 +40,13 @@ a.emplacement-slot--vide:hover {
   transform: scale(1.35);
 }
 
+/* Breuvages : images détourées au plus près du sujet (pas de marge noire
+   intégrée à réduire comme sorts/breloques) — le zoom par défaut ci-dessus les
+   ferait déborder de la case, une échelle réduite laisse de la place autour. */
+.emplacement-slot__image.emplacement-slot__image--petite {
+  transform: scale(1.12);
+}
+
 .emplacement-slot--rempli {
   /* Fond sombre (pas le panneau beige) : les images ont un fond noir plein
      baké dedans (pas de transparence) — un fond clair créerait un anneau

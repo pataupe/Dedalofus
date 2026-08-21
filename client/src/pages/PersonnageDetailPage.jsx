@@ -5,6 +5,7 @@ import {
   equiperCube,
   equiperSort,
   equiperBreloque,
+  equiperBreuvage,
   renommerPersonnage,
   desequiperTout,
   supprimerPersonnage,
@@ -23,14 +24,14 @@ import Modal from '../components/Modal';
 import CubeCard from '../components/CubeCard';
 import SortCard from '../components/SortCard';
 import BreloqueCard from '../components/BreloqueCard';
+import BreuvageCard from '../components/BreuvageCard';
 import './PersonnageDetailPage.css';
 
-const BREUVAGES_VIDES = [1, 2, 3];
-
 // Une fonction d'équipement par type + la clé correspondante dans la réponse de
-// GET /api/personnages/:id (cubes[].cube, sorts[].sort, breloques[].breloque).
-const EQUIPER_PAR_TYPE = { cube: equiperCube, sort: equiperSort, breloque: equiperBreloque };
-const CHEMIN_PAR_TYPE = { cube: 'cubes', sort: 'sorts', breloque: 'breloques' };
+// GET /api/personnages/:id (cubes[].cube, sorts[].sort, breloques[].breloque,
+// breuvages[].breuvage).
+const EQUIPER_PAR_TYPE = { cube: equiperCube, sort: equiperSort, breloque: equiperBreloque, breuvage: equiperBreuvage };
+const CHEMIN_PAR_TYPE = { cube: 'cubes', sort: 'sorts', breloque: 'breloques', breuvage: 'breuvages' };
 
 function PersonnageDetailPage() {
   const { id } = useParams();
@@ -279,8 +280,18 @@ function PersonnageDetailPage() {
               </div>
 
               <div className="page-personnage-detail__breuvages">
-                {BREUVAGES_VIDES.map((n) => (
-                  <EmplacementSlot key={n} vide />
+                {personnage.breuvages.map(({ emplacement, breuvage }) => (
+                  <EmplacementSlot
+                    key={emplacement}
+                    vide={!breuvage}
+                    libelle={breuvage?.nom}
+                    image={breuvage?.image_url}
+                    sansBordure
+                    imagePetite
+                    lien={`/breuvages?perso=${id}`}
+                    onClick={breuvage ? () => setModale({ type: 'breuvage', data: breuvage, emplacement }) : undefined}
+                    onDesequiper={breuvage ? () => desequiper('breuvage', emplacement) : undefined}
+                  />
                 ))}
               </div>
 
@@ -333,6 +344,7 @@ function PersonnageDetailPage() {
           {modale.type === 'cube' && <CubeCard cube={modale.data} />}
           {modale.type === 'sort' && <SortCard sort={modale.data} />}
           {modale.type === 'breloque' && <BreloqueCard breloque={modale.data} />}
+          {modale.type === 'breuvage' && <BreuvageCard breuvage={modale.data} />}
           <Link
             to={`/${CHEMIN_PAR_TYPE[modale.type]}?perso=${id}&emplacement=${modale.emplacement}`}
             className="page-personnage-detail__bouton-remplacer"
@@ -351,7 +363,7 @@ function PersonnageDetailPage() {
 
       {desequipementOuvert && (
         <Modal onClose={() => setDesequipementOuvert(false)}>
-          <p>Déséquiper tous les cubes, sorts et breloques de ce personnage ?</p>
+          <p>Déséquiper tous les cubes, sorts, breloques et breuvages de ce personnage ?</p>
           <button
             type="button"
             className="page-personnage-detail__bouton-desequiper"

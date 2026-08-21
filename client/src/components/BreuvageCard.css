@@ -1,0 +1,56 @@
+.carte-breuvage {
+  background: var(--panneau-fond);
+  color: var(--panneau-texte);
+  border: 1px solid var(--bordure-or-forte);
+  border-radius: 10px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  box-shadow: var(--ombre-panneau);
+  flex: 1;
+}
+
+.carte-breuvage__entete {
+  background: var(--primaire);
+  color: var(--primaire-texte);
+  font-weight: 600;
+  padding: 8px 12px;
+  font-size: 14px;
+}
+
+.carte-breuvage__corps {
+  display: flex;
+  align-items: center;
+  padding: 12px;
+  gap: 12px;
+}
+
+.carte-breuvage__image {
+  flex: 0 0 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  border-radius: 8px;
+}
+
+.carte-breuvage__image img {
+  max-width: 100%;
+  max-height: 100%;
+}
+
+.carte-breuvage__placeholder {
+  width: 40px;
+  height: 40px;
+  background: var(--panneau-fond-sombre);
+  clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+}
+
+.carte-breuvage__stat {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--panneau-texte);
+  flex: 1;
+}

@@ -1,0 +1,69 @@
+.page-breuvages {
+  padding: 24px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.page-breuvages__filtres {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.page-breuvages__filtres input {
+  padding: 10px 14px;
+  border-radius: 6px;
+  border: 1px solid var(--bordure-or-forte);
+  background: var(--bg-surface);
+  color: var(--texte);
+  font-size: 15px;
+  max-width: 320px;
+}
+
+.page-breuvages__rangs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.page-breuvages__rangs button {
+  padding: 6px 14px;
+  border-radius: 20px;
+  border: 2px solid var(--bordure);
+  background: transparent;
+  color: var(--texte);
+  font-size: 14px;
+}
+
+.page-breuvages__rangs button.actif {
+  background: var(--texte-attenue);
+  color: #1a1a1a;
+  font-weight: 600;
+}
+
+.page-breuvages__erreur {
+  color: var(--couleur-feu);
+}
+
+.page-breuvages__grille {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.page-breuvages__carte {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.page-breuvages__bouton-equiper {
+  padding: 8px;
+  border-radius: 6px;
+  border: none;
+  background: var(--primaire);
+  color: var(--primaire-texte);
+  font-weight: 600;
+}

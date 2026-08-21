@@ -167,14 +167,18 @@ function calculerBonusPanoplies(cubesEquipes) {
  *   `{ statsPlates }`. Bonus des ensembles classiques/boss actuellement actifs (nombre de
  *   pièces équipées >= seuil d'un palier), fusionné comme Parcho/breloques — les ensembles
  *   de cubes restent gérés par `calculerBonusPanoplies` ci-dessus, inchangé.
+ * @param {Object} [bonusBreuvages] Bonus des 3 breuvages équipés (`{ cle_stat: valeur }`,
+ *   déjà agrégé par l'appelant) — chaque breuvage ne boostant qu'une seule stat fixe, pas
+ *   besoin d'une fonction `calculerXxx` dédiée comme pour panoplies/breloques/ensembles.
+ *   Même traitement additif que les autres bonus, avant toute dérivation.
  * @returns {Object} Stats brutes sommées par clé (cubes + bonus de panoplie + Parcho +
- *   bonus de breloques + bonus d'ensembles inclus), plus les stats dérivées :
+ *   bonus de breloques + bonus d'ensembles + bonus de breuvages inclus), plus les stats dérivées :
  *   `INITIATIVE_TOTALE`, `VITALITE_TOTALE`, `PA_TOTAL`, `PM_TOTAL`, `INVOCATION_TOTALE`,
  *   `TACLE_TOTAL`, `FUITE_TOTALE`, `RETRAIT_PA_TOTAL`, `RETRAIT_PM_TOTAL`,
  *   `ESQUIVE_PA_TOTALE`, `ESQUIVE_PM_TOTALE`, `DOMMAGES_FEU_TOTAL`, `DOMMAGES_TERRE_TOTAL`,
  *   `DOMMAGES_EAU_TOTAL`, `DOMMAGES_AIR_TOTAL`.
  */
-function calculerStatsPersonnage(cubesEquipes, bonusParcho = {}, effetsBreloques = {}, bonusEnsembles = {}) {
+function calculerStatsPersonnage(cubesEquipes, bonusParcho = {}, effetsBreloques = {}, bonusEnsembles = {}, bonusBreuvages = {}) {
   const stats = {};
   const { statsPlates: bonusBreloques = {}, pdvPourcent = 0 } = effetsBreloques;
   const { statsPlates: bonusEnsemblesPlates = {} } = bonusEnsembles;
@@ -211,6 +215,12 @@ function calculerStatsPersonnage(cubesEquipes, bonusParcho = {}, effetsBreloques
   // traitement, cible les mêmes clés génériques (VITALITE, PA, PUISSANCE_PIEGE,
   // RETRAIT_PA_BRELOQUE...) donc aucune formule de dérivation à dupliquer.
   for (const [cle, valeur] of Object.entries(bonusEnsemblesPlates)) {
+    stats[cle] = (stats[cle] || 0) + (valeur || 0);
+  }
+
+  // Bonus des breuvages équipés (3 emplacements, chacun ne boostant qu'une seule
+  // stat fixe) : même traitement additif que les autres sources.
+  for (const [cle, valeur] of Object.entries(bonusBreuvages || {})) {
     stats[cle] = (stats[cle] || 0) + (valeur || 0);
   }
 

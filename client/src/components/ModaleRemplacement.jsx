@@ -4,12 +4,14 @@ import { couleurRangCube } from '../constants/rangs';
 import { couleurRangMaitrise } from '../constants/rangsMaitrise';
 import './ModaleRemplacement.css';
 
-const LIBELLES_TYPE = { cube: 'cube', sort: 'sort', breloque: 'breloque' };
+const LIBELLES_TYPE = { cube: 'cube', sort: 'sort', breloque: 'breloque', breuvage: 'breuvage' };
 
 function libelleItem(type, item) {
   return type === 'cube' ? `${item.element} ${item.numero}` : item.nom;
 }
 
+// Breuvage (comme cube) n'affiche pas de bordure de rang, cf. sansBordure ci-dessous
+// — la couleur calculée ici n'a alors aucun effet visuel (masquée par le CSS).
 function bordureItem(type, item) {
   return type === 'cube' ? couleurRangCube(item.rang) : couleurRangMaitrise(item.rang ?? item.rang_evolution);
 }
@@ -32,7 +34,8 @@ function ModaleRemplacement({ type, emplacements, onChoisir, onClose }) {
               libelle={libelleItem(type, item)}
               image={item.image_url}
               bordure={bordureItem(type, item)}
-              sansBordure={type === 'cube'}
+              sansBordure={type === 'cube' || type === 'breuvage'}
+              imagePetite={type === 'breuvage'}
               onClick={() => onChoisir(e.emplacement)}
             />
           );
