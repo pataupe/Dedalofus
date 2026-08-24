@@ -13,7 +13,7 @@ const TUILES = [
   {
     to: '/sorts',
     nom: 'Sorts',
-    compte: '493 pièces',
+    compte: '448 pièces',
     couleur: '#d9534f',
     chemin: 'M12 2 14 10 22 12 14 14 12 22 10 14 2 12 10 10Z',
   },
