@@ -18,7 +18,7 @@ import './OngletSorts.css';
 //   serveur (voir server/logic/effetsBreloques.js).
 // - Dégâts de base/calculés (défaut calculés) : bascule entre les valeurs
 //   brutes du sort et le résultat du calcul pour ce personnage.
-function OngletSorts({ personnage }) {
+function OngletSorts({ personnage, perso }) {
   const [modeAttaque, setModeAttaque] = useState('distance');
   const [afficherCalcule, setAfficherCalcule] = useState(true);
 
@@ -54,7 +54,7 @@ function OngletSorts({ personnage }) {
       <div className="onglet-sorts__grille">
         {sortsEquipes.map(({ emplacement, sort }) => {
           const calculs = afficherCalcule ? degatsDuMode.filter((d) => d.sortId === sort.id) : [];
-          return <SortCard key={emplacement} sort={sort} calculs={calculs} />;
+          return <SortCard key={emplacement} sort={sort} calculs={calculs} perso={perso} />;
         })}
       </div>
     </div>

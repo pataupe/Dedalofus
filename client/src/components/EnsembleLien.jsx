@@ -8,7 +8,7 @@ import './EnsembleLien.css';
 // Autonome : possède sa propre modale plutôt que de faire remonter un état vers
 // chaque page qui rend ces cards (CubeListPage, PersonnageDetailPage, PartagePage,
 // OngletSorts, ModaleRemplacement...).
-function EnsembleLien({ ensembles }) {
+function EnsembleLien({ ensembles, perso }) {
   const [ensembleOuvert, setEnsembleOuvert] = useState(null);
 
   if (!ensembles || ensembles.length === 0) return null;
@@ -33,7 +33,7 @@ function EnsembleLien({ ensembles }) {
 
       {ensembleOuvert && (
         <Modal large onClose={() => setEnsembleOuvert(null)}>
-          <EnsembleDetail ensemble={ensembleOuvert} />
+          <EnsembleDetail ensemble={ensembleOuvert} perso={perso} />
         </Modal>
       )}
     </>

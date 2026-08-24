@@ -252,7 +252,7 @@ function PersonnageDetailPage() {
       </div>
 
       {ongletActif === 'sorts' ? (
-        <OngletSorts personnage={personnage} />
+        <OngletSorts personnage={personnage} perso={id} />
       ) : ongletActif === 'boosts' ? (
         <OngletBoosts
           breloques={personnage.breloques}
@@ -371,9 +371,9 @@ function PersonnageDetailPage() {
             );
             return (
               <>
-                {modale.type === 'cube' && <CubeCard cube={modale.data} actions={actionsModale} />}
-                {modale.type === 'sort' && <SortCard sort={modale.data} actions={actionsModale} />}
-                {modale.type === 'breloque' && <BreloqueCard breloque={modale.data} actions={actionsModale} />}
+                {modale.type === 'cube' && <CubeCard cube={modale.data} actions={actionsModale} perso={id} />}
+                {modale.type === 'sort' && <SortCard sort={modale.data} actions={actionsModale} perso={id} />}
+                {modale.type === 'breloque' && <BreloqueCard breloque={modale.data} actions={actionsModale} perso={id} />}
                 {modale.type === 'breuvage' && <BreuvageCard breuvage={modale.data} actions={actionsModale} />}
               </>
             );

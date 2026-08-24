@@ -1,10 +1,26 @@
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import './Modal.css';
 
+// Pile des modales montées (une modale peut désormais en ouvrir une autre par-
+// dessus, ex: EnsembleDetail → détail d'une pièce) : Échap ne doit fermer que
+// celle du dessus, pas toutes en même temps — sans ça, les 2 listeners globaux
+// indépendants se déclenchaient tous les deux sur une seule pression.
+const pileModales = [];
+
 function Modal({ onClose, children, large = false }) {
+  const idRef = useRef(Symbol('modale'));
+
+  useEffect(() => {
+    pileModales.push(idRef.current);
+    return () => {
+      const i = pileModales.indexOf(idRef.current);
+      if (i !== -1) pileModales.splice(i, 1);
+    };
+  }, []);
+
   useEffect(() => {
     function surEchap(e) {
-      if (e.key === 'Escape') onClose();
+      if (e.key === 'Escape' && pileModales[pileModales.length - 1] === idRef.current) onClose();
     }
     window.addEventListener('keydown', surEchap);
     return () => window.removeEventListener('keydown', surEchap);

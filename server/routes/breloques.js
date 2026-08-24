@@ -1,8 +1,9 @@
 const express = require('express');
-const { listerBreloques } = require('../controllers/breloquesController');
+const { listerBreloques, obtenirBreloque } = require('../controllers/breloquesController');
 
 const router = express.Router();
 
 router.get('/', listerBreloques);
+router.get('/:id', obtenirBreloque);
 
 module.exports = router;

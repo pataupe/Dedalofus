@@ -12,3 +12,9 @@ export async function listerSorts({ nom = '', elements = [], rangs = [], limite 
   if (!reponse.ok) throw new Error('Erreur lors du chargement des sorts');
   return reponse.json();
 }
+
+export async function obtenirSort(id) {
+  const reponse = await fetch(`${BASE_URL}/sorts/${id}`);
+  if (!reponse.ok) throw new Error('Sort introuvable');
+  return reponse.json();
+}

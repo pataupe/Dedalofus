@@ -52,4 +52,19 @@ async function listerBreloques(req, res) {
   res.json(breloques);
 }
 
-module.exports = { listerBreloques };
+// GET /api/breloques/:id — pas de filtre `visible`/`nom` (contrairement à la
+// liste) : une breloque déjà référencée ailleurs (ex: pièce d'un ensemble)
+// doit rester consultable même si elle ne remonterait plus dans une recherche.
+async function obtenirBreloque(req, res) {
+  const { id } = req.params;
+
+  const [breloques] = await pool.query('SELECT * FROM Breloque WHERE id = ?', [id]);
+
+  if (breloques.length === 0) {
+    return res.status(404).json({ erreur: 'Breloque introuvable' });
+  }
+
+  res.json(breloques[0]);
+}
+
+module.exports = { listerBreloques, obtenirBreloque };

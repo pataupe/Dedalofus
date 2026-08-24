@@ -134,7 +134,7 @@ function PanopliesPersonnage({ panoplies }) {
             <li key={cle} className="panoplies-personnage__ligne">
               <span className="panoplies-personnage__valeur">{valeur}</span>
               <span className="panoplies-personnage__icone">
-                <IconeStat icone={icone} couleur={couleur} taille={15} />
+                <IconeStat cle={cle} icone={icone} couleur={couleur} taille={15} />
               </span>
               <span className="panoplies-personnage__libelle">{libelle}</span>
             </li>

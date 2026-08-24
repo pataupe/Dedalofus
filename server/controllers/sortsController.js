@@ -73,4 +73,25 @@ async function listerSorts(req, res) {
   res.json(sorts.map((s) => ({ ...s, lignes_supplementaires: lignesSupParSort[s.id] || [] })));
 }
 
-module.exports = { listerSorts };
+// GET /api/sorts/:id — pas de filtre `visible` (contrairement à la liste) :
+// un sort déjà référencé ailleurs (ex: pièce d'un ensemble) doit rester
+// consultable même si masqué de la recherche (sorts utilitaires type "- Novice").
+async function obtenirSort(req, res) {
+  const { id } = req.params;
+
+  const [sorts] = await pool.query('SELECT * FROM Sort WHERE id = ?', [id]);
+
+  if (sorts.length === 0) {
+    return res.status(404).json({ erreur: 'Sort introuvable' });
+  }
+
+  const [lignesSup] = await pool.query(
+    `SELECT element, degats_min, degats_max, degats_critique_min, degats_critique_max
+     FROM SortDegatsSup WHERE sort_id = ? ORDER BY ordre`,
+    [id]
+  );
+
+  res.json({ ...sorts[0], lignes_supplementaires: lignesSup });
+}
+
+module.exports = { listerSorts, obtenirSort };

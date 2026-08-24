@@ -83,15 +83,35 @@
   gap: 8px;
 }
 
+/* Devenu un <button> (pièce cliquable → modale de détail imbriquée) : reset des
+   styles natifs de bouton, le reste hérite déjà de .detail-ensemble (panneau). */
 .detail-ensemble__piece {
   display: flex;
   align-items: center;
   gap: 10px;
+  width: 100%;
   background: var(--panneau-fond-sombre);
   border: 2px solid var(--bordure-piece, var(--bordure-or));
   border-radius: 6px;
   padding: 6px 10px;
   min-width: 0;
+  font: inherit;
+  color: inherit;
+  text-align: left;
+  cursor: pointer;
+  transition: border-color 0.15s ease, background-color 0.15s ease;
+}
+
+.detail-ensemble__piece:hover,
+.detail-ensemble__piece:focus-visible {
+  border-color: var(--primaire);
+  background: var(--panneau-fond);
+}
+
+.detail-ensemble__erreur {
+  margin: 8px 0 0;
+  color: var(--couleur-feu);
+  font-size: 13px;
 }
 
 .detail-ensemble__piece-image {

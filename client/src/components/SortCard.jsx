@@ -62,7 +62,7 @@ function construireLignes(sort, calculs) {
 // /sorts publique), comportement inchangé : dégâts et % critique de base.
 // `actions` (optionnel) : boutons Équiper/Remplacer/Enlever rendus dans le pied
 // de la carte plutôt qu'en élément détaché à côté.
-function SortCard({ sort, calculs, actions }) {
+function SortCard({ sort, calculs, actions, perso }) {
   const lignes = construireLignes(sort, calculs);
   // % CC de base (toujours celui du sort) et % CC total (sort + stat du
   // personnage) affichés séparément quand `calculs` est fourni (onglet Sorts) —
@@ -81,7 +81,7 @@ function SortCard({ sort, calculs, actions }) {
         <p className="carte-sort__soustitre">
           Sort &middot; {sort.rang_evolution}
         </p>
-        {ensembles.length > 0 && <EnsembleLien ensembles={ensembles} />}
+        {ensembles.length > 0 && <EnsembleLien ensembles={ensembles} perso={perso} />}
       </div>
       <div className="carte-sort__corps">
         <div className="carte-sort__image">
@@ -131,7 +131,7 @@ function SortCard({ sort, calculs, actions }) {
 
           <ul className="carte-sort__stats">
             <li>
-              <IconeStat icone="eclair" couleur="var(--accent)" taille={14} />
+              <IconeStat cle="PA" icone="eclair" couleur="var(--accent)" taille={14} />
               {sort.cout_pa} PA
             </li>
             {sort.portee_min != null && sort.portee_max != null && (
@@ -166,13 +166,13 @@ function SortCard({ sort, calculs, actions }) {
             )}
             {chanceCritiqueBase != null && (
               <li>
-                <IconeStat icone="viseur" couleur="var(--accent)" taille={14} />
+                <IconeStat cle="%_COUP_CRITIQUE" icone="viseur" couleur="var(--accent)" taille={14} />
                 {chanceCritiqueBase}% CC
               </li>
             )}
             {chanceCritiqueTotal != null && (
               <li>
-                <IconeStat icone="viseur" couleur="var(--accent)" taille={14} />
+                <IconeStat cle="%_COUP_CRITIQUE" icone="viseur" couleur="var(--accent)" taille={14} />
                 {chanceCritiqueTotal}% CC Total
               </li>
             )}

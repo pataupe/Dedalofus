@@ -8,11 +8,11 @@ import './BonusPalier.css';
 // tenu synchronisé à la main). Utilisé à la fois par EnsembleDetail.jsx (modale de
 // détail) et EnsemblesPersonnage.jsx (résumé sur la fiche perso) — un seul endroit à
 // faire évoluer si le format change.
-function LigneBonus({ icone, couleur, libelle, valeur }) {
+function LigneBonus({ cle, icone, couleur, libelle, valeur }) {
   return (
     <li className="bonus-palier__ligne">
       <span className="bonus-palier__icone">
-        <IconeStat icone={icone} couleur={couleur} taille={15} />
+        <IconeStat cle={cle} icone={icone} couleur={couleur} taille={15} />
       </span>
       <span className="bonus-palier__valeur">{valeur}</span>
       <span className="bonus-palier__libelle">{libelle}</span>
@@ -45,7 +45,7 @@ function BonusPalier({ delta }) {
         // AGILITE/DO_AIR/DOMMAGES manquants faisaient disparaître 3 stats sur 5 des
         // ensembles de cubes élémentaires, sans aucune erreur ni log).
         const config = ICONES_ENSEMBLES[cle] || { icone: 'losange', couleur: 'var(--texte-attenue)', libelle: cle };
-        return <LigneBonus key={cle} icone={config.icone} couleur={config.couleur} libelle={config.libelle} valeur={valeur} />;
+        return <LigneBonus key={cle} cle={cle} icone={config.icone} couleur={config.couleur} libelle={config.libelle} valeur={valeur} />;
       })}
       {multiplicateurs.map((mult, i) => {
         const config = ICONES_MULTIPLICATEURS[mult.type] || { icone: 'losange', couleur: 'var(--texte-attenue)', libelle: mult.type };

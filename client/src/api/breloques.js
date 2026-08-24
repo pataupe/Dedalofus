@@ -12,3 +12,9 @@ export async function listerBreloques({ nom = '', rangs = [], tags = [], limite 
   if (!reponse.ok) throw new Error('Erreur lors du chargement des breloques');
   return reponse.json();
 }
+
+export async function obtenirBreloque(id) {
+  const reponse = await fetch(`${BASE_URL}/breloques/${id}`);
+  if (!reponse.ok) throw new Error('Breloque introuvable');
+  return reponse.json();
+}

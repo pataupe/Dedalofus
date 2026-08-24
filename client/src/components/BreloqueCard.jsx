@@ -4,7 +4,7 @@ import './BreloqueCard.css';
 
 // `actions` (optionnel) : boutons Équiper/Remplacer/Enlever rendus dans le
 // pied de la carte plutôt qu'en élément détaché à côté.
-function BreloqueCard({ breloque, actions }) {
+function BreloqueCard({ breloque, actions, perso }) {
   const ensembles = trouverEnsemblesPiece('breloque', breloque.nom);
 
   return (
@@ -12,7 +12,7 @@ function BreloqueCard({ breloque, actions }) {
       <div className="carte-breloque__entete">
         <h3 className="carte-breloque__titre">{breloque.nom}</h3>
         <p className="carte-breloque__soustitre">Breloque &middot; {breloque.rang}</p>
-        {ensembles.length > 0 && <EnsembleLien ensembles={ensembles} />}
+        {ensembles.length > 0 && <EnsembleLien ensembles={ensembles} perso={perso} />}
       </div>
       <div className="carte-breloque__corps">
         <div className="carte-breloque__image">

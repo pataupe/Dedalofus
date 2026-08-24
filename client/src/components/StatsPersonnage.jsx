@@ -87,10 +87,10 @@ const CARACTERISTIQUES_EDITABLES = [
 
 const BOUTONS_REMPLISSAGE = [0, 100, 150];
 
-function Icone({ emoji, couleur }) {
+function Icone({ cle, emoji, couleur }) {
   return (
     <span className="stats-personnage__icone">
-      <IconeStat icone={emoji} couleur={couleur} taille={14} />
+      <IconeStat cle={cle} icone={emoji} couleur={couleur} taille={14} />
     </span>
   );
 }
@@ -99,7 +99,7 @@ function LigneStat({ cle, libelle, icone, couleur, valeur, vedette }) {
   return (
     <li className={`stats-personnage__ligne ${vedette ? 'stats-personnage__ligne--vedette' : ''}`}>
       <span className="stats-personnage__valeur">{valeur}</span>
-      <Icone emoji={icone} couleur={couleur} />
+      <Icone cle={cle} emoji={icone} couleur={couleur} />
       <span className="stats-personnage__libelle">{libelle}</span>
     </li>
   );
@@ -165,7 +165,7 @@ function StatsPersonnage({ stats, parcho, token, personnageId, onParchoSauvegard
           <div key={cle} className="stats-personnage__carac-ligne">
             <span className="stats-personnage__carac-total">
               <span className="stats-personnage__valeur">{stats[cle] || 0}</span>
-              <Icone emoji={icone} couleur={couleur} />
+              <Icone cle={cle} emoji={icone} couleur={couleur} />
               <span className="stats-personnage__libelle">{libelle}</span>
             </span>
             {lectureSeule ? (
@@ -196,7 +196,7 @@ function StatsPersonnage({ stats, parcho, token, personnageId, onParchoSauvegard
         <div className="stats-personnage__carac-puissance-ligne">
           <span className="stats-personnage__carac-puissance-stat">
             <span className="stats-personnage__valeur">{stats.PUISSANCE || 0}</span>
-            <Icone emoji="puissance" couleur="var(--couleur-lumiere)" />
+            <Icone cle="PUISSANCE" emoji="puissance" couleur="var(--couleur-lumiere)" />
             <span className="stats-personnage__libelle">Puissance</span>
           </span>
           {!lectureSeule && (

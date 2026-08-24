@@ -20,7 +20,7 @@ function formaterStat(stat) {
 // actions, pour ne pas imbriquer un <button> dans un <a> (HTML invalide, et
 // cause réelle du flash de tap bleu qui n'apparaissait que sur "Équiper" côté
 // cubes — un bouton ne devrait jamais être un descendant d'un lien).
-function CubeCard({ cube, actions, lienDetail }) {
+function CubeCard({ cube, actions, lienDetail, perso }) {
   const couleur = couleurElement(cube.element);
   const ensembles = trouverEnsemblesCube(cube.element);
 
@@ -34,7 +34,7 @@ function CubeCard({ cube, actions, lienDetail }) {
           <span className="carte-cube__pastille" style={{ background: couleur }} aria-hidden="true" />
           Cube &middot; {cube.rang}
         </p>
-        {ensembles.length > 0 && <EnsembleLien ensembles={ensembles} />}
+        {ensembles.length > 0 && <EnsembleLien ensembles={ensembles} perso={perso} />}
       </div>
 
       <div className="carte-cube__corps">
