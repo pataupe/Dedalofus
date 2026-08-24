@@ -1,0 +1,98 @@
+// Bibliothèque d'icônes vectorielles partagée pour toutes les stats du jeu —
+// remplace les emoji utilisés jusqu'ici (StatsPersonnage.jsx, iconesEnsembles.js)
+// par de vraies icônes SVG. Un chemin par concept, réutilisé quand plusieurs
+// stats partagent le même thème (ex: Force/Do Terre/Ré Terre → montagne),
+// exactement comme le jeu lie déjà ces stats au même élément — pas un raccourci,
+// une cohérence volontaire. viewBox 0 0 24 24 pour toutes.
+export const CHEMINS_ICONES = {
+  coeur: 'M12 21s-7-4.35-9.5-9A5.5 5.5 0 0 1 12 6a5.5 5.5 0 0 1 9.5 6c-2.5 4.65-9.5 9-9.5 9Z',
+  eclair: 'M13 2 4 14h6l-1 8 9-12h-6l1-8Z',
+  mouvement: 'M5 5l6 7-6 7M13 5l6 7-6 7',
+  cible: 'M12 20a8 8 0 1 0 0-16 8 8 0 0 0 0 16Zm0-4.6a3.4 3.4 0 1 0 0-6.8 3.4 3.4 0 0 0 0 6.8Z',
+  flamme: 'M12 3c2 3 5 5 5 9a5 5 0 0 1-10 0c0-2 1-3 2-4.5C9.8 9 10 10 10 10c.3-2 .5-4 2-7Z',
+  montagne: 'M3 18 9 8l4 6 2-3 6 7Z',
+  goutte: 'M12 3s6 7 6 11a6 6 0 0 1-12 0c0-4 6-11 6-11Z',
+  plume: 'M18 4C10 4 5 9 5 17c8 0 13-5 13-13Zm-10 12L16 8',
+  bouclier: 'M12 2 20 5v6c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V5Z',
+  viseur: 'M12 2v6M12 16v6M2 12h6M16 12h6M4.9 4.9l4.2 4.2M14.9 14.9l4.2 4.2M4.9 19.1l4.2-4.2M14.9 9.1l4.2-4.2',
+  soin: 'M12 5v14M5 12h14',
+  invocation: 'M12 4a8 8 0 1 0 0 16 8 8 0 0 0 0-16Zm0 4.5 4 7H8l4-7Z',
+  piege: 'M12 3 21 12 12 21 3 12ZM9 9l6 6M15 9l-6 6',
+  lune: 'M15 3a9 9 0 1 0 6 15.5A9 9 0 0 1 15 3Z',
+  aile: 'M4 18c4-2 6-8 8-14 2 6 4 12 8 14-4 1-8 0-8-4 0 4-4 5-8 4Z',
+  chevronBas: 'M6 9l6 6 6-6',
+  poussee: 'M7 8l5-5 5 5M7 16l5 5 5-5',
+  etincelle: 'M12 2 14 10 22 12 14 14 12 22 10 14 2 12 10 10Z',
+  puissance: 'M12 19V5M6 11l6-6 6 6',
+  arc: 'M7 3c6 2 6 16 0 18M7 3 21 12 7 21',
+  epee: 'M4 20 18 6M14 6l4 4M15 5l4 4',
+  losange: 'M12 3 21 12 12 21 3 12Z',
+};
+
+// cle (STATS_CUBES / clés dérivées de calcul.js) -> nom d'icône ci-dessus.
+export const ICONE_PAR_STAT = {
+  VITALITE: 'coeur',
+  VITALITE_TOTALE: 'coeur',
+  PA: 'eclair',
+  PA_TOTAL: 'eclair',
+  PM: 'mouvement',
+  PM_TOTAL: 'mouvement',
+  PO: 'cible',
+  FUITE: 'mouvement',
+  FUITE_TOTALE: 'mouvement',
+  TACLE: 'mouvement',
+  TACLE_TOTAL: 'mouvement',
+  FORCE: 'montagne',
+  DO_TERRE: 'montagne',
+  DOMMAGES_TERRE_TOTAL: 'montagne',
+  RES_TERRE: 'montagne',
+  '%_RES_TERRE': 'montagne',
+  INTELLIGENCE: 'flamme',
+  DO_FEU: 'flamme',
+  DOMMAGES_FEU_TOTAL: 'flamme',
+  RES_FEU: 'flamme',
+  '%_RES_FEU': 'flamme',
+  CHANCE: 'goutte',
+  DO_EAU: 'goutte',
+  DOMMAGES_EAU_TOTAL: 'goutte',
+  RES_EAU: 'goutte',
+  '%_RES_EAU': 'goutte',
+  AGILITE: 'plume',
+  DO_AIR: 'plume',
+  DOMMAGES_AIR_TOTAL: 'plume',
+  RES_AIR: 'plume',
+  '%_RES_AIR': 'plume',
+  ESQUIVE_PA: 'bouclier',
+  ESQUIVE_PA_TOTALE: 'bouclier',
+  ESQUIVE_PM: 'bouclier',
+  ESQUIVE_PM_TOTALE: 'bouclier',
+  RES_NEUTRE: 'bouclier',
+  '%_RES_NEUTRE': 'bouclier',
+  RES_CRIT: 'bouclier',
+  RES_POU: 'bouclier',
+  DO_CRIT: 'viseur',
+  '%_COUP_CRITIQUE': 'viseur',
+  SOIN: 'soin',
+  INVOCATION: 'invocation',
+  INVOCATION_TOTALE: 'invocation',
+  DO_PIEGE: 'piege',
+  PUISSANCE_PIEGE: 'puissance',
+  SAGESSE: 'lune',
+  INITIATIVE: 'aile',
+  INITIATIVE_TOTALE: 'aile',
+  RETRAIT_PA_TOTAL: 'chevronBas',
+  RETRAIT_PM_TOTAL: 'chevronBas',
+  RETRAIT_PA_BRELOQUE: 'chevronBas',
+  RETRAIT_PM_BRELOQUE: 'chevronBas',
+  DO_POU: 'poussee',
+  DOMMAGES: 'etincelle',
+  PUISSANCE: 'puissance',
+};
+
+// Repli générique (rune neutre) pour une clé de stat qui n'aurait pas encore
+// d'icône dédiée ci-dessus — jamais d'icône manquante silencieuse.
+export const ICONE_DEFAUT = 'etincelle';
+
+export function nomIcone(cle) {
+  return ICONE_PAR_STAT[cle] || ICONE_DEFAUT;
+}

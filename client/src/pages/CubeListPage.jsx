@@ -198,14 +198,26 @@ function CubeListPage() {
       <div className="page-cubes__grille">
         {cubes.map((cube) => (
           <div key={cube.id} className="page-cubes__carte">
-            <Link to={`/cubes/${cube.id}`}>
-              <CubeCard cube={cube} />
-            </Link>
-            {modeEquipement && (
-              <button type="button" className="page-cubes__bouton-equiper" onClick={() => equiper(cube.id)}>
-                {emplacementCible ? 'Remplacer' : 'Équiper'}
-              </button>
-            )}
+            <CubeCard
+              cube={cube}
+              lienDetail={`/cubes/${cube.id}${modeEquipement ? `?perso=${perso}${emplacementCible ? `&emplacement=${emplacementCible}` : ''}` : ''}`}
+              actions={
+                modeEquipement && (
+                  <button
+                    type="button"
+                    className="carte-action carte-action--principale"
+                    onClick={() => equiper(cube.id)}
+                  >
+                    {emplacementCible ? (
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M4 8h13M17 8l-3-3M17 8l-3 3" /><path d="M20 16H7M7 16l3-3M7 16l3 3" /></svg>
+                    ) : (
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M5 12l5 5L20 7" /></svg>
+                    )}
+                    {emplacementCible ? 'Remplacer' : 'Équiper'}
+                  </button>
+                )
+              }
+            />
           </div>
         ))}
       </div>

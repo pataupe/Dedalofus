@@ -14,16 +14,33 @@
   flex: 1;
 }
 
+/* Plus de bandeau coloré plein : la hiérarchie titre/contenu vient de la
+   typographie (poids, taille), pas d'un aplat de couleur. */
 .carte-sort__entete {
-  background: var(--primaire);
-  color: var(--primaire-texte);
+  padding: 12px 14px 10px;
+  border-bottom: 1px solid var(--bordure-or);
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.carte-sort__titre {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1.25;
+  color: var(--panneau-texte);
+}
+
+.carte-sort__soustitre {
+  margin: 0;
+  font-size: 12px;
   font-weight: 600;
-  padding: 8px 12px;
-  font-size: 14px;
+  color: var(--panneau-texte-attenue);
 }
 
 .carte-sort__corps {
-  padding: 12px;
+  padding: 12px 14px;
   display: flex;
   gap: 12px;
   flex: 1;
@@ -124,9 +141,8 @@
 }
 
 /* Stats secondaires en grille 2 colonnes, comme les caractéristiques de DofusBook.
-   Texte en pleine opacité (pas atténué) : ce sont des infos primaires de la
-   carte, pas des légendes secondaires — un ton trop clair sur fond beige les
-   rendait peu lisibles. */
+   Poids/couleur plus discrets que le titre (500 + atténué) : c'est du contenu,
+   pas un 2e titre. */
 .carte-sort__stats {
   list-style: none;
   margin: 0;
@@ -135,8 +151,8 @@
   grid-template-columns: 1fr 1fr;
   gap: 6px 12px;
   font-size: 13px;
-  font-weight: 600;
-  color: var(--panneau-texte);
+  font-weight: 500;
+  color: var(--panneau-texte-attenue);
 }
 
 .carte-sort__stats li {
@@ -145,13 +161,9 @@
   gap: 6px;
 }
 
-/* Puce ronde (liste), plus discrète qu'un carré style case à cocher. */
-.carte-sort__stat-icone {
-  width: 6px;
-  height: 6px;
-  flex: 0 0 6px;
-  border-radius: 50%;
-  background: var(--accent);
+.carte-sort__stats li svg {
+  flex: 0 0 auto;
+  opacity: 0.9;
 }
 
 .carte-sort__description {
@@ -159,4 +171,11 @@
   font-style: italic;
   font-size: 13px;
   color: var(--panneau-texte-attenue);
+}
+
+.carte-sort__actions {
+  display: flex;
+  gap: 6px;
+  padding: 10px 14px;
+  border-top: 1px solid var(--bordure-or);
 }

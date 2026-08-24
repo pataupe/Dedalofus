@@ -1,70 +1,71 @@
 import { useEffect, useState } from 'react';
 import { sauvegarderParcho as sauvegarderParchoApi } from '../api/personnages';
+import IconeStat from './IconeStat';
 import './StatsPersonnage.css';
 
 // Regroupement en blocs façon DofusBook. Les clés viennent soit directement
 // des stats brutes des cubes (ex: FORCE), soit des stats dérivées calculées
 // par `calculerStatsPersonnage` (server/logic/calcul.js) — respecter le mélange
 // `_TOTAL`/`_TOTALE` exact, ce sont les noms réellement produits par ce module.
-// `icone`/`couleur` : simples emoji + couleur d'élément existante (pas de vraies
-// icônes en V1), juste pour retrouver visuellement le repère DofusBook.
+// `icone` référence un nom de CHEMINS_ICONES (constants/iconesStats.js), plus
+// des emoji — vraies icônes vectorielles, cohérentes avec le reste du site.
 // Bloc "Principal" affiché en 2 colonnes fixes (pas l'auto-répartition des
 // autres blocs) : PdV/PA/PM/PO à gauche, le reste à droite. PdV a `vedette:
 // true` pour ressortir légèrement des 7 autres stats du bloc.
 const PRINCIPAL_GAUCHE = [
-  { cle: 'VITALITE_TOTALE', libelle: 'PdV', icone: '❤️', couleur: 'var(--couleur-feu)', vedette: true },
-  { cle: 'PA_TOTAL', libelle: 'PA', icone: '⭐', couleur: 'var(--couleur-lumiere)' },
-  { cle: 'PM_TOTAL', libelle: 'PM', icone: '🔷', couleur: 'var(--couleur-air)' },
-  { cle: 'PO', libelle: 'PO', icone: '👁️', couleur: 'var(--couleur-eau)' },
+  { cle: 'VITALITE_TOTALE', libelle: 'PdV', icone: 'coeur', couleur: 'var(--couleur-feu)', vedette: true },
+  { cle: 'PA_TOTAL', libelle: 'PA', icone: 'eclair', couleur: 'var(--couleur-lumiere)' },
+  { cle: 'PM_TOTAL', libelle: 'PM', icone: 'mouvement', couleur: 'var(--couleur-air)' },
+  { cle: 'PO', libelle: 'PO', icone: 'cible', couleur: 'var(--couleur-eau)' },
 ];
 
 const PRINCIPAL_DROITE = [
-  { cle: 'INITIATIVE_TOTALE', libelle: 'Initiative', icone: '🪽', couleur: 'var(--couleur-chaos)' },
-  { cle: '%_COUP_CRITIQUE', libelle: '% Critique', icone: '❗', couleur: 'var(--couleur-feu)' },
-  { cle: 'INVOCATION_TOTALE', libelle: 'Invocation', icone: '👹', couleur: 'var(--couleur-chaos)' },
-  { cle: 'SOIN', libelle: 'Soin', icone: '✚', couleur: 'var(--couleur-feu)' },
+  { cle: 'INITIATIVE_TOTALE', libelle: 'Initiative', icone: 'aile', couleur: 'var(--couleur-chaos)' },
+  { cle: '%_COUP_CRITIQUE', libelle: '% Critique', icone: 'viseur', couleur: 'var(--couleur-feu)' },
+  { cle: 'INVOCATION_TOTALE', libelle: 'Invocation', icone: 'invocation', couleur: 'var(--couleur-chaos)' },
+  { cle: 'SOIN', libelle: 'Soin', icone: 'soin', couleur: 'var(--couleur-feu)' },
 ];
 
 const BLOCS = [
   {
     titre: 'Mobilité',
     lignes: [
-      { cle: 'FUITE_TOTALE', libelle: 'Fuite', icone: '➡️', couleur: 'var(--couleur-terre)' },
-      { cle: 'TACLE_TOTAL', libelle: 'Tacle', icone: '🐾', couleur: 'var(--couleur-lumiere)' },
-      { cle: 'ESQUIVE_PA_TOTALE', libelle: 'Esq. PA', icone: '🛡️', couleur: 'var(--couleur-eau)' },
-      { cle: 'ESQUIVE_PM_TOTALE', libelle: 'Esq. PM', icone: '🛡️', couleur: 'var(--couleur-air)' },
-      { cle: 'RETRAIT_PA_TOTAL', libelle: 'Ret. PA', icone: '⬇️', couleur: 'var(--couleur-eau)' },
-      { cle: 'RETRAIT_PM_TOTAL', libelle: 'Ret. PM', icone: '⬇️', couleur: 'var(--couleur-air)' },
+      { cle: 'FUITE_TOTALE', libelle: 'Fuite', icone: 'mouvement', couleur: 'var(--couleur-terre)' },
+      { cle: 'TACLE_TOTAL', libelle: 'Tacle', icone: 'mouvement', couleur: 'var(--couleur-lumiere)' },
+      { cle: 'ESQUIVE_PA_TOTALE', libelle: 'Esq. PA', icone: 'bouclier', couleur: 'var(--couleur-eau)' },
+      { cle: 'ESQUIVE_PM_TOTALE', libelle: 'Esq. PM', icone: 'bouclier', couleur: 'var(--couleur-air)' },
+      { cle: 'RETRAIT_PA_TOTAL', libelle: 'Ret. PA', icone: 'chevronBas', couleur: 'var(--couleur-eau)' },
+      { cle: 'RETRAIT_PM_TOTAL', libelle: 'Ret. PM', icone: 'chevronBas', couleur: 'var(--couleur-air)' },
     ],
   },
   {
     titre: 'Dommages',
     lignes: [
-      { cle: 'DOMMAGES_FEU_TOTAL', libelle: 'Do Feu', icone: '🔥', couleur: 'var(--couleur-feu)' },
-      { cle: 'DOMMAGES_TERRE_TOTAL', libelle: 'Do Terre', icone: '🌾', couleur: 'var(--couleur-terre)' },
-      { cle: 'DOMMAGES_EAU_TOTAL', libelle: 'Do Eau', icone: '💧', couleur: 'var(--couleur-eau)' },
-      { cle: 'DOMMAGES_AIR_TOTAL', libelle: 'Do Air', icone: '🍃', couleur: 'var(--couleur-air)' },
-      { cle: 'DO_CRIT', libelle: 'Do Crit.', icone: '🎯', couleur: 'var(--couleur-feu)' },
-      { cle: 'DO_POU', libelle: 'Do Pou.', icone: '➡️', couleur: 'var(--texte-attenue)' },
-      { cle: 'DO_PIEGE', libelle: 'Do Piège', icone: '🪤', couleur: 'var(--couleur-terre)' },
-      { cle: 'PUISSANCE_PIEGE', libelle: 'Puiss. Piège', icone: '🪤', couleur: 'var(--couleur-lumiere)' },
+      { cle: 'DOMMAGES_FEU_TOTAL', libelle: 'Do Feu', icone: 'flamme', couleur: 'var(--couleur-feu)' },
+      { cle: 'DOMMAGES_TERRE_TOTAL', libelle: 'Do Terre', icone: 'montagne', couleur: 'var(--couleur-terre)' },
+      { cle: 'DOMMAGES_EAU_TOTAL', libelle: 'Do Eau', icone: 'goutte', couleur: 'var(--couleur-eau)' },
+      { cle: 'DOMMAGES_AIR_TOTAL', libelle: 'Do Air', icone: 'plume', couleur: 'var(--couleur-air)' },
+      { cle: 'DO_CRIT', libelle: 'Do Crit.', icone: 'viseur', couleur: 'var(--couleur-feu)' },
+      { cle: 'DO_POU', libelle: 'Do Pou.', icone: 'poussee', couleur: 'var(--texte-attenue)' },
+      { cle: 'DO_PIEGE', libelle: 'Do Piège', icone: 'piege', couleur: 'var(--couleur-terre)' },
+      { cle: 'PUISSANCE_PIEGE', libelle: 'Puiss. Piège', icone: 'puissance', couleur: 'var(--couleur-lumiere)' },
     ],
   },
   {
     titre: 'Résistances',
     lignes: [
-      { cle: 'RES_NEUTRE', libelle: 'Ré Neutre', icone: '☯️', couleur: 'var(--texte-attenue)' },
-      { cle: '%_RES_NEUTRE', libelle: '% Ré Neutre', icone: '☯️', couleur: 'var(--texte-attenue)' },
-      { cle: 'RES_TERRE', libelle: 'Ré Terre', icone: '🌾', couleur: 'var(--couleur-terre)' },
-      { cle: '%_RES_TERRE', libelle: '% Ré Terre', icone: '🌾', couleur: 'var(--couleur-terre)' },
-      { cle: 'RES_FEU', libelle: 'Ré Feu', icone: '🔥', couleur: 'var(--couleur-feu)' },
-      { cle: '%_RES_FEU', libelle: '% Ré Feu', icone: '🔥', couleur: 'var(--couleur-feu)' },
-      { cle: 'RES_EAU', libelle: 'Ré Eau', icone: '💧', couleur: 'var(--couleur-eau)' },
-      { cle: '%_RES_EAU', libelle: '% Ré Eau', icone: '💧', couleur: 'var(--couleur-eau)' },
-      { cle: 'RES_AIR', libelle: 'Ré Air', icone: '🍃', couleur: 'var(--couleur-air)' },
-      { cle: '%_RES_AIR', libelle: '% Ré Air', icone: '🍃', couleur: 'var(--couleur-air)' },
-      { cle: 'RES_CRIT', libelle: 'Ré Crit.', icone: '🛡️', couleur: 'var(--couleur-feu)' },
-      { cle: 'RES_POU', libelle: 'Ré Pou.', icone: '🛡️', couleur: 'var(--texte-attenue)' },
+      { cle: 'RES_NEUTRE', libelle: 'Ré Neutre', icone: 'bouclier', couleur: 'var(--texte-attenue)' },
+      { cle: '%_RES_NEUTRE', libelle: '% Ré Neutre', icone: 'bouclier', couleur: 'var(--texte-attenue)' },
+      { cle: 'RES_TERRE', libelle: 'Ré Terre', icone: 'montagne', couleur: 'var(--couleur-terre)' },
+      { cle: '%_RES_TERRE', libelle: '% Ré Terre', icone: 'montagne', couleur: 'var(--couleur-terre)' },
+      { cle: 'RES_FEU', libelle: 'Ré Feu', icone: 'flamme', couleur: 'var(--couleur-feu)' },
+      { cle: '%_RES_FEU', libelle: '% Ré Feu', icone: 'flamme', couleur: 'var(--couleur-feu)' },
+      { cle: 'RES_EAU', libelle: 'Ré Eau', icone: 'goutte', couleur: 'var(--couleur-eau)' },
+      { cle: '%_RES_EAU', libelle: '% Ré Eau', icone: 'goutte', couleur: 'var(--couleur-eau)' },
+      { cle: 'RES_AIR', libelle: 'Ré Air', icone: 'plume', couleur: 'var(--couleur-air)' },
+      { cle: '%_RES_AIR', libelle: '% Ré Air', icone: 'plume', couleur: 'var(--couleur-air)' },
+      { cle: 'RES_CRIT', libelle: 'Ré Crit.', icone: 'viseur', couleur: 'var(--couleur-feu)' },
+      { cle: 'RES_POU', libelle: 'Ré Pou.', icone: 'bouclier', couleur: 'var(--texte-attenue)' },
     ],
   },
 ];
@@ -76,20 +77,20 @@ const PARCHO_MAX = 1000;
 // Les 6 caractéristiques qui ont une case "Parcho" éditable (dans cet ordre
 // précis, façon DofusBook). Puissance n'a pas de Parcho, elle reste à part.
 const CARACTERISTIQUES_EDITABLES = [
-  { cle: 'VITALITE', libelle: 'Vitalité', icone: '❤️', couleur: 'var(--couleur-feu)' },
-  { cle: 'SAGESSE', libelle: 'Sagesse', icone: '🌙', couleur: 'var(--couleur-chaos)' },
-  { cle: 'FORCE', libelle: 'Force', icone: '🌾', couleur: 'var(--couleur-terre)' },
-  { cle: 'INTELLIGENCE', libelle: 'Intel.', icone: '🔥', couleur: 'var(--couleur-feu)' },
-  { cle: 'CHANCE', libelle: 'Chance', icone: '💧', couleur: 'var(--couleur-eau)' },
-  { cle: 'AGILITE', libelle: 'Agilité', icone: '🍃', couleur: 'var(--couleur-air)' },
+  { cle: 'VITALITE', libelle: 'Vitalité', icone: 'coeur', couleur: 'var(--couleur-feu)' },
+  { cle: 'SAGESSE', libelle: 'Sagesse', icone: 'lune', couleur: 'var(--couleur-chaos)' },
+  { cle: 'FORCE', libelle: 'Force', icone: 'montagne', couleur: 'var(--couleur-terre)' },
+  { cle: 'INTELLIGENCE', libelle: 'Intel.', icone: 'flamme', couleur: 'var(--couleur-feu)' },
+  { cle: 'CHANCE', libelle: 'Chance', icone: 'goutte', couleur: 'var(--couleur-eau)' },
+  { cle: 'AGILITE', libelle: 'Agilité', icone: 'plume', couleur: 'var(--couleur-air)' },
 ];
 
 const BOUTONS_REMPLISSAGE = [0, 100, 150];
 
 function Icone({ emoji, couleur }) {
   return (
-    <span className="stats-personnage__icone" style={{ background: couleur }}>
-      {emoji}
+    <span className="stats-personnage__icone">
+      <IconeStat icone={emoji} couleur={couleur} taille={14} />
     </span>
   );
 }
@@ -195,7 +196,7 @@ function StatsPersonnage({ stats, parcho, token, personnageId, onParchoSauvegard
         <div className="stats-personnage__carac-puissance-ligne">
           <span className="stats-personnage__carac-puissance-stat">
             <span className="stats-personnage__valeur">{stats.PUISSANCE || 0}</span>
-            <Icone emoji="⚡" couleur="var(--couleur-lumiere)" />
+            <Icone emoji="puissance" couleur="var(--couleur-lumiere)" />
             <span className="stats-personnage__libelle">Puissance</span>
           </span>
           {!lectureSeule && (

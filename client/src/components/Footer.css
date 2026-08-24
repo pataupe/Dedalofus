@@ -33,7 +33,8 @@
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.06em;
-  color: var(--bordure-or-forte);
+  color: var(--or);
+  opacity: 0.9;
 }
 
 /* Liens empilés verticalement, un par ligne : c'est cet empilement qui donne

@@ -9,17 +9,36 @@
   color: var(--couleur-feu);
 }
 
-/* Légèrement mis en valeur (bordure + fond dorés discrets, même recette que
-   LienRetourFiche), pas un gros bouton arrondi. */
+/* Modal.jsx ne pose lui-même aucun fond (c'est toujours au contenu de le
+   faire, voir CubeCard/SortCard etc.) — les confirmations "Tout déséquiper"/
+   "Supprimer" rendaient juste un <p> + des boutons sans panneau autour,
+   donnant une modale transparente. */
+.page-personnage-detail__confirmation {
+  background: var(--panneau-fond);
+  color: var(--panneau-texte);
+  border-radius: 10px;
+  padding: 20px;
+  text-align: center;
+}
+
+.page-personnage-detail__confirmation p {
+  margin: 0;
+  line-height: 1.5;
+}
+
+/* Surface neutre plate (même recette que LienRetourFiche), pas un gros bouton
+   arrondi — l'ancien fond doré translucide sur fond quasi noir donnait un
+   mélange kaki/boueux, corrigé au profit d'une surface neutre + accent violet
+   au survol (langage du reste du site, pas de l'or en aplat). */
 .page-personnage-detail__retour {
   align-self: flex-start;
   display: inline-flex;
   align-items: center;
   margin-bottom: 12px;
   padding: 6px 12px;
-  border-radius: 6px;
+  border-radius: 8px;
   border: 1px solid var(--bordure-or-forte);
-  background: rgba(212, 175, 55, 0.08);
+  background: var(--bg-carte);
   color: var(--texte);
   text-decoration: none;
   font-size: 13px;
@@ -28,8 +47,8 @@
 }
 
 .page-personnage-detail__retour:hover {
-  background: rgba(212, 175, 55, 0.16);
-  border-color: var(--or);
+  background: var(--bg-carte-survol);
+  border-color: var(--primaire);
 }
 
 .page-personnage-detail__titre {
@@ -62,20 +81,32 @@
   opacity: 1;
 }
 
+/* flex-wrap : sur petit écran, l'input passe seul sur sa ligne (min-width:0
+   lui permet de rétrécir sous sa largeur intrinsèque au lieu de forcer un
+   débordement horizontal) et les 2 boutons repassent en dessous plutôt que de
+   sortir de l'écran. */
 .page-personnage-detail__form-renommage {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   gap: 8px;
-  margin-bottom: 4px;
+  margin: 0 auto 4px;
+  max-width: 360px;
 }
 
 .page-personnage-detail__form-renommage input {
+  flex: 1 1 160px;
+  min-width: 0;
   font-size: 18px;
-  padding: 4px 8px;
-  border-radius: 6px;
-  border: 1px solid var(--bordure-or);
+  padding: 6px 10px;
+  border-radius: 8px;
+  border: 1px solid var(--bordure-or-forte);
   background: var(--bg-surface);
   color: var(--texte);
+}
+
+.page-personnage-detail__form-renommage button {
+  flex: 0 0 auto;
 }
 
 .page-personnage-detail__form-renommage button {
@@ -97,9 +128,9 @@
 
 .page-personnage-detail__actions-perso button {
   padding: 8px 16px;
-  border-radius: 20px;
+  border-radius: 8px;
   border: 1px solid var(--primaire);
-  background: rgba(90, 61, 107, 0.18);
+  background: rgba(138, 92, 196, 0.16);
   color: var(--texte);
   font-size: 13px;
   font-weight: 600;
@@ -131,11 +162,14 @@
 }
 
 .page-personnage-detail__partage {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
   margin-bottom: 12px;
   padding: 8px 18px;
-  border-radius: 20px;
+  border-radius: 8px;
   border: 1px solid var(--primaire);
-  background: rgba(90, 61, 107, 0.18);
+  background: rgba(138, 92, 196, 0.16);
   color: var(--texte);
   font-size: 13px;
   font-weight: 600;
@@ -148,12 +182,15 @@
 }
 
 .page-personnage-detail__bouton-remplacer {
-  display: block;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
   width: 100%;
   margin-top: 12px;
   padding: 10px;
   border: none;
-  border-radius: 6px;
+  border-radius: 8px;
   background: var(--primaire);
   color: var(--primaire-texte);
   font-weight: 600;
@@ -167,12 +204,15 @@
 }
 
 .page-personnage-detail__bouton-desequiper {
-  display: block;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
   width: 100%;
   margin-top: 12px;
   padding: 10px;
   border: none;
-  border-radius: 6px;
+  border-radius: 8px;
   background: var(--couleur-feu);
   color: #fff;
   font-weight: 600;

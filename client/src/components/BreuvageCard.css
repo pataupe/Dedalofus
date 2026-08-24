@@ -11,17 +11,32 @@
 }
 
 .carte-breuvage__entete {
-  background: var(--primaire);
-  color: var(--primaire-texte);
+  padding: 12px 14px 10px;
+  border-bottom: 1px solid var(--bordure-or);
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.carte-breuvage__titre {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1.25;
+  color: var(--panneau-texte);
+}
+
+.carte-breuvage__soustitre {
+  margin: 0;
+  font-size: 12px;
   font-weight: 600;
-  padding: 8px 12px;
-  font-size: 14px;
+  color: var(--panneau-texte-attenue);
 }
 
 .carte-breuvage__corps {
   display: flex;
   align-items: center;
-  padding: 12px;
+  padding: 12px 14px;
   gap: 12px;
 }
 
@@ -48,9 +63,23 @@
 }
 
 .carte-breuvage__stat {
+  display: flex;
+  align-items: center;
+  gap: 8px;
   margin: 0;
   font-size: 14px;
   font-weight: 600;
   color: var(--panneau-texte);
   flex: 1;
+}
+
+.carte-breuvage__stat svg {
+  flex: 0 0 auto;
+}
+
+.carte-breuvage__actions {
+  display: flex;
+  gap: 6px;
+  padding: 10px 14px;
+  border-top: 1px solid var(--bordure-or);
 }

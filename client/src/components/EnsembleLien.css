@@ -5,18 +5,19 @@
   margin-top: 6px;
 }
 
-/* --accent (violet) sur le fond clair "panneau" des cards Cube/Breloque/Sort donne
-   ~6.5:1 (largement conforme WCAG AA) — mais son état hover précédent passait à
-   --or (or sur fond beige, ~1.5:1, quasi invisible). Plutôt que de chercher une
-   2e couleur de texte qui passe aussi sur ce fond, on inverse au survol (fond plein
-   + texte clair dédié) : un contraste garanti, cohérent avec les autres éléments
-   interactifs du site qui font déjà ça (ex: .detail-monstre__partage:hover). */
+/* --accent (violet clair) plutôt que --primaire pour le TEXTE : sur le fond
+   sombre "panneau" actuel, --primaire (#8a5cc4) ne donne qu'environ 3.3:1, sous
+   le minimum WCAG AA — --accent (#a97fdb), plus clair, passe à ~5:1. --primaire
+   reste réservé aux fonds pleins (boutons), --accent au texte/bordures sur fond
+   sombre. Inversion complète au survol (fond plein + texte clair dédié) : un
+   contraste garanti, cohérent avec les autres éléments interactifs du site qui
+   font déjà ça (ex: .detail-monstre__partage:hover). */
 .ensemble-lien__bouton {
   padding: 3px 8px;
   border-radius: 4px;
-  border: 1px solid var(--primaire);
+  border: 1px solid var(--accent);
   background: transparent;
-  color: var(--primaire);
+  color: var(--accent);
   font-size: 11px;
   font-weight: 700;
 }

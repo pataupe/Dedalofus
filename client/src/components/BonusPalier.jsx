@@ -1,4 +1,5 @@
 import { ICONES_ENSEMBLES, ICONES_MULTIPLICATEURS, ICONES_INDICATIFS } from '../constants/iconesEnsembles';
+import IconeStat from './IconeStat';
 import './BonusPalier.css';
 
 // Une ligne par stat (jamais regroupées, ex: "Retrait PA/PM" devient 2 lignes
@@ -10,8 +11,8 @@ import './BonusPalier.css';
 function LigneBonus({ icone, couleur, libelle, valeur }) {
   return (
     <li className="bonus-palier__ligne">
-      <span className="bonus-palier__icone" style={{ background: couleur }}>
-        {icone}
+      <span className="bonus-palier__icone">
+        <IconeStat icone={icone} couleur={couleur} taille={15} />
       </span>
       <span className="bonus-palier__valeur">{valeur}</span>
       <span className="bonus-palier__libelle">{libelle}</span>
@@ -43,18 +44,18 @@ function BonusPalier({ delta }) {
         // et visible qu'une ligne qui disparaît sans laisser de trace (bug vécu :
         // AGILITE/DO_AIR/DOMMAGES manquants faisaient disparaître 3 stats sur 5 des
         // ensembles de cubes élémentaires, sans aucune erreur ni log).
-        const config = ICONES_ENSEMBLES[cle] || { icone: '🔹', couleur: 'var(--texte-attenue)', libelle: cle };
+        const config = ICONES_ENSEMBLES[cle] || { icone: 'losange', couleur: 'var(--texte-attenue)', libelle: cle };
         return <LigneBonus key={cle} icone={config.icone} couleur={config.couleur} libelle={config.libelle} valeur={valeur} />;
       })}
       {multiplicateurs.map((mult, i) => {
-        const config = ICONES_MULTIPLICATEURS[mult.type] || { icone: '🔹', couleur: 'var(--texte-attenue)', libelle: mult.type };
+        const config = ICONES_MULTIPLICATEURS[mult.type] || { icone: 'losange', couleur: 'var(--texte-attenue)', libelle: mult.type };
         const pourcent = Math.round((mult.valeur - 1) * 100);
         return (
           <LigneBonus key={`m-${i}`} icone={config.icone} couleur={config.couleur} libelle={config.libelle} valeur={`${pourcent}%`} />
         );
       })}
       {indicatifs.map((ind, i) => {
-        const config = ICONES_INDICATIFS[ind.type] || { icone: '🔹', couleur: 'var(--texte-attenue)', libelle: ind.type };
+        const config = ICONES_INDICATIFS[ind.type] || { icone: 'losange', couleur: 'var(--texte-attenue)', libelle: ind.type };
         return <LigneBonus key={`i-${i}`} icone={config.icone} couleur={config.couleur} libelle={config.libelle} valeur={`${ind.valeur}%`} />;
       })}
       {notes.map((note, i) => (

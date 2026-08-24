@@ -14,20 +14,24 @@
   font-family: inherit;
 }
 
+/* Bordure/fond dédiés (pas --bordure-or, devenu quasi transparent depuis la
+   direction "Ardoise" pour les cartes) : une case vide doit rester clairement
+   visible et lisible comme "cliquable" à elle seule, ce n'est pas une bordure
+   décorative comme sur les cartes — teinte violette (langage des éléments
+   interactifs du site) plutôt que dorée. */
 .emplacement-slot--vide {
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.03), rgba(0, 0, 0, 0.15));
-  border: 1px dashed var(--bordure-or);
-  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.35);
+  background: rgba(138, 92, 196, 0.07);
+  border: 1.5px dashed rgba(138, 92, 196, 0.45);
 }
 
 a.emplacement-slot--vide {
   cursor: pointer;
-  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+  transition: border-color 0.15s ease, background-color 0.15s ease;
 }
 
 a.emplacement-slot--vide:hover {
-  border-color: var(--or);
-  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.35), 0 0 0 1px var(--or);
+  border-color: var(--primaire);
+  background: rgba(138, 92, 196, 0.14);
 }
 
 .emplacement-slot__image {
@@ -82,7 +86,11 @@ a.emplacement-slot--vide:hover {
   width: 18px;
   height: 18px;
   border-radius: 50%;
-  border: 1px solid var(--bordure);
+  /* var(--bordure) ne fait que 0.14 d'opacité — quasi invisible sur
+     var(--bg-carte), signalé par WAVE (contraste non-texte < 3:1). Un token
+     déjà solide et suffisamment contrasté ailleurs sur le site, plutôt qu'une
+     nouvelle valeur inventée. */
+  border: 1px solid var(--texte-attenue);
   background: var(--bg-carte);
   color: var(--texte);
   font-size: 12px;
@@ -94,9 +102,14 @@ a.emplacement-slot--vide:hover {
   transition: opacity 0.15s ease;
 }
 
-/* Révélée au clavier (focus) quel que soit l'appareil — accessibilité,
-   sans rapport avec le survol souris/tactile ci-dessous. */
-.emplacement-slot-conteneur:focus-within .emplacement-slot__croix {
+/* Révélée au clavier UNIQUEMENT (:focus-visible, pas :focus-within) —
+   accessibilité, sans rapport avec le survol souris/tactile ci-dessous.
+   :focus-within se déclenchait aussi sur un simple tap mobile (certains
+   navigateurs posent le focus sur l'élément tapé), faisant réapparaître la
+   croix sur tactile alors qu'elle doit y rester invisible (cf. règle
+   @media (hover: hover) plus bas, même objectif) — :focus-visible ne se
+   déclenche que sur une vraie navigation clavier, jamais sur un tap. */
+.emplacement-slot-conteneur:has(:focus-visible) .emplacement-slot__croix {
   opacity: 1;
 }
 
@@ -116,6 +129,18 @@ a.emplacement-slot--vide:hover {
 @media (hover: hover) {
   .emplacement-slot-conteneur:hover .emplacement-slot__croix {
     opacity: 1;
+  }
+}
+
+/* Sur tactile, la croix restait dans le DOM avec juste opacity:0 — invisible
+   mais toujours cliquable (un tap au bon endroit déséquipait sans aucun
+   indice visuel avant). display:none la retire complètement de l'affichage
+   ET de l'interaction, pas seulement de la vue — plus aucun tap fantôme
+   possible. Le déséquipement reste possible via la modale de détail (bouton
+   "Déséquiper"), qui n'a jamais dépendu de cette croix. */
+@media (hover: none) {
+  .emplacement-slot__croix {
+    display: none;
   }
 }
 

@@ -128,12 +128,21 @@ function BreuvageListPage() {
       <div className="page-breuvages__grille">
         {breuvages.map((breuvage) => (
           <div key={breuvage.id} className="page-breuvages__carte">
-            <BreuvageCard breuvage={breuvage} />
-            {modeEquipement && (
-              <button type="button" className="page-breuvages__bouton-equiper" onClick={() => equiper(breuvage.id)}>
-                {emplacementCible ? 'Remplacer' : 'Équiper'}
-              </button>
-            )}
+            <BreuvageCard
+              breuvage={breuvage}
+              actions={
+                modeEquipement && (
+                  <button type="button" className="carte-action carte-action--principale" onClick={() => equiper(breuvage.id)}>
+                    {emplacementCible ? (
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M4 8h13M17 8l-3-3M17 8l-3 3" /><path d="M20 16H7M7 16l3-3M7 16l3 3" /></svg>
+                    ) : (
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M5 12l5 5L20 7" /></svg>
+                    )}
+                    {emplacementCible ? 'Remplacer' : 'Équiper'}
+                  </button>
+                )
+              }
+            />
           </div>
         ))}
       </div>

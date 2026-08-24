@@ -1,5 +1,6 @@
 import { trouverEnsemblesPiece } from '../utils/ensembles';
 import EnsembleLien from './EnsembleLien';
+import IconeStat from './IconeStat';
 import './SortCard.css';
 
 // "10 à 10" -> "10" : certains sorts (ex: Escarre face) ont des dégâts fixes,
@@ -59,7 +60,9 @@ function construireLignes(sort, calculs) {
 // critique (utilisé par l'onglet "Sorts" de la fiche perso). PA/Portée/Lancers
 // ne changent jamais, ils ne dépendent pas du personnage. Sans `calculs` (page
 // /sorts publique), comportement inchangé : dégâts et % critique de base.
-function SortCard({ sort, calculs }) {
+// `actions` (optionnel) : boutons Équiper/Remplacer/Enlever rendus dans le pied
+// de la carte plutôt qu'en élément détaché à côté.
+function SortCard({ sort, calculs, actions }) {
   const lignes = construireLignes(sort, calculs);
   // % CC de base (toujours celui du sort) et % CC total (sort + stat du
   // personnage) affichés séparément quand `calculs` est fourni (onglet Sorts) —
@@ -69,11 +72,16 @@ function SortCard({ sort, calculs }) {
 
   const lancerLigne = sort.portee_diagonale_ligne?.includes('Ligne');
   const lancerDiagonale = sort.portee_diagonale_ligne?.includes('Diagonale');
+  const ensembles = trouverEnsemblesPiece('sort', sort.nom);
 
   return (
     <div className="carte-sort">
       <div className="carte-sort__entete">
-        {sort.nom} — {sort.rang_evolution}
+        <h3 className="carte-sort__titre">{sort.nom}</h3>
+        <p className="carte-sort__soustitre">
+          Sort &middot; {sort.rang_evolution}
+        </p>
+        {ensembles.length > 0 && <EnsembleLien ensembles={ensembles} />}
       </div>
       <div className="carte-sort__corps">
         <div className="carte-sort__image">
@@ -123,60 +131,60 @@ function SortCard({ sort, calculs }) {
 
           <ul className="carte-sort__stats">
             <li>
-              <span className="carte-sort__stat-icone" aria-hidden="true" />
+              <IconeStat icone="eclair" couleur="var(--accent)" taille={14} />
               {sort.cout_pa} PA
             </li>
             {sort.portee_min != null && sort.portee_max != null && (
               <li>
-                <span className="carte-sort__stat-icone" aria-hidden="true" />
+                <IconeStat icone="cible" couleur="var(--accent)" taille={14} />
                 PO : {sort.portee_min} - {sort.portee_max}
               </li>
             )}
             {sort.portee_modifiable === 'Oui' && (
               <li>
-                <span className="carte-sort__stat-icone" aria-hidden="true" />
+                <IconeStat icone="cible" couleur="var(--accent)" taille={14} />
                 PO modifiable
               </li>
             )}
             {lancerLigne && (
               <li>
-                <span className="carte-sort__stat-icone" aria-hidden="true" />
+                <IconeStat icone="mouvement" couleur="var(--accent)" taille={14} />
                 Lancer en ligne
               </li>
             )}
             {lancerDiagonale && (
               <li>
-                <span className="carte-sort__stat-icone" aria-hidden="true" />
+                <IconeStat icone="mouvement" couleur="var(--accent)" taille={14} />
                 Lancer en diagonale
               </li>
             )}
             {sort.intervalle_relance_cd != null && (
               <li>
-                <span className="carte-sort__stat-icone" aria-hidden="true" />
+                <IconeStat icone="chevronBas" couleur="var(--accent)" taille={14} />
                 Relance : {sort.intervalle_relance_cd} tours
               </li>
             )}
             {chanceCritiqueBase != null && (
               <li>
-                <span className="carte-sort__stat-icone" aria-hidden="true" />
+                <IconeStat icone="viseur" couleur="var(--accent)" taille={14} />
                 {chanceCritiqueBase}% CC
               </li>
             )}
             {chanceCritiqueTotal != null && (
               <li>
-                <span className="carte-sort__stat-icone" aria-hidden="true" />
+                <IconeStat icone="viseur" couleur="var(--accent)" taille={14} />
                 {chanceCritiqueTotal}% CC Total
               </li>
             )}
             {sort.lancers_par_tour && (
               <li>
-                <span className="carte-sort__stat-icone" aria-hidden="true" />
+                <IconeStat icone="poussee" couleur="var(--accent)" taille={14} />
                 {sort.lancers_par_tour} par tour
               </li>
             )}
             {sort.lancers_par_cible && (
               <li>
-                <span className="carte-sort__stat-icone" aria-hidden="true" />
+                <IconeStat icone="poussee" couleur="var(--accent)" taille={14} />
                 {sort.lancers_par_cible} par cible
               </li>
             )}
@@ -185,7 +193,7 @@ function SortCard({ sort, calculs }) {
           {sort.description && <p className="carte-sort__description">{sort.description}</p>}
         </div>
       </div>
-      <EnsembleLien ensembles={trouverEnsemblesPiece('sort', sort.nom)} />
+      {actions && <div className="carte-sort__actions">{actions}</div>}
     </div>
   );
 }

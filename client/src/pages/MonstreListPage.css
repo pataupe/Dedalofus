@@ -54,7 +54,7 @@
 
 .page-monstres__familles button {
   padding: 6px 14px;
-  border-radius: 20px;
+  border-radius: 9px;
   border: 2px solid var(--bordure);
   background: transparent;
   color: var(--texte);

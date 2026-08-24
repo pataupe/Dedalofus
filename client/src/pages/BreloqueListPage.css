@@ -29,7 +29,7 @@
 
 .page-breloques__rangs button {
   padding: 6px 14px;
-  border-radius: 20px;
+  border-radius: 9px;
   border: 2px solid var(--bordure);
   background: transparent;
   color: var(--texte);
@@ -45,7 +45,7 @@
 .page-breloques__bouton-plus-filtres {
   align-self: flex-start;
   padding: 6px 14px;
-  border-radius: 20px;
+  border-radius: 9px;
   border: 1px solid var(--bordure-or-forte);
   background: var(--bg-surface);
   color: var(--texte);
@@ -93,7 +93,7 @@
 
 .page-breloques__categories-grille button {
   padding: 6px 14px;
-  border-radius: 20px;
+  border-radius: 9px;
   border: 2px solid var(--bordure);
   background: transparent;
   color: var(--texte);
@@ -121,15 +121,6 @@
   display: flex;
   flex-direction: column;
   gap: 8px;
-}
-
-.page-breloques__bouton-equiper {
-  padding: 8px;
-  border-radius: 6px;
-  border: none;
-  background: var(--primaire);
-  color: var(--primaire-texte);
-  font-weight: 600;
 }
 
 .page-breloques__pagination {

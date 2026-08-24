@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useParams, Link } from 'react-router-dom';
+import { useParams, useSearchParams, Link } from 'react-router-dom';
 import { obtenirCube } from '../api/cubes';
 import CubeCard from '../components/CubeCard';
 import './CubeDetailPage.css';
@@ -8,6 +8,15 @@ function CubeDetailPage() {
   const { id } = useParams();
   const [cube, setCube] = useState(null);
   const [erreur, setErreur] = useState(null);
+  const [searchParams] = useSearchParams();
+  const perso = searchParams.get('perso');
+  const emplacement = searchParams.get('emplacement');
+  // Repropage le contexte "équipement" (venu de la liste, ?perso=&emplacement=)
+  // dans le lien retour : sans ça, revenir à la liste depuis la fiche d'un cube
+  // perdait ce contexte et retombait sur la liste en lecture seule, sans bouton
+  // Équiper — bug repéré de longue date, propre aux cubes (seul type avec une
+  // vraie page de détail cliquable).
+  const lienRetour = perso ? `/cubes?perso=${perso}${emplacement ? `&emplacement=${emplacement}` : ''}` : '/cubes';
 
   useEffect(() => {
     setCube(null);
@@ -19,7 +28,7 @@ function CubeDetailPage() {
 
   return (
     <div className="page-detail-cube">
-      <Link to="/cubes" className="page-detail-cube__retour">
+      <Link to={lienRetour} className="page-detail-cube__retour">
         ← Retour à la liste
       </Link>
 

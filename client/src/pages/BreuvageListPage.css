@@ -29,7 +29,7 @@
 
 .page-breuvages__rangs button {
   padding: 6px 14px;
-  border-radius: 20px;
+  border-radius: 9px;
   border: 2px solid var(--bordure);
   background: transparent;
   color: var(--texte);
@@ -59,11 +59,16 @@
   gap: 8px;
 }
 
-.page-breuvages__bouton-equiper {
-  padding: 8px;
-  border-radius: 6px;
+.page-breuvages__bouton-equiper--dead {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 9px 8px;
+  border-radius: 8px;
   border: none;
   background: var(--primaire);
   color: var(--primaire-texte);
   font-weight: 600;
+  font-size: 13px;
 }

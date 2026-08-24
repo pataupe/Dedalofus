@@ -10,20 +10,54 @@
   flex: 1;
 }
 
-/* Bandeau coloré par élément conservé tel quel : contrairement au jaune
-   générique des cartes sort/breloque, cette couleur est une info fonctionnelle
-   (l'élément du cube), pas un simple accent décoratif. */
+/* Le <Link> vers la page de détail n'enveloppe QUE l'entête+corps, jamais les
+   actions (voir CubeCard.jsx) : display:contents le retire de la mise en page
+   (entête/corps se comportent comme des enfants directs de .carte-cube), sans
+   quoi il faudrait lui donner sa propre mise en page flex en double. */
+.carte-cube__lien {
+  display: contents;
+}
+
+/* Plus de bandeau coloré plein : la hiérarchie titre/contenu se fait par la
+   typographie (poids, taille), pas par un aplat de couleur — la couleur de
+   l'élément reste présente via la pastille du sous-titre et l'icône du cube,
+   sans peser sur toute la largeur de la carte. */
 .carte-cube__entete {
-  background: var(--primaire);
-  color: var(--primaire-texte);
+  padding: 12px 14px 10px;
+  border-bottom: 1px solid var(--bordure-or);
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.carte-cube__titre {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1.25;
+  color: var(--panneau-texte);
+}
+
+.carte-cube__soustitre {
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
   font-weight: 600;
-  padding: 8px 12px;
-  font-size: 14px;
+  color: var(--panneau-texte-attenue);
+}
+
+.carte-cube__pastille {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  flex: 0 0 auto;
 }
 
 .carte-cube__corps {
   display: flex;
-  padding: 12px;
+  padding: 12px 14px;
   gap: 12px;
   flex: 1;
 }
@@ -52,14 +86,14 @@
   clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
 }
 
-/* Texte en pleine opacité (pas de blanc en dur, qui devenait illisible sur le
-   nouveau fond beige) — même traitement de contraste que carte-sort__stats. */
+/* Poids et couleur volontairement plus discrets que le titre (500 + atténué,
+   contre 700 + pleine opacité) : c'est du contenu, pas un 2e titre. */
 .carte-cube__stats {
   list-style: none;
   margin: 0;
   padding: 0;
   font-size: 13px;
-  font-weight: 600;
+  font-weight: 500;
   color: var(--panneau-texte);
   display: flex;
   flex-direction: column;
@@ -70,14 +104,17 @@
 .carte-cube__stats li {
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 7px;
 }
 
-/* Puce ronde, même convention que carte-sort__stat-icone. */
-.carte-cube__stat-icone {
-  width: 6px;
-  height: 6px;
-  flex: 0 0 6px;
-  border-radius: 50%;
-  background: var(--accent);
+.carte-cube__stats li svg {
+  flex: 0 0 auto;
+  opacity: 0.9;
+}
+
+.carte-cube__actions {
+  display: flex;
+  gap: 6px;
+  padding: 10px 14px;
+  border-top: 1px solid var(--bordure-or);
 }

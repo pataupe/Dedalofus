@@ -1,12 +1,11 @@
-/* Tout ce composant reste dans la famille de tons clairs "panneau"
+/* Tout ce composant reste dans la famille de tokens "panneau"
    (--panneau-fond/--panneau-fond-sombre/--panneau-texte/--panneau-texte-attenue),
-   jamais mélangé avec les tokens du thème sombre (--bg-surface/--texte/--texte-
-   atténué/--accent/--or) : ce mélange est exactement ce qui causait du texte
-   sombre illisible sur fond sombre + de l'or illisible sur fond clair (contrastes
-   réels ~1.5:1, très en dessous du minimum WCAG AA 4.5:1) avant ce correctif —
-   chaque paire a été recalculée : --panneau-texte sur --panneau-fond-sombre
-   ≈ 8:1, --primaire sur --panneau-fond(-sombre) ≈ 5.7-6.5:1, très au-dessus du
-   minimum. Ne jamais réintroduire --bg-surface/--accent/--or/--texte-attenue ici. */
+   pas mélangé avec les tokens de chrome (--bg/--bg-surface/--texte) — mais
+   depuis la direction "Ardoise", --panneau-fond EST sombre (plus de parchemin
+   clair) : --accent (#a97fdb, ~5:1) sert de texte/accent sur ce fond, jamais
+   --primaire (#8a5cc4, ~3.3:1 seulement, sous le minimum WCAG AA 4.5:1) —
+   --primaire reste réservé aux fonds pleins (boutons), voir aussi
+   EnsembleLien.css/EnsembleCard.css pour le même correctif. */
 .detail-ensemble {
   background: var(--panneau-fond);
   color: var(--panneau-texte);
@@ -24,7 +23,7 @@
   margin: 20px 0 10px;
   font-size: 16px;
   font-weight: 700;
-  color: var(--primaire);
+  color: var(--accent);
 }
 
 /* Même convention que les blocs "Mécanique"/"Conseils" de MonstreDetail.css
@@ -35,7 +34,7 @@
   margin: 0 0 16px;
   padding: 10px 12px;
   border-left: 3px solid var(--primaire);
-  background: rgba(90, 61, 107, 0.1);
+  background: rgba(138, 92, 196, 0.1);
   border-radius: 0 6px 6px 0;
 }
 
@@ -43,7 +42,7 @@
   display: block;
   margin-bottom: 4px;
   font-size: 13px;
-  color: var(--primaire);
+  color: var(--accent);
 }
 
 .detail-ensemble__bonus-special p {
@@ -69,7 +68,7 @@
   margin: 0 0 4px;
   font-size: 12px;
   font-weight: 700;
-  color: var(--primaire);
+  color: var(--accent);
   text-transform: uppercase;
   letter-spacing: 0.03em;
 }

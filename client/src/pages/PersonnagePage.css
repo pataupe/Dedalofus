@@ -50,7 +50,7 @@
 .formulaire-personnage input:focus {
   outline: none;
   border-color: var(--primaire);
-  box-shadow: 0 0 0 3px rgba(90, 61, 107, 0.3);
+  box-shadow: 0 0 0 3px rgba(138, 92, 196, 0.3);
 }
 
 .formulaire-personnage button {

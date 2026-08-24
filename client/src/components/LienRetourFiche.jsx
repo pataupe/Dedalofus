@@ -11,7 +11,7 @@ function LienRetourFiche({ perso, visible }) {
 
   return (
     <Link to={`/personnage/${perso}`} className="lien-retour-fiche">
-      ← Retour à ma fiche
+      ← Retour
     </Link>
   );
 }

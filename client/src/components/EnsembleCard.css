@@ -59,14 +59,15 @@
   font-weight: 700;
 }
 
-/* --primaire (pas --accent, ~4.3:1 seulement à cette taille sur --panneau-fond —
-   sous le seuil WCAG AA 4.5:1 pour du texte de cette taille) : --primaire est plus
-   sombre, ~6.5:1, confortablement conforme. */
+/* --accent (pas --primaire, ~3.3:1 seulement sur le --panneau-fond sombre actuel
+   — sous le seuil WCAG AA 4.5:1) : --accent est plus clair, ~5:1, conforme.
+   (Cette note était inversée à l'époque du panneau clair — voir EnsembleLien.css
+   pour le même correctif, gardé synchronisé.) */
 .carte-ensemble__nb-pieces {
   margin: 0 0 4px;
   font-size: 12px;
   font-weight: 700;
-  color: var(--primaire);
+  color: var(--accent);
   text-transform: uppercase;
   letter-spacing: 0.02em;
 }

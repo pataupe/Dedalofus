@@ -1,3 +1,4 @@
+import IconeStat from './IconeStat';
 import './BreuvageCard.css';
 
 // Libellés des 10 stats boostées par un breuvage (une seule par breuvage) —
@@ -16,11 +17,14 @@ const LIBELLES_STAT = {
   TACLE: 'Tacle',
 };
 
-function BreuvageCard({ breuvage }) {
+// `actions` (optionnel) : boutons Équiper/Remplacer/Enlever rendus dans le
+// pied de la carte plutôt qu'en élément détaché à côté.
+function BreuvageCard({ breuvage, actions }) {
   return (
     <div className="carte-breuvage">
       <div className="carte-breuvage__entete">
-        {breuvage.nom} — {breuvage.rang}
+        <h3 className="carte-breuvage__titre">{breuvage.nom}</h3>
+        <p className="carte-breuvage__soustitre">Breuvage &middot; {breuvage.rang}</p>
       </div>
       <div className="carte-breuvage__corps">
         <div className="carte-breuvage__image">
@@ -31,9 +35,11 @@ function BreuvageCard({ breuvage }) {
           )}
         </div>
         <p className="carte-breuvage__stat">
-          +{breuvage.valeur_stat} {LIBELLES_STAT[breuvage.cle_stat] || breuvage.cle_stat}
+          <IconeStat cle={breuvage.cle_stat} couleur="var(--or)" taille={16} />
+          {breuvage.valeur_stat} {LIBELLES_STAT[breuvage.cle_stat] || breuvage.cle_stat}
         </p>
       </div>
+      {actions && <div className="carte-breuvage__actions">{actions}</div>}
     </div>
   );
 }

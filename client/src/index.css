@@ -1,14 +1,16 @@
 :root {
-  /* Brun très sombre façon DofusBook (mesuré sur le vrai site : rgb(46,41,36)).
-     Ni trop clair/désaturé ("cigarette pack", ancien #4a433b) ni trop orangé
-     ("caca", tentative précédente #45301f) : sombre et discret, avec juste
-     assez de chaleur pour ne pas paraître gris. */
-  --bg: #1F1C18;
-  --bg-carte: #4a453f;
-  --bg-carte-survol: #5a544c;
-  --bordure: #6f6555;
-  --texte: #ede6da;
-  --texte-attenue: #b8ae9e;
+  /* Direction "Ardoise" (refonte) : noir pas trop sombre à peine teinté, violet
+     réservé aux boutons/accents, or réservé au liseré/texte (jamais un aplat
+     plein ni une bordure par défaut — voir --bordure-or* plus bas). Les
+     anciens noms de tokens (--bg-carte, --panneau-fond, --bordure-or...) sont
+     conservés tels quels pour ne pas casser les composants qui les utilisent
+     déjà : seules leurs VALEURS changent, exactement le rôle d'un design token. */
+  --bg: #1f1e21;
+  --bg-carte: #29272c;
+  --bg-carte-survol: #322f36;
+  --bordure: rgba(244, 241, 247, 0.14);
+  --texte: #f4f1f7;
+  --texte-attenue: #9d97a3;
 
   --couleur-feu: #d9534f;
   --couleur-eau: #4a90d9;
@@ -17,26 +19,29 @@
   --couleur-chaos: #9b59b6;
   --couleur-lumiere: #e8c547;
 
-  /* Palette DofusBook (redesign Lovable) — nouveaux tokens ajoutés à côté des
-     anciens, rien n'est retiré ici pour ne pas casser les 22 fichiers CSS qui
-     utilisent déjà --bg-carte/--texte avec l'hypothèse "carte = fond sombre". */
-  --rayon: 0.375rem;
-  --bg-surface: #15130f;
+  --rayon: 10px;
+  --bg-surface: #1c1a1e;
 
-  /* Panneau clair (beige) : à utiliser avec --panneau-texte, jamais --texte seul. */
-  --panneau-fond: #e6dbb9;
-  --panneau-fond-sombre: #d9ccaa;
-  --panneau-texte: #3b352e;
-  --panneau-texte-attenue: rgba(59, 53, 46, 0.88);
+  /* "Panneau" ne désigne plus un fond beige clair : même surface sombre plate
+     que --bg-carte, avec du texte clair. Le nom reste (utilisé par ~15
+     composants) mais son sens visuel a changé — plus de parchemin. */
+  --panneau-fond: #29272c;
+  --panneau-fond-sombre: #322f36;
+  --panneau-texte: #f4f1f7;
+  --panneau-texte-attenue: #9d97a3;
 
-  --primaire: #5a3d6b;
-  --primaire-texte: #f4eede;
-  --accent: #7a5591;
+  --primaire: #724C98;
+  --primaire-texte: #f8f5fc;
+  --accent: #a97fdb;
   --or: #d4af37;
-  --bordure-or: rgba(212, 175, 55, 0.28);
-  --bordure-or-forte: rgba(212, 175, 55, 0.6);
+  /* Bordure par défaut des cartes/panneaux : neutre, pas dorée — l'or doré en
+     bordure systématique sur fond sombre est le tic visuel "IA" à éviter,
+     réservé maintenant aux accents ponctuels (rang, CTA) qui le référencent
+     directement via --or plutôt que via ces deux tokens généraux. */
+  --bordure-or: rgba(244, 241, 247, 0.08);
+  --bordure-or-forte: rgba(244, 241, 247, 0.14);
 
-  --ombre-panneau: 0 1px 0 rgba(244, 238, 220, 0.08) inset, 0 2px 6px rgba(0, 0, 0, 0.35);
+  --ombre-panneau: 0 1px 0 rgba(255, 255, 255, 0.03) inset, 0 20px 44px rgba(0, 0, 0, 0.4);
   --ombre-case: 0 1px 2px rgba(0, 0, 0, 0.4);
 
   font-family: 'Work Sans', system-ui, 'Segoe UI', Roboto, sans-serif;
@@ -80,6 +85,15 @@ button {
   cursor: pointer;
 }
 
+/* Supprime le flash bleu par défaut des navigateurs mobiles au tap sur un
+   lien/bouton (jamais désactivé nulle part dans le projet jusqu'ici) — la
+   transition CSS `:hover`/`:active` déjà présente sur les éléments interactifs
+   suffit comme retour visuel. */
+a,
+button {
+  -webkit-tap-highlight-color: transparent;
+}
+
 /* Panneau clair beige à liseré doré (ex: bloc de stats). */
 .panneau {
   background-color: var(--panneau-fond);
@@ -109,6 +123,46 @@ button {
 .tap {
   min-height: 44px;
   min-width: 44px;
+}
+
+/* Boutons d'action des cartes d'objet (Équiper/Remplacer/Enlever) — partagés
+   par CubeCard/SortCard/BreloqueCard/BreuvageCard, rendus dans le pied de la
+   carte via leur prop `actions` plutôt qu'en élément détaché à côté. */
+.carte-action {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  padding: 8px 6px;
+  border-radius: 8px;
+  border: 1px solid transparent;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.carte-action--principale {
+  background: var(--primaire);
+  color: var(--primaire-texte);
+}
+
+.carte-action--fantome {
+  background: transparent;
+  border-color: var(--bordure-or-forte);
+  color: var(--panneau-texte);
+}
+
+.carte-action--danger {
+  background: transparent;
+  border-color: rgba(217, 83, 79, 0.4);
+  color: #e08a86;
+}
+
+.carte-action svg {
+  flex: 0 0 auto;
 }
 
 /* Nombres alignés (colonnes de stats). */

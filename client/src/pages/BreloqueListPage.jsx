@@ -176,16 +176,25 @@ function BreloqueListPage() {
       <div className="page-breloques__grille">
         {breloques.map((breloque) => (
           <div key={breloque.id} className="page-breloques__carte">
-            <BreloqueCard breloque={breloque} />
-            {modeEquipement && (
-              <button
-                type="button"
-                className="page-breloques__bouton-equiper"
-                onClick={() => equiper(breloque.id)}
-              >
-                {emplacementCible ? 'Remplacer' : 'Équiper'}
-              </button>
-            )}
+            <BreloqueCard
+              breloque={breloque}
+              actions={
+                modeEquipement && (
+                  <button
+                    type="button"
+                    className="carte-action carte-action--principale"
+                    onClick={() => equiper(breloque.id)}
+                  >
+                    {emplacementCible ? (
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M4 8h13M17 8l-3-3M17 8l-3 3" /><path d="M20 16H7M7 16l3-3M7 16l3 3" /></svg>
+                    ) : (
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M5 12l5 5L20 7" /></svg>
+                    )}
+                    {emplacementCible ? 'Remplacer' : 'Équiper'}
+                  </button>
+                )
+              }
+            />
           </div>
         ))}
       </div>

@@ -1,36 +1,6 @@
 import { useState } from 'react';
+import { copierTexte } from '../utils/presse-papier';
 import './MonstreDetail.css';
-
-// navigator.clipboard n'existe pas sur tous les navigateurs mobiles (ou est
-// bloqué selon le contexte) : y accéder directement (comme sur PersonnageDetailPage)
-// plante avant même d'atteindre le .then(), donc aucun message d'erreur ne
-// s'affichait — juste "le bouton ne fait rien" sur les appareils concernés.
-// Repli sur l'ancienne méthode (textarea invisible + execCommand) si l'API
-// moderne est absente ou échoue.
-function copierTexte(texte) {
-  if (navigator.clipboard && window.isSecureContext) {
-    return navigator.clipboard.writeText(texte);
-  }
-
-  return new Promise((resolve, reject) => {
-    const zone = document.createElement('textarea');
-    zone.value = texte;
-    zone.style.position = 'fixed';
-    zone.style.opacity = '0';
-    document.body.appendChild(zone);
-    zone.focus();
-    zone.select();
-    try {
-      const succes = document.execCommand('copy');
-      document.body.removeChild(zone);
-      if (succes) resolve();
-      else reject(new Error('execCommand a échoué'));
-    } catch (err) {
-      document.body.removeChild(zone);
-      reject(err);
-    }
-  });
-}
 
 function MonstreDetail({ monstre, famille }) {
   const [lienCopie, setLienCopie] = useState(false);
@@ -69,7 +39,13 @@ function MonstreDetail({ monstre, famille }) {
       </div>
 
       <button type="button" className="detail-monstre__partage" onClick={partager}>
-        {lienCopie ? 'Lien copié !' : '🔗 Copier le lien de cette fiche'}
+        {!lienCopie && (
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+            <path d="M10 13a5 5 0 0 0 7 0l3-3a5 5 0 0 0-7-7l-1 1" />
+            <path d="M14 11a5 5 0 0 0-7 0l-3 3a5 5 0 0 0 7 7l1-1" />
+          </svg>
+        )}
+        {lienCopie ? 'Lien copié !' : 'Copier le lien de cette fiche'}
       </button>
       {erreurPartage && <p className="detail-monstre__erreur-partage">{erreurPartage}</p>}
 

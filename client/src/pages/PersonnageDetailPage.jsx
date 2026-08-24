@@ -11,6 +11,7 @@ import {
   supprimerPersonnage,
 } from '../api/personnages';
 import { obtenirCube } from '../api/cubes';
+import { copierTexte } from '../utils/presse-papier';
 import { useAuth } from '../context/AuthContext';
 import { couleurRangCube } from '../constants/rangs';
 import { couleurRangMaitrise } from '../constants/rangsMaitrise';
@@ -84,15 +85,8 @@ function PersonnageDetailPage() {
   }
 
   function copierLienPartage() {
-    // Discord (et les autres bots d'aperçu) mettent l'embed en cache indéfiniment
-    // pour une URL donnée, sans jamais revérifier son contenu ensuite — un
-    // segment qui change à chaque copie force un aperçu neuf à chaque partage,
-    // même si le stuff a déjà été partagé avec ce lien par le passé. Un simple
-    // paramètre ?v=... ne suffisait pas : Discord semble l'ignorer pour décider
-    // si une URL a déjà été vue — un segment de chemin, lui, change forcément
-    // l'URL complète (voir App.jsx et server/routes/partageOg.js).
-    const url = `${window.location.origin}/partage/${personnage.lienPartage}/${Date.now()}`;
-    navigator.clipboard.writeText(url).then(
+    const url = `${window.location.origin}/partage/${personnage.lienPartage}`;
+    copierTexte(url).then(
       () => {
         setLienCopie(true);
         setTimeout(() => setLienCopie(false), 2000);
@@ -167,7 +161,7 @@ function PersonnageDetailPage() {
   return (
     <div className="page-personnage-detail">
       <Link to="/personnage" className="page-personnage-detail__retour">
-        ← Retour à mes personnages
+        ← Retour
       </Link>
       {renommage ? (
         <form className="page-personnage-detail__form-renommage" onSubmit={validerRenommage}>
@@ -193,14 +187,23 @@ function PersonnageDetailPage() {
             aria-label="Renommer le personnage"
             title="Renommer"
           >
-            ✏️
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+              <path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z" />
+              <path d="M15 5l4 4" />
+            </svg>
           </button>
         </div>
       )}
       {erreurRenommage && <p className="page-personnage-detail__erreur">{erreurRenommage}</p>}
 
       <button type="button" className="page-personnage-detail__partage" onClick={copierLienPartage}>
-        {lienCopie ? 'Lien copié !' : '🔗 Copier le lien de partage'}
+        {!lienCopie && (
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+            <path d="M10 13a5 5 0 0 0 7 0l3-3a5 5 0 0 0-7-7l-1 1" />
+            <path d="M14 11a5 5 0 0 0-7 0l-3 3a5 5 0 0 0 7 7l1-1" />
+          </svg>
+        )}
+        {lienCopie ? 'Lien copié !' : 'Copier le lien de partage'}
       </button>
 
       <div className="page-personnage-detail__actions-perso">
@@ -214,7 +217,12 @@ function PersonnageDetailPage() {
           aria-label="Supprimer ce personnage"
           title="Supprimer ce personnage"
         >
-          🗑️
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+            <path d="M4 7h16" />
+            <path d="M9 7V4h6v3" />
+            <path d="M6 7l1 13h10l1-13" />
+            <path d="M10 11v6M14 11v6" />
+          </svg>
         </button>
       </div>
       {erreurAction && <p className="page-personnage-detail__erreur">{erreurAction}</p>}
@@ -341,70 +349,86 @@ function PersonnageDetailPage() {
 
       {modale && (
         <Modal onClose={() => setModale(null)}>
-          {modale.type === 'cube' && <CubeCard cube={modale.data} />}
-          {modale.type === 'sort' && <SortCard sort={modale.data} />}
-          {modale.type === 'breloque' && <BreloqueCard breloque={modale.data} />}
-          {modale.type === 'breuvage' && <BreuvageCard breuvage={modale.data} />}
-          <Link
-            to={`/${CHEMIN_PAR_TYPE[modale.type]}?perso=${id}&emplacement=${modale.emplacement}`}
-            className="page-personnage-detail__bouton-remplacer"
-          >
-            Remplacer
-          </Link>
-          <button
-            type="button"
-            className="page-personnage-detail__bouton-desequiper"
-            onClick={() => desequiper(modale.type, modale.emplacement)}
-          >
-            Déséquiper
-          </button>
+          {(() => {
+            const actionsModale = (
+              <>
+                <Link
+                  to={`/${CHEMIN_PAR_TYPE[modale.type]}?perso=${id}&emplacement=${modale.emplacement}`}
+                  className="carte-action carte-action--fantome"
+                >
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M4 8h13M17 8l-3-3M17 8l-3 3" /><path d="M20 16H7M7 16l3-3M7 16l3 3" /></svg>
+                  Remplacer
+                </Link>
+                <button
+                  type="button"
+                  className="carte-action carte-action--danger"
+                  onClick={() => desequiper(modale.type, modale.emplacement)}
+                >
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" /></svg>
+                  Déséquiper
+                </button>
+              </>
+            );
+            return (
+              <>
+                {modale.type === 'cube' && <CubeCard cube={modale.data} actions={actionsModale} />}
+                {modale.type === 'sort' && <SortCard sort={modale.data} actions={actionsModale} />}
+                {modale.type === 'breloque' && <BreloqueCard breloque={modale.data} actions={actionsModale} />}
+                {modale.type === 'breuvage' && <BreuvageCard breuvage={modale.data} actions={actionsModale} />}
+              </>
+            );
+          })()}
         </Modal>
       )}
 
       {desequipementOuvert && (
         <Modal onClose={() => setDesequipementOuvert(false)}>
-          <p>Déséquiper tous les cubes, sorts, breloques et breuvages de ce personnage ?</p>
-          <button
-            type="button"
-            className="page-personnage-detail__bouton-desequiper"
-            onClick={confirmerToutDesequiper}
-            disabled={desequipementEnCours}
-          >
-            {desequipementEnCours ? 'Déséquipement...' : 'Tout déséquiper'}
-          </button>
-          <button
-            type="button"
-            className="page-personnage-detail__bouton-annuler"
-            onClick={() => setDesequipementOuvert(false)}
-            disabled={desequipementEnCours}
-          >
-            Annuler
-          </button>
+          <div className="page-personnage-detail__confirmation">
+            <p>Déséquiper tous les cubes, sorts, breloques et breuvages de ce personnage ?</p>
+            <button
+              type="button"
+              className="page-personnage-detail__bouton-desequiper"
+              onClick={confirmerToutDesequiper}
+              disabled={desequipementEnCours}
+            >
+              {desequipementEnCours ? 'Déséquipement...' : 'Tout déséquiper'}
+            </button>
+            <button
+              type="button"
+              className="page-personnage-detail__bouton-annuler"
+              onClick={() => setDesequipementOuvert(false)}
+              disabled={desequipementEnCours}
+            >
+              Annuler
+            </button>
+          </div>
         </Modal>
       )}
 
       {suppressionOuverte && (
         <Modal onClose={() => setSuppressionOuverte(false)}>
-          <p>
-            Supprimer définitivement <strong>{personnage.nom}</strong> ? Le stuff sauvegardé sera perdu, cette action
-            est irréversible.
-          </p>
-          <button
-            type="button"
-            className="page-personnage-detail__bouton-desequiper"
-            onClick={confirmerSuppression}
-            disabled={suppressionEnCours}
-          >
-            {suppressionEnCours ? 'Suppression...' : 'Supprimer définitivement'}
-          </button>
-          <button
-            type="button"
-            className="page-personnage-detail__bouton-annuler"
-            onClick={() => setSuppressionOuverte(false)}
-            disabled={suppressionEnCours}
-          >
-            Annuler
-          </button>
+          <div className="page-personnage-detail__confirmation">
+            <p>
+              Supprimer définitivement <strong>{personnage.nom}</strong> ? Le stuff sauvegardé sera perdu, cette
+              action est irréversible.
+            </p>
+            <button
+              type="button"
+              className="page-personnage-detail__bouton-desequiper"
+              onClick={confirmerSuppression}
+              disabled={suppressionEnCours}
+            >
+              {suppressionEnCours ? 'Suppression...' : 'Supprimer définitivement'}
+            </button>
+            <button
+              type="button"
+              className="page-personnage-detail__bouton-annuler"
+              onClick={() => setSuppressionOuverte(false)}
+              disabled={suppressionEnCours}
+            >
+              Annuler
+            </button>
+          </div>
         </Modal>
       )}
     </div>

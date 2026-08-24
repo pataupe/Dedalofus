@@ -1,13 +1,15 @@
-/* Légèrement mis en valeur (bordure + fond dorés discrets), pas un gros bouton
-   arrondi : juste assez pour ne plus se confondre avec du texte simple. */
+/* Surface neutre plate, pas un gros bouton arrondi : juste assez pour ne plus
+   se confondre avec du texte simple. Accent violet au survol (langage du
+   reste du site) plutôt que l'ancien fond doré translucide, qui donnait un
+   mélange kaki/boueux sur le fond quasi noir. */
 .lien-retour-fiche {
   display: inline-flex;
   align-items: center;
   margin-bottom: 12px;
   padding: 6px 12px;
-  border-radius: 6px;
+  border-radius: 8px;
   border: 1px solid var(--bordure-or-forte);
-  background: rgba(212, 175, 55, 0.08);
+  background: var(--bg-carte);
   color: var(--texte);
   text-decoration: none;
   font-size: 13px;
@@ -16,6 +18,6 @@
 }
 
 .lien-retour-fiche:hover {
-  background: rgba(212, 175, 55, 0.16);
-  border-color: var(--or);
+  background: var(--bg-carte-survol);
+  border-color: var(--primaire);
 }
