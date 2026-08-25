@@ -1,5 +1,5 @@
 /* Style partagé par les pages légales (Mentions légales, Politique de
-   confidentialité, CGU) : même structure titre/section/paragraphe. */
+   confidentialité) : même structure titre/section/paragraphe. */
 .page-legale {
   max-width: 720px;
   margin: 0 auto;
