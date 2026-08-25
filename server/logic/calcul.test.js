@@ -298,6 +298,34 @@ describe('calculerDegats', () => {
     expect(resultats[0].degatsCritiqueMax).toBe(50);
   });
 
+  it('DO_CRIT (bonus cube) s\'ajoute uniquement sur la plage de dégâts critiques, pas sur les dégâts normaux', () => {
+    // Exemple porteur de projet : 1000 Intelligence, 200 DO_FEU, 100 DO_CRIT.
+    // Normal -> 1000 Intel + 200 dommages. Critique -> 1000 Intel + 300 dommages
+    // (le "a"/stat efficace ne change pas, seul le "b"/bonus gagne DO_CRIT).
+    const stats = calculerStatsPersonnage([cube({ INTELLIGENCE: 1000, DO_FEU: 200, DO_CRIT: 100 })]);
+    const resultats = calculerDegats(stats, [
+      { id: 1, degatsMin: 10, degatsMax: 10, degatsCritiqueMin: 10, degatsCritiqueMax: 10, element: 'Feu' },
+    ]);
+    expect(resultats[0].degatsMin).toBe(310); // 10 * 11 + 200
+    expect(resultats[0].degatsCritiqueMin).toBe(410); // 10 * 11 + 300
+  });
+
+  it('sans DO_CRIT équipé, dégâts normaux et critiques ont le même bonus (rétrocompatible)', () => {
+    const stats = calculerStatsPersonnage([cube({ INTELLIGENCE: 100, DO_FEU: 50 })]);
+    const resultats = calculerDegats(stats, [
+      { id: 1, degatsMin: 10, degatsMax: 10, degatsCritiqueMin: 10, degatsCritiqueMax: 10, element: 'Feu' },
+    ]);
+    expect(resultats[0].degatsCritiqueMin).toBe(resultats[0].degatsMin);
+  });
+
+  it('DO_CRIT ne s\'applique pas aux sorts de soin', () => {
+    const stats = calculerStatsPersonnage([cube({ INTELLIGENCE: 100, SOIN: 20, DO_CRIT: 100 })]);
+    const resultats = calculerDegats(stats, [
+      { id: 1, degatsMin: 10, degatsMax: 10, degatsCritiqueMin: 10, degatsCritiqueMax: 10, element: 'Feu', estSoin: true },
+    ]);
+    expect(resultats[0].degatsCritiqueMin).toBe(resultats[0].degatsMin); // 10 * 2 + 20, DO_CRIT ignoré
+  });
+
   it('pas de degatsCritiqueMin/Max dans le résultat si absents en entrée (rétrocompatible)', () => {
     const stats = calculerStatsPersonnage([]);
     const resultats = calculerDegats(stats, [{ id: 1, degatsMin: 19, degatsMax: 23, element: 'Feu' }]);

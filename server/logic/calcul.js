@@ -281,21 +281,27 @@ function calculerStatEfficace(statsPersonnage, element, estPiege = false) {
 // Le "b" de la formule ax + b : Dommages globaux (tous éléments) + dommages directs
 // propres à l'élément (ex: DO_FEU). `estPiege` ajoute aussi DO_PIEGE (même principe
 // que PUISSANCE_PIEGE ci-dessus, "fonctionne pareil que les Dommages mais
-// uniquement pour les pièges").
-function calculerBonusDommages(statsPersonnage, element, estPiege = false) {
+// uniquement pour les pièges"). `estCritique` ajoute DO_CRIT (stat cube "Dommages
+// Critique") : contrairement aux autres bonus de ce "b", DO_CRIT ne s'applique QUE
+// sur la plage de dégâts critiques du sort (degats_critique_min/max) — le "a" (stat
+// efficace/Puissance) reste identique entre normal et critique, seul ce bonus change.
+// Pas de simulation du jet critique lui-même (survient ou non) : la plage critique du
+// sort représente déjà "si ce coup est un critique", DO_CRIT s'y ajoute simplement.
+function calculerBonusDommages(statsPersonnage, element, estPiege = false, estCritique = false) {
   const dommagesGlobaux = statsPersonnage.DOMMAGES || 0;
   const dommagesDirects = statsPersonnage[DOMMAGES_DIRECTS_PAR_ELEMENT[element]] || 0;
   const dommagesPiege = estPiege ? (statsPersonnage.DO_PIEGE || 0) : 0;
-  return dommagesGlobaux + dommagesDirects + dommagesPiege;
+  const dommagesCritique = estCritique ? (statsPersonnage.DO_CRIT || 0) : 0;
+  return dommagesGlobaux + dommagesDirects + dommagesPiege + dommagesCritique;
 }
 
 // Dégâts d'un coup de base `degatsBase` dans un élément donné : ax + b, où
 // a = 1 + 0.01 * stat efficace, b = bonus de dommages. Retourne une valeur décimale
 // non arrondie (l'arrondi final se fait à l'affichage, jamais pendant le calcul).
-function calculerDegatsPourElement(statsPersonnage, degatsBase, element, estPiege = false) {
+function calculerDegatsPourElement(statsPersonnage, degatsBase, element, estPiege = false, estCritique = false) {
   const stat = calculerStatEfficace(statsPersonnage, element, estPiege);
   const multiplicateur = 1 + 0.01 * stat;
-  const bonus = calculerBonusDommages(statsPersonnage, element, estPiege);
+  const bonus = calculerBonusDommages(statsPersonnage, element, estPiege, estCritique);
   return degatsBase * multiplicateur + bonus;
 }
 
@@ -475,9 +481,11 @@ function calculerDegats(statsPersonnage, sortsEquipes, options = {}) {
     // ne s'appliquent jamais aux sorts de soin.
     const facteur = sort.estSoin ? 1 : facteurGeneral * (sort.estIndirect ? facteurIndirect : 1);
     const estPiege = Boolean(sort.estPiege);
+    // 4e argument `critique` : ignoré côté soin (DO_CRIT ne s'applique qu'aux dégâts,
+    // pas aux sorts de soin — `calculerSoinPourElement` n'a pas cette notion).
     const calculerValeurPour = sort.estSoin
       ? (stats, base, element) => calculerSoinPourElement(stats, base, element)
-      : (stats, base, element) => calculerDegatsPourElement(stats, base, element, estPiege);
+      : (stats, base, element, critique) => calculerDegatsPourElement(stats, base, element, estPiege, critique);
 
     for (const ligne of construireLignes(sort)) {
       const elements = resoudreElements(statsPersonnage, sort, ligne);
@@ -487,16 +495,16 @@ function calculerDegats(statsPersonnage, sortsEquipes, options = {}) {
         if (sort.estSoin) resultat.estSoin = true;
 
         if (ligne.degatsMin != null && ligne.degatsMax != null) {
-          resultat.degatsMin = Math.round(calculerValeurPour(statsPersonnage, ligne.degatsMin, element) * facteur);
-          resultat.degatsMax = Math.round(calculerValeurPour(statsPersonnage, ligne.degatsMax, element) * facteur);
+          resultat.degatsMin = Math.round(calculerValeurPour(statsPersonnage, ligne.degatsMin, element, false) * facteur);
+          resultat.degatsMax = Math.round(calculerValeurPour(statsPersonnage, ligne.degatsMax, element, false) * facteur);
         }
 
         if (ligne.degatsCritiqueMin != null && ligne.degatsCritiqueMax != null) {
           resultat.degatsCritiqueMin = Math.round(
-            calculerValeurPour(statsPersonnage, ligne.degatsCritiqueMin, element) * facteur
+            calculerValeurPour(statsPersonnage, ligne.degatsCritiqueMin, element, true) * facteur
           );
           resultat.degatsCritiqueMax = Math.round(
-            calculerValeurPour(statsPersonnage, ligne.degatsCritiqueMax, element) * facteur
+            calculerValeurPour(statsPersonnage, ligne.degatsCritiqueMax, element, true) * facteur
           );
         }
 
