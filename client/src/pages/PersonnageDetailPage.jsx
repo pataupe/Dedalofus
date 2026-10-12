@@ -326,7 +326,7 @@ function PersonnageDetailPage() {
                   vide={!breloque}
                   libelle={breloque?.nom}
                   image={breloque?.image_url}
-                  bordure={breloque ? couleurRangMaitrise(breloque.rang) : null}
+                  sansBordure
                   lien={`/breloques?perso=${id}`}
                   onClick={breloque ? () => setModale({ type: 'breloque', data: breloque, emplacement }) : undefined}
                   onDesequiper={breloque ? () => desequiper('breloque', emplacement) : undefined}

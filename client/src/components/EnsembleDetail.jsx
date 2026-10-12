@@ -143,7 +143,7 @@ function EnsembleDetail({ ensemble, perso }) {
                 key={piece.cle}
                 type="button"
                 className="detail-ensemble__piece"
-                style={{ '--bordure-piece': couleurRangMaitrise(piece.rang) }}
+                style={{ '--bordure-piece': piece.type === 'sort' ? couleurRangMaitrise(piece.rang) : undefined }}
                 onClick={() => setPieceOuverte(piece)}
               >
                 <div className="detail-ensemble__piece-image">

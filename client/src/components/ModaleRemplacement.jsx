@@ -10,8 +10,9 @@ function libelleItem(type, item) {
   return type === 'cube' ? `${item.element} ${item.numero}` : item.nom;
 }
 
-// Breuvage (comme cube) n'affiche pas de bordure de rang, cf. sansBordure ci-dessous
-// — la couleur calculée ici n'a alors aucun effet visuel (masquée par le CSS).
+// Breuvage et breloque (comme cube) n'affichent pas de bordure de rang, cf.
+// sansBordure ci-dessous — la couleur calculée ici n'a alors aucun effet visuel
+// (masquée par le CSS). Seul sort n'a pas encore d'image par rang.
 function bordureItem(type, item) {
   return type === 'cube' ? couleurRangCube(item.rang) : couleurRangMaitrise(item.rang ?? item.rang_evolution);
 }
@@ -34,7 +35,7 @@ function ModaleRemplacement({ type, emplacements, onChoisir, onClose }) {
               libelle={libelleItem(type, item)}
               image={item.image_url}
               bordure={bordureItem(type, item)}
-              sansBordure={type === 'cube' || type === 'breuvage'}
+              sansBordure={type === 'cube' || type === 'breuvage' || type === 'breloque'}
               imagePetite={type === 'breuvage'}
               onClick={() => onChoisir(e.emplacement)}
             />

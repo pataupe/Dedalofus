@@ -132,7 +132,7 @@ function PartagePage() {
                   vide={!breloque}
                   libelle={breloque?.nom}
                   image={breloque?.image_url}
-                  bordure={breloque ? couleurRangMaitrise(breloque.rang) : null}
+                  sansBordure
                   onClick={breloque ? () => setModale({ type: 'breloque', data: breloque }) : undefined}
                 />
               ))}
