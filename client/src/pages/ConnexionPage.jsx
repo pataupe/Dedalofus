@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useNavigate, Link } from 'react-router-dom';
+import { useNavigate, useSearchParams, Link } from 'react-router-dom';
 import { connecter } from '../api/auth';
 import { useAuth } from '../context/AuthContext';
 import './FormulaireAuth.css';
@@ -11,8 +11,13 @@ function ConnexionPage() {
   const [envoiEnCours, setEnvoiEnCours] = useState(false);
   const { session, connecterSession } = useAuth();
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
+  const sessionExpiree = searchParams.get('expiree') === '1';
 
   // Déjà connecté : pas de sens à réafficher le formulaire de connexion.
+  // (Ne s'applique pas juste après une déconnexion forcée pour token expiré :
+  // declencherDeconnexionExpiree vide déjà localStorage avant la redirection,
+  // donc `session` est null à ce moment-là.)
   useEffect(() => {
     if (session) navigate('/personnage', { replace: true });
   }, [session, navigate]);
@@ -35,6 +40,9 @@ function ConnexionPage() {
   return (
     <div className="page-auth">
       <h1>Connexion</h1>
+      {sessionExpiree && (
+        <p className="formulaire-auth__erreur">Ta session a expiré, reconnecte-toi.</p>
+      )}
       <form onSubmit={soumettre} className="formulaire-auth">
         <label>
           Email

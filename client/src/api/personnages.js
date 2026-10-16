@@ -1,3 +1,5 @@
+import { declencherDeconnexionExpiree } from '../context/AuthContext';
+
 const BASE_URL = '/api';
 
 async function appelPersonnages(chemin, token, options = {}) {
@@ -7,6 +9,13 @@ async function appelPersonnages(chemin, token, options = {}) {
   });
   const donnees = await reponse.json();
   if (!reponse.ok) {
+    // Sur ces routes protégées, un 401 ne peut venir que de verifierToken.js
+    // (token absent/invalide/expiré) — jamais un vrai refus métier (ça, c'est
+    // du 403/404). On déconnecte automatiquement plutôt que de laisser
+    // l'utilisateur voir un message d'erreur confus en se croyant connecté.
+    if (reponse.status === 401) {
+      declencherDeconnexionExpiree();
+    }
     const erreur = new Error(donnees.erreur || 'Une erreur est survenue');
     erreur.code = donnees.code;
     throw erreur;
