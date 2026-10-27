@@ -15,6 +15,7 @@ import InscriptionPage from './pages/InscriptionPage';
 import PersonnagePage from './pages/PersonnagePage';
 import PersonnageDetailPage from './pages/PersonnageDetailPage';
 import PartagePage from './pages/PartagePage';
+import AdminPage from './pages/AdminPage';
 import MentionsLegalesPage from './pages/MentionsLegalesPage';
 import PolitiqueConfidentialitePage from './pages/PolitiqueConfidentialitePage';
 
@@ -42,6 +43,8 @@ function App() {
               paramètre ?v=... était ignoré par le cache d'aperçu de Discord ; un
               segment de chemin, lui, change forcément l'URL vue par le robot. */}
           <Route path="/partage/:lienPartage/:version?" element={<PartagePage />} />
+          <Route path="/admin" element={<AdminPage />} />
+          <Route path="/admin/personnage/:id" element={<PartagePage admin />} />
           <Route path="/mentions-legales" element={<MentionsLegalesPage />} />
           <Route path="/politique-de-confidentialite" element={<PolitiqueConfidentialitePage />} />
         </Routes>

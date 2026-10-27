@@ -775,6 +775,7 @@ module.exports = {
   listerPersonnages,
   obtenirPersonnage,
   obtenirPersonnagePartage,
+  construireFichePersonnage,
   equiperCube,
   equiperSort,
   equiperBreloque,

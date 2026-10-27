@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { obtenirPersonnagePartage } from '../api/personnages';
+import { obtenirPersonnageAdmin } from '../api/admin';
+import { useAuth } from '../context/AuthContext';
 import { obtenirCube } from '../api/cubes';
 import { couleurRangCube } from '../constants/rangs';
 import { couleurRangMaitrise } from '../constants/rangsMaitrise';
@@ -21,8 +23,13 @@ import './PartagePage.css';
 // en lecture seule : même grille + stats + panoplies que PersonnageDetailPage,
 // mais sans les actions Équiper/Déséquiper ni l'édition du Parcho — un visiteur
 // ne doit pas pouvoir modifier le stuff de quelqu'un d'autre.
-function PartagePage() {
-  const { lienPartage } = useParams();
+//
+// Prop `admin` : réutilisée telle quelle par la vue admin (/admin/personnage/:id),
+// qui charge le personnage par son id via la route /api/admin au lieu du lien
+// public (donc sans incrémenter le compteur de vues du propriétaire).
+function PartagePage({ admin = false }) {
+  const { lienPartage, id } = useParams();
+  const { session } = useAuth();
 
   const [personnage, setPersonnage] = useState(null);
   const [chargement, setChargement] = useState(true);
@@ -31,13 +38,19 @@ function PartagePage() {
   const [ongletActif, setOngletActif] = useState('equipement');
 
   useEffect(() => {
+    if (admin && !session) return;
     setChargement(true);
     setErreur(null);
-    obtenirPersonnagePartage(lienPartage)
+    const chargerPersonnage = admin
+      ? obtenirPersonnageAdmin(session.token, id)
+      : obtenirPersonnagePartage(lienPartage);
+    chargerPersonnage
       .then(setPersonnage)
-      .catch(() => setErreur('Ce lien de partage est introuvable ou invalide.'))
+      .catch(() =>
+        setErreur(admin ? 'Personnage introuvable ou accès refusé.' : 'Ce lien de partage est introuvable ou invalide.')
+      )
       .finally(() => setChargement(false));
-  }, [lienPartage]);
+  }, [admin, session, id, lienPartage]);
 
   function ouvrirCube(cube) {
     setModale({ type: 'cube', data: cube });
@@ -57,7 +70,11 @@ function PartagePage() {
   return (
     <div className="page-partage">
       <h1>{personnage.nom}</h1>
-      <p className="page-partage__info">Stuff partagé — lecture seule</p>
+      <p className="page-partage__info">
+        {admin
+          ? `Vue admin, lecture seule. Joueur : ${personnage.proprietaire.pseudo} (${personnage.proprietaire.email})`
+          : 'Stuff partagé — lecture seule'}
+      </p>
 
       <div className="page-partage__onglets">
         <button
