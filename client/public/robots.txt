@@ -1,2 +1,9 @@
 User-agent: *
 Allow: /
+Disallow: /connexion
+Disallow: /inscription
+Disallow: /personnage
+Disallow: /partage/
+Disallow: /admin
+
+Sitemap: https://dedalofus.fr/sitemap.xml

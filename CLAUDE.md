@@ -790,6 +790,14 @@ Règles d'enchaînement :
 - **Vérifié en local** : 401 sans token, 403 compte non-admin, 200 admin, 404 id inconnu ; liste et fiche affichées dans le navigateur ; page de partage publique inchangée.
 - ⚠️ **Déploiement en prod** : lancer `node server/scripts/migrate-admin.js Hyxa` sur le VPS **avant** de déployer le code (même règle que les migrations précédentes). Sans la colonne, seule la route `/api/admin` échouerait (le reste du site n'y touche pas), mais mieux vaut respecter l'ordre.
 
+### ✅ Sitemap + robots.txt pour Google Search Console
+- **Nouveau script `server/scripts/generate-sitemap.js`** (rejouable, aucune écriture en base) : génère `client/public/sitemap.xml` à partir des **vraies données** (jamais de nombre codé en dur) — lit `data/cubes_v2.json` pour les ids de cube et `client/src/data/monstres.json` (parcours récursif générique de toute la hiérarchie profondeur/biome/famille/monstre, pas une boucle qui suppose une structure fixe) pour les slugs de monstre.
+- **519 URLs générées** : 9 pages statiques (accueil, 4 listes d'équipement, ensembles, monstres, les 2 pages légales) + 420 fiches cube (`/cubes/:id`) + 90 fiches monstre (`/monstre/:slug`). Pas de fiche dédiée pour breloques/sorts (aucune route `/breloques/:id`/`/sorts/:id` n'existe, détail uniquement en modale).
+- **Volontairement exclu** (aucune valeur SEO, et certaines exposeraient les données d'un joueur précis si indexées) : `/connexion`, `/inscription`, `/personnage`, `/personnage/:id`, `/partage/:lienPartage`, `/admin`, `/admin/personnage/:id`.
+- `client/public/robots.txt` mis à jour en cohérence : `Disallow` explicite sur ces mêmes chemins privés (empêche aussi leur **exploration**, pas juste leur absence du sitemap — un lien `/partage/...` partagé sur Discord reste accessible directement, mais un robot ne doit pas le découvrir et l'indexer tout seul) + ligne `Sitemap: https://dedalofus.fr/sitemap.xml`.
+- Vérifié en local (`npm run dev`) : les deux fichiers servis correctement en statique par Vite à la racine (`/sitemap.xml`, `/robots.txt`), XML valide.
+- **À rejouer** (`node server/scripts/generate-sitemap.js`) à chaque ajout significatif de cubes ou de monstres, pour que le sitemap reste à jour — pas branché sur le déploiement ni un script npm, exécution manuelle comme `generate-monstres.js`/`generate-ensembles.js`.
+
 ## Points encore en suspens
 
 - **Responsive mobile-first sur les pages déjà construites** (Tâche 5 : accueil, Cubes/Breloques/Sorts, Connexion/Inscription) : aucune media query pour l'instant, pas testé sur petit écran. La convention mobile-first ne s'applique qu'au code écrit *à partir de* la Tâche 7 — une passe dédiée reste à faire sur l'existant.
