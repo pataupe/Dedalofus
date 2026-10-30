@@ -19,6 +19,9 @@ const CLES_PROFONDEUR = {
   'Profondeurs 2 & 3': 'P2-P3',
   'Profondeurs 4 & 5': 'P4-P5',
   'Profondeurs 6 & 7': 'P6-P7',
+  // Pas une profondeur mais une catégorie à part (boss présents du palier 2 au 7) :
+  // affichée comme un 5e onglet à côté des 4 profondeurs, même mécanique côté page.
+  Champions: 'Champions',
 };
 
 function normaliser(texte) {

@@ -506,3 +506,45 @@ Vous pouvez « naturellement » pousser celle-ci sur lui, ou bien utiliser un é
 
 Kong dispose d’un sort au corps-à-corps qui inflige des dégâts et pousse, et d’un autre à courte portée qui inflige simplement des dégâts.
 Il peut également soigner ses alliés en zone autour de lui.
+
+---
+
+# Champions
+## Du palier 2 au palier 7
+
+### Les Champions
+
+#### BOSS : Gragamemnon
+Il inflige de très lourds dégâts au corps-à-corps. Il dispose d’un sort qui attire et repousse ses cibles, peut échanger sa position avec l’un de ses alliés, et peut se téléporter dès le premier tour.
+
+Mécanique : Au début du combat, il applique l’effet Plaie béante aux personnages. Lorsqu’un personnage sous cet effet reçoit un soin, il subit de très gros dégâts, qui dépendent de ses caractéristiques.
+
+Conseils : Ce Boss frappe très fort de manière générale, il vaut donc mieux rester à distance de lui. Surtout, ne vous soignez pas pendant le combat : pensez à retirer avant tous vos effets de soin automatiques.
+
+#### BOSS : Horlemar
+Au début du combat, il invoque 5 mini-versions de lui-même. Il tape au corps-à-corps et à moyenne distance, retire des PM, et peut se téléporter sur un ennemi ou sur l’une de ses invocations.
+Ses invocations n’infligent aucun dégât, mais peuvent attirer leurs cibles, se téléporter ou échanger leur position avec Horlemar.
+Ce Boss n’est pas très dangereux, ses dégâts restent moyens : ce sont surtout ses téléportations qui le rendent embêtant. Inutile de perdre du temps sur les invocations, il vaut mieux focus directement Horlemar pour finir le combat rapidement.
+
+#### BOSS : Ravagerune des Embruns
+Il tape au corps-à-corps et à courte distance. Il recouvre toute la carte d’un glyphe en damier.
+
+Mécanique : Vous devez vous trouver en dehors du glyphe pour pouvoir lui infliger des dégâts. À chaque fois qu’il subit des dégâts, le damier s’inverse : les cases sous glyphe deviennent libres, et les cases libres se retrouvent sous glyphe.
+
+Conseils : Pensez à vous replacer après chaque coup, la case sur laquelle vous vous trouvez peut passer sous glyphe.
+
+#### BOSS : Ravagerune du Brasier
+Il tape au corps-à-corps et à courte distance. Il recouvre toute la carte d’un glyphe en damier.
+
+Mécanique : Pour pouvoir infliger des dégâts aux monstres du combat, ceux-ci doivent se trouver en dehors du glyphe, peu importe votre position. À chaque fois que Ravagerune subit des dégâts, le damier s’inverse : les cases sous glyphe deviennent libres, et les cases libres se retrouvent sous glyphe.
+
+Conseils : Après chaque coup, vérifiez que votre cible est toujours en dehors du glyphe : le damier s’inverse et elle peut se retrouver dessus.
+
+#### BOSS : Tourment
+Il tape surtout au corps-à-corps et à courte distance, avec des dégâts plutôt conséquents.
+Il se téléporte aléatoirement à chaque PM qu’il utilise, et aussi dès qu’un autre monstre est frappé.
+Ce Boss est particulièrement dangereux de près. Le plus simple est de le focus en priorité pour le tuer vite : cela évite de subir ses gros dégâts et de devoir gérer ses téléportations pendant tout le combat.
+
+#### BOSS : Trancharnier
+Il n’attaque qu’en ligne et à courte distance, et ses sorts infligent surtout des dommages de poussée. Ils peuvent toucher aussi bien ses ennemis que ses alliés. Il invoque également des noix de coco autour d’un joueur ou d’un monstre.
+Ce Boss n’est pas dangereux, mais ses poussées peuvent vous déplacer là où vous ne l’aviez pas prévu. Évitez de vous retrouver dans son axe à courte distance pour limiter les dommages de poussée.
