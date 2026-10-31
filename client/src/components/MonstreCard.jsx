@@ -1,3 +1,4 @@
+import { enTexteBrut } from '../utils/texteMonstre';
 import './MonstreCard.css';
 
 function MonstreCard({ monstre, onClick }) {
@@ -21,7 +22,7 @@ function MonstreCard({ monstre, onClick }) {
           {monstre.boss && <span className="carte-monstre__badge">BOSS</span>}
           {monstre.nom}
         </p>
-        {extrait && <p className="carte-monstre__extrait">{extrait.texte}</p>}
+        {extrait && <p className="carte-monstre__extrait">{enTexteBrut(extrait.texte)}</p>}
       </div>
     </button>
   );

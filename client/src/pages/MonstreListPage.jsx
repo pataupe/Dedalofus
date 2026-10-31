@@ -4,6 +4,7 @@ import monstresData from '../data/monstres.json';
 import MonstreCard from '../components/MonstreCard';
 import Modal from '../components/Modal';
 import MonstreDetail from '../components/MonstreDetail';
+import TexteMonstre from '../components/TexteMonstre';
 import './MonstreListPage.css';
 
 const PROFONDEURS = monstresData.map(({ cle, titre }) => ({ cle, titre }));
@@ -111,7 +112,11 @@ function MonstreListPage() {
             {familles.map((famille) => (
               <div key={famille.nom} className="page-monstres__groupe-famille">
                 <h3>{famille.nom}</h3>
-                {famille.passif && <p className="page-monstres__passif">{famille.passif}</p>}
+                {famille.passif && (
+                  <div className="page-monstres__passif">
+                    <TexteMonstre texte={famille.passif} />
+                  </div>
+                )}
                 <div className="page-monstres__grille">
                   {famille.monstres.map((monstre) => (
                     <MonstreCard key={monstre.slug} monstre={monstre} onClick={() => ouvrirMonstre(monstre)} />

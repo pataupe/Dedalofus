@@ -1,7 +1,11 @@
 .modale__fond {
   position: fixed;
   inset: 0;
-  background: rgba(0, 0, 0, 0.6);
+  /* Plus sombre + léger flou : avec 0.6 sans flou, le texte de la page derrière
+     (cartes) restait parfaitement lisible et concurrençait le contenu de la modale. */
+  background: rgba(0, 0, 0, 0.75);
+  backdrop-filter: blur(3px);
+  -webkit-backdrop-filter: blur(3px);
   display: flex;
   align-items: center;
   justify-content: center;

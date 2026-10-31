@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { copierTexte } from '../utils/presse-papier';
+import TexteMonstre from './TexteMonstre';
 import './MonstreDetail.css';
 
 function MonstreDetail({ monstre, famille }) {
@@ -67,7 +68,7 @@ function MonstreDetail({ monstre, famille }) {
           </button>
           <div className={`detail-monstre__bloc-repli ${passifOuvert ? 'ouvert' : ''}`}>
             <div className="detail-monstre__bloc-repli-interieur">
-              <p>{famille.passif}</p>
+              <TexteMonstre texte={famille.passif} />
             </div>
           </div>
         </div>
@@ -78,7 +79,7 @@ function MonstreDetail({ monstre, famille }) {
           return (
             <div key={index} className="detail-monstre__bloc detail-monstre__bloc--mecanique">
               <strong>Mécanique</strong>
-              <p>{paragraphe.texte}</p>
+              <TexteMonstre texte={paragraphe.texte} />
             </div>
           );
         }
@@ -86,14 +87,14 @@ function MonstreDetail({ monstre, famille }) {
           return (
             <div key={index} className="detail-monstre__bloc detail-monstre__bloc--conseils">
               <strong>Conseils</strong>
-              <p>{paragraphe.texte}</p>
+              <TexteMonstre texte={paragraphe.texte} />
             </div>
           );
         }
         return (
-          <p key={index} className="detail-monstre__texte">
-            {paragraphe.texte}
-          </p>
+          <div key={index} className="detail-monstre__texte">
+            <TexteMonstre texte={paragraphe.texte} />
+          </div>
         );
       })}
     </div>

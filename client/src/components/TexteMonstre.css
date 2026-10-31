@@ -1,0 +1,44 @@
+/* Structure seulement (espacement, puces, gras) : la taille/couleur du texte vient
+   du conteneur, ce composant est utilisé dans la fiche, les blocs Mécanique/Conseils
+   et le passif de famille, qui n'ont pas la même typographie. */
+.texte-monstre {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.texte-monstre p,
+.texte-monstre li {
+  margin: 0;
+  font: inherit;
+  line-height: inherit;
+}
+
+.texte-monstre b {
+  font-weight: 700;
+}
+
+.texte-monstre__liste {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.texte-monstre__liste li {
+  position: relative;
+  padding-left: 18px;
+}
+
+.texte-monstre__liste li::before {
+  content: '';
+  position: absolute;
+  left: 4px;
+  top: 0.65em;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--couleur-lumiere);
+}

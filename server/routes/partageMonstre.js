@@ -33,6 +33,12 @@ function echapperHtml(texte) {
     .replace(/"/g, '&quot;');
 }
 
+// Les textes peuvent contenir du balisage minimal (**gras**, sauts de ligne) :
+// l'aperçu Discord n'a pas de gras, on retire les "**" pour ne pas les afficher tels quels.
+function sansGras(texte) {
+  return texte.replace(/\*\*/g, '');
+}
+
 function tronquer(texte, max) {
   if (texte.length <= max) return texte;
   return `${texte.slice(0, max).trimEnd()}…`;
@@ -57,7 +63,7 @@ router.get('/:slug', (req, res) => {
   // applique de toute façon sa propre limite d'affichage côté aperçu de lien,
   // qu'on ne contrôle pas depuis le site.
   const texteComplet = monstre.paragraphes.map((p) => p.texte).join('\n\n');
-  const description = tronquer(texteComplet || famille.passif || 'Monstre du Dédale.', 1000);
+  const description = tronquer(sansGras(texteComplet || famille.passif || 'Monstre du Dédale.'), 1000);
 
   const titre = echapperHtml(`${monstre.nom}${monstre.boss ? ' (BOSS)' : ''} — Dédalofus`);
   const desc = echapperHtml(description);

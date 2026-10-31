@@ -92,11 +92,13 @@
   border-radius: 4px;
 }
 
+/* Texte courant : 16px en graisse normale (avant : 15px en semi-gras, tout avait
+   le même poids et la fiche ressemblait à un mur de texte). Le gras est réservé
+   aux mots-clés balisés **comme ça** dans monstres.md (voir TexteMonstre). */
 .detail-monstre__texte {
-  margin: 0;
-  font-size: 15px;
-  line-height: 1.55;
-  font-weight: 600;
+  font-size: 16px;
+  line-height: 1.6;
+  font-weight: 400;
 }
 
 /* Fond teinté (pas juste --panneau-fond-sombre, trop proche du fond de carte
@@ -116,11 +118,10 @@
   margin-bottom: 4px;
 }
 
-.detail-monstre__bloc p {
-  margin: 0;
-  font-size: 15px;
-  line-height: 1.55;
-  font-weight: 500;
+.detail-monstre__bloc .texte-monstre {
+  font-size: 16px;
+  line-height: 1.6;
+  font-weight: 400;
 }
 
 .detail-monstre__bloc--passif {
@@ -128,8 +129,10 @@
   background: rgba(232, 197, 71, 0.18);
 }
 
+/* Or clair (pas #8a6d10 : brun conçu pour un panneau clair, ≈ 3:1 seulement sur le
+   panneau sombre actuel — le libellé "Passif de famille" était à peine lisible). */
 .detail-monstre__bloc--passif strong {
-  color: #8a6d10;
+  color: var(--couleur-lumiere);
 }
 
 /* Replié par défaut : le déclencheur est un bouton (accessible au clavier),
@@ -173,7 +176,7 @@
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.03em;
-  color: #8a6d10;
+  color: var(--couleur-lumiere);
 }
 
 .detail-monstre__bloc-fleche {
@@ -199,7 +202,7 @@
   overflow: hidden;
 }
 
-.detail-monstre__bloc-repli-interieur p {
+.detail-monstre__bloc-repli-interieur .texte-monstre {
   margin-top: 8px;
 }
 

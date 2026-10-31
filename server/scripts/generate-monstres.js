@@ -66,9 +66,17 @@ function decouperParagraphes(lignes) {
   const texteBrut = lignes.join('\n').trim();
   if (!texteBrut) return [];
 
+  // Les sauts de ligne simples sont conservés ("\n") : une ligne du .md = une
+  // ligne affichée (TexteMonstre), au lieu d'un seul bloc de texte collé.
   return texteBrut
     .split(/\n{2,}/)
-    .map((bloc) => bloc.replace(/\n/g, ' ').trim())
+    .map((bloc) =>
+      bloc
+        .split('\n')
+        .map((ligne) => ligne.trim())
+        .filter(Boolean)
+        .join('\n')
+    )
     .filter(Boolean)
     .map((bloc) => {
       const matchMecanique = bloc.match(/^Mécanique\s*:\s*/i);
@@ -94,7 +102,9 @@ function parserMonstresMd(contenu) {
   function clorePassifFamille() {
     if (familleActuelle && lignesPassifFamille && lignesPassifFamille.length) {
       const texte = lignesPassifFamille.join('\n').trim();
-      if (texte) familleActuelle.passif = texte.replace(/\n+/g, ' ');
+      // Idem paragraphes : lignes conservées (le passif de certaines familles contient
+      // une liste "– Monstre : effet"), lignes vides écrasées.
+      if (texte) familleActuelle.passif = texte.split('\n').map((l) => l.trim()).filter(Boolean).join('\n');
     }
     lignesPassifFamille = null;
   }
